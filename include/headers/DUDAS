@@ -1,0 +1,6 @@
+para los controladores, se suponen que implementan las interfaces,
+entonces por ejemplo, el controlador de usuario tiene que ser
+": public IControladorUsuario"?
+
+como se implementan tipos asociativos? son clases donde sus atributos son
+los objetos que conectan? supuse esto y las implemente asi
