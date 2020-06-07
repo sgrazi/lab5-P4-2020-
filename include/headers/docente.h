@@ -3,11 +3,11 @@
 
 class Docente : public Usuario{
   private:
-    string: instituto;
+    string instituto;
     set(Rol) roles;
     set(Clase) clasesCreadas;
     set(Clase) participa;
-  public:
+  public://faltan funciones de manejo de relaciones
     Docente();
     string getInstituto();
     void setInstituto(string);

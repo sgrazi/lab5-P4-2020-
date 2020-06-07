@@ -3,7 +3,7 @@
 Mensaje::Mensaje(){
 
 };
-void Mensaje::setId(string id){
+void Mensaje::setId(int id){
   this->id = id;
 };
 void Mensaje::setContenido(string cont){
@@ -15,7 +15,7 @@ void Mensaje::setFecha(DtFecha fecha){
 void Mensaje::setEnRespuestaA(Mensaje *ms){
   this->enRespuestaA = ms
 };
-string Mensaje::getId(){
+int Mensaje::getId(){
   return id;
 };
 string Mensaje::getContenido(){
@@ -30,3 +30,6 @@ Mensaje* Mensaje::getEnRespuestaA(){
 Mensaje::~Mensaje(){
 
 };
+/*bool operator<(const Mensaje &right){
+  return id < right.id;
+};*/ //si colecciones se implementan con set esto es necesario

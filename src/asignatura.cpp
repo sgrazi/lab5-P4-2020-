@@ -1,20 +1,23 @@
 #include "../include/headers/asignatura.h"
 
-Asignatura::Asignatura();
+Asignatura(){};
 
-void Asignatura::setCodigo(string c){ this->codigo = c;};
-string Asignatura::getCodigo(){ return codigo;};
+void setCodigo(int c){ this->codigo = c;};
+int getCodigo() const{ return codigo;};
 
-void Asignatura::setNombre(string n){ this->nombre = n};
-string Asignatura::getNombre(){ return nombre;};
+void setNombre(string n){ this->nombre = n;};
+string getNombre()const{ return nombre;};
 
-void Asignatura::setTeorico(bool t){  this->teorico = t};
-bool Asignatura::getTeorico(){ return teorico;};
+void setTeorico(bool t){  this->teorico = t;};
+bool getTeorico() const{ return teorico;};
 
-void Asignatura::setPractico(bool p){ this->practico = p};
-bool Asignatura::getPractico(){ return practico;};
+void setPractico(bool p){ this->practico = p;};
+bool getPractico() const{ return practico;};
 
-void Asignatura::setMonitoreo(bool m){ this->monitoreo = m};
-bool Asignatura::getMonitoreo(){  return monitoreo;};
+void setMonitoreo(bool m){ this->monitoreo = m;};
+bool getMonitoreo() const{  return monitoreo;};
 
-Asignatura::~Asignatura();
+~Asignatura(){};
+
+/*bool operator< (const Asignatura &right) const{
+return codigo < right.codigo;*/ //si colecciones se implementan con set esto es necesario

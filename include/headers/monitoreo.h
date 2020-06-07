@@ -4,7 +4,7 @@
 class Monitoreo : public Clase{
   private:
     *Estudiante[15] habilitados;
-  public:
+  public://faltan funciones de manejo de relaciones
     Monitoreo();
     ~Monitoreo();
 };

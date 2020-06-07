@@ -3,11 +3,11 @@
 
 class Estudiante : public Usuario{
   private:
-    string: ci;
+    string ci;
     set(Asignatura) asignaturas;
     set(EstCla) clasesParticipa;
     set(Monitoreo) monHabilitados;
-  public:
+  public://faltan funciones de manejo de relaciones
     Estudiante();
     void setCI(string);
     string getCI();

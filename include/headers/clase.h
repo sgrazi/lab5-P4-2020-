@@ -4,7 +4,7 @@
 class Clase{
   private:
     string nombre;
-    string codigo;
+    int codigo;
     string url;
     DtFecha fechaInicio;
     DtFecha fechaFin;
@@ -15,16 +15,16 @@ class Clase{
     Asignatura *asig;
     tipoClase tipo;
 
-  public:
+  public://faltan funciones de manejo de relaciones
     Clase() = 0;
     void setNombre(string);
-    void setCodigo(string);
+    void setCodigo(int);
     void setUrl(string);
     void setFechaInicio(DtFecha);
     void setFechaFin(DtFecha);
     tipoClase getTipo();
     string getNombre();
-    string getCodigo();
+    int getCodigo();
     string getUrl();
     DtFecha getFechaInicio();
     DtFecha getFechaFin();
@@ -32,5 +32,6 @@ class Clase{
     virtual void visualizar(Estudiante);
 
     ~Clase(){};
+    //bool operator<(const Clase &right); //si colecciones se implementan con set esto es necesario
 }
 #endif

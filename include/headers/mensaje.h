@@ -3,23 +3,24 @@
 
 class Mensaje{
   private:
-    string id;
+    int id;
     string contenido;
     DtFecha fecha;
     Mensaje *enRespuestaA;
     HandlerMensajes *handler;
     Clase *clase;
-  public:
+  public://faltan funciones de manejo de relaciones
     Mensaje();
-    void setId(string);
+    void setId(int);
     void setContenido(string);
     void setFecha(DtFecha);
     void setEnRespuestaA(Mensaje);
-    string getId();
+    int getId();
     string getContenido();
     DtFecha getFecha();
     Mensaje* getEnRespuestaA();
 
     ~Mensaje();
+    //bool operator<(const Mensaje &right); //si colecciones se implementan con set esto es necesario
 }
 #endif

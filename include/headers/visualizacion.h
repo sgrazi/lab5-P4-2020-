@@ -7,7 +7,7 @@ class Visualizacion{
     DtFecha fechaInicioVis;
     DtFecha fechaFinVis;
     EstCla *estcla;
-  public:
+  public://faltan funciones de manejo de relaciones
     Visualizacion();
     void setEnVivo(bool);
     void setFechaInicioVis(DtFecha);

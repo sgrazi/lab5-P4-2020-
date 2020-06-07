@@ -4,7 +4,7 @@
 void Clase::setNombre(string nombre){
   this->nombre = nombre;
 };
-void Clase::setCodigo(string codigo){
+void Clase::setCodigo(int codigo){
   this->codigo = codigo;
 };
 void Clase::setUrl(string url){
@@ -22,7 +22,7 @@ tipoClase Clase::getTipo(){
 string Clase::getNombre(){
   return nombre;
 };
-string Clase::getCodigo(){
+int Clase::getCodigo(){
   return codigo;
 };
 string Clase::getUrl(){
@@ -43,3 +43,7 @@ void Clase::visualizar(Estudiante){//sacado del diagrama de comunicacion de conf
     EstCla *repro = new EstCla();
     estParticipantes.add(repro);
 };
+
+/*bool operator<(const Asignatura &right){
+  return codigo < right.codigo;
+};*/ //si colecciones se implementan con set esto es necesario

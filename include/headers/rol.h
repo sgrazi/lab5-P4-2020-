@@ -12,7 +12,7 @@ class Rol{
     void setAsig(Asignatura*);
     Docente* getDoc();
     Asignatura* getAsig();
-    string getCodigoAsig()
+    string getCodigoAsig();
     ~Rol();
 }
 #endif
