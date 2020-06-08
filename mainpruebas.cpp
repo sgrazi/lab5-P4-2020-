@@ -3,12 +3,16 @@
 #include "include/headers/estudiante.h"
 #include "include/headers/controladorUsuario.h"
 using namespace std;
-int main(){
-map<string,Estudiante*>Eglobal;
 
-ControladorUsuario* Cu = new ControladorUsuario;
-Cu->agregarEstudiante(c,a,s,a,s);
-Cu->confirmarAlta;
+  //coleccion de est
+  map<string,Estudiante*> coleccionGlobalEstudiantes;
+  map<string,Docente*> coleccionGlobalDocentes;
+
+int main(){
+
+  //ControladorUsuario* Cu = new ControladorUsuario;
+  Cu->agregarEstudiante(c,a,s,a,s);
+  Cu->confirmarAlta();
 
 
 

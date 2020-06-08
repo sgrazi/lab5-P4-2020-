@@ -39,19 +39,23 @@ void ControladorUsuario::iniciarSesion(string email, string pass){
 };
 
 void ControladorUsuario::agregarEstudiante(string n, string c, string e, string u, string ci){
-  nombreUser = n;
-  contraseniaUser = c;
-  emailUser = e;
-  urlUser = u;
-  cedulaEst = ci;
+  setNombreUser(n);
+  setContraseniaUser(c);
+  setEmailUser(e);
+  setUrlUser(u);
+  setCedulaEst(ci);
+
+  setUserEsEst(true);
 };
 
 void ControladorUsuario::agregarDocente(string n, string c, string e, string u, string i){
-  nombreUser = n;
-  contraseniaUser = c;
-  emailUser = e;
-  urlUser = u;
-  institutoDoc = i;
+  setNombreUser(n);
+  setContraseniaUser(c);
+  setEmailUser(e);
+  setUrlUser(u);
+  setInstitutoDoc(i);
+
+  setUserEsEst(false);
 };
 
 void ControladorUsuario::confirmarAlta(){
@@ -62,6 +66,7 @@ void ControladorUsuario::confirmarAlta(){
     nuevo.setContrasenia(getContraseniaUser());
     nuevo.setImagen(getUrlUser());
     nuevo.setCI(getCedulaEst());
+    coleccionGlobalEstudiantes.insert(getEmailUser(),nuevo);
   }
   else{
     Docente *nuevo = new Docente()
@@ -70,8 +75,8 @@ void ControladorUsuario::confirmarAlta(){
     nuevo.setContrasenia(getContraseniaUser());
     nuevo.setImagen(getUrlUser());
     nuevo.setInstituto(getInstitutoDoc());
+    coleccionGlobalDocentes.insert(getEmailUser(),nuevo);
   }
-  //agregar nuevo a la coleccion
 };
 
 void ControladorUsuario::cancelarAlta(){

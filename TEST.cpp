@@ -42,10 +42,11 @@ int main(void) {
    asig->setTeorico(true);
    asig->setPractico(true);
    asig->setMonitoreo(false);
-   map<int, Asignatura> m = {
+   map<int, Asignatura> m;/* = {
             {asig->getCodigo(), *asig},
             };
-
+*/
+   m.insert(pair<int,Asignatura*>(getCodigo(),asig));
    auto it = m.find(asig->getCodigo());
 
    cout << "Iterator points to " << it->first <<

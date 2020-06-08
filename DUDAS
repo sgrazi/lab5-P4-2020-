@@ -10,3 +10,8 @@ para usar set de stl hay que establecer un orden en lo guardado,
 o sea hay que establecer un orden para los objetos, entonces para esto se puede
   cambiar codigo de asignatura, codigo de clase, id de mensaje a ints?
   como hago para los usuarios? estudiantes puedo ordenar por cedula pero docentes?
+
+como es la clase sistema?
+  suponemos se crea en main una unica
+  que tiene como atributos?
+  las operaciones son una por caso de uso?
