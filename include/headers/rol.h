@@ -1,5 +1,6 @@
 #ifndef ROL_H
 #define ROL_H
+#include <string>
 
 class Rol{
   private:
@@ -14,5 +15,5 @@ class Rol{
     Asignatura* getAsig();
     string getCodigoAsig();
     ~Rol();
-}
+};
 #endif

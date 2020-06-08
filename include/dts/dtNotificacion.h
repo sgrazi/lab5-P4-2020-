@@ -3,7 +3,7 @@
 #include<iostream>
 using namespace std;
 
-class DtNotificaciones {
+class DtNotificacion {
 private:
   string IdMensaje;
   string NombreClase;

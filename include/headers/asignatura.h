@@ -1,5 +1,6 @@
 #ifndef ASIGNATURA_H
 #define ASIGNATURA_H
+#include <string>
 
 class Asignatura{
   private:

@@ -1,5 +1,8 @@
 #ifndef I_CONTROLADOR_USUARIO_H
 #define I_CONTROLADOR_USUARIO_H
+#include <string>
+#include <set>
+#include"../dts/dtNotificacion.h"
 
 class IControladorUsuario{
 	public:
@@ -15,5 +18,5 @@ class IControladorUsuario{
 		virtual void desuscribirse() = 0;
 
 		virtual ~IControladorUsuario(){};
-}
+};
 #endif

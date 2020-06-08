@@ -1,5 +1,6 @@
 #ifndef MENSAJE_H
 #define MENSAJE_H
+#include <string>
 
 class Mensaje{
   private:
@@ -22,5 +23,5 @@ class Mensaje{
 
     ~Mensaje();
     //bool operator<(const Mensaje &right); //si colecciones se implementan con set esto es necesario
-}
+};
 #endif

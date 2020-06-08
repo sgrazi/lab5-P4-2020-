@@ -1,5 +1,6 @@
 #ifndef CONTROLADOR_CLASE_H
 #define CONTROLADOR_CLASE_H
+#include <string>
 
 class ControladorClase{
 	private:
@@ -43,5 +44,5 @@ class ControladorClase{
 		void confirmarEnvio();
 
 		~ControladorClase()
-}
+};
 #endif

@@ -1,5 +1,11 @@
 #ifndef ESTUDIANTE_H
 #define ESTUDIANTE_H
+#include <string>
+#include <set>
+
+#include"../headers/asignatura.h"
+#include"../headers/estcla.h"
+#include"../headers/monitoreo.h"
 
 class Estudiante : public Usuario{
   private:
@@ -15,5 +21,5 @@ class Estudiante : public Usuario{
     void desinscribir(string);
 
     ~Estudiante();
-}
+};
 #endif

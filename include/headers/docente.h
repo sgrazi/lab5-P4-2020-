@@ -1,5 +1,6 @@
 #ifndef DOCENTE_H
 #define DOCENTE_H
+#include <string>
 
 class Docente : public Usuario{
   private:
@@ -20,5 +21,5 @@ class Docente : public Usuario{
     void desvincularDoc(rol);
 
     ~Docente();
-}
+};
 #endif

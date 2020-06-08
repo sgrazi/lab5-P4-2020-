@@ -1,5 +1,6 @@
 #ifndef CONTROLADOR_ASIGNATURA_H
 #define CONTROLADOR_ASIGNATURA_H
+#include <string>
 
 class ControladorAsignatura{
 	private:

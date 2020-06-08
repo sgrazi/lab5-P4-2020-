@@ -1,5 +1,6 @@
 #ifndef CLASE_H
 #define CLASE_H
+#include <string>
 
 class Clase{
   private:
@@ -33,5 +34,5 @@ class Clase{
 
     ~Clase(){};
     //bool operator<(const Clase &right); //si colecciones se implementan con set esto es necesario
-}
+};
 #endif

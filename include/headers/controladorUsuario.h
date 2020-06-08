@@ -1,8 +1,12 @@
 #ifndef CONTROLADOR_USUARIO_H
 #define CONTROLADOR_USUARIO_H
 #include<iostream>
-#include"/include/dts/dtNotificaciones.h"
-#include"/include/headers/iControladorUsuario.h"
+#include"../dts/dtNotificacion.h"
+#include"../headers/iControladorUsuario.h"
+#include"../headers/estcla.h"
+#include <set>
+#include <string>
+
 using namespace std;
 
 class ControladorUsuario: public iControladorUsuario{
@@ -52,5 +56,5 @@ class ControladorUsuario: public iControladorUsuario{
 		void desuscribirse();
 
 		~ControladorUsuario();
-}
+};
 #endif

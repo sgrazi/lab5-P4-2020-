@@ -19,5 +19,5 @@ class Visualizacion{
     DtFecha generarFecha();
 
     ~Visualizacion();
-}
+};
 #endif

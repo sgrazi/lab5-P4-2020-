@@ -1,5 +1,6 @@
 #ifndef I_CONTROLADOR_CLASE_H
 #define I_CONTROLADOR_CLASE_H
+#include <string>
 
 class IControladorClase{
 	public:
@@ -28,5 +29,5 @@ class IControladorClase{
 		virtual void confirmarEnvio() = 0;
 
 		virtual ~IControladorClase(){};
-}
+};
 #endif

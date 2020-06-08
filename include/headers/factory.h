@@ -10,5 +10,5 @@ class Factory{
     Usuario getUsuario();
 
     ~Factory();
-}
+};
 #endif

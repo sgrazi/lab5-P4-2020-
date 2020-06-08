@@ -8,5 +8,5 @@ class EstrategiaNotifs{
     virtual bool aplicaNotificacion() = 0;
 
     virtual ~EstrategiaNotifs(){};
-}
+};
 #endif

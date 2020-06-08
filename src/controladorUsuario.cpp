@@ -66,7 +66,8 @@ void ControladorUsuario::confirmarAlta(){
     nuevo.setContrasenia(getContraseniaUser());
     nuevo.setImagen(getUrlUser());
     nuevo.setCI(getCedulaEst());
-    coleccionGlobalEstudiantes.insert(getEmailUser(),nuevo);
+    coleccionGlobalEstudiantes.insert(pair<string,Estudiante*>(getEmailUser(),nuevo));
+
   }
   else{
     Docente *nuevo = new Docente()
@@ -75,7 +76,7 @@ void ControladorUsuario::confirmarAlta(){
     nuevo.setContrasenia(getContraseniaUser());
     nuevo.setImagen(getUrlUser());
     nuevo.setInstituto(getInstitutoDoc());
-    coleccionGlobalDocentes.insert(getEmailUser(),nuevo);
+    coleccionGlobalDocentes.insert(pair<string,Docente*>(getEmailUser(),nuevo));
   }
 };
 
