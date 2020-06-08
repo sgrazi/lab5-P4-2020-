@@ -1,7 +1,11 @@
 #ifndef CONTROLADOR_USUARIO_H
 #define CONTROLADOR_USUARIO_H
+#include<iostream>
+#include"/include/dts/dtNotificaciones.h"
+#include"/include/headers/iControladorUsuario.h"
+using namespace std;
 
-class ControladorUsuario{
+class ControladorUsuario: public iControladorUsuario{
 	private:
 		bool userEsEst;
 		string nombreUser;
@@ -41,7 +45,7 @@ class ControladorUsuario{
 		void agregarDocente(string,string,string,string,string);
 		void confirmarAlta();
 		void cancelarAlta();
-		set(DtNotifiaciones) consultarNotifs(); //??? set ???
+		set(DtNotificaciones) consultarNotifs(); //??? set ???
 		void cambiarModoSus(int);
 		void cancelarCambio();
 		void confirmarCambio();
