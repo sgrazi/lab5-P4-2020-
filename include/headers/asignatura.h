@@ -1,6 +1,8 @@
 #ifndef ASIGNATURA_H
 #define ASIGNATURA_H
 #include <string>
+#include <iostream>
+using namespace std;
 
 class Asignatura{
   private:
