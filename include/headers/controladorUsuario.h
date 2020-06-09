@@ -21,6 +21,7 @@ class ControladorUsuario: public iControladorUsuario{
 		string nombreUserActual;
 		string emailUserActual;
 		int nuevoModoSus;
+		
 	public:
 		ControladorUsuario();
 		bool getUserEsEst();

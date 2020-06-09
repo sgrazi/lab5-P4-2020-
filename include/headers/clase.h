@@ -2,9 +2,12 @@
 #define CLASE_H
 #include"../dts/dtFecha.h"
 #include"../headers/iControladorUsuario.h"
-
+#include "../headers/docente.h"
+#include "../headers/estcla.h"
 #include <string>
 #include <set>
+
+
 
 using namespace std;
 class Clase{
@@ -14,7 +17,7 @@ class Clase{
     string url;
     DtFecha fechaInicio;
     DtFecha fechaFin;
-    Docente creador;
+    Docente* creador;
     set<EstCla> estParticipantes;
     set<Docente> docParticipantes;
     set<Mensaje> mensajes;

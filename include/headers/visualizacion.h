@@ -2,12 +2,13 @@
 #define VISUALIZACION_H
 #include"../headers/estcla.h"
 #include"../dts/dtFecha.h"
+class EstCla;
 class Visualizacion{
   private:
     bool enVivo;
     DtFecha fechaInicioVis;
     DtFecha fechaFinVis;
-    EstCla *estcla;
+    EstCla*estcla;
   public://faltan funciones de manejo de relaciones
     Visualizacion();
     void setEnVivo(bool);

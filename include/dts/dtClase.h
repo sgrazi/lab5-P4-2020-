@@ -1,5 +1,9 @@
 #ifndef DT_CLASE_H
 #define DT_CLASE_H
+#include"../dts/dtFecha.h"
+
+enum tipoClase {Teorico,Practico,Monitoreo};
+class Docente;
 
 class dtClase{
   private:
@@ -8,12 +12,12 @@ class dtClase{
     string url;
     DtFecha fechaInicio;
     DtFecha fechaFin;
-    Docente creador;
+    Docente* creador;
     string codigoAsig; //Clase original tenia una asociacion a la asignatura, aca lo reemplaza el identificador de la asignatura
     tipoClase tipo;
 
   public:
-    dtClase() = 0;
+    dtClase();
     void setNombre(string);
     void setCodigo(int);
     void setUrl(string);
@@ -28,5 +32,5 @@ class dtClase{
 
     ~dtClase(){};
     //bool operator<(const Clase &right); //si colecciones se implementan con set esto es necesario
-}
+};
 #endif

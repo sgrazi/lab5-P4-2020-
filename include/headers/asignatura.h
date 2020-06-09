@@ -1,9 +1,14 @@
 #ifndef ASIGNATURA_H
 #define ASIGNATURA_H
+#include<map>
+#include<set>
 #include <string>
 #include <iostream>
 #include"../dts/dtEstudiante.h"
+#include "../headers/rol.h"
+
 using namespace std;
+class Rol;
 
 class Asignatura{
   private:
@@ -12,7 +17,7 @@ class Asignatura{
     bool teorico;
     bool monitoreo;
     bool practico;
-    set(dtEstudiante) inscriptos;
+    set<dtEstudiante> inscriptos;
     map<string,Rol> docentes; //string es el email del doc
   public://faltan funciones de manejo de relaciones
     Asignatura();

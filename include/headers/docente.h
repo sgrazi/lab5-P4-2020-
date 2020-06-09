@@ -2,8 +2,14 @@
 #define DOCENTE_H
 #include <string>
 #include <set>
-
+#include "../headers/usuario.h"
+#include"../dts/dtAsignatura.h"
+#include"../dts/dtClase.h"
+//#include "../headers/rol.h"
 using namespace std;
+class Rol;
+class Clase;
+class Asignatura;
 
 class Docente : public Usuario{
   private:
@@ -17,11 +23,11 @@ class Docente : public Usuario{
     void setInstituto(string);
 
     bool esDocenteDe(string);
-    rol nuevoRol(Asignatura);
-    set<DtAsignatura> getInfo();
+    Rol nuevoRol(Asignatura);
+    set<dtAsignatura> getInfo();
     void agregarClaseNueva(Clase);
-    set<DtClase> clasesATerminar();
-    void desvincularDoc(rol);
+    set<dtClase> clasesATerminar();
+    void desvincularDoc(Rol);
 
     ~Docente();
 };

@@ -2,6 +2,10 @@
 #define ROL_H
 #include <string>
 using namespace std;
+//#include "../headers/docente.h"
+//#include "../headers/asignatura.h"
+class Docente;
+class Asignatura;
 
 class Rol{
   private:
