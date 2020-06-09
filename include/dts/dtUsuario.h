@@ -1,5 +1,9 @@
 #ifndef DT_USUARIO_H
 #define DT_USUARIO_H
+#include <string>
+#include <iostream>
+using namespace std;
+#include"../headers/estrategiaNotifs.h"
 
 class dtUsuario{
   private:
@@ -8,7 +12,7 @@ class dtUsuario{
     string password;
     string imagen;
     //set(DtNotifiacion) notificaciones; va?
-    int modoSus //antes estaba su componente de strategy, ahora un int que indica cual modo de strategy tiene
+    int modoSus; //antes estaba su componente de strategy, ahora un int que indica cual modo de strategy tiene
   public:
     dtUsuario();
     void setNombre(string);
@@ -17,7 +21,7 @@ class dtUsuario{
     void setImagen(string);
     //void setNotificaciones(); //crea el conjunto de notifiaciones vacio
     void setModoSus(int);
-    void setAplica(EstrategiaNotifs);
+    void setAplica(estrategiaNotifs);
     string getNombre();
     string getEmail();
     string getPassword();

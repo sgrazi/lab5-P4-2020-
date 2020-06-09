@@ -2,6 +2,7 @@
 #define ASIGNATURA_H
 #include <string>
 #include <iostream>
+#include"../dts/dtEstudiante.h"
 using namespace std;
 
 class Asignatura{
@@ -11,7 +12,7 @@ class Asignatura{
     bool teorico;
     bool monitoreo;
     bool practico;
-    set(DtEstudiantes) inscriptos;
+    set(dtEstudiante) inscriptos;
     map<string,Rol> docentes; //string es el email del doc
   public://faltan funciones de manejo de relaciones
     Asignatura();

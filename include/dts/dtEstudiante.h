@@ -1,14 +1,18 @@
 #ifndef DT_ESTUDIANTE_H
 #define DT_ESTUDIANTE_H
+#include <string>
+#include <iostream>
+#include "../dts/dtUsuario.h"
+using namespace std;
 
-class dtEstudiante : public dtUsuario{
+class dtEstudiante : public dtUsuario {
   private:
     string ci;
   public:
-    Estudiante();
+    dtEstudiante();
     void setCI(string);
     string getCI();
 
-    ~Estudiante();
-}
+    ~dtEstudiante();
+};
 #endif

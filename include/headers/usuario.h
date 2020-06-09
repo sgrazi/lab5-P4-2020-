@@ -3,16 +3,19 @@
 
 #include <string>
 #include <set>
-
+#include"../dts/dtNotificacion.h"
+//#include "../headers/estrategiaNotifs.h"
 using namespace std;
+class EstrategiaNotifs{
 
+};
 class Usuario{
   private:
     string nombre;
     string email;
     string password;
     string imagen;
-    set<DtNotifiacion> notificaciones;
+    set<DtNotificacion> notificaciones;
     // int modoSus //Necesario?
     EstrategiaNotifs aplica;
   public:
@@ -22,15 +25,15 @@ class Usuario{
     void setPassword(string);
     void setImagen(string);
     void setNotificaciones(); //crea el conjunto de notifiaciones vacio
-    void setAplica(EstrategiaNotifs);
+    virtual void setAplica(EstrategiaNotifs)= 0;
     string getNombre();
     string getEmail();
     string getPassword();
     string getImagen();
-    set<DtNotifiacion> getNotificaciones();
+    set<DtNotificacion> getNotificaciones();
     EstrategiaNotifs getAplica();
 
-    void notificar(DtNotifiacion)
+    void notificar(DtNotificacion);
 
     ~Usuario();
 };

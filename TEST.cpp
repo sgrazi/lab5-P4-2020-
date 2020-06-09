@@ -46,7 +46,7 @@ int main(void) {
             {asig->getCodigo(), *asig},
             };
 */
-   m.insert(pair<int,Asignatura*>(asig->getCodigo(),asig));
+   m[asig->getCodigo()] = asig;
    auto it = m.find(asig->getCodigo());
 
    cout << "Iterator points to " << it->first <<

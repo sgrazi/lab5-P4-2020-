@@ -1,6 +1,7 @@
 #ifndef VISUALIZACION_H
 #define VISUALIZACION_H
-
+#include"../headers/estcla.h"
+#include"../dts/dtFecha.h"
 class Visualizacion{
   private:
     bool enVivo;

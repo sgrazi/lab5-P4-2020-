@@ -1,5 +1,7 @@
 #ifndef DT_ASIGNATURA_H
 #define DT_ASIGNATURA_H
+#include"../dts/dtEstudiante.h"
+
 
 class dtAsignatura{
   private:
