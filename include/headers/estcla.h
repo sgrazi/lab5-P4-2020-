@@ -12,14 +12,14 @@ class EstCla{
     Clase *clase;
   public:
     EstCla();
-    void setVisualizacion(Visualizacion*)
-    void setEstudiante(Estudiante*)
-    void setClase(Clase*)
+    void setVisualizacion(Visualizacion*);
+    void setEstudiante(Estudiante*);
+    void setClase(Clase*);
     Visualizacion* getVis();
     Estudiante* getEst();
     Clase* getClase();
 
-    void marcar(dtFecha);
+    void marcar(DtFecha);
     void iniciarVis();
     ~EstCla();
 };

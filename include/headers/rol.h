@@ -4,11 +4,14 @@
 using namespace std;
 //#include "../headers/docente.h"
 //#include "../headers/asignatura.h"
+#include"../dts/dtClase.h"
 class Docente;
 class Asignatura;
 
+
 class Rol{
   private:
+    tipoClase Dicta;
     Docente *doc;
     Asignatura *asig;
   public:

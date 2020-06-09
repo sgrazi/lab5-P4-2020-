@@ -1,7 +1,7 @@
 #include "../include/headers/docente.h"
 
 Docente::Docente(){
-  //como inicializo los sets?
+  //se crean las colecciones vacias ?
 };
 string Docente::getInstituto(){
   return instituto;
@@ -19,8 +19,8 @@ bool Docente::esDocenteDe(string codigoAsig){
   };
   return res;
 };
-rol Docente::nuevoRol(Asignatura asig){
-  Rol *rolNuevo = new Rol(this, &asig);//paso puntero a doc implicito y direcicon de asig? funciona?
+Rol Docente::nuevoRol(Asignatura asig){
+  Rol *rolNuevo = new Rol(this, &asig);//paso puntero a doc implicito y direcicon de asig? funciona?//falta el tipo del rol
   add(rolNuevo,this.roles);//agregago el rol nuevo a la coleccion
   //asig.agregarRol(rolNuevo);
 };

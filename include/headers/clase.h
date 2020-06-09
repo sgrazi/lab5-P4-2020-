@@ -1,13 +1,13 @@
 #ifndef CLASE_H
 #define CLASE_H
-#include"../dts/dtFecha.h"
+
 #include"../headers/iControladorUsuario.h"
 #include "../headers/docente.h"
 #include "../headers/estcla.h"
 #include <string>
 #include <set>
-
-
+class Mensaje;
+class Estudiante;
 
 using namespace std;
 class Clase{
@@ -25,8 +25,8 @@ class Clase{
     tipoClase tipo;
 
   public://faltan funciones de manejo de relaciones
-    Clase() = 0;
-    void setNombre(string);
+    Clase();
+    virtual void setNombre(string)=0;
     void setCodigo(int);
     void setUrl(string);
     void setFechaInicio(DtFecha);
@@ -38,9 +38,9 @@ class Clase{
     DtFecha getFechaInicio();
     DtFecha getFechaFin();
 
-    virtual void visualizar(Estudiante);
+    void visualizar(Estudiante*);
 
-    ~Clase(){};
+    ~Clase();
     //bool operator<(const Clase &right); //si colecciones se implementan con set esto es necesario
 };
 #endif

@@ -30,7 +30,7 @@ class dtClase{
     DtFecha getFechaInicio();
     DtFecha getFechaFin();
 
-    ~dtClase(){};
+    ~dtClase();
     //bool operator<(const Clase &right); //si colecciones se implementan con set esto es necesario
 };
 #endif

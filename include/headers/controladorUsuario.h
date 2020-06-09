@@ -9,7 +9,7 @@
 
 using namespace std;
 
-class ControladorUsuario: public iControladorUsuario{
+class ControladorUsuario: public iControladorUsuario {
 	private:
 		bool userEsEst;
 		string nombreUser;
@@ -21,7 +21,7 @@ class ControladorUsuario: public iControladorUsuario{
 		string nombreUserActual;
 		string emailUserActual;
 		int nuevoModoSus;
-		
+
 	public:
 		ControladorUsuario();
 		bool getUserEsEst();
@@ -50,7 +50,7 @@ class ControladorUsuario: public iControladorUsuario{
 		void agregarDocente(string,string,string,string,string);
 		void confirmarAlta();
 		void cancelarAlta();
-		set<DtNotificaciones> consultarNotifs();
+		set<DtNotificacion> consultarNotifs();
 		void cambiarModoSus(int);
 		void cancelarCambio();
 		void confirmarCambio();

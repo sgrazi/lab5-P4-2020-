@@ -1,3 +1,6 @@
+#ifndef DTFECHA_H
+#define DTFECHA_H
+
 #include <stdio.h>
 #include <iostream>
 
@@ -13,7 +16,7 @@ int minuto;
 int segundo;
 
 public:
-dtFecha();
+DtFecha();
 void setanio(int);
 void setmes(int);
 void setdia(int);
@@ -24,3 +27,4 @@ DtFecha getFecha();
 ~DtFecha();
 
 };
+#endif
