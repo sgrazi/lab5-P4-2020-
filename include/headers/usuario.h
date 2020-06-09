@@ -25,13 +25,13 @@ class Usuario{
     void setPassword(string);
     void setImagen(string);
     void setNotificaciones(); //crea el conjunto de notifiaciones vacio
-    virtual void setAplica(EstrategiaNotifs)= 0;
+    virtual void setAplica(EstrategiaNotifs*)= 0;
     string getNombre();
     string getEmail();
     string getPassword();
     string getImagen();
     set<DtNotificacion> getNotificaciones();
-    EstrategiaNotifs getAplica();
+    EstrategiaNotifs* getAplica();
 
     void notificar(DtNotificacion);
 
