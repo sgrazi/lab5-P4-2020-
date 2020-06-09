@@ -4,6 +4,7 @@
 #include <iostream>
 using namespace std;
 #include"../headers/estrategiaNotifs.h"
+class estrategiaNotifs;
 
 class dtUsuario{
   private:

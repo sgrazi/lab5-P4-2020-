@@ -6,9 +6,9 @@
 #include"../dts/dtNotificacion.h"
 //#include "../headers/estrategiaNotifs.h"
 using namespace std;
-class EstrategiaNotifs{
 
-};
+class EstrategiaNotifs;
+
 class Usuario{
   private:
     string nombre;
@@ -17,7 +17,7 @@ class Usuario{
     string imagen;
     set<DtNotificacion> notificaciones;
     // int modoSus //Necesario?
-    EstrategiaNotifs aplica;
+    EstrategiaNotifs* aplica;
   public:
     Usuario();
     void setNombre(string);

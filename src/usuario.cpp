@@ -1,5 +1,5 @@
 #include "../include/headers/usuario.h"
-
+#include "../include/headers/estrategiaNotifs.h"
 Usuario::Usuario(){
 
 };
