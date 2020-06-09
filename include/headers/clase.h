@@ -1,7 +1,12 @@
 #ifndef CLASE_H
 #define CLASE_H
-#include <string>
+#include"../dts/dtFecha.h"
+#include"../headers/iControladorUsuario.h"
 
+#include <string>
+#include <set>
+
+using namespace std;
 class Clase{
   private:
     string nombre;
@@ -10,9 +15,9 @@ class Clase{
     DtFecha fechaInicio;
     DtFecha fechaFin;
     Docente creador;
-    set(EstCla) estParticipantes;
-    set(Docente) docParticipantes;
-    set(Mensaje) mensajes;
+    set<EstCla> estParticipantes;
+    set<Docente> docParticipantes;
+    set<Mensaje> mensajes;
     Asignatura *asig;
     tipoClase tipo;
 

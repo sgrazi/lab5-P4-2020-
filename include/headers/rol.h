@@ -1,6 +1,7 @@
 #ifndef ROL_H
 #define ROL_H
 #include <string>
+using namespace std;
 
 class Rol{
   private:

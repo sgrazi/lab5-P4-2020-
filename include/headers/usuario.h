@@ -1,6 +1,10 @@
 #ifndef USUARIO_H
 #define USUARIO_H
+
 #include <string>
+#include <set>
+
+using namespace std;
 
 class Usuario{
   private:
@@ -8,7 +12,7 @@ class Usuario{
     string email;
     string password;
     string imagen;
-    set(DtNotifiacion) notificaciones;
+    set<DtNotifiacion> notificaciones;
     // int modoSus //Necesario?
     EstrategiaNotifs aplica;
   public:
@@ -23,7 +27,7 @@ class Usuario{
     string getEmail();
     string getPassword();
     string getImagen();
-    set(DtNotifiacion) getNotificaciones();
+    set<DtNotifiacion> getNotificaciones();
     EstrategiaNotifs getAplica();
 
     void notificar(DtNotifiacion)

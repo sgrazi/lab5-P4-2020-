@@ -1,10 +1,13 @@
 #ifndef HANDLER_MENSAJES_H
 #define HANDLER_MENSAJES_H
 
+#include <map>
+
+using namespace std;
+
 class HandlerMensajes{
   private:
-    set(Mensaje) colMensajes;
-    set(Usuario) observers;
+    map<Usuario> observers;
   public:
     HandlerMensajes();
 

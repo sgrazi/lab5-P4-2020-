@@ -49,7 +49,7 @@ class ControladorUsuario: public iControladorUsuario{
 		void agregarDocente(string,string,string,string,string);
 		void confirmarAlta();
 		void cancelarAlta();
-		set(DtNotificaciones) consultarNotifs(); //??? set ???
+		set<DtNotificaciones> consultarNotifs();
 		void cambiarModoSus(int);
 		void cancelarCambio();
 		void confirmarCambio();

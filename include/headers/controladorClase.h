@@ -1,6 +1,10 @@
 #ifndef CONTROLADOR_CLASE_H
 #define CONTROLADOR_CLASE_H
+
 #include <string>
+#include <set>
+
+using namespace std;
 
 class ControladorClase{
 	private:
@@ -20,27 +24,27 @@ class ControladorClase{
 		string getClaseAFinalizar();
 
 		void iniciarSesion(string,string);
-		set(DtAsignatura) consultarAsignaturasDocente();
+		set<DtAsignatura> consultarAsignaturasDocente();
 		DtInfoClase infoDocente(string);
 		void iniciarClase(string,string,DtFecha);
 		string generarCodigo();
 		string generarUrl(clase);
 		DtFecha generarFecha();
-		set(DtEstudiantes) consultarInscriptos();
+		set<DtEstudiantes> consultarInscriptos();
 		void agregarHabilitado(string);
 		DtInfoClase desplegarInfoClase();
 		void confirmarInicio();
 		void cancelarInicio();
-		set(DtClase) consultarClasesEnVivo();
+		set<DtClase> consultarClasesEnVivo();
 		DtClase finalizarClase(string);
 		void confirmarFin();
 		void cancelarFin();
-		set(DtAsignatura) consultarAsigIns();
-		set(DtClase) consultarClasesDiferido(string);
+		set<DtAsignatura> consultarAsigIns();
+		set<DtClase> consultarClasesDiferido(string);
 		DtClase AsistirClaseDiferido(string);
-		set(DtMensaje) confirmarAsistencia();
+		set<DtMensaje> confirmarAsistencia();
 		void cancelarAsistencia();
-		set(DtInfoClase) desplegarInfoClases(string);
+		set<DtInfoClase> desplegarInfoClases(string);
 		void confirmarEnvio();
 
 		~ControladorClase()

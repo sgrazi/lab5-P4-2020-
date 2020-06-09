@@ -1,13 +1,16 @@
 #ifndef DOCENTE_H
 #define DOCENTE_H
 #include <string>
+#include <set>
+
+using namespace std;
 
 class Docente : public Usuario{
   private:
     string instituto;
-    set(Rol) roles;
-    set(Clase) clasesCreadas;
-    set(Clase) participa;
+    set<Rol> roles;
+    set<Clase> clasesCreadas;
+    set<Clase> participa;
   public://faltan funciones de manejo de relaciones
     Docente();
     string getInstituto();
@@ -15,9 +18,9 @@ class Docente : public Usuario{
 
     bool esDocenteDe(string);
     rol nuevoRol(Asignatura);
-    set(DtAsignatura) getInfo();
+    set<DtAsignatura> getInfo();
     void agregarClaseNueva(Clase);
-    set(DtClase) clasesATerminar();
+    set<DtClase> clasesATerminar();
     void desvincularDoc(rol);
 
     ~Docente();

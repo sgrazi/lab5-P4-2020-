@@ -1,6 +1,7 @@
 #ifndef MENSAJE_H
 #define MENSAJE_H
 #include <string>
+using namespace std;
 
 class Mensaje{
   private:

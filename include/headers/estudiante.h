@@ -7,12 +7,14 @@
 #include"../headers/estcla.h"
 #include"../headers/monitoreo.h"
 
+using namespace std;
+
 class Estudiante : public Usuario{
   private:
     string ci;
-    set(Asignatura) asignaturas;
-    set(EstCla) clasesParticipa;
-    set(Monitoreo) monHabilitados;
+    set<Asignatura> asignaturas;
+    set<EstCla> clasesParticipa;
+    set<Monitoreo> monHabilitados;
   public://faltan funciones de manejo de relaciones
     Estudiante();
     void setCI(string);

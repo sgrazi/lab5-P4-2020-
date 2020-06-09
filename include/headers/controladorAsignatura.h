@@ -1,6 +1,9 @@
 #ifndef CONTROLADOR_ASIGNATURA_H
 #define CONTROLADOR_ASIGNATURA_H
 #include <string>
+#include <set>
+
+using namespace std;
 
 class ControladorAsignatura{
 	private:
@@ -19,8 +22,8 @@ class ControladorAsignatura{
 		tipoClase getRolDoc();
 		string getAsigAEliminar();
 
-		Set(DtAsignatura) consultarAsignaturas();
-		Set(DtDocente) consultarDocentesLibres(string);
+		Set<DtAsignatura> consultarAsignaturas();
+		Set<DtDocente> consultarDocentesLibres(string);
 		void asignarDocente(string,string,tipoClase);
 		void confirmarAsignacion();
 		void cancelarAsignacion();

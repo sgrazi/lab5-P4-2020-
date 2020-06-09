@@ -1,6 +1,10 @@
 #ifndef I_CONTROLADOR_CLASE_H
 #define I_CONTROLADOR_CLASE_H
+
 #include <string>
+#include <set>
+
+using namespace std;
 
 class IControladorClase{
 	public:
