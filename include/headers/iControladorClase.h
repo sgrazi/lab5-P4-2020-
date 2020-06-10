@@ -32,6 +32,6 @@ class IControladorClase{
 		virtual set(DtInfoClase) desplegarInfoClases(string) = 0;
 		virtual void confirmarEnvio() = 0;
 
-		virtual ~IControladorClase(){};
+		~IControladorClase(){};
 };
 #endif

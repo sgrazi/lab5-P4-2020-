@@ -17,6 +17,6 @@ class IControladorAsignatura{
 		virtual void confirmarElim() = 0;
 		virtual void cancelarElim() = 0;
 
-		virtual ~IControladorAsignatura(){};
+		~IControladorAsignatura(){};
 };
 #endif

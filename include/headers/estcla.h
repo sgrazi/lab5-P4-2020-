@@ -5,6 +5,9 @@
 #include "../headers/estudiante.h"
 #include "../headers/clase.h"
 
+class Clase;
+class Estudiante;
+
 class EstCla{
   private:
     Visualizacion *vis;

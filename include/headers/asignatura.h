@@ -26,11 +26,11 @@ class Asignatura{
     void setTeorico(bool);
     void setPractico(bool);
     void setMonitoreo(bool);
-    int getCodigo();
-    string getNombre();
-    bool getTeorico();
-    bool getPractico();
-    bool getMonitoreo();
+    int getCodigo() const;
+    string getNombre() const;
+    bool getTeorico() const;
+    bool getPractico() const;
+    bool getMonitoreo() const;
     ~Asignatura();
     //bool operator<(const Asignatura &right); //si colecciones se implementan con set esto es necesario
 };

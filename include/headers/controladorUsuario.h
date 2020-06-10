@@ -2,8 +2,10 @@
 #define CONTROLADOR_USUARIO_H
 #include<iostream>
 #include"../dts/dtNotificacion.h"
-#include"../headers/iControladorUsuario.h"
-#include"../headers/estcla.h"
+
+#include"iControladorUsuario.h"
+#include"estcla.h"
+
 #include <set>
 #include <string>
 

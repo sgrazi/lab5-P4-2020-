@@ -2,7 +2,7 @@ all: mainpruebas
 
 HDIR = include/headers
 CPPDIR  = src
-CLASES = controladorUsuario docente estudiante iControladorUsuario
+CLASES = controladorUsuario usuario docente estudiante rol 
 
 PUNTOH  = $(CLASES:%=$(HDIR)/%.h)
 

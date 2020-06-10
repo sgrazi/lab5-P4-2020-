@@ -6,7 +6,7 @@
 #include "../headers/usuario.h"
 #include"../dts/dtAsignatura.h"
 #include"../dts/dtClase.h"
-//#include "../headers/rol.h"
+#include "../headers/clase.h"
 
 using namespace std;
 class Rol;
@@ -17,8 +17,8 @@ class Docente : public Usuario{
   private:
     string instituto;
     map<tipoClase,Rol> roles;
-    map<int,Clase> clasesCreadas;
-    map<int,Clase> participa;
+    //map<int,Clase> clasesCreadas;
+    //map<int,Clase> participa;
   public://faltan funciones de manejo de relaciones
     Docente();
     string getInstituto();

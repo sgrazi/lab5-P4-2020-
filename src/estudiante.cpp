@@ -9,9 +9,9 @@ void Estudiante::setCI(string ci){
 string Estudiante::getCI(){
   return ci;
 };
-void Estudiante::desinscribir(string codigo){//inventado
+void Estudiante::desinscribir(string codigo){/*//inventado
   Asignatura *asig = find(codigo,ColeccionGlobalAsignaturas);
-  remove(asig,asignaturas);
+  remove(asig,asignaturas);*/
 };
 Estudiante::~Estudiante(){
 

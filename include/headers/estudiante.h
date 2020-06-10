@@ -1,20 +1,22 @@
 #ifndef ESTUDIANTE_H
 #define ESTUDIANTE_H
 #include <string>
-#include <set>
+#include <map>
+#include"clase.h"
+//#include"asignatura.h"
+//#include"estcla.h"
+//#include"monitoreo.h"
 
-#include"../headers/asignatura.h"
-#include"../headers/estcla.h"
-#include"../headers/monitoreo.h"
+//class Asignatura;
 
 using namespace std;
 
 class Estudiante : public Usuario{
   private:
     string ci;
-    set<Asignatura> asignaturas;
-    set<EstCla> clasesParticipa;
-    //set<Monitoreo> monHabilitados;// va ??
+    //map<int,Asignatura> asignaturas;
+    //set<EstCla> clasesParticipa;
+    //map<int,Monitoreo> monHabilitados;
   public://faltan funciones de manejo de relaciones
     Estudiante();
     void setCI(string);

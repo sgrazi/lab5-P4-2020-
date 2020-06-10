@@ -8,5 +8,5 @@ class EstrategiaModoSus2 : public EstrategiaNotifs{
     bool aplicaNotificacion();
 
     ~EstrategiaModoSus2();
-  };
+};
 #endif

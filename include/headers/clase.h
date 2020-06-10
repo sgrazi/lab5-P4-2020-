@@ -6,7 +6,9 @@
 #include "../headers/estcla.h"
 #include <string>
 #include <set>
+
 class Mensaje;
+class Asignatura;
 class Estudiante;
 
 using namespace std;

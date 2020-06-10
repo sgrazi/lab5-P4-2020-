@@ -1,6 +1,9 @@
 #include "../include/headers/usuario.h"
 #include "../include/headers/estrategiaNotifs.h"
+#include "../include/dts/dtNotificacion.h"
 #include <set>
+
+
 Usuario::Usuario(){
 
 };
@@ -16,8 +19,8 @@ void Usuario::setPassword(string pass){
 void Usuario::setImagen(string imagen){
   this->imagen = imagen;
 };
-void Usuario::setNotificaciones(){ //crea el conjunto de notifiaciones vacio
-  this->notificaciones = set<DtNotificacion> ;
+void Usuario::setNotificaciones(){
+  //crea el conjunto de notifiaciones vacio
 };
 void Usuario::setAplica(EstrategiaNotifs* e){
   this->aplica = e;
@@ -37,10 +40,10 @@ string Usuario::getImagen(){
 set<DtNotificacion> Usuario::getNotificaciones(){
   return notificaciones;
 };
-EstrategiaNotifs Usuario::getAplica(){
+EstrategiaNotifs* Usuario::getAplica(){
   return aplica;
 };
-void Usuario::notificar(DtNotifiacion){
+void Usuario::notificar(DtNotificacion){
 
 };
 Usuario::~Usuario(){

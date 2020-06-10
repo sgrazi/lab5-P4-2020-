@@ -1,5 +1,9 @@
 #include "../include/headers/rol.h"
 
+class Docente;
+class Asignatura;
+
+
 Rol::Rol(){
 
 };
@@ -19,9 +23,9 @@ Docente* Rol::getDoc(){
 Asignatura* Rol::getAsig(){
   return asig;
 };
-string Rol::getCodigoAsig(){
-  return asig.getCodigo();
-};
+/*int Rol::getCodigoAsig(){
+  return asig->getCodigo();
+};*/
 Rol::~Rol(){
 
 };

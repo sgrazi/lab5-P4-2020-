@@ -2,12 +2,9 @@
 #define ROL_H
 #include <string>
 using namespace std;
-//#include "../headers/docente.h"
-//#include "../headers/asignatura.h"
+#include "../headers/docente.h"
+#include "../headers/asignatura.h"
 #include"../dts/dtClase.h"
-class Docente;
-class Asignatura;
-
 
 class Rol{
   private:
@@ -21,7 +18,7 @@ class Rol{
     void setAsig(Asignatura*);
     Docente* getDoc();
     Asignatura* getAsig();
-    string getCodigoAsig();
+    //int getCodigoAsig();
     ~Rol();
 };
 #endif

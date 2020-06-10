@@ -1,4 +1,5 @@
 #include "../include/headers/docente.h"
+#include "../include/headers/clase.h"
 #include "../include/dts/dtAsignatura.h"
 #include "../include/dts/dtClase.h"
 #include "../include/headers/asignatura.h"
