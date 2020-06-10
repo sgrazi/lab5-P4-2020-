@@ -13,5 +13,5 @@ class dtRol{
     string getDoc();
     int getAsig();
     ~dtRol();
-}
+};
 #endif

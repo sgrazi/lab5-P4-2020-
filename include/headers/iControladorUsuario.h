@@ -9,6 +9,7 @@ using namespace std;
 
 class IControladorUsuario{
 	public:
+		IControladorUsuario(){};
 		virtual void iniciarSesion(string,string) = 0;
 		virtual void agregarEstudiante(string,string,string,string,string) = 0;
 		virtual void agregarDocente(string,string,string,string,string) = 0;
@@ -20,6 +21,6 @@ class IControladorUsuario{
 		virtual void confirmarCambio() = 0;
 		virtual void desuscribirse() = 0;
 
-		virtual ~IControladorUsuario(){};
+		 ~IControladorUsuario(){};
 };
 #endif

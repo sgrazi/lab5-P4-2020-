@@ -1,16 +1,29 @@
-#include "../include/headers/ControladorUsuario.h"
+#include "../include/headers/controladorUsuario.h"
+#include "../include/headers/docente.h"
+#include "../include/headers/estudiante.h"
+#include "../include/headers/estrategiaModoSus1.h"
+#include "../include/headers/estrategiaModoSus2.h"
+#include "../include/headers/estrategiaModoSus3.h"
+#include"../include/dts/dtNotificacion.h"
+
+//#include <set>
+
+//probando, creo que le doy visibilidad a las colecciones globales asi, esto las declara, no las define
+extern map<string,Estudiante*> coleccionGlobalEstudiantes;
+extern map<string,Docente*> coleccionGlobalDocentes;
 
 ControladorUsuario::ControladorUsuario(){
 
 };
+
 bool ControladorUsuario::getUserEsEst(){  return userEsEst;};
 void ControladorUsuario::setUserEsEst(bool es){  this->userEsEst = es;};
 
 string ControladorUsuario::getNombreUser(){  return nombreUser;};
 void ControladorUsuario::setNombreUser(string nombre){  this->nombreUser = nombre;};
 
-string ControladorUsuario::getContraseniaUser(){  return contraseniaUser;};
-void ControladorUsuario::setContraseniaUser(string pass){  this->contraseniaUser = pass;};
+string ControladorUsuario::getPasswordUser(){  return contraseniaUser;};
+void ControladorUsuario::setPasswordUser(string pass){  this->contraseniaUser = pass;};
 
 string ControladorUsuario::getEmailUser(){  return emailUser;};
 void ControladorUsuario::setEmailUser(string email){  this->emailUser = email;};
@@ -35,12 +48,12 @@ void ControladorUsuario::setNuevoModoSus(int modo){  this->nuevoModoSus = modo;}
 
 void ControladorUsuario::iniciarSesion(string email, string pass){
   //member(); buscar si las credenciales existen en la coleccion
-  this.setEmailUserActual(email);
+  this->setEmailUserActual(email);
 };
 
 void ControladorUsuario::agregarEstudiante(string n, string c, string e, string u, string ci){
   setNombreUser(n);
-  setContraseniaUser(c);
+  setPasswordUser(c);
   setEmailUser(e);
   setUrlUser(u);
   setCedulaEst(ci);
@@ -50,7 +63,7 @@ void ControladorUsuario::agregarEstudiante(string n, string c, string e, string 
 
 void ControladorUsuario::agregarDocente(string n, string c, string e, string u, string i){
   setNombreUser(n);
-  setContraseniaUser(c);
+  setPasswordUser(c);
   setEmailUser(e);
   setUrlUser(u);
   setInstitutoDoc(i);
@@ -59,23 +72,23 @@ void ControladorUsuario::agregarDocente(string n, string c, string e, string u, 
 };
 
 void ControladorUsuario::confirmarAlta(){
-  if userEsEst{
-    Estudiante *nuevo = new Estudiante()
-    nuevo.setNombre(getNombreUser());
-    nuevo.setEmail(getEmailUser());
-    nuevo.setContrasenia(getContraseniaUser());
-    nuevo.setImagen(getUrlUser());
-    nuevo.setCI(getCedulaEst());
+  if (userEsEst){
+    Estudiante *nuevo = new Estudiante();
+    nuevo->setNombre(getNombreUser());
+    nuevo->setEmail(getEmailUser());
+    nuevo->setPassword(getPasswordUser());
+    nuevo->setImagen(getUrlUser());
+    nuevo->setCI(getCedulaEst());
     coleccionGlobalEstudiantes.insert(pair<string,Estudiante*>(getEmailUser(),nuevo));
 
   }
   else{
-    Docente *nuevo = new Docente()
-    nuevo.setNombre(getNombreUser());
-    nuevo.setEmail(getEmailUser());
-    nuevo.setContrasenia(getContraseniaUser());
-    nuevo.setImagen(getUrlUser());
-    nuevo.setInstituto(getInstitutoDoc());
+    Docente *nuevo = new Docente();
+    nuevo->setNombre(getNombreUser());
+    nuevo->setEmail(getEmailUser());
+    nuevo->setPassword(getPasswordUser());
+    nuevo->setImagen(getUrlUser());
+    nuevo->setInstituto(getInstitutoDoc());
     coleccionGlobalDocentes.insert(pair<string,Docente*>(getEmailUser(),nuevo));
   }
 };
@@ -84,44 +97,44 @@ void ControladorUsuario::cancelarAlta(){
   //vacio
 };
 
-set(DtNotifiaciones) ControladorUsuario::consultarNotifs(){
+set<DtNotificacion> ControladorUsuario::consultarNotifs(){
 
 };
 
 void ControladorUsuario::cambiarModoSus(int modo){
   if(modo == 1 | modo == 2 | modo == 3)
     setNuevoModoSus(modo);
-  else
+  //else
     //mandar warning?
 };
 
-void ControladorUsuario::confirmarCambio(){
+void ControladorUsuario::confirmarCambio(){/*
   usuario* user = find(getEmailUser(),ColeccionGlobalUsuarios);//CORREGIR, notacion inventada
   switch (modo){
     case 1:
       estrategiaModoSus1 *strat = new estrategiaModoSus1();
-      user.setAplica(strat);
+      user->setAplica(strat);
     break;
     case 2:
       estrategiaModoSus2 *strat = new estrategiaModoSus2();
-      user.setAplica(strat);
+      user->setAplica(strat);
     break;
     case 3:
       estrategiaModoSus3 *strat = new estrategiaModoSus3();
-      user.setAplica(strat);
+      user->setAplica(strat);
     break;
-  }
+  }*/
 };
 
 void ControladorUsuario::cancelarCambio(){
   //vacio
 };
 
-void ControladorUsuario::desuscribirse(){
+void ControladorUsuario::desuscribirse(){/*
   usuario* user = find(getEmailUser(),ColeccionGlobalUsuarios);//CORREGIR, notacion inventada
-  handlerMensajes.eliminarObs(user);
+  handlerMensajes.eliminarObs(user);*/
 };
 
 ControladorUsuario::~ControladorUsuario(){
-  //??
+  //??estrategiaModoSus1
 };

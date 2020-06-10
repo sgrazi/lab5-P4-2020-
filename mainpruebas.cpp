@@ -46,11 +46,11 @@ using namespace std;
 
 int main(){
 
-  ControladorUsuario* Cu = new ControladorUsuario;
-  Cu->agregarEstudiante(c,a,email,a,s);
+  ControladorUsuario* Cu = new ControladorUsuario();
+  Cu->agregarEstudiante("c","a","email","a","s");
   Cu->confirmarAlta();
 
-  auto it = coleccionGlobalEstudiantes.find(email);
+  auto it = coleccionGlobalEstudiantes.find("email");
 
   cout << "Iterator points to " << it->first <<
      " = " << it->second->getNombre() << endl;

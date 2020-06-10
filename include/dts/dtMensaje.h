@@ -23,5 +23,5 @@ class dtMensaje{
 
     ~dtMensaje();
     //bool operator<(const Mensaje &right); //si colecciones se implementan con set esto es necesario
-}
+};
 #endif

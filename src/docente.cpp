@@ -1,4 +1,8 @@
 #include "../include/headers/docente.h"
+#include "../include/dts/dtAsignatura.h"
+#include "../include/dts/dtClase.h"
+#include "../include/headers/asignatura.h"
+#include "../include/headers/rol.h"
 
 Docente::Docente(){
   //se crean las colecciones vacias ?
@@ -9,7 +13,7 @@ string Docente::getInstituto(){
 void Docente::setInstituto(string ins){
   this->instituto = ins;
 };
-bool Docente::esDocenteDe(string codigoAsig){
+bool Docente::esDocenteDe(string codigoAsig){/*
   string aux;
   bool res = false;
   foreach rol in roles do{//notacion inventada
@@ -17,15 +21,15 @@ bool Docente::esDocenteDe(string codigoAsig){
     if aux==codigoAsig
       res = true;
   };
-  return res;
+  return res;*/
 };
-Rol Docente::nuevoRol(Asignatura asig){
+Rol Docente::nuevoRol(Asignatura asig){/*
   Rol *rolNuevo = new Rol(this, &asig);//paso puntero a doc implicito y direcicon de asig? funciona?//falta el tipo del rol
-  add(rolNuevo,this.roles);//agregago el rol nuevo a la coleccion
-  //asig.agregarRol(rolNuevo);
+  add(rolNuevo,this->roles);//agregago el rol nuevo a la coleccion
+  //asig.agregarRol(rolNuevo);*/
 };
-set(DtAsignatura) Docente::getInfo(){
-  //new set(DtAsignatura)
+set<dtAsignatura> Docente::getInfo(){
+  /*//new set(DtAsignatura)
   foreach rol in roles do{//notacion inventada
     string c = rol.getAsig().getCodigo();
     string n = rol.getAsig().getNombre();
@@ -34,15 +38,15 @@ set(DtAsignatura) Docente::getInfo(){
     bool m = rol.getAsig().getMonitoreo();
     //armar dt
     //agregarlo al set
-  }
+  }*/
   //return set;
 };
-void Docente::agregarClaseNueva(Clase c){
-  add(c,clasesCreadas);
+void Docente::agregarClaseNueva(Clase *c){/*
+  add(c,clasesCreadas);*/
 };
 
-set(DtClase) Docente::clasesATerminar(){
-  //new set(DtClase)
+set<dtClase> Docente::clasesATerminar(){
+  /*//new set(DtClase)
   foreach clase in clasesCreadas do{
     if clase.getFechaFin() == fechaNula{ //definir esta constante y sobrecargar == para dtFecha
       string n = clase.getNombre();
@@ -52,12 +56,12 @@ set(DtClase) Docente::clasesATerminar(){
       //armar dt
       //agregarlo al set
     }
-  }
+  }*/
   //return set;
 };
 
-void Docente::desvincularDoc(rol){
-  remove(rol,roles);
+void Docente::desvincularDoc(Rol){/*
+  remove(rol,roles);*/
 };
 
 Docente::~Docente(){

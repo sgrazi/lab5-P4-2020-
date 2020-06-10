@@ -16,5 +16,5 @@ class dtVisualizacion{
     DtFecha getFechaFinVis();
 
     ~dtVisualizacion();
-}
+};
 #endif

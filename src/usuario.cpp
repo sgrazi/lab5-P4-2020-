@@ -19,9 +19,9 @@ void Usuario::setImagen(string imagen){
 void Usuario::setNotificaciones(){ //crea el conjunto de notifiaciones vacio
   this->notificaciones = set<DtNotificacion> ;
 };
-/*void Usuario::setAplica(EstrategiaNotifs){ //abstracta
-  this->aplica =
-};*/
+void Usuario::setAplica(EstrategiaNotifs* e){
+  this->aplica = e;
+};
 string Usuario::getNombre(){
   return nombre;
 };

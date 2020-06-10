@@ -9,5 +9,5 @@ class dtDocente : public dtUsuario{
     string getInstituto();
     void setInstituto(string);
     ~dtDocente();
-}
+};
 #endif
