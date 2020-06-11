@@ -43,6 +43,7 @@ using namespace std;
 
 map<string,Estudiante*> coleccionGlobalEstudiantes;
 map<string,Docente*> coleccionGlobalDocentes;
+map<int,Asignatura*> coleccionGlobalAsignaturas;
 
 int main(){
 
@@ -52,9 +53,9 @@ int main(){
 
   ControladorUsuario* Cu = new ControladorUsuario();
   ControladorAsignatura* Ca = new ControladorAsignatura();
+
   //los controladores tienen punteros a las colecciones en atributos
   //de esta manera las colecciones se declaran en el main y son unicas para todo controlador que necesite usarlas
-
   Cu->setColEst(colEstudiantes);
   Cu->setColDoc(colDocentes);
   Ca->setColDoc(colDocentes);
@@ -77,10 +78,20 @@ int main(){
   cout << "doc de " << it2->first << " = " << it2->second->getNombre() << endl;
   */
 
+  /*//ALTA DE ASIG
+
+  Ca->agregarAsignatura("calculo",1,1,0,0);
+
+  Ca->confirmarAlta();
+
+  auto it = coleccionGlobalAsignaturas.find(1);
+
+  cout << "Asignatura " << it->first <<
+     " = " << it->second->getNombre() << endl;*/
+
   //ASIGNACION DE DOC A ASIG
 
-  Cu->agregarDocente("ale","a","email2","a","s");
-  Cu->confirmarAlta();
+
 
   return 0;
 }
