@@ -6,14 +6,7 @@
 #include "../include/estrategiaModoSus3.h"
 #include "../include/dtNotificacion.h"
 
-//#include <set>
-
-//probando, creo que le doy visibilidad a las colecciones globales asi, esto las declara, no las define
-extern map<string,Estudiante*> coleccionGlobalEstudiantes;
-extern map<string,Docente*> coleccionGlobalDocentes;
-
 ControladorUsuario::ControladorUsuario(){
-
 };
 
 bool ControladorUsuario::getUserEsEst(){  return userEsEst;};
@@ -45,6 +38,9 @@ void ControladorUsuario::setEmailUserActual(string email){  this->emailUserActua
 
 int ControladorUsuario::getNuevoModoSus(){  return nuevoModoSus;};
 void ControladorUsuario::setNuevoModoSus(int modo){  this->nuevoModoSus = modo;};
+
+void ControladorUsuario::setColEst(map<string,Estudiante*>* c){ this->coleccionGlobalEstudiantes = c;};
+void ControladorUsuario::setColDoc(map<string,Docente*>* c){ this->coleccionGlobalDocentes = c;};
 
 void ControladorUsuario::iniciarSesion(string email, string pass){
   //member(); buscar si las credenciales existen en la coleccion
@@ -79,8 +75,8 @@ void ControladorUsuario::confirmarAlta(){
     nuevo->setPassword(getPasswordUser());
     nuevo->setImagen(getUrlUser());
     nuevo->setCI(getCedulaEst());
-    //coleccionGlobalEstudiantes.insert(pair<string,Estudiante*>(getEmailUser(),nuevo));
-    coleccionGlobalEstudiantes[nuevo->getEmail()]=nuevo;
+    this->coleccionGlobalEstudiantes->insert(pair<string,Estudiante*>(nuevo->getEmail(),nuevo));
+    //coleccionGlobalEstudiantes[nuevo->getEmail()]=nuevo;
 
   }
   else{
@@ -90,8 +86,8 @@ void ControladorUsuario::confirmarAlta(){
     nuevo->setPassword(getPasswordUser());
     nuevo->setImagen(getUrlUser());
     nuevo->setInstituto(getInstitutoDoc());
-    //coleccionGlobalDocentes.insert(pair<string,Docente*>(getEmailUser(),nuevo));
-    coleccionGlobalDocentes[nuevo->getEmail()]=nuevo;
+    this->coleccionGlobalDocentes->insert(pair<string,Docente*>(nuevo->getEmail(),nuevo));
+    //coleccionGlobalDocentes[nuevo->getEmail()]=nuevo;
   }
 };
 

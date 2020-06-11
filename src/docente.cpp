@@ -14,24 +14,28 @@ string Docente::getInstituto(){
 void Docente::setInstituto(string ins){
   this->instituto = ins;
 };
-bool Docente::esDocenteDe(string codigoAsig){/*
-  string aux;
+bool Docente::esDocenteDe(int codigoAsig){
+  int aux;
   bool res = false;
-  foreach rol in roles do{//notacion inventada
-    aux = rol.getCodigoAsig();
-    if aux==codigoAsig
+  map<int,Rol> :: iterator it;
+  for(it=asignaturas.begin(); it!=asignaturas.end(); it++){
+    aux = it->first;
+    if(aux==codigoAsig)
       res = true;
+    if (res==true)
+      break;
   };
-  return res;*/
+  return res;
 };
-Rol Docente::nuevoRol(Asignatura asig){/*
-  Rol *rolNuevo = new Rol(this, &asig);//paso puntero a doc implicito y direcicon de asig? funciona?//falta el tipo del rol
-  add(rolNuevo,this->roles);//agregago el rol nuevo a la coleccion
-  //asig.agregarRol(rolNuevo);*/
+Rol Docente::nuevoRol(Asignatura *asig, tipoClase rolDoc){
+  Rol *rolNuevo = new Rol(this, asig);
+  rolNuevo->setDicta(rolDoc);
+  this->asignaturas.insert(pair<int,Rol> (asig->getCodigo(),*rolNuevo));//agregago el rol nuevo a la coleccion
+  asig->agregarRol(*rolNuevo);
 };
 set<dtAsignatura> Docente::getInfo(){
   /*//new set(DtAsignatura)
-  foreach rol in roles do{//notacion inventada
+  foreach rol in asignaturas do{//notacion inventada
     string c = rol.getAsig().getCodigo();
     string n = rol.getAsig().getNombre();
     bool t = rol.getAsig().getTeorico();
@@ -62,7 +66,7 @@ set<dtClase> Docente::clasesATerminar(){
 };
 
 void Docente::desvincularDoc(Rol){/*
-  remove(rol,roles);*/
+  remove(rol,asignaturas);*/
 };
 
 Docente::~Docente(){

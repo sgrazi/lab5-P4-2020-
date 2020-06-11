@@ -1,11 +1,13 @@
 #ifndef CONTROLADOR_USUARIO_H
 #define CONTROLADOR_USUARIO_H
 
-#include<iostream>
+#include <iostream>
 
-#include"dtNotificacion.h"
-#include"iControladorUsuario.h"
-#include"usrcla.h"
+#include "dtNotificacion.h"
+#include "iControladorUsuario.h"
+#include "usrcla.h"
+#include "estudiante.h"
+#include "docente.h"
 
 #include <map>
 #include <set>
@@ -25,6 +27,8 @@ class ControladorUsuario: public IControladorUsuario{
 		string nombreUserActual;
 		string emailUserActual;
 		int nuevoModoSus;
+		map<string,Estudiante*>* coleccionGlobalEstudiantes;
+		map<string,Docente*>* coleccionGlobalDocentes;
 
 	public:
 		ControladorUsuario();
@@ -48,6 +52,9 @@ class ControladorUsuario: public IControladorUsuario{
 		void setNombreUserActual(string);
 		void setEmailUserActual(string);
 		void setNuevoModoSus(int);
+
+		void setColEst(map<string,Estudiante*>*);
+		void setColDoc(map<string,Docente*>*);
 
 		void iniciarSesion(string,string);
 		void agregarEstudiante(string,string,string,string,string);

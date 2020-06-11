@@ -9,17 +9,19 @@ using namespace std;
 
 class Rol{
   private:
-    tipoClase Dicta;
+    tipoClase dicta;
     Docente *doc;
     Asignatura *asig;
   public:
     Rol();
     Rol(Docente* d, Asignatura* a);
+    void setDicta(tipoClase);
+    tipoClase getDicta();
     void setDoc(Docente*);
     void setAsig(Asignatura*);
     Docente* getDoc();
     Asignatura* getAsig();
-    //int getCodigoAsig();
+    int getCodigoAsig();
     ~Rol();
 };
 #endif

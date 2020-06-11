@@ -11,6 +11,10 @@ Rol::Rol(Docente* d, Asignatura* a){
   this->doc = d;
   this->asig = a;
 };
+
+void Rol::setDicta(tipoClase t){ this->dicta = t;};
+tipoClase Rol::getDicta(){  return dicta;};
+
 void Rol::setDoc(Docente* d){
   this->doc = d;
 };
@@ -23,9 +27,9 @@ Docente* Rol::getDoc(){
 Asignatura* Rol::getAsig(){
   return asig;
 };
-/*int Rol::getCodigoAsig(){
+int Rol::getCodigoAsig(){
   return asig->getCodigo();
-};*/
+};
 Rol::~Rol(){
 
 };

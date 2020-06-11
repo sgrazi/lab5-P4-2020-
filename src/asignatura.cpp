@@ -19,5 +19,9 @@ bool Asignatura::getMonitoreo() const{  return monitoreo;};
 
 Asignatura::~Asignatura(){};
 
+void Asignatura::agregarRol(Rol rol){
+  this->docentes.insert(pair<string,Rol>(rol.getDoc()->getEmail(),rol));
+};
+
 /*bool operator< (const Asignatura &right) const{
 return codigo < right.codigo;*/ //si colecciones se implementan con set esto es necesario

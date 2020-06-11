@@ -9,8 +9,8 @@ using namespace std;
 
 class IControladorAsignatura{
 	public:
-		virtual Set<dtAsignatura> consultarAsignaturas() = 0;
-		virtual Set<dtDocente> consultarDocentesLibres(string) = 0;
+		virtual set<dtAsignatura> consultarAsignaturas() = 0;
+		virtual set<dtDocente> consultarDocentesLibres(string) = 0;
 		virtual void asignarDocente(string,string,tipoClase) = 0;
 		virtual void confirmarAsignacion() = 0;
 		virtual void cancelarAsignacion() = 0;

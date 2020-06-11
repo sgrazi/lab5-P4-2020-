@@ -19,13 +19,13 @@ class dtAsignatura{
     void setTeorico(bool);
     void setPractico(bool);
     void setMonitoreo(bool);
-    int getCodigo();
+    int getCodigo() const;
     string getNombre();
     bool getTeorico();
     bool getPractico();
     bool getMonitoreo();
     ~dtAsignatura();
-    bool operator<(const dtAsignatura &right); //si colecciones se implementan con set esto es necesario
+    bool operator<(const dtAsignatura &right)const; //si colecciones se implementan con set esto es necesario
 };
 
 #endif

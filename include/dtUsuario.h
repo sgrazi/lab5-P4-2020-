@@ -6,7 +6,7 @@
 using namespace std;
 
 
-class dtUsuario{
+class dtUsuario{ //abstracta
   private:
     string nombre;
     string email;
@@ -15,7 +15,7 @@ class dtUsuario{
     //set<DtNotifiacion> notificaciones; va?
     int modoSus; //antes estaba su componente de strategy, ahora un int que indica cual modo de strategy tiene
   public:
-    dtUsuario();
+    dtUsuario(){};
     void setNombre(string);
     void setEmail(string);
     void setPassword(string);
@@ -27,8 +27,8 @@ class dtUsuario{
     string getPassword();
     string getImagen();
     //set(DtNotifiacion) getNotificaciones();
-    int setModoSus();
+    int getModoSus();
 
-    ~dtUsuario();
+    ~dtUsuario(){};
 };
 #endif
