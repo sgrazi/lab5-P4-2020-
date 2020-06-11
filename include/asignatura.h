@@ -18,7 +18,7 @@ class Asignatura{
     bool monitoreo;
     bool practico;
     //set<dtEstudiante>* inscriptos;
-    map<string,Rol> docentes; //string es el email del doc
+    map<string,Rol> docentes; //string es el email del doc 
     //map<int,Clase> clases;
   public://faltan funciones de manejo de relaciones
     Asignatura();

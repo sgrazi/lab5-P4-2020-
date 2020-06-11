@@ -10,8 +10,20 @@ ControladorAsignatura::ControladorAsignatura(){};
 void ControladorAsignatura::setEmailDocente(string e){  this->emailDocente = e;};
 string ControladorAsignatura::getEmailDocente(){  return emailDocente;};
 
+void ControladorAsignatura::setNombreAsig(string n){  this->nombreAsig = n;};
+string ControladorAsignatura::getNombreAsig(){ return nombreAsig;};
+
 void ControladorAsignatura::setCodigoAsig(int c){  this->codigoAsig = c;};
 int ControladorAsignatura::getCodigoAsig(){ return codigoAsig;};
+
+void ControladorAsignatura::setAceptaTeo(bool b){  this->aceptaTeo = b;};
+bool ControladorAsignatura::getAceptaTeo(){ return aceptaTeo;};
+
+void ControladorAsignatura::setAceptaPra(bool b){  this->aceptaPra = b;};
+bool ControladorAsignatura::getAceptaPra(){ return aceptaPra;};
+
+void ControladorAsignatura::setAceptaMon(bool b){  this->aceptaMon = b;};
+bool ControladorAsignatura::getAceptaMon(){ return aceptaMon;};
 
 void ControladorAsignatura::setRolDoc(tipoClase r){ this->rolDoc = r;};
 tipoClase ControladorAsignatura::getRolDoc(){return rolDoc;};
@@ -22,6 +34,27 @@ int ControladorAsignatura::getAsigAEliminar(){ return asigAEliminar;};
 void ControladorAsignatura::setColAsig(map<int,Asignatura*>* c){ this->coleccionGlobalAsignaturas = c;};
 void ControladorAsignatura::setColDoc(map<string,Docente*>* c){ this->coleccionGlobalDocentes = c;};
 
+void ControladorAsignatura::agregarAsignatura(string n, int c, bool t, bool p, bool m){
+  this->setNombreAsig(n);
+  this->setCodigoAsig(c);
+  this->setAceptaTeo(t);
+  this->setAceptaPra(p);
+  this->setAceptaMon(m);
+};
+
+void ControladorAsignatura::confirmarAlta(){
+  Asignatura *nueva = new Asignatura();
+  nueva->setNombre(getNombreAsig());
+  nueva->setCodigo(getCodigoAsig());
+  nueva->setTeorico(getAceptaTeo());
+  nueva->setPractico(getAceptaPra());
+  nueva->setMonitoreo(getAceptaMon());
+  this->coleccionGlobalAsignaturas->insert(pair<int,Asignatura*>(nueva->getCodigo(),nueva));
+};
+
+void ControladorAsignatura::cancelarAlta(){
+
+};
 
 set<dtAsignatura> ControladorAsignatura::consultarAsignaturas(){
   set<dtAsignatura> nuevo;

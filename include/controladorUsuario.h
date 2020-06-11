@@ -52,15 +52,18 @@ class ControladorUsuario: public IControladorUsuario{
 		void setNombreUserActual(string);
 		void setEmailUserActual(string);
 		void setNuevoModoSus(int);
-
+		//COLECCIONES
 		void setColEst(map<string,Estudiante*>*);
 		void setColDoc(map<string,Docente*>*);
 
 		void iniciarSesion(string,string);
+
+		//ALTA DE USUARIO
 		void agregarEstudiante(string,string,string,string,string);
 		void agregarDocente(string,string,string,string,string);
 		void confirmarAlta();
 		void cancelarAlta();
+
 		set<dtNotificacion> consultarNotifs();
 		void cambiarModoSus(int);
 		void cancelarCambio();

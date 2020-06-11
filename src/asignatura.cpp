@@ -1,6 +1,8 @@
 #include "../include/asignatura.h"
 
-Asignatura::Asignatura(){};
+Asignatura::Asignatura(){ 
+
+};
 
 void Asignatura::setCodigo(int c){ this->codigo = c;};
 int Asignatura::getCodigo() const{ return codigo;};
