@@ -3,6 +3,8 @@
 #include <string>
 #include "dtUsuario.h"
 
+using namespace std;
+
 class dtDocente : public dtUsuario{
   private:
     string instituto;

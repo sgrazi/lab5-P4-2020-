@@ -1,7 +1,9 @@
 #include "../include/controladorAsignatura.h"
 #include "../include/dtAsignatura.h"
 
-#include <string>
+using namespace std;
+
+extern map<int,Asignatura*> coleccionGlobalAsignaturas;
 
 ControladorAsignatura::ControladorAsignatura(){};
 
@@ -19,17 +21,16 @@ int ControladorAsignatura::getAsigAEliminar(){ return asigAEliminar;};
 
 set<dtAsignatura> ControladorAsignatura::consultarAsignaturas(){
   set<dtAsignatura> nuevo;
-  map<int,Asignatura> :: iterator it;
-  for (it=this->coleccionGlobalAsignaturas->begin(); it!=this->coleccionGlobalAsignaturas->end() ;++it){
-    int i= it->first;
+  map<int,Asignatura*> :: iterator it;
+  for (it=coleccionGlobalAsignaturas.begin(); it!=coleccionGlobalAsignaturas.end() ;++it){
     Asignatura* a = it->second;
-    dtAsignatura agregar = new dtAsignatura();
-    agregar->setCodigo() = a->getCodigo();
-    agregar->setNombre() = a->getNombre();
-    agregar->setMonitoreo() = a->getMonitoreo();
-    agregar->setPractico() =a->getPractico();
-    agregar->setTeorico() =a->getTeorico();
-    nuevo.insert(agregar);
+    dtAsignatura* agregar = new dtAsignatura();
+    agregar->setCodigo(a->getCodigo());
+    agregar->setNombre(a->getNombre());
+    agregar->setMonitoreo(a->getMonitoreo());
+    agregar->setPractico(a->getPractico());
+    agregar->setTeorico(a->getTeorico());
+    nuevo.insert(*agregar);
   };
   return nuevo;
 };

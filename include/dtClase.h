@@ -1,8 +1,11 @@
 #ifndef DT_CLASE_H
 #define DT_CLASE_H
 #include "dtFecha.h"
+#include "tipoClase.h"
+#include <string>
 
-enum tipoClase {Teorico,Practico,Monitoreo};
+using namespace std;
+
 class Docente;
 
 class dtClase{
@@ -10,8 +13,8 @@ class dtClase{
     string nombre;
     int codigo;
     string url;
-    DtFecha fechaInicio;
-    DtFecha fechaFin;
+    dtFecha fechaInicio;
+    dtFecha fechaFin;
     Docente* creador;
     string codigoAsig; //Clase original tenia una asociacion a la asignatura, aca lo reemplaza el identificador de la asignatura
     tipoClase tipo;
@@ -21,14 +24,14 @@ class dtClase{
     void setNombre(string);
     void setCodigo(int);
     void setUrl(string);
-    void setFechaInicio(DtFecha);
-    void setFechaFin(DtFecha);
+    void setFechaInicio(dtFecha);
+    void setFechaFin(dtFecha);
     tipoClase getTipo();
     string getNombre();
     int getCodigo();
     string getUrl();
-    DtFecha getFechaInicio();
-    DtFecha getFechaFin();
+    dtFecha getFechaInicio();
+    dtFecha getFechaFin();
 
     ~dtClase();
     //bool operator<(const Clase &right); //si colecciones se implementan con set esto es necesario

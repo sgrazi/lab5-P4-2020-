@@ -2,7 +2,6 @@
 #define ESTRATEGIA_NOTIFS_H
 #include"usuario.h"
 
-class Usuario;
 
 class EstrategiaNotifs{
   private:

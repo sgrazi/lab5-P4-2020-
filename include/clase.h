@@ -7,6 +7,8 @@
 #include <string>
 #include <set>
 
+using namespace std;
+
 class Mensaje;
 class Asignatura;
 class Estudiante;
@@ -17,8 +19,8 @@ class Clase{
     string nombre;
     int codigo;
     string url;
-    DtFecha fechaInicio;
-    DtFecha fechaFin;
+    dtFecha fechaInicio;
+    dtFecha fechaFin;
     Docente* creador;
     set<UsrCla> estParticipantes;
     set<Docente> docParticipantes;
@@ -31,14 +33,14 @@ class Clase{
     virtual void setNombre(string)=0;
     void setCodigo(int);
     void setUrl(string);
-    void setFechaInicio(DtFecha);
-    void setFechaFin(DtFecha);
+    void setFechaInicio(dtFecha);
+    void setFechaFin(dtFecha);
     tipoClase getTipo();
     string getNombre();
     int getCodigo();
     string getUrl();
-    DtFecha getFechaInicio();
-    DtFecha getFechaFin();
+    dtFecha getFechaInicio();
+    dtFecha getFechaFin();
 
     void visualizar(Estudiante*);
 

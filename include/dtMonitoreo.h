@@ -1,5 +1,8 @@
 #ifndef DT_MONITOREO_H
 #define DT_MONITOREO_H
+#include <string>
+
+using namespace std;
 
 class dtMonitoreo : public dtClase{
   private:

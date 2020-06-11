@@ -8,19 +8,19 @@ class UsrCla;
 class Visualizacion{
   private:
     bool enVivo;
-    DtFecha fechaInicioVis;
-    DtFecha fechaFinVis;
+    dtFecha fechaInicioVis;
+    dtFecha fechaFinVis;
     UsrCla* usrcla;
   public://faltan funciones de manejo de relaciones
     Visualizacion();
     void setEnVivo(bool);
-    void setFechaInicioVis(DtFecha);
-    void setFechaFinVis(DtFecha);
+    void setFechaInicioVis(dtFecha);
+    void setFechaFinVis(dtFecha);
     bool getEnVivo();
-    DtFecha getFechaInicioVis();
-    DtFecha getFechaFinVis();
+    dtFecha getFechaInicioVis();
+    dtFecha getFechaFinVis();
 
-    DtFecha generarFecha();
+    dtFecha generarFecha();
 
     ~Visualizacion();
 };

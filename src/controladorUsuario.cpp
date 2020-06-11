@@ -4,7 +4,7 @@
 #include "../include/estrategiaModoSus1.h"
 #include "../include/estrategiaModoSus2.h"
 #include "../include/estrategiaModoSus3.h"
-#include"../include/dtNotificacion.h"
+#include "../include/dtNotificacion.h"
 
 //#include <set>
 

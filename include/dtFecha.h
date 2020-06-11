@@ -6,7 +6,7 @@
 
 using namespace std;
 
-class DtFecha {
+class dtFecha {
 private:
 int anio;
 int mes;
@@ -16,15 +16,15 @@ int minuto;
 int segundo;
 
 public:
-DtFecha();
+dtFecha();
 void setanio(int);
 void setmes(int);
 void setdia(int);
 void sethora(int);
 void setminuto(int);
 void setsegundo(int);
-DtFecha getFecha();
-~DtFecha();
+dtFecha getFecha();
+~dtFecha();
 
 };
 #endif

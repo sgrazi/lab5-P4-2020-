@@ -1,9 +1,11 @@
 #ifndef ESTCLA_H
 #define ESTCLA_H
-
+#include <string>
 #include "visualizacion.h"
 //#include "estudiante.h"
 //#include "clase.h"
+
+using namespace std;
 
 class Clase;
 class Estudiante;
@@ -24,7 +26,7 @@ class UsrCla{
 
     int getCodigoClase();
     string getEmailUser();
-    void marcar(DtFecha);
+    void marcar(dtFecha);
     void iniciarVis();
     ~UsrCla();
 };

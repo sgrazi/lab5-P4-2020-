@@ -1,10 +1,11 @@
 #ifndef ROL_H
 #define ROL_H
 #include <string>
-using namespace std;
 #include "docente.h"
 #include "asignatura.h"
 #include "dtClase.h"
+
+using namespace std;
 
 class Rol{
   private:

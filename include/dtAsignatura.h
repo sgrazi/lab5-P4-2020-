@@ -3,6 +3,8 @@
 
 #include <string>
 
+using namespace std;
+
 class dtAsignatura{
   private:
     int codigo;
@@ -23,7 +25,7 @@ class dtAsignatura{
     bool getPractico();
     bool getMonitoreo();
     ~dtAsignatura();
-    //bool operator<(const Asignatura &right); //si colecciones se implementan con set esto es necesario
+    bool operator<(const dtAsignatura &right); //si colecciones se implementan con set esto es necesario
 };
 
 #endif

@@ -1,6 +1,9 @@
 #ifndef DT_MENSAJE_H
 #define DT_MENSAJE_H
 #include "dtFecha.h"
+#include <string>
+
+using namespace std;
 
 class dtMensaje{
   private:

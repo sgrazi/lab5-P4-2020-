@@ -2,9 +2,9 @@
 #define DT_USUARIO_H
 #include <string>
 #include <iostream>
+
 using namespace std;
-#include "estrategiaNotifs.h"
-class estrategiaNotifs;
+
 
 class dtUsuario{
   private:
@@ -22,7 +22,6 @@ class dtUsuario{
     void setImagen(string);
     //void setNotificaciones(); //crea el conjunto de notifiaciones vacio
     void setModoSus(int);
-    void setAplica(estrategiaNotifs);
     string getNombre();
     string getEmail();
     string getPassword();

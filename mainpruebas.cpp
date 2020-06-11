@@ -48,10 +48,14 @@ int main(){
 
   ControladorUsuario* Cu = new ControladorUsuario();
 
+  /* ALTA DE USUARIO
   Cu->agregarEstudiante("c","a","email","a","s");
   Cu->confirmarAlta();
 
   Cu->agregarDocente("ale","a","email2","a","s");
+  Cu->cancelarAlta();
+
+
   Cu->confirmarAlta();
 
   auto it = coleccionGlobalEstudiantes.find("email");
@@ -61,7 +65,8 @@ int main(){
 
   auto it2 = coleccionGlobalDocentes.find("email2");
 
-  cout << "doc de " << it2->first << " = " << it2->second->getNombre() << endl;
+  cout << "doc de " << it2->first << " = " << it2->second->getNombre() << endl;*/
+
 
   return 0;
 }

@@ -2,6 +2,8 @@
 #define DT_ROL_H
 #include <string>
 
+using namespace std;
+
 class dtRol{
   private:
     string doc; //antes tenia puntero a docente, ahora string email del doc

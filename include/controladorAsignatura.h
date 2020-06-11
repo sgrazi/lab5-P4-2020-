@@ -1,13 +1,19 @@
 #ifndef CONTROLADOR_ASIGNATURA_H
 #define CONTROLADOR_ASIGNATURA_H
+
+#include <iostream>
+
+#include "asignatura.h"
 #include "dtAsignatura.h"
 #include "dtDocente.h"
+#include "tipoClase.h"
+
 #include <string>
 #include <set>
+#include <map>
 
 using namespace std;
 
-enum tipoClase{teorico,practico,monitoreo};
 
 class ControladorAsignatura{
 	private:
