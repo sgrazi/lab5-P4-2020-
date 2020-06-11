@@ -79,7 +79,8 @@ void ControladorUsuario::confirmarAlta(){
     nuevo->setPassword(getPasswordUser());
     nuevo->setImagen(getUrlUser());
     nuevo->setCI(getCedulaEst());
-    coleccionGlobalEstudiantes.insert(pair<string,Estudiante*>(getEmailUser(),nuevo));
+    //coleccionGlobalEstudiantes.insert(pair<string,Estudiante*>(getEmailUser(),nuevo));
+    coleccionGlobalEstudiantes[nuevo->getEmail()]=nuevo;
 
   }
   else{
@@ -89,7 +90,8 @@ void ControladorUsuario::confirmarAlta(){
     nuevo->setPassword(getPasswordUser());
     nuevo->setImagen(getUrlUser());
     nuevo->setInstituto(getInstitutoDoc());
-    coleccionGlobalDocentes.insert(pair<string,Docente*>(getEmailUser(),nuevo));
+    //coleccionGlobalDocentes.insert(pair<string,Docente*>(getEmailUser(),nuevo));
+    coleccionGlobalDocentes[nuevo->getEmail()]=nuevo;
   }
 };
 

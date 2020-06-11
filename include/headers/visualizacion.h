@@ -1,6 +1,6 @@
 #ifndef VISUALIZACION_H
 #define VISUALIZACION_H
-//#include"../headers/estcla.h"
+//#include"../headers/usrcla.h"
 #include"../dts/dtFecha.h"
 class EstCla;
 
@@ -9,7 +9,7 @@ class Visualizacion{
     bool enVivo;
     DtFecha fechaInicioVis;
     DtFecha fechaFinVis;
-    EstCla*estcla;
+    UsrCla* usrcla;
   public://faltan funciones de manejo de relaciones
     Visualizacion();
     void setEnVivo(bool);

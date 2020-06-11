@@ -8,13 +8,13 @@
 class Clase;
 class Estudiante;
 
-class EstCla{
+class UsrCla{
   private:
     Visualizacion *vis;
     Estudiante *est;
     Clase *clase;
   public:
-    EstCla();
+    UsrCla();
     void setVisualizacion(Visualizacion*);
     void setEstudiante(Estudiante*);
     void setClase(Clase*);
@@ -22,9 +22,11 @@ class EstCla{
     Estudiante* getEst();
     Clase* getClase();
 
+    int getCodigoClase();
+    string getEmailUser();
     void marcar(DtFecha);
     void iniciarVis();
-    ~EstCla();
+    ~UsrCla();
 };
 
 #endif

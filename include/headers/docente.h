@@ -17,6 +17,7 @@ class Docente : public Usuario{
   private:
     string instituto;
     map<tipoClase,Rol> roles;
+    //set<UsrCla> clasesParticipa;
     //map<int,Clase> clasesCreadas;
     //map<int,Clase> participa;
   public://faltan funciones de manejo de relaciones

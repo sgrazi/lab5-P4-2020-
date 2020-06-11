@@ -1,17 +1,18 @@
 #ifndef HANDLER_MENSAJES_H
 #define HANDLER_MENSAJES_H
-
+#include "usuario.h"
+#include <iostream>
 #include <map>
 
 using namespace std;
 
 class HandlerMensajes{
   private:
-    map<Usuario> observers;
+    map<string,Usuario>* observers;
   public:
     HandlerMensajes();
 
-    agregarMensaje(); //cual es el tipo de retorno? en el dcd no estaba, puse void
+    void agregarMensaje(); //cual es el tipo de retorno? en el dcd no estaba, puse void
     void agregarObs(Usuario);
     void eliminarObs(Usuario);
 

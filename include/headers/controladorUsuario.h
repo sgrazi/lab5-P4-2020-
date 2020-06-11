@@ -6,6 +6,7 @@
 #include"iControladorUsuario.h"
 #include"estcla.h"
 
+#include<map>
 #include <set>
 #include <string>
 

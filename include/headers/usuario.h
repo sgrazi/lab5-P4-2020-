@@ -16,7 +16,6 @@ class Usuario{
     string password;
     string imagen;
     set<DtNotificacion> notificaciones;
-    // int modoSus //Necesario?
     EstrategiaNotifs* aplica;
   public:
     Usuario();

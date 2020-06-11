@@ -5,7 +5,7 @@
 #include <string>
 #include <iostream>
 #include"../dts/dtEstudiante.h"
-#include "../headers/rol.h"
+#include "rol.h"
 
 using namespace std;
 class Rol;
@@ -17,8 +17,9 @@ class Asignatura{
     bool teorico;
     bool monitoreo;
     bool practico;
-    set<dtEstudiante> inscriptos;
-    map<string,Rol> docentes; //string es el email del doc
+    //set<dtEstudiante>* inscriptos;
+    //map<string,Rol>* docentes; //string es el email del doc
+    //map<int,Clase> clases;
   public://faltan funciones de manejo de relaciones
     Asignatura();
     void setCodigo(int);
@@ -31,6 +32,11 @@ class Asignatura{
     bool getTeorico() const;
     bool getPractico() const;
     bool getMonitoreo() const;
+
+    //void agregarRol(Rol);
+    //void agregarClaseNueva(dtClase);
+    //set<dtEstudiante> getInscriptos();
+    //set<dtClase> getClases();
     ~Asignatura();
     //bool operator<(const Asignatura &right); //si colecciones se implementan con set esto es necesario
 };

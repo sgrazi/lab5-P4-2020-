@@ -5,9 +5,9 @@ class Factory{
   public:
     Factory();
 
-    Asignatura getAsignatura();
-    Clase getClase();
-    Usuario getUsuario();
+    Asignatura getIAsignatura();
+    Clase getIClase();
+    Usuario getIUsuario();
 
     ~Factory();
 };

@@ -13,7 +13,7 @@ void Mensaje::setFecha(DtFecha fecha){
   this->fecha = fecha;
 };
 void Mensaje::setEnRespuestaA(Mensaje *ms){
-  this->enRespuestaA = ms
+  this->enRespuestaA = ms;
 };
 int Mensaje::getId(){
   return id;

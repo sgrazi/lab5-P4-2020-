@@ -1,6 +1,8 @@
 #ifndef MENSAJE_H
 #define MENSAJE_H
 #include <string>
+#include "handlerMensajes.h"
+#include "clase.h"
 using namespace std;
 
 class Mensaje{
@@ -16,7 +18,7 @@ class Mensaje{
     void setId(int);
     void setContenido(string);
     void setFecha(DtFecha);
-    void setEnRespuestaA(Mensaje);
+    void setEnRespuestaA(Mensaje*);
     int getId();
     string getContenido();
     DtFecha getFecha();

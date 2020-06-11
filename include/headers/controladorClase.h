@@ -8,17 +8,17 @@ using namespace std;
 
 class ControladorClase{
 	private:
-		string contraseniaUserActual;
+		string passwordUserActual;
 		string emailUserActual;
 		DtInfoClase infoParaCreacionClase;
 		string claseAFinalizar;
 	public:
 		ControladorClase();
-		void setContraseniaUserActual(string);
+		void setPasswordUserActual(string);
 		void setEmailUserActual(string);
 		void setInfoParaCreacionClase(DtInfoClase);
 		void setClaseAFinalizar(string);
-		string getContraseniaUserActual();
+		string getPasswordUserActual();
 		string getEmailUserActual();
 		DtInfoClase getInfoParaCreacionClase();
 		string getClaseAFinalizar();
