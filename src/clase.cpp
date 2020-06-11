@@ -1,5 +1,4 @@
-#include "../include/headers/clase.h"
-#include "../include/"
+#include "../include/clase.h"
 
 void Clase::setNombre(string nombre){
   this->nombre = nombre;

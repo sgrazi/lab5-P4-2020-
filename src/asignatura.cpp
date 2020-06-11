@@ -1,4 +1,4 @@
-#include "../include/headers/asignatura.h"
+#include "../include/asignatura.h"
 
 Asignatura::Asignatura(){};
 

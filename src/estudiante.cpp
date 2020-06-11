@@ -1,4 +1,4 @@
-#include "../include/headers/estudiante.h"
+#include "../include/estudiante.h"
 
 Estudiante::Estudiante(){
 

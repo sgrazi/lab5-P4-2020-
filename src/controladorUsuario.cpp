@@ -1,10 +1,10 @@
-#include "../include/headers/controladorUsuario.h"
-#include "../include/headers/docente.h"
-#include "../include/headers/estudiante.h"
-#include "../include/headers/estrategiaModoSus1.h"
-#include "../include/headers/estrategiaModoSus2.h"
-#include "../include/headers/estrategiaModoSus3.h"
-#include"../include/dts/dtNotificacion.h"
+#include "../include/controladorUsuario.h"
+#include "../include/docente.h"
+#include "../include/estudiante.h"
+#include "../include/estrategiaModoSus1.h"
+#include "../include/estrategiaModoSus2.h"
+#include "../include/estrategiaModoSus3.h"
+#include"../include/dtNotificacion.h"
 
 //#include <set>
 
@@ -99,7 +99,7 @@ void ControladorUsuario::cancelarAlta(){
   //vacio
 };
 
-set<DtNotificacion> ControladorUsuario::consultarNotifs(){
+set<dtNotificacion> ControladorUsuario::consultarNotifs(){
 
 };
 

@@ -1,4 +1,4 @@
-#include "../include/headers/mensaje.h"
+#include "../include/mensaje.h"
 
 Mensaje::Mensaje(){
 
@@ -21,7 +21,7 @@ int Mensaje::getId(){
 string Mensaje::getContenido(){
   return contenido;
 };
-DtFecha Mensaje::getFecha(){
+dtFecha Mensaje::getFecha(){
   return fecha;
 };
 Mensaje* Mensaje::getEnRespuestaA(){

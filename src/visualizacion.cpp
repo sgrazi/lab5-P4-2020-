@@ -1,4 +1,4 @@
-#include "../include/headers/visualizacion.h"
+#include "../include/visualizacion.h"
 
 Visualizacion::Visualizacion(){
 
@@ -15,13 +15,13 @@ void Visualizacion::setFechaFinVis(DtFecha fecha){
 bool Visualizacion::getEnVivo(){
   return enVivo
 };
-DtFecha Visualizacion::getFechaInicioVis(){
+dtFecha Visualizacion::getFechaInicioVis(){
   return FechaInicioVis;
 };
-DtFecha Visualizacion::getFechaFinVis(){
+dtFecha Visualizacion::getFechaFinVis(){
   return FechaFinVis;
 };
-DtFecha Visualizacion::generarFecha(){
+dtFecha Visualizacion::generarFecha(){
   return
 };
 Visualizacion::~Visualizacion(){

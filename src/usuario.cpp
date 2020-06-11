@@ -1,6 +1,6 @@
-#include "../include/headers/usuario.h"
-#include "../include/headers/estrategiaNotifs.h"
-#include "../include/dts/dtNotificacion.h"
+#include "../include/usuario.h"
+#include "../include/estrategiaNotifs.h"
+#include "../include/dtNotificacion.h"
 #include <set>
 
 
@@ -37,13 +37,13 @@ string Usuario::getPassword(){
 string Usuario::getImagen(){
   return imagen;
 };
-set<DtNotificacion> Usuario::getNotificaciones(){
+set<dtNotificacion> Usuario::getNotificaciones(){
   return notificaciones;
 };
 EstrategiaNotifs* Usuario::getAplica(){
   return aplica;
 };
-void Usuario::notificar(DtNotificacion){
+void Usuario::notificar(dtNotificacion){
 
 };
 Usuario::~Usuario(){

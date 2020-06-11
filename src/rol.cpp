@@ -1,4 +1,4 @@
-#include "../include/headers/rol.h"
+#include "../include/rol.h"
 
 class Docente;
 class Asignatura;

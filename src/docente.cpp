@@ -1,9 +1,9 @@
-#include "../include/headers/docente.h"
-#include "../include/headers/clase.h"
-#include "../include/dts/dtAsignatura.h"
-#include "../include/dts/dtClase.h"
-#include "../include/headers/asignatura.h"
-#include "../include/headers/rol.h"
+#include "../include/docente.h"
+#include "../include/clase.h"
+#include "../include/dtAsignatura.h"
+#include "../include/dtClase.h"
+#include "../include/asignatura.h"
+#include "../include/rol.h"
 
 Docente::Docente(){
   //se crean las colecciones vacias ?

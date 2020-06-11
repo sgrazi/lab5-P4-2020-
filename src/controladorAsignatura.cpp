@@ -1,6 +1,9 @@
-#include "../include/headers/ControladorAsignatura.h"
+#include "../include/controladorAsignatura.h"
+#include "../include/dtAsignatura.h"
 
-ControladorAsignatura::ControladorAsignatura();
+#include <string>
+
+ControladorAsignatura::ControladorAsignatura(){};
 
 void ControladorAsignatura::setEmailDocente(string e){  this->emailDocente = e;};
 string ControladorAsignatura::getEmailDocente(){  return emailDocente;};
@@ -9,22 +12,29 @@ void ControladorAsignatura::setCodigoAsig(string c){  this->codigoAsig = c;};
 string ControladorAsignatura::getCodigoAsig(){ return codigoAsig;};
 
 void ControladorAsignatura::setRolDoc(tipoClase r){ this->rolDoc = r;};
-tipoClase ControladorAsignatura::getRolDoc( return rolDoc;);
+tipoClase ControladorAsignatura::getRolDoc(){return rolDoc;};
 
-void ControladorAsignatura::setAsigAEliminar(string a){ this->asigAEliminar = a;};
-string ControladorAsignatura::getAsigAEliminar(){ return asigAEliminar;};
+void ControladorAsignatura::setAsigAEliminar(int a){ this->asigAEliminar = a;};
+int ControladorAsignatura::getAsigAEliminar(){ return asigAEliminar;};
 
-Set(DtAsignatura) ControladorAsignatura::consultarAsignaturas(){
-  //set(DtAsignatura) nuevo
-  foreach asig in ColeccionGlobalAsignaturas do{
-    string c = asig.getCodigo();
-    string n = asig.getNombre();
-    //armar dt
-    //agregarlo al set nuevo
-  }
-  //return nuevo;
+set<dtAsignatura> ControladorAsignatura::consultarAsignaturas(){
+  set<dtAsignatura> nuevo;
+  map<int,Asignatura> :: iterator it;
+  for (it=this->coleccionGlobalAsignaturas->begin(); it!=this->coleccionGlobalAsignaturas->end() ;++it){
+    int i= it->first;
+    Asignatura* a = it->second;
+    dtAsignatura agregar = new dtAsignatura();
+    agregar->setCodigo() = a->getCodigo();
+    agregar->setNombre() = a->getNombre();
+    agregar->setMonitoreo() = a->getMonitoreo();
+    agregar->setPractico() =a->getPractico();
+    agregar->setTeorico() =a->getTeorico();
+    nuevo.insert(agregar);
+  };
+  return nuevo;
 };
-Set(DtDocente) ControladorAsignatura::consultarDocentesLibres(string){
+
+set<dtDocente> ControladorAsignatura::consultarDocentesLibres(string){
 
 };
 void ControladorAsignatura::asignarDocente(string,string,tipoClase){
