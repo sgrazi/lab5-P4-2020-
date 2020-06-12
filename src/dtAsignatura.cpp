@@ -5,16 +5,16 @@ void dtAsignatura::setCodigo(int c){  this->codigo = c;};
 int dtAsignatura::getCodigo() const {  return codigo;};
 
 void dtAsignatura::setNombre(string n){ this->nombre = n;};
-string dtAsignatura::getNombre(){ return nombre;};
+string dtAsignatura::getNombre() const { return nombre;};
 
 void dtAsignatura::setTeorico(bool b){  this->teorico = b;};
-bool dtAsignatura::getTeorico(){  return teorico;};
+bool dtAsignatura::getTeorico() const {  return teorico;};
 
 void dtAsignatura::setPractico(bool b){ this->practico = b;};
-bool dtAsignatura::getPractico(){ return practico;};
+bool dtAsignatura::getPractico() const { return practico;};
 
 void dtAsignatura::setMonitoreo(bool b){  this->monitoreo = b;};
-bool dtAsignatura::getMonitoreo(){  return monitoreo;};
+bool dtAsignatura::getMonitoreo() const {  return monitoreo;};
 
 dtAsignatura::~dtAsignatura(){};
 

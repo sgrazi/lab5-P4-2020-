@@ -22,12 +22,12 @@ class dtUsuario{ //abstracta
     void setImagen(string);
     //void setNotificaciones(); //crea el conjunto de notifiaciones vacio
     void setModoSus(int);
-    string getNombre();
-    string getEmail();
-    string getPassword();
-    string getImagen();
+    string getNombre() const ;
+    string getEmail() const ;
+    string getPassword() const ;
+    string getImagen() const ;
     //set(DtNotifiacion) getNotificaciones();
-    int getModoSus();
+    int getModoSus() const ;
 
     ~dtUsuario(){};
 };

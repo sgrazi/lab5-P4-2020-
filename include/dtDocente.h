@@ -11,7 +11,7 @@ class dtDocente : public dtUsuario{
     string instituto;
   public:
     dtDocente();
-    string getInstituto();
+    string getInstituto() const ;
     void setInstituto(string);
     ~dtDocente();
 };

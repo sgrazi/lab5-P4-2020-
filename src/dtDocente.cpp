@@ -2,7 +2,7 @@
 
 dtDocente::dtDocente(){};
 
-string dtDocente::getInstituto(){ return instituto;};
+string dtDocente::getInstituto() const { return instituto;};
 
 void dtDocente::setInstituto(string i){ this->instituto = i;};
 
