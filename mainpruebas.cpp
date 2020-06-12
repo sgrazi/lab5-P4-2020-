@@ -61,13 +61,13 @@ int main(){
   Ca->setColDoc(colDocentes);
   Ca->setColAsig(colAsinaturas);
 
-  /* //ALTA DE USUARIO
-  Cu->agregarEstudiante("c","a","email","a","s");
+  //ALTA DE USUARIO
+  Cu->agregarDocente("c","a","email","a","s");
   Cu->confirmarAlta();
 
   Cu->agregarDocente("ale","a","email2","a","s");
   Cu->confirmarAlta();
-
+  /*
   auto it = coleccionGlobalEstudiantes.find("email");
 
   cout << "est de " << it->first <<
@@ -75,23 +75,41 @@ int main(){
 
   auto it2 = coleccionGlobalDocentes.find("email2");
 
-  cout << "doc de " << it2->first << " = " << it2->second->getNombre() << endl;
-  */
-
-  /*//ALTA DE ASIG
+  cout << "doc de " << it2->first << " = " << it2->second->getNombre() << endl;*/
 
   Ca->agregarAsignatura("calculo",1,1,0,0);
-
   Ca->confirmarAlta();
+  Ca->agregarAsignatura("calculo2",2,1,0,0);
+  Ca->confirmarAlta();
+  /*
+  auto as = coleccionGlobalAsignaturas.find(1);
 
-  auto it = coleccionGlobalAsignaturas.find(1);
-
-  cout << "Asignatura " << it->first <<
-     " = " << it->second->getNombre() << endl;*/
+  cout << "Asignatura " << as->first <<
+     " = " << as->second->getNombre() << endl;*/
 
   //ASIGNACION DE DOC A ASIG
 
+  set<dtAsignatura> as = Ca->consultarAsignaturas();
 
+  for(auto ite = as.begin(); ite!=as.end() ; ite++){
+      cout << "Nombre asignatura: " << ite->getNombre() << "\n";
+  }; //consultarAsignaturas() funciona bien, nombra todas las asigs
+
+  map<string,dtDocente> ds = Ca->consultarDocentesLibres(1);
+
+  for(auto ite2 = ds.begin(); ite2!=ds.end() ; ite2++){
+      cout << "Email docente libre de la asig calculo: "<< ite2->first << "\n";
+  }; //consultarDocentesLibres() funca
+
+  Ca->asignarDocente("email2",1,teorico);
+
+  Ca->confirmarAsignacion();
+  //asigno el docente y ahora me fijo si aparece en docentes libres
+  ds = Ca->consultarDocentesLibres(1);
+
+  for(auto ite2 = ds.begin(); ite2!=ds.end() ; ite2++){
+      cout << "Email docente libre de la asig calculo: "<< ite2->first << "\n";
+  };
 
   return 0;
 }
