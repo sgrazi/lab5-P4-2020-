@@ -49,7 +49,7 @@ int main(){
 
   map<string,Estudiante*>* colEstudiantes = &coleccionGlobalEstudiantes;
   map<string,Docente*>* colDocentes = &coleccionGlobalDocentes;
-  map<int,Asignatura*>* colAsinaturas = &coleccionGlobalAsignaturas;
+  map<int,Asignatura*>* colAsignaturas = &coleccionGlobalAsignaturas;
 
   ControladorUsuario* Cu = new ControladorUsuario();
   ControladorAsignatura* Ca = new ControladorAsignatura();
@@ -58,14 +58,15 @@ int main(){
   //de esta manera las colecciones se declaran en el main y son unicas para todo controlador que necesite usarlas
   Cu->setColEst(colEstudiantes);
   Cu->setColDoc(colDocentes);
+  Cu->setColAsig(colAsignaturas);
   Ca->setColDoc(colDocentes);
-  Ca->setColAsig(colAsinaturas);
+  Ca->setColAsig(colAsignaturas);
 
   //ALTA DE USUARIO
-  Cu->agregarDocente("c","a","email","a","s");
+  Cu->agregarEstudiante("nombre","pass","email","url","1.234.567-8");
   Cu->confirmarAlta();
 
-  Cu->agregarDocente("ale","a","email2","a","s");
+  Cu->agregarEstudiante("aaaaaa","123","email2","a","s");
   Cu->confirmarAlta();
   /*
   auto it = coleccionGlobalEstudiantes.find("email");
@@ -88,7 +89,7 @@ int main(){
      " = " << as->second->getNombre() << endl;*/
 
   //ASIGNACION DE DOC A ASIG
-
+  /*
   set<dtAsignatura> as = Ca->consultarAsignaturas();
 
   for(auto ite = as.begin(); ite!=as.end() ; ite++){
@@ -110,6 +111,17 @@ int main(){
   for(auto ite2 = ds.begin(); ite2!=ds.end() ; ite2++){
       cout << "Email docente libre de la asig calculo: "<< ite2->first << "\n";
   };
-
+  */
+  //INSCRIPCION A ASIGNATURA
+  Cu->iniciarSesion("email","pass");
+  set<dtAsignatura> set = Cu->consultarAsigNoIns();
+  for(auto it = set.begin(); it!=set.end(); it++)
+    cout << it->getNombre();
+  cout << "\n";
+  Cu->inscribir(1);
+  Cu->confirmarInscripcion();
+  set = Cu->consultarAsigNoIns();
+  for(auto it = set.begin(); it!=set.end(); it++)
+    cout << it->getNombre();
   return 0;
 }
