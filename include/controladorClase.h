@@ -16,30 +16,31 @@ class ControladorClase{
 		string passwordUserActual;
 		string emailUserActual;
 		DtInfoClase infoParaCreacionClase;
-		string claseAFinalizar;
+		int claseAFinalizar;
 	public:
 		ControladorClase();
 		void setPasswordUserActual(string);
 		void setEmailUserActual(string);
 		void setInfoParaCreacionClase(DtInfoClase);
-		void setClaseAFinalizar(string);
+		void setClaseAFinalizar(int);
 		string getPasswordUserActual();
 		string getEmailUserActual();
 		DtInfoClase getInfoParaCreacionClase();
-		string getClaseAFinalizar();
-
+		int getClaseAFinalizar();
+		//inicio de clase
 		void iniciarSesion(string,string);
 		set<DtAsignatura> consultarAsignaturasDocente();
 		DtInfoClase infoDocente(string);
 		void iniciarClase(string,string,DtFecha);
-		string generarCodigo();
-		string generarUrl(clase);
-		DtFecha generarFecha();
 		set<DtEstudiante> consultarInscriptos();
 		void agregarHabilitado(string);
 		DtInfoClase desplegarInfoClase();
 		void confirmarInicio();
 		void cancelarInicio();
+
+		string generarCodigo();
+		string generarUrl(clase);
+		DtFecha generarFecha();
 		set<DtClase> consultarClasesEnVivo();
 		DtClase finalizarClase(string);
 		void confirmarFin();

@@ -123,5 +123,9 @@ int main(){
   set = Cu->consultarAsigNoIns();
   for(auto it = set.begin(); it!=set.end(); it++)
     cout << it->getNombre();
+
+  //INICIO DE CLASE
+  
+
   return 0;
 }
