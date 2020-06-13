@@ -5,6 +5,10 @@
 #include "../include/estrategiaModoSus2.h"
 #include "../include/estrategiaModoSus3.h"
 #include "../include/dtNotificacion.h"
+#include "../include/asignatura.h"
+#include "../include/dtAsignatura.h"
+
+#include <iostream>
 
 ControladorUsuario::ControladorUsuario(){
 };
@@ -39,8 +43,12 @@ void ControladorUsuario::setEmailUserActual(string email){  this->emailUserActua
 int ControladorUsuario::getNuevoModoSus(){  return nuevoModoSus;};
 void ControladorUsuario::setNuevoModoSus(int modo){  this->nuevoModoSus = modo;};
 
+int ControladorUsuario::getAsignaturaAIns(){ return asignaturaAIns;};
+void ControladorUsuario::setAsignaturaAIns(int a){ this->asignaturaAIns = a;};
+
 void ControladorUsuario::setColEst(map<string,Estudiante*>* c){ this->coleccionGlobalEstudiantes = c;};
 void ControladorUsuario::setColDoc(map<string,Docente*>* c){ this->coleccionGlobalDocentes = c;};
+void ControladorUsuario::setColAsig(map<int,Asignatura*>* c){ this->coleccionGlobalAsignaturas = c;};
 
 void ControladorUsuario::iniciarSesion(string email, string pass){
   //member(); buscar si las credenciales existen en la coleccion
@@ -93,6 +101,48 @@ void ControladorUsuario::confirmarAlta(){
 
 void ControladorUsuario::cancelarAlta(){
   //vacio
+};
+
+set<dtAsignatura> ControladorUsuario::consultarAsigNoIns(){
+  auto itEst = this->coleccionGlobalEstudiantes->find(emailUserActual);//busco a mi usuario actual
+  set<dtAsignatura> nuevo;
+  //agrego TODAS las asignaturas a un set nuevo de dt
+  for(auto itAsig = this->coleccionGlobalAsignaturas->begin(); itAsig!=this->coleccionGlobalAsignaturas->end();++itAsig){
+    dtAsignatura* agregar = new dtAsignatura();
+    agregar->setCodigo(itAsig->first);
+    agregar->setNombre(itAsig->second->getNombre());
+    agregar->setMonitoreo(itAsig->second->getMonitoreo());
+    agregar->setPractico(itAsig->second->getPractico());
+    agregar->setTeorico(itAsig->second->getTeorico());
+    nuevo.insert(*agregar);
+  }
+  //para cada asig que ya estoy inscripto, la remuevo del set
+  for(auto itAsig = itEst->second->getAsignaturas()->begin(); itAsig!=itEst->second->getAsignaturas()->end(); ++itAsig){
+    auto it = nuevo.begin();
+    for(it = nuevo.begin(); it!=nuevo.end(); ++it){
+      if(it->getCodigo() == itAsig->first);
+        break;
+    }
+    if(it!=nuevo.end()){
+      nuevo.erase(it);
+    }
+  }
+  return nuevo;
+};
+
+void ControladorUsuario::inscribir(int codigo){
+  this->setAsignaturaAIns(codigo);
+};
+
+void ControladorUsuario::confirmarInscripcion(){
+  auto itEst = this->coleccionGlobalEstudiantes->find(emailUserActual);//busco a mi usuario actual
+  auto itAsig = this->coleccionGlobalAsignaturas->find(asignaturaAIns);//busco la asignatura
+  itEst->second->inscribir(itAsig->second);
+  itAsig->second->agregarInscripto(itEst->second);
+};
+
+void ControladorUsuario::cancelarInscripcion(){
+
 };
 
 set<dtNotificacion> ControladorUsuario::consultarNotifs(){

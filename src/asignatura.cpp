@@ -1,7 +1,9 @@
 #include "../include/asignatura.h"
+#include "../include/estudiante.h"
 
-Asignatura::Asignatura(){ 
-
+Asignatura::Asignatura(){
+  map<string,Estudiante*>* a = new map<string,Estudiante*>;
+  this->inscriptos = a;
 };
 
 void Asignatura::setCodigo(int c){ this->codigo = c;};
@@ -23,6 +25,10 @@ Asignatura::~Asignatura(){};
 
 void Asignatura::agregarRol(Rol rol){
   this->docentes.insert(pair<string,Rol>(rol.getDoc()->getEmail(),rol));
+};
+
+void Asignatura::agregarInscripto(Estudiante* est){
+  inscriptos->insert(pair<string,Estudiante*> (est->getEmail(),est));
 };
 
 /*bool operator< (const Asignatura &right) const{

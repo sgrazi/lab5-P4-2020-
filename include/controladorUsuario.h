@@ -27,8 +27,10 @@ class ControladorUsuario: public IControladorUsuario{
 		string nombreUserActual;
 		string emailUserActual;
 		int nuevoModoSus;
+		int asignaturaAIns;
 		map<string,Estudiante*>* coleccionGlobalEstudiantes;
 		map<string,Docente*>* coleccionGlobalDocentes;
+		map<int,Asignatura*>* coleccionGlobalAsignaturas;
 
 	public:
 		ControladorUsuario();
@@ -42,6 +44,7 @@ class ControladorUsuario: public IControladorUsuario{
 		string getNombreUserActual();
 		string getEmailUserActual();
 		int getNuevoModoSus();
+		int getAsignaturaAIns();
 		void setUserEsEst(bool);
 		void setNombreUser(string);
 		void setPasswordUser(string);
@@ -52,9 +55,11 @@ class ControladorUsuario: public IControladorUsuario{
 		void setNombreUserActual(string);
 		void setEmailUserActual(string);
 		void setNuevoModoSus(int);
+		void setAsignaturaAIns(int);
 		//COLECCIONES
 		void setColEst(map<string,Estudiante*>*);
 		void setColDoc(map<string,Docente*>*);
+		void setColAsig(map<int,Asignatura*>*);
 
 		void iniciarSesion(string,string);
 
@@ -63,6 +68,12 @@ class ControladorUsuario: public IControladorUsuario{
 		void agregarDocente(string,string,string,string,string);
 		void confirmarAlta();
 		void cancelarAlta();
+
+		//INSCRIPCION A ASIGNATURA
+		set<dtAsignatura> consultarAsigNoIns();
+		void inscribir(int);
+		void confirmarInscripcion();
+		void cancelarInscripcion();
 
 		set<dtNotificacion> consultarNotifs();
 		void cambiarModoSus(int);

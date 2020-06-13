@@ -4,7 +4,7 @@
 #include <string>
 #include <set>
 #include "dtNotificacion.h"
-//#include "../headers/estrategiaNotifs.h"
+//#include "../estrategiaNotifs.h"
 using namespace std;
 
 class EstrategiaNotifs;

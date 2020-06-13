@@ -8,7 +8,10 @@
 #include "rol.h"
 
 using namespace std;
+
 class Rol;
+
+class Estudiante;
 
 class Asignatura{
   private:
@@ -17,8 +20,8 @@ class Asignatura{
     bool teorico;
     bool monitoreo;
     bool practico;
-    //set<dtEstudiante>* inscriptos;
-    map<string,Rol> docentes; //string es el email del doc 
+    map<string,Estudiante*>* inscriptos;
+    map<string,Rol> docentes; //string es el email del doc
     //map<int,Clase> clases;
   public://faltan funciones de manejo de relaciones
     Asignatura();
@@ -34,8 +37,9 @@ class Asignatura{
     bool getMonitoreo() const;
 
     void agregarRol(Rol);
+    void agregarInscripto(Estudiante*);
     //void agregarClaseNueva(dtClase);
-    //set<dtEstudiante> getInscriptos();
+    //map<string,Estudiante*>* getInscriptos();
     //set<dtClase> getClases();
     ~Asignatura();
     //bool operator<(const Asignatura &right); //si colecciones se implementan con set esto es necesario
