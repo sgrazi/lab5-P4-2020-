@@ -1,5 +1,9 @@
 #include "../include/clase.h"
 
+Clase::Clase(){
+
+};
+
 void Clase::setNombre(string nombre){
   this->nombre = nombre;
 };
@@ -9,19 +13,19 @@ void Clase::setCodigo(int codigo){
 void Clase::setUrl(string url){
   this->url = url;
 };
-void Clase::setFechaInicio(DtFecha fecha){
+void Clase::setFechaInicio(dtFecha fecha){
   this->fechaInicio = fecha;
 };
-void Clase::setFechaFin(DtFecha){
+void Clase::setFechaFin(dtFecha fecha){
   this->fechaFin = fecha;
 };
-void setCreador(Docente* d){
+void Clase::setCreador(Docente* d){
   this->creador = d;
 };
-void setAsig(Asignatura* a){
-  this->asignatura = a;
+void Clase::setAsig(Asignatura* a){
+  this->asig = a;
 };
-void setTipo(tipoClase t){
+void Clase::setTipo(tipoClase t){
   this->tipo = t;
 };
 tipoClase Clase::getTipo(){
@@ -36,22 +40,23 @@ int Clase::getCodigo(){
 string Clase::getUrl(){
   return url;
 };
-DtFecha Clase::getFechaInicio(){
+dtFecha Clase::getFechaInicio(){
   return fechaInicio;
 };
-DtFecha Clase::getFechaFin(){
+dtFecha Clase::getFechaFin(){
   return fechaFin;
 };
-void Clase::visualizar(Estudiante){//sacado del diagrama de comunicacion de confirmarAsistencia()
+void Clase::visualizar(Estudiante* e){/*
   //puse las funciones member find y add como si existieran, no vi nada de la implementacion de coleccion que nos dieron
   bool existe = estParticipantes.member(email);
   if existe
     Estudiante *repro = find(email);
   else
     EstCla *repro = new EstCla();
-    estParticipantes.add(repro);
+    estParticipantes.add(repro);*/
 };
 
-/*bool operator<(const Asignatura &right){
-  return codigo < right.codigo;
-};*/ //si colecciones se implementan con set esto es necesario
+
+Clase::~Clase(){
+
+};

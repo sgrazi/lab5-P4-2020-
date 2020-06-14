@@ -3,7 +3,8 @@
 
 #include "iControladorUsuario.h"
 #include "docente.h"
-#include "usrcla.h"
+#include "usrCla.h"
+#include "mensaje.h"
 #include <string>
 #include <set>
 

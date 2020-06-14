@@ -9,7 +9,7 @@ void Mensaje::setId(int id){
 void Mensaje::setContenido(string cont){
   this->contenido = cont;
 };
-void Mensaje::setFecha(DtFecha fecha){
+void Mensaje::setFecha(dtFecha fecha){
   this->fecha = fecha;
 };
 void Mensaje::setEnRespuestaA(Mensaje *ms){

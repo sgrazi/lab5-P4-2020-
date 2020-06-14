@@ -9,8 +9,8 @@ class Teorico : public Clase{
     Teorico();
     void setAsistentes(int);
     int getAsistentes();
-
     int calcularAsistentes();
+    void setNombre(string);
 
     ~Teorico();
 };

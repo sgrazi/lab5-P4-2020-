@@ -6,5 +6,6 @@ class Practico : public Clase{
   public:
     Practico();
     ~Practico();
+    void setNombre(string);
 };
 #endif

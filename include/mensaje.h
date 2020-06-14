@@ -23,7 +23,7 @@ class Mensaje{
     void setEnRespuestaA(Mensaje*);
     int getId();
     string getContenido();
-    DtFecha getFecha();
+    dtFecha getFecha();
     Mensaje* getEnRespuestaA();
 
     ~Mensaje();

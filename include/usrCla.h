@@ -1,7 +1,7 @@
 #ifndef ESTCLA_H
 #define ESTCLA_H
 #include <string>
-#include "visualizacion.h"
+//#include "visualizacion.h"
 //#include "estudiante.h"
 //#include "clase.h"
 
@@ -12,23 +12,24 @@ class Estudiante;
 
 class UsrCla{
   private:
-    Visualizacion *vis;
+    //Visualizacion *vis;
     Estudiante *est;
     Clase *clase;
   public:
     UsrCla();
-    void setVisualizacion(Visualizacion*);
+    //void setVisualizacion(Visualizacion*);
     void setEstudiante(Estudiante*);
     void setClase(Clase*);
-    Visualizacion* getVis();
+    //Visualizacion* getVis();
     Estudiante* getEst();
     Clase* getClase();
-
+/*
     int getCodigoClase();
     string getEmailUser();
     void marcar(dtFecha);
     void iniciarVis();
     ~UsrCla();
+    */
 };
 
 #endif

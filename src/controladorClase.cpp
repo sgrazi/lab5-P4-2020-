@@ -2,6 +2,10 @@
 #include "../include/estudiante.h"
 #include "../include/docente.h"
 #include "../include/asignatura.h"
+#include "../include/clase.h"
+#include "../include/teorico.h"
+#include "../include/practico.h"
+#include "../include/monitoreo.h"
 #include "../include/dtAsignatura.h"
 #include "../include/dtInfoClase.h"
 #include "../include/dtEstudiante.h"
@@ -86,12 +90,12 @@ void ControladorClase::agregarHabilitado(string email){//que pasa si quiero agre
 };
 
 dtInfoClase ControladorClase::desplegarInfoClase(){
-  return infoParaCreacionClase;
+  return *infoParaCreacionClase;
 };
 void ControladorClase::confirmarInicio(){
   auto itDoc = this->coleccionGlobalDocentes->find(emailUserActual);
   auto itAsig = this->coleccionGlobalAsignaturas->find(infoParaCreacionClase->getCodigo());
-
+  Clase* clase;
   if(infoParaCreacionClase->getTipo() == teorico)
     Teorico *clase = new Teorico();
   else
@@ -117,8 +121,7 @@ void ControladorClase::cancelarInicio(){
 
 };
 
-string ControladorClase::generarCodigo(){};
-string ControladorClase::generarUrl(Clase*){};
+
 dtFecha ControladorClase::generarFecha(){};
 set<dtClase> ControladorClase::consultarClasesEnVivo(){};
 dtClase ControladorClase::finalizarClase(string){};

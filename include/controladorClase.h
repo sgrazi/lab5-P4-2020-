@@ -42,7 +42,7 @@ class ControladorClase{
 		void setColEst(map<string,Estudiante*>*);
 		void setColDoc(map<string,Docente*>*);
 		void setColAsig(map<int,Asignatura*>*);
-		void setColCla(map<int,Clase*>*)
+		void setColCla(map<int,Clase*>*);
 
 		//INICIO DE CLASE
 		void iniciarSesion(string,string);
@@ -55,8 +55,6 @@ class ControladorClase{
 		void confirmarInicio();
 		void cancelarInicio();
 
-		string generarCodigo();
-		string generarUrl(Clase*);
 		dtFecha generarFecha();
 		set<dtClase> consultarClasesEnVivo();
 		dtClase finalizarClase(string);

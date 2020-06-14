@@ -6,7 +6,7 @@ Asignatura::Asignatura(){//inicializo las colecciones vacias
   this->inscriptos = a;
   map<int,Clase*>* b = new map<int,Clase*>;
   this->clases = b;
-  map<string,Docente*>* c = new map<string,Docente*>;
+  map<string,Rol*>* c = new map<string,Rol*>;
   this->docentes = c;
 };
 
@@ -28,7 +28,7 @@ bool Asignatura::getMonitoreo() const{  return monitoreo;};
 Asignatura::~Asignatura(){};
 
 void Asignatura::agregarRol(Rol* rol){
-  this->docentes.insert(pair<string,Rol*>(rol->getDoc()->getEmail(),rol));
+  this->docentes->insert(pair<string,Rol*>(rol->getDoc()->getEmail(),rol));
 };
 
 map<string,Estudiante*>* Asignatura::getInscriptos(){
@@ -38,7 +38,7 @@ map<int,Clase*>* Asignatura::getClases(){
   return clases;
 };
 
-map<string,Docente*>* Asignatura::getDocentes(){
+map<string,Rol*>* Asignatura::getDocentes(){
   return docentes;
 };
 
@@ -47,7 +47,7 @@ void Asignatura::agregarInscripto(Estudiante* est){
 };
 
 void Asignatura::agregarClaseNueva(Clase* c){
-  clases.insert(pair<int,Clase*> (c->getCodigo(),c));
+  clases->insert(pair<int,Clase*> (c->getCodigo(),c));
 };
 
 /*bool operator< (const Asignatura &right) const{

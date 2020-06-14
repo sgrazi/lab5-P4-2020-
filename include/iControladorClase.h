@@ -17,11 +17,9 @@ class IControladorClase{
 		virtual void iniciarSesion(string,string) = 0;
 		virtual set<dtAsignatura> consultarAsignaturasDocente() = 0;
 		virtual dtInfoClase infoDocente(string) = 0;
-		virtual void iniciarClase(string,string,DtFecha) = 0;
-		virtual string generarCodigo() = 0;
-		virtual string generarUrl(clase) = 0;
+		virtual void iniciarClase(string,string,dtFecha) = 0;
 		virtual dtFecha generarFecha() = 0;
-		virtual set<dtEstudiantes> consultarInscriptos() = 0;
+		virtual set<dtEstudiante> consultarInscriptos() = 0;
 		virtual void agregarHabilitado(string) = 0;
 		virtual dtInfoClase desplegarInfoClase() = 0;
 		virtual void confirmarInicio() = 0;

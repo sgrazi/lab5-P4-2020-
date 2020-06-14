@@ -120,7 +120,7 @@ set<dtAsignatura> ControladorUsuario::consultarAsigNoIns(){
   for(auto itAsig = itEst->second->getAsignaturas()->begin(); itAsig!=itEst->second->getAsignaturas()->end(); ++itAsig){
     auto it = nuevo.begin();
     for(it = nuevo.begin(); it!=nuevo.end(); ++it){
-      if(it->getCodigo() == itAsig->first);
+      if(it->getCodigo() == itAsig->first)
         break;
     }
     if(it!=nuevo.end()){
@@ -150,7 +150,7 @@ set<dtNotificacion> ControladorUsuario::consultarNotifs(){
 };
 
 void ControladorUsuario::cambiarModoSus(int modo){
-  if(modo == 1 | modo == 2 | modo == 3)
+  if((modo == 1) | (modo == 2) | (modo == 3))
     setNuevoModoSus(modo);
   //else
     //mandar warning?
