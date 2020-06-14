@@ -2,9 +2,9 @@
 #include <map>
 
 #include "include/asignatura.h"
-//#include "include/headers/clase.h"
+#include "include/clase.h"
 #include "include/controladorAsignatura.h"
-//#include "include/headers/controladorClase.h"
+#include "include/controladorClase.h"
 #include "include/controladorUsuario.h"
 #include "include/docente.h"
 //#include "include/headers/estcla.h"
@@ -16,20 +16,20 @@
 //#include "include/headers/factory.h"
 //#include "include/headers/handlerMensajes.h"
 #include "include/iControladorAsignatura.h"
-//#include "include/headers/iControladorClase.h"
+#include "include/iControladorClase.h"
 #include "include/iControladorUsuario.h"
 //#include "include/headers/mensaje.h"
-//#include "include/headers/monitoreo.h"
-//#include "include/headers/practico.h"
+#include "include/monitoreo.h"
+#include "include/practico.h"
 #include "include/rol.h"
-//#include "include/headers/teorico.h"
+#include "include/teorico.h"
 #include "include/usuario.h"
 //#include "include/headers/visualizacion.h"
 #include "include/dtAsignatura.h"
-//#include "include/dts/dtClase.h"
+#include "include/dtClase.h"
 #include "include/dtDocente.h"
 #include "include/dtEstudiante.h"
-//*#include "include/dts/dtFecha.h"
+#include "include/dtFecha.h"
 //#include "include/dts/dtMensaje.h"
 //#include "include/dts/dtMonitoreo.h"
 //#include "include/dts/dtNotificacion.h"
@@ -44,7 +44,7 @@ using namespace std;
 map<string,Estudiante*> coleccionGlobalEstudiantes;
 map<string,Docente*> coleccionGlobalDocentes;
 map<int,Asignatura*> coleccionGlobalAsignaturas;
-map<int,Clase*>* coleccionGlobalClases;
+map<int,Clase*> coleccionGlobalClases;
 
 int main(){
 
@@ -133,7 +133,7 @@ int main(){
     cout << it->getNombre();*/
 
   //INICIO DE CLASE
-  
+
 
   return 0;
 }
