@@ -1,5 +1,5 @@
 #include "../include/clase.h"
-
+#include "../include/asignatura.h"
 Clase::Clase(){
 
 };
@@ -44,6 +44,10 @@ dtFecha Clase::getFechaInicio(){
 };
 dtFecha Clase::getFechaFin(){
   return fechaFin;
+};
+
+list<UsrCla*> Clase::getParticipantes(){
+  return participantes;
 };
 
 int Clase::getCodigoAsig(){

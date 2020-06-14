@@ -16,7 +16,7 @@ class dtClase{
     dtFecha fechaInicio;
     dtFecha fechaFin;
     string creador;
-    string codigoAsig; //Clase original tenia una asociacion a la asignatura, aca lo reemplaza el identificador de la asignatura
+    int codigoAsig; //Clase original tenia una asociacion a la asignatura, aca lo reemplaza el identificador de la asignatura
     tipoClase tipo;
 
   public:
@@ -29,7 +29,7 @@ class dtClase{
     void setTipo(tipoClase);
     tipoClase getTipo();
     string getNombre();
-    int getCodigo();
+    int getCodigo() const;
     string getUrl();
     dtFecha getFechaInicio();
     dtFecha getFechaFin();
@@ -40,6 +40,6 @@ class dtClase{
     int getAsig();
 
     ~dtClase();
-    //bool operator<(const Clase &right); //si colecciones se implementan con set esto es necesario
+    bool operator<(const dtClase &right)const; //si colecciones se implementan con set esto es necesario
 };
 #endif

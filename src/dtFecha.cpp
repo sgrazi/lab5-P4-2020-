@@ -34,13 +34,13 @@ dtFecha dtFecha::getFecha(){
 };
 dtFecha::~dtFecha(){};
 
-int dtFecha::getAnio(){ return anio;};
-int dtFecha::getMes(){ return mes;};
-int dtFecha::getDia(){ return dia;};
-int dtFecha::getHora(){ return hora;};
-int dtFecha::getMinuto(){ return minuto;};
-int dtFecha::getSegundo(){ return segundo;};
+int dtFecha::getAnio() const { return anio;};
+int dtFecha::getMes() const { return mes;};
+int dtFecha::getDia() const { return dia;};
+int dtFecha::getHora() const { return hora;};
+int dtFecha::getMinuto() const { return minuto;};
+int dtFecha::getSegundo() const { return segundo;};
 
 bool dtFecha::operator==(const dtFecha& fecha) const{
-  return ((this->anio == fecha.getAnio())&&(this->mes == fecha.getMes())&&(this->dia == fecha.getDia())&&(this->hora == fecha.getHora())&&(this->minuto == fecha.getMinuto())&&(this->segundo = fecha.getSegundo()) )
+  return ((this->anio == fecha.getAnio())&&(this->mes == fecha.getMes())&&(this->dia == fecha.getDia())&&(this->hora == fecha.getHora())&&(this->minuto == fecha.getMinuto())&&(this->segundo == fecha.getSegundo()));
 };

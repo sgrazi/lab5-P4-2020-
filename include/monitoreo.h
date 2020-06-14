@@ -10,6 +10,6 @@ class Monitoreo : public Clase{
   public://faltan funciones de manejo de relaciones
     Monitoreo();
     ~Monitoreo();
-    void abstracta();
+    int calcularAsistentes();
 };
 #endif

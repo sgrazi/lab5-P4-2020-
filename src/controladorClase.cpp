@@ -16,7 +16,7 @@
 #include <set>
 #include <map>
 
-const fechaNula dtFecha(0,0,0,0,0,0);
+const dtFecha fechaNula(0,0,0,0,0,0);
 
 using namespace std;
 
@@ -126,7 +126,7 @@ void ControladorClase::cancelarInicio(){
 };
 
 
-dtFecha ControladorClase::generarFecha(){}; //no se de que caso de uso es esta funcion, esta aca perdida
+
 
 //FINALIZACION DE CLASE
 set<dtClase> ControladorClase::consultarClasesEnVivo(){
@@ -138,9 +138,23 @@ void ControladorClase::finalizarClase(int codigo){
   this->claseAFinalizar = codigo;
 };
 
-void ControladorClase::confirmarFin(){};
+void ControladorClase::confirmarFin(){
+  auto itCla = this->coleccionGlobalClases->find(claseAFinalizar);
+  dtFecha fechaFin = generarFecha();
+  itCla->second->setFechaFin(fechaFin);
 
-void ControladorClase::cancelarFin(){};
+  if(itCla->second->getTipo()==teorico)
+      itCla->second->calcularAsistentes();
+};
+
+void ControladorClase::cancelarFin(){
+
+};
+
+dtFecha ControladorClase::generarFecha(){//NO TERMINADA, HAY QUE IMPLEMENTAR EL RELOJ DEL SISTEMA QUE ELLOS PIDEN
+  return dtFecha(1,1,1,1,1,1);
+};
+
 
 set<dtAsignatura> ControladorClase::consultarAsigIns(){};
 set<dtClase> ControladorClase::consultarClasesDiferido(string){};

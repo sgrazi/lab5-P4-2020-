@@ -7,6 +7,8 @@
 #include "mensaje.h"
 #include <string>
 #include <set>
+#include <map>
+#include <list>
 
 using namespace std;
 
@@ -23,15 +25,14 @@ class Clase{
     dtFecha fechaInicio;
     dtFecha fechaFin;
     Docente* creador;
-    set<UsrCla> estParticipantes;
-    set<Docente> docParticipantes;
-    set<Mensaje> mensajes;
+    list<UsrCla*> participantes; //list porque usrcla no tiene identificador
+    set<Mensaje*> mensajes;
     Asignatura *asig;
     tipoClase tipo;
 
   public://faltan funciones de manejo de relaciones
     Clase();
-    virtual void abstracta() = 0;
+    virtual int calcularAsistentes() = 0;
     void setNombre(string);
     void setCodigo(int);
     void setUrl(string);
@@ -46,7 +47,8 @@ class Clase{
     string getUrl();
     dtFecha getFechaInicio();
     dtFecha getFechaFin();
-    
+
+    list<UsrCla*> getParticipantes();
     int getCodigoAsig();
 
     void visualizar(Estudiante*);

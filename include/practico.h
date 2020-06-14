@@ -6,6 +6,6 @@ class Practico : public Clase{
   public:
     Practico();
     ~Practico();
-    void abstracta();
+    int calcularAsistentes();
 };
 #endif

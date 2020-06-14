@@ -1,7 +1,7 @@
 #include "../include/monitoreo.h"
 
-void Monitoreo::abstracta(){
-
+int Monitoreo::calcularAsistentes(){
+  return 0;
 };
 
 Monitoreo::Monitoreo(){

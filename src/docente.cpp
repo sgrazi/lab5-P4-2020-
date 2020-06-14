@@ -6,7 +6,7 @@
 #include "../include/rol.h"
 #include "../include/dtFecha.h"
 
-const fechaNula dtFecha(0,0,0,0,0,0);
+const dtFecha fechaNula(0,0,0,0,0,0);
 
 Docente::Docente(){
   map<int,Rol*>* a = new map<int,Rol*>;
@@ -62,8 +62,8 @@ void Docente::agregarClaseNueva(Clase *c){
 };
 
 set<dtClase> Docente::clasesATerminar(){
-  new set<dtClase> set;
-  for(auto it = clases.begin(); it!=clases.end(); ++it){
+  set<dtClase> nuevo;
+  for(auto it = clases->begin(); it!=clases->end(); ++it){
     if(it->second->getFechaFin() == fechaNula){ //definir esta constante y sobrecargar == para dtFecha
       dtClase* dt = new dtClase();
       dt->setNombre(it->second->getNombre());
@@ -71,13 +71,13 @@ set<dtClase> Docente::clasesATerminar(){
       dt->setFechaInicio(it->second->getFechaInicio());
       dt->setFechaFin(fechaNula);
       dt->setTipo(it->second->getTipo());
-      dt->setUrl(it->second->getUlr());
+      dt->setUrl(it->second->getUrl());
       dt->setCreador(this->getEmail());
       dt->setAsig(it->second->getCodigoAsig());
-      set.insert(*dt);
+      nuevo.insert(*dt);
     }
   }
-  return set;
+  return nuevo;
 };
 
 void Docente::desvincularDoc(Rol){/*

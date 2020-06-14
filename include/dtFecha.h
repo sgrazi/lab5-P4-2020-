@@ -17,6 +17,7 @@ class dtFecha {
 
   public:
     dtFecha();
+    dtFecha(int,int,int,int,int,int);
     void setAnio(int);
     void setMes(int);
     void setDia(int);
@@ -25,6 +26,12 @@ class dtFecha {
     void setSegundo(int);
     dtFecha getFecha();
     ~dtFecha();
+    int getAnio() const ;
+    int getMes() const ;
+    int getDia() const ;
+    int getHora() const ;
+    int getMinuto() const ;
+    int getSegundo() const ;
     bool operator==(const dtFecha& fecha) const;
 };
 #endif

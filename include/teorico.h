@@ -6,8 +6,7 @@ class Teorico : public Clase{
   private:
     int asistentes;
   public:
-    void abstracta();
-    
+        
     Teorico();
     void setAsistentes(int);
     int getAsistentes();

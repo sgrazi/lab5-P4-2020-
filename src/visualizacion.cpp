@@ -6,23 +6,23 @@ Visualizacion::Visualizacion(){
 void Visualizacion::setEnVivo(bool b){
   this->enVivo = b;
 };
-void Visualizacion::setFechaInicioVis(DtFecha fecha){
-  this->FechaInicioVis = fecha;
+void Visualizacion::setFechaInicioVis(dtFecha fecha){
+  this->fechaInicioVis = fecha;
 };
-void Visualizacion::setFechaFinVis(DtFecha fecha){
-  this->FechaFinVis = fecha;
+void Visualizacion::setFechaFinVis(dtFecha fecha){
+  this->fechaFinVis = fecha;
 };
 bool Visualizacion::getEnVivo(){
-  return enVivo
+  return enVivo;
 };
 dtFecha Visualizacion::getFechaInicioVis(){
-  return FechaInicioVis;
+  return fechaInicioVis;
 };
 dtFecha Visualizacion::getFechaFinVis(){
-  return FechaFinVis;
+  return fechaFinVis;
 };
-dtFecha Visualizacion::generarFecha(){
-  return
+dtFecha Visualizacion::generarFecha(){ //TERMINAR, PLACEHOLDER
+  return dtFecha(1,1,1,1,1,1);
 };
 Visualizacion::~Visualizacion(){
 

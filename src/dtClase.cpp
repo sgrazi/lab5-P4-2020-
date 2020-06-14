@@ -6,7 +6,7 @@ void dtClase::setNombre(string n){ this->nombre = n;};
 string dtClase::getNombre(){ return nombre;};
 
 void dtClase::setCodigo(int c){ this->codigo = c;};
-int dtClase::getCodigo(){ return codigo;};
+int dtClase::getCodigo() const { return codigo;};
 
 void dtClase::setUrl(string u){ this->url = u;};
 string dtClase::getUrl(){ return url;};
@@ -27,3 +27,7 @@ void dtClase::setAsig(int a){ this->codigoAsig = a;};
 int dtClase::getAsig(){ return codigoAsig;};
 
 dtClase::~dtClase(){};
+
+bool dtClase::operator<(const dtClase &right)const{
+  return (codigo < right.getCodigo());
+};

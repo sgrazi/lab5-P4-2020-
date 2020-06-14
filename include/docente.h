@@ -20,11 +20,11 @@ class Docente : public Usuario{
     //set<UsrCla> clasesParticipa;
     map<int,Clase*>* clases;
     //map<int,Clase> participa;
-  public://faltan funciones de manejo de relaciones
+  public:
     Docente();
     string getInstituto();
     void setInstituto(string);
-    map<int,Rol*>* getAsignaturas();
+    map<int,Rol*>* getAsignaturas();//corregir esto en un futuro, no tiene que ser puntero a map sino map solo
     map<int,Clase*>* getClases();
 
     bool esDocenteDe(int);
