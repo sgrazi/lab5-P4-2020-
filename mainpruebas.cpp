@@ -75,16 +75,8 @@ int main(){
 
   Cu->agregarDocente("aaaaaa","123","email2","a","s");
   Cu->confirmarAlta();
-  /*
-  auto it = coleccionGlobalEstudiantes.find("email");
 
-  cout << "est de " << it->first <<
-     " = " << it->second->getNombre() << endl;
-
-  auto it2 = coleccionGlobalDocentes.find("email2");
-
-  cout << "doc de " << it2->first << " = " << it2->second->getNombre() << endl;*/
-
+  //ALTA DE ASIG
   Ca->agregarAsignatura("calculo",1,1,0,0);
   Ca->confirmarAlta();
   Ca->agregarAsignatura("calculo2",2,1,0,0);
@@ -109,16 +101,16 @@ int main(){
       cout << "Email docente libre de la asig calculo: "<< ite2->first << "\n";
   }; //consultarDocentesLibres() funca
 */
+  //asigno el docente
   Ca->asignarDocente("email2",1,teorico);
-
   Ca->confirmarAsignacion();
-  //asigno el docente y ahora me fijo si aparece en docentes libres
-  //ds = Ca->consultarDocentesLibres(1);
-/*
+  //me fijo si aparece en docentes libres
+  map<string,dtDocente> ds = Ca->consultarDocentesLibres(1);
+
   for(auto ite2 = ds.begin(); ite2!=ds.end() ; ite2++){
       cout << "Email docente libre de la asig calculo: "<< ite2->first << "\n";
   };
-  */
+
   //INSCRIPCION A ASIGNATURA
   /*
   Cu->iniciarSesion("email","pass");
@@ -133,7 +125,34 @@ int main(){
     cout << it->getNombre();*/
 
   //INICIO DE CLASE
+  Cc->iniciarSesion("email2","123");
 
+  set<dtAsignatura> set = Cc->consultarAsignaturasDocente();
+  for(auto it = set.begin(); it!=set.end(); it++){
+    cout << "Asignatura es " << it->getNombre() << "\n";
+  }
+
+  tipoClase t = Cc->rolDocente(1);
+  if(t==teorico)
+    cout << "Rol es teorico\n";
+
+  dtFecha* fecha = new dtFecha();
+  fecha->setAnio(2020);
+  fecha->setMes(6);
+  fecha->setDia(1);
+  fecha->setHora(0);
+  fecha->setMinuto(0);
+  fecha->setSegundo(0);
+
+  Cc->iniciarClase(1,"Clase 1",teorico,*fecha);
+
+  Cc->confirmarInicio();
+
+  auto clasesa = coleccionGlobalAsignaturas.find(1)->second->getClases();
+  cout << "clase en asignatura: " << clasesa->begin()->second->getNombre() << "\n";
+
+  auto clasesd = coleccionGlobalAsignaturas.find(1)->second->getClases();
+  cout << "clase en docente: " <<clasesd->begin()->second->getNombre() << "\n";
 
   return 0;
 }

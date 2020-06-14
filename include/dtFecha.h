@@ -25,5 +25,6 @@ class dtFecha {
     void setSegundo(int);
     dtFecha getFecha();
     ~dtFecha();
+    bool operator==(const dtFecha& fecha) const;
 };
 #endif

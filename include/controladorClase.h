@@ -56,8 +56,10 @@ class ControladorClase{
 		void cancelarInicio();
 
 		dtFecha generarFecha();
+
+		//FINALIZAR CLASE
 		set<dtClase> consultarClasesEnVivo();
-		dtClase finalizarClase(string);
+		void finalizarClase(int);
 		void confirmarFin();
 		void cancelarFin();
 		set<dtAsignatura> consultarAsigIns();

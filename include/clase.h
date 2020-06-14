@@ -31,7 +31,8 @@ class Clase{
 
   public://faltan funciones de manejo de relaciones
     Clase();
-    virtual void setNombre(string)=0;
+    virtual void abstracta() = 0;
+    void setNombre(string);
     void setCodigo(int);
     void setUrl(string);
     void setFechaInicio(dtFecha);
@@ -45,6 +46,8 @@ class Clase{
     string getUrl();
     dtFecha getFechaInicio();
     dtFecha getFechaFin();
+    
+    int getCodigoAsig();
 
     void visualizar(Estudiante*);
 

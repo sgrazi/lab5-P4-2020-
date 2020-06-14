@@ -4,9 +4,15 @@
 #include "../include/dtClase.h"
 #include "../include/asignatura.h"
 #include "../include/rol.h"
+#include "../include/dtFecha.h"
+
+const fechaNula dtFecha(0,0,0,0,0,0);
 
 Docente::Docente(){
-  //se crean las colecciones vacias ?
+  map<int,Rol*>* a = new map<int,Rol*>;
+  this->asignaturas = a;
+  map<int,Clase*>* c = new map<int,Clase*>;
+  this->clases = c;
 };
 string Docente::getInstituto(){
   return instituto;
@@ -15,13 +21,14 @@ void Docente::setInstituto(string ins){
   this->instituto = ins;
 };
 
-map<int,Rol*> Docente::getAsignaturas(){ return asignaturas;};
+map<int,Rol*>* Docente::getAsignaturas(){ return asignaturas;};
+map<int,Clase*>* Docente::getClases(){ return clases;};
 
 bool Docente::esDocenteDe(int codigoAsig){
   int aux;
   bool res = false;
   map<int,Rol*> :: iterator it;
-  for(it=asignaturas.begin(); it!=asignaturas.end(); it++){
+  for(it=asignaturas->begin(); it!=asignaturas->end(); it++){
     aux = it->first;
     if(aux==codigoAsig)
       res = true;
@@ -33,13 +40,13 @@ bool Docente::esDocenteDe(int codigoAsig){
 Rol* Docente::nuevoRol(Asignatura *asig, tipoClase rolDoc){
   Rol *rolNuevo = new Rol(this, asig);
   rolNuevo->setDicta(rolDoc);
-  /*this->asignaturas.insert(pair<int,Rol*> (asig->getCodigo(),rolNuevo));//agregago el rol nuevo a la coleccion
-  asig->agregarRol(rolNuevo);*/ //de esto se encarga controlador Aasignatura en confirmarAsignacion
+  this->asignaturas->insert(pair<int,Rol*> (asig->getCodigo(),rolNuevo));//agregago el rol nuevo a la coleccion
+  //asig->agregarRol(rolNuevo); //de esto se encarga controlador Aasignatura en confirmarAsignacion
   return rolNuevo;
 };
 set<dtAsignatura> Docente::getInfo(){
   set<dtAsignatura> nuevo;
-  for(auto it = this->asignaturas.begin(); it!=this->asignaturas.end(); ++it){//notacion inventada
+  for(auto it = this->asignaturas->begin(); it!=this->asignaturas->end(); ++it){//notacion inventada
     dtAsignatura *d = new dtAsignatura();
     d->setCodigo(it->second->getAsig()->getCodigo());
     d->setNombre(it->second->getAsig()->getNombre());
@@ -51,22 +58,26 @@ set<dtAsignatura> Docente::getInfo(){
   return nuevo;
 };
 void Docente::agregarClaseNueva(Clase *c){
-  clasesCreadas.insert(pair<int,Clase*> (c->getCodigo(),c));
+  clases->insert(pair<int,Clase*> (c->getCodigo(),c));
 };
 
 set<dtClase> Docente::clasesATerminar(){
-  /*//new set(DtClase)
-  foreach clase in clasesCreadas do{
-    if clase.getFechaFin() == fechaNula{ //definir esta constante y sobrecargar == para dtFecha
-      string n = clase.getNombre();
-      string c = clase.getCodigo();
-      dtFecha fi = clase.getFechaInicio();
-      tipoClase t = clase.getTipo();
-      //armar dt
-      //agregarlo al set
+  new set<dtClase> set;
+  for(auto it = clases.begin(); it!=clases.end(); ++it){
+    if(it->second->getFechaFin() == fechaNula){ //definir esta constante y sobrecargar == para dtFecha
+      dtClase* dt = new dtClase();
+      dt->setNombre(it->second->getNombre());
+      dt->setCodigo(it->second->getCodigo());
+      dt->setFechaInicio(it->second->getFechaInicio());
+      dt->setFechaFin(fechaNula);
+      dt->setTipo(it->second->getTipo());
+      dt->setUrl(it->second->getUlr());
+      dt->setCreador(this->getEmail());
+      dt->setAsig(it->second->getCodigoAsig());
+      set.insert(*dt);
     }
-  }*/
-  //return set;
+  }
+  return set;
 };
 
 void Docente::desvincularDoc(Rol){/*

@@ -26,12 +26,18 @@ class dtClase{
     void setUrl(string);
     void setFechaInicio(dtFecha);
     void setFechaFin(dtFecha);
+    void setTipo(tipoClase);
     tipoClase getTipo();
     string getNombre();
     int getCodigo();
     string getUrl();
     dtFecha getFechaInicio();
     dtFecha getFechaFin();
+
+    void setCreador(string);
+    string getCreador();
+    void setAsig(int);
+    int getAsig();
 
     ~dtClase();
     //bool operator<(const Clase &right); //si colecciones se implementan con set esto es necesario

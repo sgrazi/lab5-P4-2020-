@@ -3,7 +3,6 @@
 Clase::Clase(){
 
 };
-
 void Clase::setNombre(string nombre){
   this->nombre = nombre;
 };
@@ -46,6 +45,11 @@ dtFecha Clase::getFechaInicio(){
 dtFecha Clase::getFechaFin(){
   return fechaFin;
 };
+
+int Clase::getCodigoAsig(){
+  return asig->getCodigo();
+};
+
 void Clase::visualizar(Estudiante* e){/*
   //puse las funciones member find y add como si existieran, no vi nada de la implementacion de coleccion que nos dieron
   bool existe = estParticipantes.member(email);

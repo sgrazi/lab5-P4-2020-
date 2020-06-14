@@ -16,6 +16,8 @@
 #include <set>
 #include <map>
 
+const fechaNula dtFecha(0,0,0,0,0,0);
+
 using namespace std;
 
 ControladorClase::ControladorClase(){
@@ -55,20 +57,19 @@ para despues usarla en el confirmar, pero no es necesario, lo puedo empezar a
 hacer en iniciarClase*/
 tipoClase ControladorClase::rolDocente(int codigoAsig){//retorna un tipoClase con el rol del docente en el parametro tipo
   auto itDoc = this->coleccionGlobalDocentes->find(emailUserActual);
-  auto itRol = itDoc->second->getAsignaturas().find(codigoAsig);
+  auto itRol = itDoc->second->getAsignaturas()->find(codigoAsig);
   return itRol->second->getDicta();
 };
 
 void ControladorClase::iniciarClase(int codigoAsig, string nombre, tipoClase tipo, dtFecha fecha){
   dtInfoClase* dt = new dtInfoClase();
-  auto itDoc = this->coleccionGlobalDocentes->find(emailUserActual);
-  auto itRol = itDoc->second->getAsignaturas().find(codigoAsig);
   dt->setIniciadaPor(emailUserActual);
   dt->setCodigo(codigoAsig);
   dt->setNombre(nombre);
   dt->setTipo(tipo);
   dt->setFechaInicio(fecha);
   this->infoParaCreacionClase = dt;
+  //cout << "dtInfoClase creado\n";
 };
 
 map<string,dtEstudiante*> ControladorClase::consultarInscriptos(){
@@ -97,20 +98,23 @@ void ControladorClase::confirmarInicio(){
   auto itAsig = this->coleccionGlobalAsignaturas->find(infoParaCreacionClase->getCodigo());
   Clase* clase;
   if(infoParaCreacionClase->getTipo() == teorico)
-    Teorico *clase = new Teorico();
+    clase = new Teorico();
   else
     if(infoParaCreacionClase->getTipo() == practico)
-      Practico *clase = new Practico();
+      clase = new Practico();
     else
-      Monitoreo *clase = new Monitoreo();
+      clase = new Monitoreo();
 
   clase->setCodigo(itAsig->second->getClases()->size());//fijarme cantidad de clases en la asignatura y ponerle codigo igual a eso +1
   clase->setNombre(infoParaCreacionClase->getNombre());
   clase->setUrl("clases.com/" + clase->getCodigo());
   clase->setFechaInicio(infoParaCreacionClase->getFechaInicio());
+  clase->setFechaFin(fechaNula);
   clase->setCreador(itDoc->second);
   clase->setAsig(itAsig->second);
   clase->setTipo(infoParaCreacionClase->getTipo());
+
+  //FALTA PARTE DE LA LISTA DE HABILITADOS DEL MONITOREO
 
   itDoc->second->agregarClaseNueva(clase);
   itAsig->second->agregarClaseNueva(clase);
@@ -122,11 +126,22 @@ void ControladorClase::cancelarInicio(){
 };
 
 
-dtFecha ControladorClase::generarFecha(){};
-set<dtClase> ControladorClase::consultarClasesEnVivo(){};
-dtClase ControladorClase::finalizarClase(string){};
+dtFecha ControladorClase::generarFecha(){}; //no se de que caso de uso es esta funcion, esta aca perdida
+
+//FINALIZACION DE CLASE
+set<dtClase> ControladorClase::consultarClasesEnVivo(){
+  auto itDoc = this->coleccionGlobalDocentes->find(emailUserActual);
+  return itDoc->second->clasesATerminar();
+};
+
+void ControladorClase::finalizarClase(int codigo){
+  this->claseAFinalizar = codigo;
+};
+
 void ControladorClase::confirmarFin(){};
+
 void ControladorClase::cancelarFin(){};
+
 set<dtAsignatura> ControladorClase::consultarAsigIns(){};
 set<dtClase> ControladorClase::consultarClasesDiferido(string){};
 dtClase ControladorClase::AsistirClaseDiferido(string){};

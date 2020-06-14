@@ -5,7 +5,7 @@
 
 #include "dtNotificacion.h"
 #include "iControladorUsuario.h"
-#include "usrcla.h"
+#include "usrCla.h"
 #include "estudiante.h"
 #include "docente.h"
 
