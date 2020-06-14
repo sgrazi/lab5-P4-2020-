@@ -30,11 +30,12 @@ bool Docente::esDocenteDe(int codigoAsig){
   };
   return res;
 };
-Rol Docente::nuevoRol(Asignatura *asig, tipoClase rolDoc){
+Rol* Docente::nuevoRol(Asignatura *asig, tipoClase rolDoc){
   Rol *rolNuevo = new Rol(this, asig);
   rolNuevo->setDicta(rolDoc);
-  this->asignaturas.insert(pair<int,Rol*> (asig->getCodigo(),rolNuevo));//agregago el rol nuevo a la coleccion
-  asig->agregarRol(rolNuevo);
+  /*this->asignaturas.insert(pair<int,Rol*> (asig->getCodigo(),rolNuevo));//agregago el rol nuevo a la coleccion
+  asig->agregarRol(rolNuevo);*/ //de esto se encarga controlador Aasignatura en confirmarAsignacion
+  return rolNuevo;
 };
 set<dtAsignatura> Docente::getInfo(){
   set<dtAsignatura> nuevo;

@@ -27,7 +27,7 @@ class Docente : public Usuario{
     map<int,Rol*> getAsignaturas();
 
     bool esDocenteDe(int);
-    Rol nuevoRol(Asignatura*,tipoClase);
+    Rol* nuevoRol(Asignatura*,tipoClase);
     set<dtAsignatura> getInfo();
     void agregarClaseNueva(Clase*);
     set<dtClase> clasesATerminar();

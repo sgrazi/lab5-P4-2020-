@@ -98,7 +98,7 @@ void ControladorAsignatura::asignarDocente(string e, int c, tipoClase r){
 void ControladorAsignatura::confirmarAsignacion(){
   auto doc = coleccionGlobalDocentes->find(emailDocente);
   auto asig = coleccionGlobalAsignaturas->find(codigoAsig);
-  Rol nuevo = doc->second->nuevoRol(asig->second,this->rolDoc);
+  Rol* nuevo = doc->second->nuevoRol(asig->second,this->rolDoc);
   asig->second->agregarRol(nuevo);
 };
 void ControladorAsignatura::cancelarAsignacion(){
