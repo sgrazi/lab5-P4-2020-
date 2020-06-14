@@ -22,7 +22,7 @@ class ControladorClase{
 	private:
 		string passwordUserActual;
 		string emailUserActual;
-		dtInfoClase infoParaCreacionClase;
+		dtInfoClase* infoParaCreacionClase;
 		int claseAFinalizar;
 		map<int,Asignatura*>* coleccionGlobalAsignaturas;
 		map<string,Estudiante*>* coleccionGlobalEstudiantes;
@@ -31,11 +31,11 @@ class ControladorClase{
 		ControladorClase();
 		void setPasswordUserActual(string);
 		void setEmailUserActual(string);
-		void setInfoParaCreacionClase(dtInfoClase);
+		void setInfoParaCreacionClase(dtInfoClase*);
 		void setClaseAFinalizar(int);
 		string getPasswordUserActual();
 		string getEmailUserActual();
-		dtInfoClase getInfoParaCreacionClase();
+		dtInfoClase* getInfoParaCreacionClase();
 		int getClaseAFinalizar();
 		//COLECCIONES
 		void setColEst(map<string,Estudiante*>*);
@@ -45,9 +45,9 @@ class ControladorClase{
 		//INICIO DE CLASE
 		void iniciarSesion(string,string);
 		set<dtAsignatura> consultarAsignaturasDocente();
-		dtInfoClase infoDocente(int);
-		void iniciarClase(string,string,tipoClase,dtFecha);
-		set<dtEstudiante> consultarInscriptos();
+		tipoClase rolDocente(int);
+		void iniciarClase(int,string,tipoClase,dtFecha);
+		map<string,dtEstudiante*> consultarInscriptos();
 		void agregarHabilitado(string);
 		dtInfoClase desplegarInfoClase();
 		void confirmarInicio();

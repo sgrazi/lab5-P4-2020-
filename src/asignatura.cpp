@@ -27,6 +27,10 @@ void Asignatura::agregarRol(Rol* rol){
   this->docentes.insert(pair<string,Rol*>(rol->getDoc()->getEmail(),rol));
 };
 
+map<string,Estudiante*>* Asignatura::getInscriptos(){
+  return inscriptos;
+};
+
 void Asignatura::agregarInscripto(Estudiante* est){
   inscriptos->insert(pair<string,Estudiante*> (est->getEmail(),est));
 };

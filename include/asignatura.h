@@ -37,6 +37,7 @@ class Asignatura{
     bool getMonitoreo() const;
 
     void agregarRol(Rol*);
+    map<string,Estudiante*>* getInscriptos();
     void agregarInscripto(Estudiante*);
     //void agregarClaseNueva(dtClase);
     //map<string,Estudiante*>* getInscriptos();

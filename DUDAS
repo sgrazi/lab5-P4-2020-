@@ -7,3 +7,5 @@ como es la clase sistema?
 habria que agregar try and catch para posibles errores? y verificar precondiciones
 ejemplo, en iniciar sesion asegurarnos que el usuario ingresado es alguien en el sistema,
 o tambien, al llamar consultarAsignaturasDocente(), asegurarnos que el usuario que inicio sesion en el sistema es docente
+
+dtUsuario no se para que tiene atributo password pero ok

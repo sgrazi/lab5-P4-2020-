@@ -23,8 +23,8 @@ string ControladorClase::getPasswordUserActual(){ return passwordUserActual;};
 void ControladorClase::setEmailUserActual(string e){  this->emailUserActual = e;};
 string ControladorClase::getEmailUserActual(){  return emailUserActual;};
 
-void ControladorClase::setInfoParaCreacionClase(dtInfoClase i){ this->infoParaCreacionClase = i;};
-dtInfoClase ControladorClase::getInfoParaCreacionClase(){ return infoParaCreacionClase;};
+void ControladorClase::setInfoParaCreacionClase(dtInfoClase *i){ this->infoParaCreacionClase = i;};
+dtInfoClase* ControladorClase::getInfoParaCreacionClase(){ return infoParaCreacionClase;};
 
 void ControladorClase::setClaseAFinalizar(int c){ this->claseAFinalizar = c;};
 int ControladorClase::getClaseAFinalizar(){ return claseAFinalizar;};
@@ -44,22 +44,44 @@ set<dtAsignatura> ControladorClase::consultarAsignaturasDocente(){
   set<dtAsignatura> nuevo = itDoc->second->getInfo();
   return nuevo;
 };
+//para mi esta funcion no es necesaria
+/*se supone que aca se creaba un dtInfoClase y se empezaba a guardar info
+para despues usarla en el confirmar, pero no es necesario, lo puedo empezar a
+hacer en iniciarClase*/
+tipoClase ControladorClase::rolDocente(int codigoAsig){//retorna un tipoClase con el rol del docente en el parametro tipo
+  auto itDoc = this->coleccionGlobalDocentes->find(emailUserActual);
+  auto itRol = itDoc->second->getAsignaturas().find(codigoAsig);
+  return itRol->second->getDicta();
+};
 
-dtInfoClase ControladorClase::infoDocente(int codigoAsig){//retorna un dtInfoClase con el rol del docente en el parametro tipo
+void ControladorClase::iniciarClase(int codigoAsig, string nombre, tipoClase tipo, dtFecha fecha){
   dtInfoClase* dt = new dtInfoClase();
   auto itDoc = this->coleccionGlobalDocentes->find(emailUserActual);
   auto itRol = itDoc->second->getAsignaturas().find(codigoAsig);
-  dt->setTipo(itRol->second->getDicta());
-  return *dt;
+  dt->setIniciadaPor(emailUserActual);
+  dt->setCodigo(codigoAsig);
+  dt->setNombre(nombre);
+  dt->setTipo(tipo);
+  dt->setFechaInicio(fecha);
+  this->setInfoParaCreacionClase(dt);
 };
 
-void ControladorClase::iniciarClase(string codigoAsig, string nombre, tipoClase tipo, dtFecha fecha){/*
-  this->setCodigoAsig(codigoAsig);
-  this->setNombreAsig(nombre);*/
+map<string,dtEstudiante*> ControladorClase::consultarInscriptos(){
+  map<string,dtEstudiante*> set;
+  auto itAsig = this->coleccionGlobalAsignaturas->find(infoParaCreacionClase->getCodigo());//busco mi asignatura
+  for(auto it = itAsig->second->getInscriptos()->begin(); it!=itAsig->second->getInscriptos()->end(); it++){
+    dtEstudiante* nuevo = new dtEstudiante();
+    nuevo->setNombre(it->second->getNombre());
+    nuevo->setEmail(it->second->getEmail());
+    nuevo->setImagen(it->second->getImagen());
+    nuevo->setCI(it->second->getCI());
+    set.insert(pair<string,dtEstudiante*> (nuevo->getEmail(),nuevo));
+  }
+  return set;
 };
+void ControladorClase::agregarHabilitado(string){
 
-set<dtEstudiante> ControladorClase::consultarInscriptos(){};
-void ControladorClase::agregarHabilitado(string){};
+};
 dtInfoClase ControladorClase::desplegarInfoClase(){};
 void ControladorClase::confirmarInicio(){};
 void ControladorClase::cancelarInicio(){};

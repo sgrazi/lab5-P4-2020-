@@ -11,12 +11,12 @@ class dtEstudiante;
 
 class dtInfoClase{
   private:
-    int codigo;
     string nombre;
     string url;
     dtFecha fechaInicio;
     dtFecha fechaFin;
     tipoClase tipo;
+    int codigo; //codigo de la asignatura de la clase
     string iniciadaPor;
     int cantHabilitados;
     string habilitados[15]; //emails de los habilitados
