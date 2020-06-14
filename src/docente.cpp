@@ -34,17 +34,17 @@ Rol Docente::nuevoRol(Asignatura *asig, tipoClase rolDoc){
   asig->agregarRol(*rolNuevo);
 };
 set<dtAsignatura> Docente::getInfo(){
-  /*//new set(DtAsignatura)
-  foreach rol in asignaturas do{//notacion inventada
-    string c = rol.getAsig().getCodigo();
-    string n = rol.getAsig().getNombre();
-    bool t = rol.getAsig().getTeorico();
-    bool p = rol.getAsig().getPractico();
-    bool m = rol.getAsig().getMonitoreo();
-    //armar dt
-    //agregarlo al set
-  }*/
-  //return set;
+  set<dtAsignatura> nuevo;
+  for(auto it = this->asignaturas.begin(); it!=this->asignaturas.end(); ++it){//notacion inventada
+    dtAsignatura *d = new dtAsignatura();
+    d->setCodigo(it->second.getAsig()->getCodigo());
+    d->setNombre(it->second.getAsig()->getNombre());
+    d->setTeorico(it->second.getAsig()->getTeorico());
+    d->setPractico(it->second.getAsig()->getPractico());
+    d->setMonitoreo(it->second.getAsig()->getMonitoreo());
+    nuevo.insert(*d);
+  }
+  return nuevo;
 };
 void Docente::agregarClaseNueva(Clase *c){/*
   add(c,clasesCreadas);*/

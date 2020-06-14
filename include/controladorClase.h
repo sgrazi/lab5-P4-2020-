@@ -17,6 +17,9 @@ class ControladorClase{
 		string emailUserActual;
 		DtInfoClase infoParaCreacionClase;
 		int claseAFinalizar;
+		map<int,Asignatura*>* coleccionGlobalAsignaturas;
+		map<string,Estudiante*>* coleccionGlobalEstudiantes;
+		map<string,Docente*>* coleccionGlobalDocentes;
 	public:
 		ControladorClase();
 		void setPasswordUserActual(string);
@@ -27,6 +30,10 @@ class ControladorClase{
 		string getEmailUserActual();
 		DtInfoClase getInfoParaCreacionClase();
 		int getClaseAFinalizar();
+		//COLECCIONES
+		void setColEst(map<string,Estudiante*>*);
+		void setColDoc(map<string,Docente*>*);
+		void setColAsig(map<int,Asignatura*>*);
 		//inicio de clase
 		void iniciarSesion(string,string);
 		set<DtAsignatura> consultarAsignaturasDocente();

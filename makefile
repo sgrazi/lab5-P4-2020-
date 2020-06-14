@@ -4,7 +4,7 @@ HDIR = include
 CPPDIR  = src
 ODIR = obj
 
-CLASES = controladorUsuario usuario docente estudiante dtUsuario dtDocente dtEstudiante dtAsignatura controladorAsignatura asignatura rol
+CLASES = controladorUsuario usuario docente estudiante dtUsuario dtDocente dtEstudiante dtAsignatura controladorAsignatura asignatura rol controladorClase
 
 # cadena de archivos, con directorio y extensión
 HS   = $(CLASES:%=$(HDIR)/%.h)
@@ -36,9 +36,15 @@ $(EJECUTABLE): $(ODIR)/$(PRINCIPAL).o $(OS)
 clean:
 	rm obj/controladorUsuario.o
 	#rm obj/iControladorUsuario.o
-	rm obj/dtDocente.o
-	rm obj/dtEstudiante.o
+	rm obj/usuario.o
 	rm obj/docente.o
 	rm obj/estudiante.o
-	rm obj/usuario.o
+	rm obj/dtUsuario.o
+	rm obj/dtDocente.o
+	rm obj/dtEstudiante.o
+	rm obj/dtAsignatura.o
+	rm obj/controladorAsignatura.o
+	rm obj/asignatura.o
+	rm obj/rol.o
+	rm obj/controladorClase .o
 	rm obj/mainpruebas.o

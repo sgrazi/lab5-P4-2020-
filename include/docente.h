@@ -24,7 +24,7 @@ class Docente : public Usuario{
     Docente();
     string getInstituto();
     void setInstituto(string);
-
+    
     bool esDocenteDe(int);
     Rol nuevoRol(Asignatura*,tipoClase);
     set<dtAsignatura> getInfo();

@@ -113,6 +113,7 @@ int main(){
   };
   */
   //INSCRIPCION A ASIGNATURA
+  /*
   Cu->iniciarSesion("email","pass");
   set<dtAsignatura> set = Cu->consultarAsigNoIns();
   for(auto it = set.begin(); it!=set.end(); it++)
@@ -122,10 +123,10 @@ int main(){
   Cu->confirmarInscripcion();
   set = Cu->consultarAsigNoIns();
   for(auto it = set.begin(); it!=set.end(); it++)
-    cout << it->getNombre();
+    cout << it->getNombre();*/
 
   //INICIO DE CLASE
-  
+
 
   return 0;
 }
