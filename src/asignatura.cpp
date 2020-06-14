@@ -23,8 +23,8 @@ bool Asignatura::getMonitoreo() const{  return monitoreo;};
 
 Asignatura::~Asignatura(){};
 
-void Asignatura::agregarRol(Rol rol){
-  this->docentes.insert(pair<string,Rol>(rol.getDoc()->getEmail(),rol));
+void Asignatura::agregarRol(Rol* rol){
+  this->docentes.insert(pair<string,Rol*>(rol->getDoc()->getEmail(),rol));
 };
 
 void Asignatura::agregarInscripto(Estudiante* est){

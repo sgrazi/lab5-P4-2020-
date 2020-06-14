@@ -21,7 +21,7 @@ class Asignatura{
     bool monitoreo;
     bool practico;
     map<string,Estudiante*>* inscriptos;
-    map<string,Rol> docentes; //string es el email del doc
+    map<string,Rol*> docentes; //string es el email del doc
     //map<int,Clase> clases;
   public://faltan funciones de manejo de relaciones
     Asignatura();
@@ -36,7 +36,7 @@ class Asignatura{
     bool getPractico() const;
     bool getMonitoreo() const;
 
-    void agregarRol(Rol);
+    void agregarRol(Rol*);
     void agregarInscripto(Estudiante*);
     //void agregarClaseNueva(dtClase);
     //map<string,Estudiante*>* getInscriptos();

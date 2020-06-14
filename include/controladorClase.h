@@ -1,5 +1,6 @@
 #ifndef CONTROLADOR_CLASE_H
 #define CONTROLADOR_CLASE_H
+#include "tipoClase.h"
 #include "dtInfoClase.h"
 #include "dtFecha.h"
 #include "dtAsignatura.h"
@@ -8,14 +9,20 @@
 #include "dtMensaje.h"
 #include <string>
 #include <set>
+#include <map>
 
 using namespace std;
+
+class Asignatura;
+class Estudiante;
+class Docente;
+class Clase;
 
 class ControladorClase{
 	private:
 		string passwordUserActual;
 		string emailUserActual;
-		DtInfoClase infoParaCreacionClase;
+		dtInfoClase infoParaCreacionClase;
 		int claseAFinalizar;
 		map<int,Asignatura*>* coleccionGlobalAsignaturas;
 		map<string,Estudiante*>* coleccionGlobalEstudiantes;
@@ -24,42 +31,43 @@ class ControladorClase{
 		ControladorClase();
 		void setPasswordUserActual(string);
 		void setEmailUserActual(string);
-		void setInfoParaCreacionClase(DtInfoClase);
+		void setInfoParaCreacionClase(dtInfoClase);
 		void setClaseAFinalizar(int);
 		string getPasswordUserActual();
 		string getEmailUserActual();
-		DtInfoClase getInfoParaCreacionClase();
+		dtInfoClase getInfoParaCreacionClase();
 		int getClaseAFinalizar();
 		//COLECCIONES
 		void setColEst(map<string,Estudiante*>*);
 		void setColDoc(map<string,Docente*>*);
 		void setColAsig(map<int,Asignatura*>*);
-		//inicio de clase
+
+		//INICIO DE CLASE
 		void iniciarSesion(string,string);
-		set<DtAsignatura> consultarAsignaturasDocente();
-		DtInfoClase infoDocente(string);
-		void iniciarClase(string,string,DtFecha);
-		set<DtEstudiante> consultarInscriptos();
+		set<dtAsignatura> consultarAsignaturasDocente();
+		dtInfoClase infoDocente(int);
+		void iniciarClase(string,string,tipoClase,dtFecha);
+		set<dtEstudiante> consultarInscriptos();
 		void agregarHabilitado(string);
-		DtInfoClase desplegarInfoClase();
+		dtInfoClase desplegarInfoClase();
 		void confirmarInicio();
 		void cancelarInicio();
 
 		string generarCodigo();
-		string generarUrl(clase);
-		DtFecha generarFecha();
-		set<DtClase> consultarClasesEnVivo();
-		DtClase finalizarClase(string);
+		string generarUrl(Clase*);
+		dtFecha generarFecha();
+		set<dtClase> consultarClasesEnVivo();
+		dtClase finalizarClase(string);
 		void confirmarFin();
 		void cancelarFin();
-		set<DtAsignatura> consultarAsigIns();
-		set<DtClase> consultarClasesDiferido(string);
-		DtClase AsistirClaseDiferido(string);
-		set<DtMensaje> confirmarAsistencia();
+		set<dtAsignatura> consultarAsigIns();
+		set<dtClase> consultarClasesDiferido(string);
+		dtClase AsistirClaseDiferido(string);
+		set<dtMensaje> confirmarAsistencia();
 		void cancelarAsistencia();
-		set<DtInfoClase> desplegarInfoClases(string);
+		set<dtInfoClase> desplegarInfoClases(string);
 		void confirmarEnvio();
 
-		~ControladorClase()
+		~ControladorClase();
 };
 #endif

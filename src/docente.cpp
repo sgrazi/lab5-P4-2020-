@@ -14,10 +14,13 @@ string Docente::getInstituto(){
 void Docente::setInstituto(string ins){
   this->instituto = ins;
 };
+
+map<int,Rol*> Docente::getAsignaturas(){ return asignaturas;};
+
 bool Docente::esDocenteDe(int codigoAsig){
   int aux;
   bool res = false;
-  map<int,Rol> :: iterator it;
+  map<int,Rol*> :: iterator it;
   for(it=asignaturas.begin(); it!=asignaturas.end(); it++){
     aux = it->first;
     if(aux==codigoAsig)
@@ -30,18 +33,18 @@ bool Docente::esDocenteDe(int codigoAsig){
 Rol Docente::nuevoRol(Asignatura *asig, tipoClase rolDoc){
   Rol *rolNuevo = new Rol(this, asig);
   rolNuevo->setDicta(rolDoc);
-  this->asignaturas.insert(pair<int,Rol> (asig->getCodigo(),*rolNuevo));//agregago el rol nuevo a la coleccion
-  asig->agregarRol(*rolNuevo);
+  this->asignaturas.insert(pair<int,Rol*> (asig->getCodigo(),rolNuevo));//agregago el rol nuevo a la coleccion
+  asig->agregarRol(rolNuevo);
 };
 set<dtAsignatura> Docente::getInfo(){
   set<dtAsignatura> nuevo;
   for(auto it = this->asignaturas.begin(); it!=this->asignaturas.end(); ++it){//notacion inventada
     dtAsignatura *d = new dtAsignatura();
-    d->setCodigo(it->second.getAsig()->getCodigo());
-    d->setNombre(it->second.getAsig()->getNombre());
-    d->setTeorico(it->second.getAsig()->getTeorico());
-    d->setPractico(it->second.getAsig()->getPractico());
-    d->setMonitoreo(it->second.getAsig()->getMonitoreo());
+    d->setCodigo(it->second->getAsig()->getCodigo());
+    d->setNombre(it->second->getAsig()->getNombre());
+    d->setTeorico(it->second->getAsig()->getTeorico());
+    d->setPractico(it->second->getAsig()->getPractico());
+    d->setMonitoreo(it->second->getAsig()->getMonitoreo());
     nuevo.insert(*d);
   }
   return nuevo;

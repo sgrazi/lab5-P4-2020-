@@ -16,7 +16,7 @@ class Asignatura;
 class Docente : public Usuario{
   private:
     string instituto;
-    map<int,Rol> asignaturas; //int es el codigo de la asignatura
+    map<int,Rol*> asignaturas; //int es el codigo de la asignatura
     //set<UsrCla> clasesParticipa;
     //map<int,Clase> clasesCreadas;
     //map<int,Clase> participa;
@@ -24,7 +24,8 @@ class Docente : public Usuario{
     Docente();
     string getInstituto();
     void setInstituto(string);
-    
+    map<int,Rol*> getAsignaturas();
+
     bool esDocenteDe(int);
     Rol nuevoRol(Asignatura*,tipoClase);
     set<dtAsignatura> getInfo();

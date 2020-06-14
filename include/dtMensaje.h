@@ -9,14 +9,14 @@ class dtMensaje{
   private:
     int id;
     string contenido;
-    DtFecha fecha;
+    dtFecha fecha;
     int enRespuestaA; //Mensaje original tenia un puntero a otro mensaje, aca es el identificador del otro mensaje
     int clase; //Mensaje original tenia un puntero a su clase, aca es el identificador de la clase
   public:
     dtMensaje();
     void setId(int);
     void setContenido(string);
-    void setFecha(DtFecha);
+    void setFecha(dtFecha);
     void setEnRespuestaA(int);
     void setClase(int);
     int getId();
