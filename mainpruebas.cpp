@@ -172,5 +172,21 @@ int main(){
     cout << "No quedan clases sin terminar\n";
   }
 
+  //Envío de mensaje
+
+  //Asistencia a clase en vivo
+
+  //Finalización de asistencia a clase en vivo
+
+  //Tiempo de dictado de clases
+
+  //Tiempo de asistencia a clase
+
+  //Eliminación de asignatura
+
+  //Suscribirse a notificaciones (solo el tercer modo, respuesta a un mensaje del usuario)
+  
+  //Consulta de notificaciones
+
   return 0;
 }
