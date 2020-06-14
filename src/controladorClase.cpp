@@ -119,6 +119,8 @@ void ControladorClase::confirmarInicio(){
   itDoc->second->agregarClaseNueva(clase);
   itAsig->second->agregarClaseNueva(clase);
 
+  this->coleccionGlobalClases->insert(pair<int,Clase*> (clase->getCodigo(),clase));
+
 };
 
 void ControladorClase::cancelarInicio(){
@@ -129,6 +131,7 @@ void ControladorClase::cancelarInicio(){
 
 
 //FINALIZACION DE CLASE
+
 set<dtClase> ControladorClase::consultarClasesEnVivo(){
   auto itDoc = this->coleccionGlobalDocentes->find(emailUserActual);
   return itDoc->second->clasesATerminar();
@@ -139,7 +142,7 @@ void ControladorClase::finalizarClase(int codigo){
 };
 
 void ControladorClase::confirmarFin(){
-  auto itCla = this->coleccionGlobalClases->find(claseAFinalizar);
+  auto itCla = coleccionGlobalClases->find(this->claseAFinalizar);
   dtFecha fechaFin = generarFecha();
   itCla->second->setFechaFin(fechaFin);
 

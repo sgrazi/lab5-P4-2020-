@@ -127,8 +127,8 @@ int main(){
   //INICIO DE CLASE
   Cc->iniciarSesion("email2","123");
 
-  set<dtAsignatura> set = Cc->consultarAsignaturasDocente();
-  for(auto it = set.begin(); it!=set.end(); it++){
+  set<dtAsignatura> setA = Cc->consultarAsignaturasDocente();
+  for(auto it = setA.begin(); it!=setA.end(); it++){
     cout << "Asignatura es " << it->getNombre() << "\n";
   }
 
@@ -148,11 +148,29 @@ int main(){
 
   Cc->confirmarInicio();
 
-  auto clasesa = coleccionGlobalAsignaturas.find(1)->second->getClases();
+  /*auto clasesa = coleccionGlobalAsignaturas.find(1)->second->getClases();
   cout << "clase en asignatura: " << clasesa->begin()->second->getNombre() << "\n";
 
   auto clasesd = coleccionGlobalAsignaturas.find(1)->second->getClases();
-  cout << "clase en docente: " <<clasesd->begin()->second->getNombre() << "\n";
+  cout << "clase en docente: " <<clasesd->begin()->second->getNombre() << "\n";*/
+
+  //FINALIZACION DE CLASE
+
+  set<dtClase> sinFin = Cc->consultarClasesEnVivo();
+
+  for(auto iterador = sinFin.begin(); iterador!=sinFin.end(); iterador++){
+    cout << "Codigo de clase sin terminar: " << iterador->getCodigo() << "\n";
+  }
+
+  Cc->finalizarClase(0);
+
+  Cc->confirmarFin();
+
+  sinFin = Cc->consultarClasesEnVivo();
+
+  if(sinFin.begin()==sinFin.end()){
+    cout << "No quedan clases sin terminar\n";
+  }
 
   return 0;
 }

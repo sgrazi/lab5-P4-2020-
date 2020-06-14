@@ -3,28 +3,28 @@
 dtClase::dtClase(){};
 
 void dtClase::setNombre(string n){ this->nombre = n;};
-string dtClase::getNombre(){ return nombre;};
+string dtClase::getNombre() const { return nombre;};
 
 void dtClase::setCodigo(int c){ this->codigo = c;};
 int dtClase::getCodigo() const { return codigo;};
 
 void dtClase::setUrl(string u){ this->url = u;};
-string dtClase::getUrl(){ return url;};
+string dtClase::getUrl() const { return url;};
 
 void dtClase::setFechaInicio(dtFecha f){ this->fechaInicio = f;};
-dtFecha dtClase::getFechaInicio(){ return fechaInicio;};
+dtFecha dtClase::getFechaInicio() const { return fechaInicio;};
 
 void dtClase::setFechaFin(dtFecha f){ this->fechaFin = f;};
-dtFecha dtClase::getFechaFin(){ return fechaFin;};
+dtFecha dtClase::getFechaFin() const { return fechaFin;};
 
 void dtClase::setTipo(tipoClase t){ this->tipo = t;};
-tipoClase dtClase::getTipo(){ return tipo;};
+tipoClase dtClase::getTipo() const { return tipo;};
 
 void dtClase::setCreador(string c){ this->creador = c;};
-string dtClase::getCreador(){ return creador;};
+string dtClase::getCreador() const { return creador;};
 
 void dtClase::setAsig(int a){ this->codigoAsig = a;};
-int dtClase::getAsig(){ return codigoAsig;};
+int dtClase::getAsig() const { return codigoAsig;};
 
 dtClase::~dtClase(){};
 

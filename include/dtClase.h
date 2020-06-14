@@ -27,17 +27,17 @@ class dtClase{
     void setFechaInicio(dtFecha);
     void setFechaFin(dtFecha);
     void setTipo(tipoClase);
-    tipoClase getTipo();
-    string getNombre();
+    tipoClase getTipo() const ;
+    string getNombre() const ;
     int getCodigo() const;
-    string getUrl();
-    dtFecha getFechaInicio();
-    dtFecha getFechaFin();
+    string getUrl() const ;
+    dtFecha getFechaInicio() const ;
+    dtFecha getFechaFin() const ;
 
     void setCreador(string);
-    string getCreador();
+    string getCreador() const ;
     void setAsig(int);
-    int getAsig();
+    int getAsig() const ;
 
     ~dtClase();
     bool operator<(const dtClase &right)const; //si colecciones se implementan con set esto es necesario
