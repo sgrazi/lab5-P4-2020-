@@ -23,8 +23,8 @@ string ControladorClase::getPasswordUserActual(){ return passwordUserActual;};
 void ControladorClase::setEmailUserActual(string e){  this->emailUserActual = e;};
 string ControladorClase::getEmailUserActual(){  return emailUserActual;};
 
-void ControladorClase::setInfoParaCreacionClase(dtInfoClase *i){ this->infoParaCreacionClase = i;};
-dtInfoClase* ControladorClase::getInfoParaCreacionClase(){ return infoParaCreacionClase;};
+//void ControladorClase::setInfoParaCreacionClase(dtInfoClase *i){ this->infoParaCreacionClase = i;};
+//dtInfoClase* ControladorClase::getInfoParaCreacionClase(){ return infoParaCreacionClase;};
 
 void ControladorClase::setClaseAFinalizar(int c){ this->claseAFinalizar = c;};
 int ControladorClase::getClaseAFinalizar(){ return claseAFinalizar;};
@@ -32,8 +32,9 @@ int ControladorClase::getClaseAFinalizar(){ return claseAFinalizar;};
 void ControladorClase::setColEst(map<string,Estudiante*>* c){this->coleccionGlobalEstudiantes=c;};
 void ControladorClase::setColDoc(map<string,Docente*>* c){this->coleccionGlobalDocentes=c;};
 void ControladorClase::setColAsig(map<int,Asignatura*>* c){this->coleccionGlobalAsignaturas=c;};
+void ControladorClase::setColCla(map<int,Clase*>* c){this->coleccionGlobalClases=c;};
 
-//inicio de clase
+//INICIO DE CLASE
 void ControladorClase::iniciarSesion(string e, string p){
   this->setPasswordUserActual(p);
   this->setEmailUserActual(e);
@@ -63,7 +64,7 @@ void ControladorClase::iniciarClase(int codigoAsig, string nombre, tipoClase tip
   dt->setNombre(nombre);
   dt->setTipo(tipo);
   dt->setFechaInicio(fecha);
-  this->setInfoParaCreacionClase(dt);
+  this->infoParaCreacionClase = dt;
 };
 
 map<string,dtEstudiante*> ControladorClase::consultarInscriptos(){
@@ -79,12 +80,42 @@ map<string,dtEstudiante*> ControladorClase::consultarInscriptos(){
   }
   return set;
 };
-void ControladorClase::agregarHabilitado(string){
+
+void ControladorClase::agregarHabilitado(string email){//que pasa si quiero agregar mas de 15
+  infoParaCreacionClase->agregarHabilitado(email);
+};
+
+dtInfoClase ControladorClase::desplegarInfoClase(){
+  return infoParaCreacionClase;
+};
+void ControladorClase::confirmarInicio(){
+  auto itDoc = this->coleccionGlobalDocentes->find(emailUserActual);
+  auto itAsig = this->coleccionGlobalAsignaturas->find(infoParaCreacionClase->getCodigo());
+
+  if(infoParaCreacionClase->getTipo() == teorico)
+    Teorico *clase = new Teorico();
+  else
+    if(infoParaCreacionClase->getTipo() == practico)
+      Practico *clase = new Practico();
+    else
+      Monitoreo *clase = new Monitoreo();
+
+  clase->setCodigo(itAsig->second->getClases()->size());//fijarme cantidad de clases en la asignatura y ponerle codigo igual a eso +1
+  clase->setNombre(infoParaCreacionClase->getNombre());
+  clase->setUrl("clases.com/" + clase->getCodigo());
+  clase->setFechaInicio(infoParaCreacionClase->getFechaInicio());
+  clase->setCreador(itDoc->second);
+  clase->setAsig(itAsig->second);
+  clase->setTipo(infoParaCreacionClase->getTipo());
+
+  itDoc->second->agregarClaseNueva(clase);
+  itAsig->second->agregarClaseNueva(clase);
 
 };
-dtInfoClase ControladorClase::desplegarInfoClase(){};
-void ControladorClase::confirmarInicio(){};
-void ControladorClase::cancelarInicio(){};
+
+void ControladorClase::cancelarInicio(){
+
+};
 
 string ControladorClase::generarCodigo(){};
 string ControladorClase::generarUrl(Clase*){};

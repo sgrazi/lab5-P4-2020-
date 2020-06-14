@@ -15,6 +15,15 @@ void Clase::setFechaInicio(DtFecha fecha){
 void Clase::setFechaFin(DtFecha){
   this->fechaFin = fecha;
 };
+void setCreador(Docente* d){
+  this->creador = d;
+};
+void setAsig(Asignatura* a){
+  this->asignatura = a;
+};
+void setTipo(tipoClase t){
+  this->tipo = t;
+};
 tipoClase Clase::getTipo(){
   return tipo;
 };

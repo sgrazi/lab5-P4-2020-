@@ -27,20 +27,22 @@ class ControladorClase{
 		map<int,Asignatura*>* coleccionGlobalAsignaturas;
 		map<string,Estudiante*>* coleccionGlobalEstudiantes;
 		map<string,Docente*>* coleccionGlobalDocentes;
+		map<int,Clase*>* coleccionGlobalClases;
 	public:
 		ControladorClase();
 		void setPasswordUserActual(string);
 		void setEmailUserActual(string);
-		void setInfoParaCreacionClase(dtInfoClase*);
+		//void setInfoParaCreacionClase(dtInfoClase*);
 		void setClaseAFinalizar(int);
 		string getPasswordUserActual();
 		string getEmailUserActual();
-		dtInfoClase* getInfoParaCreacionClase();
+		//dtInfoClase* getInfoParaCreacionClase();
 		int getClaseAFinalizar();
 		//COLECCIONES
 		void setColEst(map<string,Estudiante*>*);
 		void setColDoc(map<string,Docente*>*);
 		void setColAsig(map<int,Asignatura*>*);
+		void setColCla(map<int,Clase*>*)
 
 		//INICIO DE CLASE
 		void iniciarSesion(string,string);

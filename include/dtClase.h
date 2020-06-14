@@ -15,7 +15,7 @@ class dtClase{
     string url;
     dtFecha fechaInicio;
     dtFecha fechaFin;
-    Docente* creador;
+    string creador;
     string codigoAsig; //Clase original tenia una asociacion a la asignatura, aca lo reemplaza el identificador de la asignatura
     tipoClase tipo;
 

@@ -25,3 +25,8 @@ string dtInfoClase::getIniciadaPor(){  return iniciadaPor;};
 
 void dtInfoClase::setAsistentes(int a){  this->asistentes = a;};
 int dtInfoClase::getAsistentes(){  return asistentes;};
+
+void dtInfoClase::agregarHabilitado(string email){
+  this->habilitados[cantHabilitados] = email;
+  this->cantHabilitados++;
+};

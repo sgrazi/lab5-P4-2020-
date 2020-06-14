@@ -18,7 +18,7 @@ class Docente : public Usuario{
     string instituto;
     map<int,Rol*> asignaturas; //int es el codigo de la asignatura
     //set<UsrCla> clasesParticipa;
-    //map<int,Clase> clasesCreadas;
+    map<int,Clase*> clasesCreadas;
     //map<int,Clase> participa;
   public://faltan funciones de manejo de relaciones
     Docente();

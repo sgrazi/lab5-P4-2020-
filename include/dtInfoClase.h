@@ -42,6 +42,7 @@ class dtInfoClase{
     string getIniciadaPor();
     int getAsistentes();
 
+    void agregarHabilitado(string);
     ~dtInfoClase(){};
 };
 

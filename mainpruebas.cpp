@@ -44,15 +44,18 @@ using namespace std;
 map<string,Estudiante*> coleccionGlobalEstudiantes;
 map<string,Docente*> coleccionGlobalDocentes;
 map<int,Asignatura*> coleccionGlobalAsignaturas;
+map<int,Clase*>* coleccionGlobalClases;
 
 int main(){
 
   map<string,Estudiante*>* colEstudiantes = &coleccionGlobalEstudiantes;
   map<string,Docente*>* colDocentes = &coleccionGlobalDocentes;
   map<int,Asignatura*>* colAsignaturas = &coleccionGlobalAsignaturas;
+  map<int,Clase*>* colClases = &coleccionGlobalClases;
 
   ControladorUsuario* Cu = new ControladorUsuario();
   ControladorAsignatura* Ca = new ControladorAsignatura();
+  ControladorClase* Cc = new ControladorClase();
 
   //los controladores tienen punteros a las colecciones en atributos
   //de esta manera las colecciones se declaran en el main y son unicas para todo controlador que necesite usarlas
@@ -61,12 +64,16 @@ int main(){
   Cu->setColAsig(colAsignaturas);
   Ca->setColDoc(colDocentes);
   Ca->setColAsig(colAsignaturas);
+  Cc->setColEst(colEstudiantes);
+  Cc->setColDoc(colDocentes);
+  Cc->setColAsig(colAsignaturas);
+  Cc->setColCla(colClases);
 
   //ALTA DE USUARIO
   Cu->agregarEstudiante("nombre","pass","email","url","1.234.567-8");
   Cu->confirmarAlta();
 
-  Cu->agregarEstudiante("aaaaaa","123","email2","a","s");
+  Cu->agregarDocente("aaaaaa","123","email2","a","s");
   Cu->confirmarAlta();
   /*
   auto it = coleccionGlobalEstudiantes.find("email");
@@ -89,7 +96,7 @@ int main(){
      " = " << as->second->getNombre() << endl;*/
 
   //ASIGNACION DE DOC A ASIG
-  /*
+/*
   set<dtAsignatura> as = Ca->consultarAsignaturas();
 
   for(auto ite = as.begin(); ite!=as.end() ; ite++){
@@ -101,13 +108,13 @@ int main(){
   for(auto ite2 = ds.begin(); ite2!=ds.end() ; ite2++){
       cout << "Email docente libre de la asig calculo: "<< ite2->first << "\n";
   }; //consultarDocentesLibres() funca
-
+*/
   Ca->asignarDocente("email2",1,teorico);
 
   Ca->confirmarAsignacion();
   //asigno el docente y ahora me fijo si aparece en docentes libres
-  ds = Ca->consultarDocentesLibres(1);
-
+  //ds = Ca->consultarDocentesLibres(1);
+/*
   for(auto ite2 = ds.begin(); ite2!=ds.end() ; ite2++){
       cout << "Email docente libre de la asig calculo: "<< ite2->first << "\n";
   };
@@ -126,7 +133,7 @@ int main(){
     cout << it->getNombre();*/
 
   //INICIO DE CLASE
-
+  
 
   return 0;
 }

@@ -35,6 +35,9 @@ class Clase{
     void setUrl(string);
     void setFechaInicio(dtFecha);
     void setFechaFin(dtFecha);
+    void setCreador(Docente*);
+    void setAsig(Asignatura*);
+    void setTipo(tipoClase);
     tipoClase getTipo();
     string getNombre();
     int getCodigo();

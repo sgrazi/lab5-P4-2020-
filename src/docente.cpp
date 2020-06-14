@@ -50,8 +50,8 @@ set<dtAsignatura> Docente::getInfo(){
   }
   return nuevo;
 };
-void Docente::agregarClaseNueva(Clase *c){/*
-  add(c,clasesCreadas);*/
+void Docente::agregarClaseNueva(Clase *c){
+  clasesCreadas.insert(pair<int,Clase*> (c->getCodigo(),c));
 };
 
 set<dtClase> Docente::clasesATerminar(){

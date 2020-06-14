@@ -13,6 +13,8 @@ class Rol;
 
 class Estudiante;
 
+class Clase;
+
 class Asignatura{
   private:
     int codigo;
@@ -21,8 +23,8 @@ class Asignatura{
     bool monitoreo;
     bool practico;
     map<string,Estudiante*>* inscriptos;
-    map<string,Rol*> docentes; //string es el email del doc
-    //map<int,Clase> clases;
+    map<string,Rol*>* docentes; //string es el email del doc
+    map<int,Clase*>* clases;
   public://faltan funciones de manejo de relaciones
     Asignatura();
     void setCodigo(int);
@@ -36,10 +38,13 @@ class Asignatura{
     bool getPractico() const;
     bool getMonitoreo() const;
 
-    void agregarRol(Rol*);
     map<string,Estudiante*>* getInscriptos();
+    map<int,Clase*>* getClases();
+    map<string,Rol*>* getDocentes();
+
+    void agregarRol(Rol*);
     void agregarInscripto(Estudiante*);
-    //void agregarClaseNueva(dtClase);
+    void agregarClaseNueva(Clase*);
     //map<string,Estudiante*>* getInscriptos();
     //set<dtClase> getClases();
     ~Asignatura();
