@@ -169,12 +169,8 @@ void ControladorClase::cancelarEnvio();
 */
 //ASITENCIA A CLASE EN VIVO
 set<dtAsignatura> ControladorClase::consultarAsigIns(){
-  auto itEst = coleccionGlobalEstudiantes->find(emailUserActual);
-  return itEst->second->getAsignaturasInscripto();
 };
 set<dtClase> ControladorClase::consultarClasesDiferido(int a){
-  auto itAsig = coleccionGlobalAsignaturas->find(a);
-  return itAsig->second->getClasesDiferido();
 };
 dtClase ControladorClase::AsistirClaseDiferido(int){};
 set<dtMensaje> ControladorClase::confirmarAsistencia(){};

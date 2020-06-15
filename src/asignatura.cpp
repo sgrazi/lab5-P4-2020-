@@ -53,7 +53,7 @@ void Asignatura::agregarClaseNueva(Clase* c){
   clases->insert(pair<int,Clase*> (c->getCodigo(),c));
 };
 
-set<dtClase> Asignatura::getClasesDiferido(){
+/*set<dtClase> Asignatura::getClasesDiferido(){
   set<dtClase> nuevo;
   for(auto itCla = clases->begin(); itCla!=clases->end();++itCla){
     if(itCla->second->getFechaFin() != fechaNula){
@@ -70,4 +70,4 @@ set<dtClase> Asignatura::getClasesDiferido(){
     }
   }
   return nuevo;
-};
+};*/

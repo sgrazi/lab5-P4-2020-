@@ -25,7 +25,7 @@ Estudiante::~Estudiante(){
 
 };
 
-set<dtAsignatura> getAsignaturasInscripto(){
+/*set<dtAsignatura> getAsignaturasInscripto(){
   set<dtAsignatura> nuevo;
   for(auto itAsig = asignaturas->begin(); itAsig!=asignaturas->end();++itAsig){
     dtAsignatura *d = new dtAsignatura();
@@ -37,4 +37,4 @@ set<dtAsignatura> getAsignaturasInscripto(){
     nuevo.insert(*d);
   }
   return nuevo;
-};
+};*/

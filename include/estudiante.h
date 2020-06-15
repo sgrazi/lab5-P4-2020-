@@ -23,7 +23,7 @@ class Estudiante : public Usuario{
     void setCI(string);
     string getCI();
     map<int,Asignatura*>* getAsignaturas();
-    set<dtAsignatura> getAsignaturasInscripto();
+    //set<dtAsignatura> getAsignaturasInscripto();
 
     void inscribir(Asignatura*);
     void desinscribir(int);

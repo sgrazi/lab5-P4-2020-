@@ -47,7 +47,7 @@ class Asignatura{
     void agregarClaseNueva(Clase*);
     //map<string,Estudiante*>* getInscriptos();
     //set<dtClase> getClases();
-    set<dtClase> getClasesDiferido();
+    //set<dtClase> getClasesDiferido();
     ~Asignatura();
 };
 
