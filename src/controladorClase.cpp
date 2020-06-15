@@ -137,6 +137,12 @@ set<dtClase> ControladorClase::consultarClasesEnVivo(){
   return itDoc->second->clasesATerminar();
 };
 
+set<dtClase> consultarClasesEnVivoDeAsig(int codigoAsig){
+auto itDoc = this->coleccionGlobalAsignaturas->find(codigoAsig);
+return itDoc->second->ClasesEnVivo();
+
+};
+
 void ControladorClase::finalizarClase(int codigo){
   this->claseAFinalizar = codigo;
 };
@@ -169,12 +175,66 @@ void ControladorClase::cancelarEnvio();
 */
 //ASITENCIA A CLASE EN VIVO
 set<dtAsignatura> ControladorClase::consultarAsigIns(){
+  auto itEst = coleccionGlobalEstudiantes->find(emailUserActual);
+  return itEst->second->getAsignaturasInscripto();
 };
 set<dtClase> ControladorClase::consultarClasesDiferido(int a){
 };
 dtClase ControladorClase::AsistirClaseDiferido(int){};
-set<dtMensaje> ControladorClase::confirmarAsistencia(){};
+
+void AsistirClaseVivo(int codigoClase){
+  this ->claseAFinalizar = codigoClase;
+  dtClase* dt = new dtClase();
+  auto itEst = coleccionGlobalClases->find(codigoClase);
+      dt->setNombre(it->second->getNombre());
+      dt->setCodigo(it->second->getCodigo());
+      dt->setFechaInicio(it->second->getFechaInicio());
+      dt->setFechaFin(fechaNula);
+      dt->setTipo(it->second->getTipo());
+      dt->setUrl(it->second->getUrl());
+      dt->setCreador(this->getEmail());
+      dt->setAsig(it->second->getCodigoAsig());
+      nuevo.insert(*dt);
+
+};
+
+void confirmarAsistenciaVivo(){
+  auto itEst this->coleccionGlobalEstudiantes->find(this->emailUserActual);
+  Estudiante* est = itEst->second; // busco el estudiante
+  auto itAsig this->coleccionGlobalClase->find(this->claseAFinalizar);
+  Clase* clase = itAsig->second; //busco la clase
+
+  UsrCla* asistencia;
+
+  auto it=est->clasesParticipa.begin(); bool sigue = true; //SE BUSCA SI YA EXISTIA UN USRCLA
+  while( it!=est->clasesParticipa.end() && sigue ){
+  UsrCla *current = *it;
+  if (it->getClase()->getCodigo() ==clase->getCodigo() ) {
+    sigue = false;
+    asistencia = it; //verificar si es = it o = *it
+  }
+  else
+    ++it;
+  };
+                           //SI NO EXISTIA SE GENERA Y ASOCIA
+  if(asistencia==NULL){
+    asistencia = new UsrCla;
+    asistencia->setEstudiante(est);
+    asistencia->setClase(clase);
+    est->Asistir(asistencia);   //implementar
+    clase->nuevaVis(asistencia); //implementar
+  };
+                           // SETEO GENERAL DE LA VISUALIZACION
+  Visualizacion* vis = new Visualizacion;
+  vis->setEnVivo(true);
+  vis->setFechaInicioVis(generarFecha());
+  asistencia->setVisualizacion(vis) //ver.h y arreglar esta funcion
+
+};
+
+set<dtMensaje> ControladorClase::confirmarAsistenciaVivo(){};
 void ControladorClase::cancelarAsistencia(){};
+
 
 
 set<dtInfoClase> ControladorClase::desplegarInfoClases(string){};

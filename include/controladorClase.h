@@ -59,6 +59,7 @@ class ControladorClase{
 
 		//FINALIZAR CLASE
 		set<dtClase> consultarClasesEnVivo();
+		set<dtClase> consultarClasesEnVivoDeAsig(string codigoAsig);
 		void finalizarClase(int);
 		void confirmarFin();
 		void cancelarFin();
@@ -73,9 +74,11 @@ class ControladorClase{
 
 		//ASISTENCIA A CLASE EN VIVO
 		set<dtAsignatura> consultarAsigIns();
+		set<dtClase> AsistirClaseVivo(int);
 		set<dtClase> consultarClasesDiferido(int);
 		dtClase AsistirClaseDiferido(int);
-		set<dtMensaje> confirmarAsistencia();
+		set<dtMensaje> confirmarAsistenciaDiferido();
+		void confirmarAsistenciaVivo();
 		void cancelarAsistencia();
 
 

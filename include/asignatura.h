@@ -37,7 +37,7 @@ class Asignatura{
     bool getTeorico() const;
     bool getPractico() const;
     bool getMonitoreo() const;
-
+    set<dtClase>ClasesEnVivo();
     map<string,Estudiante*>* getInscriptos();
     map<int,Clase*>* getClases();
     map<string,Rol*>* getDocentes();

@@ -40,7 +40,24 @@ map<string,Estudiante*>* Asignatura::getInscriptos(){
 map<int,Clase*>* Asignatura::getClases(){
   return clases;
 };
-
+set<dtClase>ClasesEnVivo(){
+  set<dtClase> nuevo;
+  for(auto it = this->clases->begin(); it!=clases->end(); ++it){
+    if(it->second->getFechaFin() == fechaNula){ //definir esta constante y sobrecargar == para dtFecha
+      dtClase* dt = new dtClase();
+      dt->setNombre(it->second->getNombre());
+      dt->setCodigo(it->second->getCodigo());
+      dt->setFechaInicio(it->second->getFechaInicio());
+      dt->setFechaFin(fechaNula);
+      dt->setTipo(it->second->getTipo());
+      dt->setUrl(it->second->getUrl());
+      dt->setCreador(this->getEmail());
+      dt->setAsig(it->second->getCodigoAsig());
+      nuevo.insert(*dt);
+    }
+  }
+  return nuevo;
+};
 map<string,Rol*>* Asignatura::getDocentes(){
   return docentes;
 };

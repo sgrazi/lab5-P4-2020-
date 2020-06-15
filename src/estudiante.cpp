@@ -25,8 +25,8 @@ Estudiante::~Estudiante(){
 
 };
 
-/*set<dtAsignatura> getAsignaturasInscripto(){
-  set<dtAsignatura> nuevo;
+set<dtAsignatura*> getAsignaturasInscripto(){
+  set<dtAsignatura*> nuevo;
   for(auto itAsig = asignaturas->begin(); itAsig!=asignaturas->end();++itAsig){
     dtAsignatura *d = new dtAsignatura();
     d->setCodigo(itAsig->second->getCodigo());
@@ -34,7 +34,7 @@ Estudiante::~Estudiante(){
     d->setTeorico(itAsig->second->getTeorico());
     d->setPractico(itAsig->second->getPractico());
     d->setMonitoreo(itAsig->second->getMonitoreo());
-    nuevo.insert(*d);
+    nuevo.insert(d);
   }
   return nuevo;
-};*/
+};

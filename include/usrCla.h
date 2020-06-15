@@ -19,7 +19,7 @@ class UsrCla{
     Clase *clase;
   public:
     UsrCla();
-    //void setVisualizacion(Visualizacion*);
+    //void setVisualizacion(Visualizacion*); //hacer coleccion de visualizacion 
     void setEstudiante(Estudiante*);
     void setClase(Clase*);
     //Visualizacion* getVis();
