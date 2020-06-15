@@ -62,11 +62,23 @@ class ControladorClase{
 		void finalizarClase(int);
 		void confirmarFin();
 		void cancelarFin();
+
+		//ENVIO DE MENSAJE
+		/*set<DtClase> consultarClasesParticipando();
+		set<DtMensaje> consultarMensajes(int);
+		void enviarMensaje(string);
+		void enviarRespuesta(string,string);
+		void confirmarEnvio();
+		void cancelarEnvio();*/
+
+		//ASISTENCIA A CLASE EN VIVO
 		set<dtAsignatura> consultarAsigIns();
-		set<dtClase> consultarClasesDiferido(string);
-		dtClase AsistirClaseDiferido(string);
+		set<dtClase> consultarClasesDiferido(int);
+		dtClase AsistirClaseDiferido(int);
 		set<dtMensaje> confirmarAsistencia();
 		void cancelarAsistencia();
+
+
 		set<dtInfoClase> desplegarInfoClases(string);
 		void confirmarEnvio();
 

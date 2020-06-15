@@ -47,8 +47,8 @@ class Asignatura{
     void agregarClaseNueva(Clase*);
     //map<string,Estudiante*>* getInscriptos();
     //set<dtClase> getClases();
+    set<dtClase> getClasesDiferido();
     ~Asignatura();
-    //bool operator<(const Asignatura &right); //si colecciones se implementan con set esto es necesario
 };
 
 #endif

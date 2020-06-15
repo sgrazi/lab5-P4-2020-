@@ -173,6 +173,14 @@ int main(){
   }
 
   //Envío de mensaje
+/*
+  set<DtClase> consultarClasesParticipando();
+  set<DtMensaje> consultarMensajes(codigo:string);
+  void enviarMensaje(mensaje:string);
+  void enviarRespuesta(id:string,mensaje:string);
+  void confirmarEnvio();
+  void cancelarEnvio();
+*/
 
   //Asistencia a clase en vivo
 
@@ -185,8 +193,10 @@ int main(){
   //Eliminación de asignatura
 
   //Suscribirse a notificaciones (solo el tercer modo, respuesta a un mensaje del usuario)
-  
+
   //Consulta de notificaciones
+
+
 
   return 0;
 }

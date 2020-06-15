@@ -158,12 +158,29 @@ dtFecha ControladorClase::generarFecha(){//NO TERMINADA, HAY QUE IMPLEMENTAR EL 
   return dtFecha(1,1,1,1,1,1);
 };
 
-
-set<dtAsignatura> ControladorClase::consultarAsigIns(){};
-set<dtClase> ControladorClase::consultarClasesDiferido(string){};
-dtClase ControladorClase::AsistirClaseDiferido(string){};
+//ENVIO DE MENSAJE
+/*
+set<DtClase> ControladorClase::consultarClasesParticipando();
+set<DtMensaje> ControladorClase::consultarMensajes(codigo:int);
+void ControladorClase::enviarMensaje(mensaje:string);
+void ControladorClase::enviarRespuesta(id:string,mensaje:string);
+void ControladorClase::confirmarEnvio();
+void ControladorClase::cancelarEnvio();
+*/
+//ASITENCIA A CLASE EN VIVO
+set<dtAsignatura> ControladorClase::consultarAsigIns(){
+  auto itEst = coleccionGlobalEstudiantes->find(emailUserActual);
+  return itEst->second->getAsignaturasInscripto();
+};
+set<dtClase> ControladorClase::consultarClasesDiferido(int a){
+  auto itAsig = coleccionGlobalAsignaturas->find(a);
+  return itAsig->second->getClasesDiferido();
+};
+dtClase ControladorClase::AsistirClaseDiferido(int){};
 set<dtMensaje> ControladorClase::confirmarAsistencia(){};
 void ControladorClase::cancelarAsistencia(){};
+
+
 set<dtInfoClase> ControladorClase::desplegarInfoClases(string){};
 void ControladorClase::confirmarEnvio(){};
 

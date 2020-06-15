@@ -24,3 +24,17 @@ map<int,Asignatura*>* Estudiante::getAsignaturas(){
 Estudiante::~Estudiante(){
 
 };
+
+set<dtAsignatura> getAsignaturasInscripto(){
+  set<dtAsignatura> nuevo;
+  for(auto itAsig = asignaturas->begin(); itAsig!=asignaturas->end();++itAsig){
+    dtAsignatura *d = new dtAsignatura();
+    d->setCodigo(itAsig->second->getCodigo());
+    d->setNombre(itAsig->second->getNombre());
+    d->setTeorico(itAsig->second->getTeorico());
+    d->setPractico(itAsig->second->getPractico());
+    d->setMonitoreo(itAsig->second->getMonitoreo());
+    nuevo.insert(*d);
+  }
+  return nuevo;
+};

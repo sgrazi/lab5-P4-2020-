@@ -1,5 +1,8 @@
 #include "../include/asignatura.h"
 #include "../include/estudiante.h"
+#include "../include/dtFecha.h"
+
+const dtFecha fechaNula(0,0,0,0,0,0)
 
 Asignatura::Asignatura(){//inicializo las colecciones vacias
   map<string,Estudiante*>* a = new map<string,Estudiante*>;
@@ -50,5 +53,21 @@ void Asignatura::agregarClaseNueva(Clase* c){
   clases->insert(pair<int,Clase*> (c->getCodigo(),c));
 };
 
-/*bool operator< (const Asignatura &right) const{
-return codigo < right.codigo;*/ //si colecciones se implementan con set esto es necesario
+set<dtClase> Asignatura::getClasesDiferido(){
+  set<dtClase> nuevo;
+  for(auto itCla = clases->begin(); itCla!=clases->end();++itCla){
+    if(itCla->second->getFechaFin() != fechaNula){
+      dtClase *d = new dtClase();
+      d->setCodigo(itAsig->second->getCodigo());
+      d->setNombre(itAsig->second->getNombre());
+      d->setUrl(itAsig->second->getUrl());
+      d->setFechaInicio(itAsig->second->getFechaInicio());
+      d->setFechaFin(itAsig->second->getFechaFin());
+      //d->setCreador(itAsig->second->);
+      d->setCodigoAsig(this->getCodigo());
+      d->setTipo(itAsig->second->getTipo());
+      nuevo.insert(*d);
+    }
+  }
+  return nuevo;
+};
