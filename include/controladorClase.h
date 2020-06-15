@@ -70,6 +70,12 @@ class ControladorClase{
 		set<dtInfoClase> desplegarInfoClases(string);
 		void confirmarEnvio();
 
+		// ASISTENCIA A CLASE EN VIVO
+		dtClase AsistirClaseVivo(string);
+		void confirmarAsistenciaVivo();
+		// cancelar asistencia igual que diferido (?)
+
+
 		~ControladorClase();
 };
 #endif

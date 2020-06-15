@@ -159,7 +159,23 @@ dtFecha ControladorClase::generarFecha(){//NO TERMINADA, HAY QUE IMPLEMENTAR EL 
 };
 
 
-set<dtAsignatura> ControladorClase::consultarAsigIns(){};
+set<dtAsignatura> ControladorClase::consultarAsigIns(){
+    set<dtAsignatura> nuevo;
+    Estudiante *est = new Estudiante;
+    map<int,Asignatura*>::iterator it;
+    est = this->coleccionGlobalEstudiantes[this->emailUserActual];
+    for (it=est->asignaturas->begin(); it!=est->asignaturas->end() ;++it){
+      Asignatura* a = it->second;
+      dtAsignatura* agregar = new dtAsignatura();
+      agregar->setCodigo(a->getCodigo());
+      agregar->setNombre(a->getNombre());
+      agregar->setMonitoreo(a->getMonitoreo());
+      agregar->setPractico(a->getPractico());
+      agregar->setTeorico(a->getTeorico());
+      nuevo.insert(*agregar);
+    }
+return nuevo;
+};
 set<dtClase> ControladorClase::consultarClasesDiferido(string){};
 dtClase ControladorClase::AsistirClaseDiferido(string){};
 set<dtMensaje> ControladorClase::confirmarAsistencia(){};

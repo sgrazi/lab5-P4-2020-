@@ -80,7 +80,7 @@ class ControladorUsuario: public IControladorUsuario{
 		void cancelarCambio();
 		void confirmarCambio();
 		void desuscribirse();
-
+		
 		~ControladorUsuario();
 };
 #endif
