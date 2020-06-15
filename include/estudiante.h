@@ -5,7 +5,7 @@
 #include "usuario.h"
 //#include "asignatura.h"
 //#include"usrcla.h"
-//#include"monitoreo.h"
+#include"dtAsignatura.h"
 
 class Asignatura;
 
