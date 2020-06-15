@@ -18,7 +18,6 @@ class Estudiante : public Usuario{
   private:
     string ci;
     map<int,Asignatura*>* asignaturas;
-    list<UsrCla*> clasesParticipa;
     //map<int,Monitoreo>* monHabilitados;
   public://faltan funciones de manejo de relaciones
     Estudiante();
@@ -26,9 +25,7 @@ class Estudiante : public Usuario{
     string getCI();
     map<int,Asignatura*>* getAsignaturas();
     set<dtAsignatura> getAsignaturasInscripto();
-    void asistir(UsrCla*); //implementar
 
-    list<UsrCla*> getClasesParticipa();
     void inscribir(Asignatura*);
     void desinscribir(int);
 

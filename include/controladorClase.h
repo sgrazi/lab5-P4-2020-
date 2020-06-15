@@ -65,8 +65,8 @@ class ControladorClase{
 		void cancelarFin();
 
 		//ENVIO DE MENSAJE
-		/*set<DtClase> consultarClasesParticipando();
-		set<DtMensaje> consultarMensajes(int);
+		set<dtClase> consultarClasesParticipando();/*
+		set<dtMensaje> consultarMensajes(int);
 		void enviarMensaje(string);
 		void enviarRespuesta(string,string);
 		void confirmarEnvio();

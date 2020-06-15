@@ -3,10 +3,12 @@
 
 #include <string>
 #include <set>
+#include <list>
 #include "dtNotificacion.h"
-//#include "../estrategiaNotifs.h"
+
 using namespace std;
 
+class UsrCla;
 class EstrategiaNotifs;
 
 class Usuario{
@@ -17,6 +19,7 @@ class Usuario{
     string imagen;
     set<dtNotificacion> notificaciones;
     EstrategiaNotifs* aplica;
+    list<UsrCla*> clasesParticipa;
   public:
     Usuario();
     void setNombre(string);
@@ -31,6 +34,9 @@ class Usuario{
     string getImagen();
     set<dtNotificacion> getNotificaciones();
     EstrategiaNotifs* getAplica();
+
+    void asistir(UsrCla*);
+    list<UsrCla*> getClasesParticipa();
 
     void notificar(dtNotificacion);
 

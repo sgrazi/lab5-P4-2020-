@@ -1,8 +1,8 @@
 #include "../include/usuario.h"
 #include "../include/estrategiaNotifs.h"
 #include "../include/dtNotificacion.h"
+#include "../include/usrCla.h"
 #include <set>
-
 
 Usuario::Usuario(){
 
@@ -43,6 +43,14 @@ set<dtNotificacion> Usuario::getNotificaciones(){
 EstrategiaNotifs* Usuario::getAplica(){
   return aplica;
 };
+
+void Usuario::asistir(UsrCla* c){
+  clasesParticipa.insert(clasesParticipa.end(),c);
+};
+list<UsrCla*> Usuario::getClasesParticipa(){
+  return clasesParticipa;
+};
+
 void Usuario::notificar(dtNotificacion){
 
 };

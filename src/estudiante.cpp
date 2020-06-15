@@ -21,14 +21,6 @@ void Estudiante::desinscribir(int codigo){/*//inventado
 map<int,Asignatura*>* Estudiante::getAsignaturas(){
   return asignaturas;
 };
-
-void Estudiante::asistir(UsrCla* c){
-  clasesParticipa.insert(clasesParticipa.end(),c);
-};
-list<UsrCla*> Estudiante::getClasesParticipa(){
-  return clasesParticipa;
-};
-
 Estudiante::~Estudiante(){
 
 };

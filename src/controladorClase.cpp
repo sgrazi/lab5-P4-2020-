@@ -166,9 +166,13 @@ dtFecha ControladorClase::generarFecha(){//NO TERMINADA, HAY QUE IMPLEMENTAR EL 
 };
 
 //ENVIO DE MENSAJE
+
+set<dtClase> ControladorClase::consultarClasesParticipando(){
+  auto itUser = coleccionGlobalEstudiantes->find(emailUserActual);
+  list<UsrCla*> lista = itUser->second->getClasesParticipa();
+};
 /*
-set<DtClase> ControladorClase::consultarClasesParticipando();
-set<DtMensaje> ControladorClase::consultarMensajes(codigo:int);
+set<dtMensaje> ControladorClase::consultarMensajes(codigo:int);
 void ControladorClase::enviarMensaje(mensaje:string);
 void ControladorClase::enviarRespuesta(id:string,mensaje:string);
 void ControladorClase::confirmarEnvio();
