@@ -44,11 +44,18 @@ EstrategiaNotifs* Usuario::getAplica(){
   return aplica;
 };
 
+void Usuario::setModoSus(int a){ this->modoSus = a;};
+int Usuario::getModoSus(){ return modoSus;};
+
 void Usuario::asistir(UsrCla* c){
   clasesParticipa.insert(clasesParticipa.end(),c);
 };
 list<UsrCla*> Usuario::getClasesParticipa(){
   return clasesParticipa;
+};
+
+bool Usuario::aplicaNotificacion(dtMensaje d){
+  return (aplica->aplicaNotificacion(d));
 };
 
 void Usuario::notificar(dtNotificacion){

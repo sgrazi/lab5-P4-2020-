@@ -2,11 +2,13 @@
 #define ESTRATEGIA_MODO_SUS_3_H
 #include "estrategiaNotifs.h"
 
+class dtMensaje;
+
 class EstrategiaModoSus3 : public EstrategiaNotifs{
   public:
     EstrategiaModoSus3();
 
-    bool aplicaNotificacion();
+    bool aplicaNotificacion(dtMensaje);
 
     ~EstrategiaModoSus3();
 };

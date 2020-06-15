@@ -13,7 +13,7 @@ class Mensaje{
     string contenido;
     dtFecha fecha;
     Mensaje *enRespuestaA;
-    HandlerMensajes *handler;
+    //HandlerMensajes *handler;
     Clase *clase;
   public://faltan funciones de manejo de relaciones
     Mensaje();

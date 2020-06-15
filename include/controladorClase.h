@@ -27,6 +27,7 @@ class ControladorClase{
 		int claseAFinalizar;
 		string contenidoMensaje;
 		int idAResponder;
+		int codigoClase;
 		hendlerMensajes* handler;
 		map<int,Asignatura*>* coleccionGlobalAsignaturas;
 		map<string,Estudiante*>* coleccionGlobalEstudiantes;
@@ -47,6 +48,8 @@ class ControladorClase{
 		string getContenidoMensaje();
 		void setIdAResponder(int);
 		int getIdAResponder();
+		void setCodigoClase(int);
+		int getCodigoClase();
 		//COLECCIONES
 		void setColEst(map<string,Estudiante*>*);
 		void setColDoc(map<string,Docente*>*);

@@ -36,6 +36,9 @@ string ControladorClase::getContenidoMensaje(){ return contenidoMensaje;};
 void ControladorClase::setIdAResponder(int id){ this->idAResponder = id;};
 int ControladorClase::getIdAResponder(){ return idAResponder;};
 
+void ControladorClase::setCodigoClase(int c){ this->codigoClase = c;};
+int ControladorClase::getCodigoClase(){ return codigoClase;};
+
 //void ControladorClase::setInfoParaCreacionClase(dtInfoClase *i){ this->infoParaCreacionClase = i;};
 //dtInfoClase* ControladorClase::getInfoParaCreacionClase(){ return infoParaCreacionClase;};
 
@@ -191,6 +194,7 @@ set<dtClase> ControladorClase::consultarClasesParticipando(){
 };
 
 set<dtMensaje> ControladorClase::consultarMensajes(int codigoClase){
+  setCodigoClase(codigoClase);
   set<dtMensaje> nuevo;
   auto itCla = coleccionGlobalClases->find(codigoClase);
   set<Mensaje*> mensajes = itCla->second->getMensajes();
@@ -216,7 +220,8 @@ void ControladorClase::enviarRespuesta(int id,string contenido){
 };
 
 void ControladorClase::confirmarEnvio(){
-  this->handler->agregarMensaje(coleccionGlobalMensajes->size(), (idAResponder!=-1), idAResponder, contenidoMensaje);
+  dtFecha fecha = generarFecha();
+  this->handler->agregarMensaje(coleccionGlobalMensajes->size(), (idAResponder!=-1), idAResponder, contenidoMensaje, fecha, getCodigoClase());
 };
 
 void ControladorClase::cancelarEnvio(){
