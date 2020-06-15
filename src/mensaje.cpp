@@ -21,7 +21,7 @@ void Mensaje::setClase(Clase* c){
 Clase* Mensaje::getClase(){
   return clase;
 };
-int Mensaje::getId(){
+int Mensaje::getId() const {
   return id;
 };
 string Mensaje::getContenido(){
@@ -36,6 +36,6 @@ Mensaje* Mensaje::getEnRespuestaA(){
 Mensaje::~Mensaje(){
 
 };
-/*bool operator<(const Mensaje &right){
-  return id < right.id;
-};*/ //si colecciones se implementan con set esto es necesario
+bool Mensaje::operator<(const Mensaje &right){
+  return id < right.getId();
+}; //si colecciones se implementan con set esto es necesario

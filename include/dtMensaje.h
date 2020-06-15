@@ -12,6 +12,7 @@ class dtMensaje{
     dtFecha fecha;
     int enRespuestaA; //Mensaje original tenia un puntero a otro mensaje, aca es el identificador del otro mensaje
     int clase; //Mensaje original tenia un puntero a su clase, aca es el identificador de la clase
+    int asignatura;
   public:
     dtMensaje();
     void setId(int);
@@ -19,11 +20,13 @@ class dtMensaje{
     void setFecha(dtFecha);
     void setEnRespuestaA(int);
     void setClase(int);
+    void setAsignatura(int);
     int getId() const ;
     string getContenido() const ;
     dtFecha getFecha() const ;
     int getEnRespuestaA() const ;
     int getClase() const ;
+    int getAsignatura() const ;
 
     ~dtMensaje();
     bool operator<(const dtMensaje &right); //si colecciones se implementan con set esto es necesario

@@ -52,7 +52,7 @@ int main(){
   map<string,Docente*>* colDocentes = &coleccionGlobalDocentes;
   map<int,Asignatura*>* colAsignaturas = &coleccionGlobalAsignaturas;
   map<int,Clase*>* colClases = &coleccionGlobalClases;
-  map<int,Mensaje*>* colMensajes = &coleccionGlobalMensajes:
+  map<int,Mensaje*>* colMensajes = &coleccionGlobalMensajes;
 
   ControladorUsuario* Cu = new ControladorUsuario();
   ControladorAsignatura* Ca = new ControladorAsignatura();

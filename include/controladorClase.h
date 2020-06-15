@@ -7,6 +7,7 @@
 #include "dtEstudiante.h"
 #include "dtClase.h"
 #include "dtMensaje.h"
+#include "handlerMensajes.h"
 #include <string>
 #include <set>
 #include <map>
@@ -17,7 +18,7 @@ class Asignatura;
 class Estudiante;
 class Docente;
 class Clase;
-class handlerMensajes;
+class Mensaje;
 
 class ControladorClase{
 	private:
@@ -28,7 +29,7 @@ class ControladorClase{
 		string contenidoMensaje;
 		int idAResponder;
 		int codigoClase;
-		hendlerMensajes* handler;
+		HandlerMensajes* handler;
 		map<int,Asignatura*>* coleccionGlobalAsignaturas;
 		map<string,Estudiante*>* coleccionGlobalEstudiantes;
 		map<string,Docente*>* coleccionGlobalDocentes;
@@ -96,7 +97,6 @@ class ControladorClase{
 
 
 		set<dtInfoClase> desplegarInfoClases(string);
-		void confirmarEnvio();
 
 		~ControladorClase();
 };

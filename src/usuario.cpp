@@ -1,7 +1,10 @@
 #include "../include/usuario.h"
 #include "../include/estrategiaNotifs.h"
 #include "../include/dtNotificacion.h"
+#include "../include/dtMensaje.h"
+#include "../include/mensaje.h"
 #include "../include/usrCla.h"
+
 #include <set>
 
 Usuario::Usuario(){
@@ -19,9 +22,7 @@ void Usuario::setPassword(string pass){
 void Usuario::setImagen(string imagen){
   this->imagen = imagen;
 };
-void Usuario::setNotificaciones(){
-  //crea el conjunto de notifiaciones vacio
-};
+
 void Usuario::setAplica(EstrategiaNotifs* e){
   this->aplica = e;
 };
@@ -37,7 +38,7 @@ string Usuario::getPassword(){
 string Usuario::getImagen(){
   return imagen;
 };
-set<dtNotificacion> Usuario::getNotificaciones(){
+set<dtNotificacion*> Usuario::getNotificaciones(){
   return notificaciones;
 };
 EstrategiaNotifs* Usuario::getAplica(){
@@ -58,8 +59,17 @@ bool Usuario::aplicaNotificacion(dtMensaje d){
   return (aplica->aplicaNotificacion(d));
 };
 
-void Usuario::notificar(dtNotificacion){
+void Usuario::agregarMensaje(Mensaje* m){
+  this->mensajes.insert(m);
+};
 
+void Usuario::notificar(dtMensaje d){
+  dtNotificacion* dt = new dtNotificacion();
+  dt->setCodigoAsig(d.getAsignatura());
+  dt->setCodigoClase(d.getClase());
+  dt->setIdMensaje(d.getId());
+  dt->setContenidoMensaje(d.getContenido());
+  this->notificaciones.insert(dt);
 };
 Usuario::~Usuario(){
 

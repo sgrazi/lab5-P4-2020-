@@ -5,11 +5,19 @@
 EstrategiaModoSus1::EstrategiaModoSus1(){};
 
 bool EstrategiaModoSus1::aplicaNotificacion(dtMensaje d){
-  int codigoClase = d->getClase();
-  //ir a la clase y buscar la asignatura
-  user->getClasesParticipa()->get
+  /*int codigoAsignatura = d->getAsignatura();
   //ir al usuario y ver si esta la asignatura (si es est en inscripto, si es doc en roles)
-  return
+  bool res = false;
+
+  //si es estudiante
+  auto it = user->getAsignaturas()->begin();
+  while(it!=user->getClasesParticipa()->end() && !res){
+    if(it->second->getCodigoAsig() == codigoAsignatura)
+      res = true;
+    ++it;
+  }*/
+
+  return false;
 };
 
 EstrategiaModoSus1::~EstrategiaModoSus1(){};

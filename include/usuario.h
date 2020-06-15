@@ -9,6 +9,7 @@ using namespace std;
 
 class UsrCla;
 class EstrategiaNotifs;
+class Mensaje;
 class dtMensaje;
 class dtNotificacion;
 
@@ -18,7 +19,8 @@ class Usuario{
     string email;
     string password;
     string imagen;
-    set<dtNotificacion> notificaciones;
+    set<dtNotificacion*> notificaciones;
+    set<Mensaje*> mensajes;
     int modoSus;
     EstrategiaNotifs* aplica;
     list<UsrCla*> clasesParticipa;
@@ -28,22 +30,22 @@ class Usuario{
     void setEmail(string);
     void setPassword(string);
     void setImagen(string);
-    void setNotificaciones(); //crea el conjunto de notifiaciones vacio
     void setModoSus(int);
     void setAplica(EstrategiaNotifs*);
     string getNombre();
     string getEmail();
     string getPassword();
     string getImagen();
-    set<dtNotificacion> getNotificaciones();
     int getModoSus();
+    set<dtNotificacion*> getNotificaciones();
     EstrategiaNotifs* getAplica();
 
+    void agregarMensaje(Mensaje*);
     void asistir(UsrCla*);
     list<UsrCla*> getClasesParticipa();
 
     bool aplicaNotificacion(dtMensaje);
-    void notificar(dtNotificacion);
+    void notificar(dtMensaje);
 
     ~Usuario();
 };

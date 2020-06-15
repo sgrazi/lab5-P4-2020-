@@ -5,6 +5,11 @@
 #include <string>
 #include <map>
 
+class Mensaje;
+class Clase;
+class Usuario;
+class dtFecha;
+
 using namespace std;
 
 class HandlerMensajes{
@@ -18,7 +23,7 @@ class HandlerMensajes{
     void setColMens(map<int,Mensaje*>*);
     void setColCla(map<int,Clase*>*);
 
-    void agregarMensaje(int , bool , int , string, dtFecha, int); //cual es el tipo de retorno? en el dcd no estaba, puse void
+    Mensaje* agregarMensaje(int , bool , int , string, dtFecha, int);
     void agregarObs(Usuario*);
     void eliminarObs(Usuario*);
 

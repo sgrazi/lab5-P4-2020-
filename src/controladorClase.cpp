@@ -13,6 +13,7 @@
 #include "../include/dtClase.h"
 #include "../include/dtMensaje.h"
 #include "../include/visualizacion.h"
+#include "../include/handlerMensajes.h"
 #include <string>
 #include <set>
 #include <map>
@@ -205,6 +206,7 @@ set<dtMensaje> ControladorClase::consultarMensajes(int codigoClase){
     dt->setFecha((*itMens)->getFecha());
     dt->setEnRespuestaA((*itMens)->getEnRespuestaA()->getId());
     dt->setClase((*itMens)->getClase()->getCodigo());
+    dt->setAsignatura((*itMens)->getClase()->getCodigoAsig());
   }
   return nuevo;
 };
@@ -221,14 +223,14 @@ void ControladorClase::enviarRespuesta(int id,string contenido){
 
 void ControladorClase::confirmarEnvio(){
   dtFecha fecha = generarFecha();
-  this->handler->agregarMensaje(coleccionGlobalMensajes->size(), (idAResponder!=-1), idAResponder, contenidoMensaje, fecha, getCodigoClase());
+  Mensaje* m = this->handler->agregarMensaje(coleccionGlobalMensajes->size(), (idAResponder!=-1), idAResponder, contenidoMensaje, fecha, getCodigoClase());
+  auto itUser = coleccionGlobalEstudiantes->find(emailUserActual);
+  itUser->second->agregarMensaje(m);
 };
 
 void ControladorClase::cancelarEnvio(){
 
 };
-
-
 
 //ASITENCIA A CLASE EN VIVO
 set<dtAsignatura> ControladorClase::consultarAsigIns(){
@@ -299,6 +301,5 @@ void ControladorClase::cancelarAsistencia(){
 
 
 set<dtInfoClase> ControladorClase::desplegarInfoClases(string){};
-void ControladorClase::confirmarEnvio(){};
 
 ControladorClase::~ControladorClase(){};

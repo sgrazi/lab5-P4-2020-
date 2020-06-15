@@ -6,14 +6,22 @@ using namespace std;
 
 class dtNotificacion {
 private:
-  string IdMensaje;
-  string NombreClase;
-  bool EsRespuesta;
-  string IdRespondido;
-
+  int codigoAsig;
+  int codigoClase;
+  int idMensaje;
+  string contenidoMensaje;
 public:
+  dtNotificacion();
 
+  void setCodigoAsig(int);
+  void setCodigoClase(int);
+  void setIdMensaje(int);
+  void setContenidoMensaje(string);
+  int getCodigoAsig();
+  int getCodigoClase();
+  int getIdMensaje();
+  string getContenidoMensaje();
 
-
+  ~dtNotificacion();
 };
 #endif
