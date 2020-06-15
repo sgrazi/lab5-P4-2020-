@@ -15,6 +15,12 @@ void Mensaje::setFecha(dtFecha fecha){
 void Mensaje::setEnRespuestaA(Mensaje *ms){
   this->enRespuestaA = ms;
 };
+void Mensaje::setClase(Clase* c){
+  this->clase = c;
+};
+Clase* Mensaje::getClase(){
+  return clase;
+};
 int Mensaje::getId(){
   return id;
 };

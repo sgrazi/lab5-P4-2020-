@@ -45,13 +45,14 @@ map<string,Estudiante*> coleccionGlobalEstudiantes;
 map<string,Docente*> coleccionGlobalDocentes;
 map<int,Asignatura*> coleccionGlobalAsignaturas;
 map<int,Clase*> coleccionGlobalClases;
-
+map<int,Mensaje*> coleccionGlobalMensajes;
 int main(){
 
   map<string,Estudiante*>* colEstudiantes = &coleccionGlobalEstudiantes;
   map<string,Docente*>* colDocentes = &coleccionGlobalDocentes;
   map<int,Asignatura*>* colAsignaturas = &coleccionGlobalAsignaturas;
   map<int,Clase*>* colClases = &coleccionGlobalClases;
+  map<int,Mensaje*>* colMensajes = &coleccionGlobalMensajes:
 
   ControladorUsuario* Cu = new ControladorUsuario();
   ControladorAsignatura* Ca = new ControladorAsignatura();
@@ -68,6 +69,7 @@ int main(){
   Cc->setColDoc(colDocentes);
   Cc->setColAsig(colAsignaturas);
   Cc->setColCla(colClases);
+  Cc->setColMens(colMensajes);
 
   //ALTA DE USUARIO
   Cu->agregarEstudiante("nombre","pass","email","url","1.234.567-8");

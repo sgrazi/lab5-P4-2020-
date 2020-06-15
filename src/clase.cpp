@@ -45,7 +45,9 @@ dtFecha Clase::getFechaInicio(){
 dtFecha Clase::getFechaFin(){
   return fechaFin;
 };
-
+set<Mensaje*> Clase::getMensajes(){
+  return mensajes;
+};
 list<UsrCla*> Clase::getParticipantes(){
   return participantes;
 };

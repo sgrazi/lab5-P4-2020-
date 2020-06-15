@@ -21,10 +21,12 @@ class Mensaje{
     void setContenido(string);
     void setFecha(dtFecha);
     void setEnRespuestaA(Mensaje*);
+    void setClase(Clase*);
     int getId();
     string getContenido();
     dtFecha getFecha();
     Mensaje* getEnRespuestaA();
+    Clase* getClase();
 
     ~Mensaje();
     //bool operator<(const Mensaje &right); //si colecciones se implementan con set esto es necesario

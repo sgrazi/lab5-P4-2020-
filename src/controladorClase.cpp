@@ -30,6 +30,12 @@ string ControladorClase::getPasswordUserActual(){ return passwordUserActual;};
 void ControladorClase::setEmailUserActual(string e){  this->emailUserActual = e;};
 string ControladorClase::getEmailUserActual(){  return emailUserActual;};
 
+void ControladorClase::setContenidoMensaje(string c){ this->contenidoMensaje = c;};
+string ControladorClase::getContenidoMensaje(){ return contenidoMensaje;};
+
+void ControladorClase::setIdAResponder(int id){ this->idAResponder = id;};
+int ControladorClase::getIdAResponder(){ return idAResponder;};
+
 //void ControladorClase::setInfoParaCreacionClase(dtInfoClase *i){ this->infoParaCreacionClase = i;};
 //dtInfoClase* ControladorClase::getInfoParaCreacionClase(){ return infoParaCreacionClase;};
 
@@ -40,6 +46,7 @@ void ControladorClase::setColEst(map<string,Estudiante*>* c){this->coleccionGlob
 void ControladorClase::setColDoc(map<string,Docente*>* c){this->coleccionGlobalDocentes=c;};
 void ControladorClase::setColAsig(map<int,Asignatura*>* c){this->coleccionGlobalAsignaturas=c;};
 void ControladorClase::setColCla(map<int,Clase*>* c){this->coleccionGlobalClases=c;};
+void ControladorClase::setColMens(map<int,Mensaje*>* c){this->coleccionGlobalMensajes=c;};
 
 //INICIO DE CLASE
 void ControladorClase::iniciarSesion(string e, string p){
@@ -128,9 +135,6 @@ void ControladorClase::cancelarInicio(){
 
 };
 
-
-
-
 //FINALIZACION DE CLASE
 
 set<dtClase> ControladorClase::consultarClasesEnVivo(){
@@ -168,16 +172,57 @@ dtFecha ControladorClase::generarFecha(){//NO TERMINADA, HAY QUE IMPLEMENTAR EL 
 //ENVIO DE MENSAJE
 
 set<dtClase> ControladorClase::consultarClasesParticipando(){
+  set<dtClase> nuevo;
   auto itUser = coleccionGlobalEstudiantes->find(emailUserActual);
   list<UsrCla*> lista = itUser->second->getClasesParticipa();
+  for(auto itLista = lista.begin(); itLista!=lista.end(); itLista++){
+    dtClase *dt = new dtClase();
+    dt->setNombre((*itLista)->getClase()->getNombre());
+    dt->setCodigo((*itLista)->getClase()->getCodigo());
+    dt->setFechaInicio((*itLista)->getClase()->getFechaInicio());
+    dt->setFechaFin((*itLista)->getClase()->getFechaFin());
+    dt->setTipo((*itLista)->getClase()->getTipo());
+    dt->setUrl((*itLista)->getClase()->getUrl());
+    dt->setCreador((*itLista)->getClase()->getEmailCreador());
+    dt->setAsig((*itLista)->getClase()->getCodigoAsig());
+    nuevo.insert(*dt);
+  }
+  return nuevo;
 };
-/*
-set<dtMensaje> ControladorClase::consultarMensajes(codigo:int);
-void ControladorClase::enviarMensaje(mensaje:string);
-void ControladorClase::enviarRespuesta(id:string,mensaje:string);
-void ControladorClase::confirmarEnvio();
-void ControladorClase::cancelarEnvio();
-*/
+
+set<dtMensaje> ControladorClase::consultarMensajes(int codigoClase){
+  set<dtMensaje> nuevo;
+  auto itCla = coleccionGlobalClases->find(codigoClase);
+  set<Mensaje*> mensajes = itCla->second->getMensajes();
+  for(auto itMens = mensajes.begin(); itMens!=mensajes.end(); itMens++){
+    dtMensaje *dt = new dtMensaje();
+    dt->setId((*itMens)->getId());
+    dt->setContenido((*itMens)->getContenido());
+    dt->setFecha((*itMens)->getFecha());
+    dt->setEnRespuestaA((*itMens)->getEnRespuestaA()->getId());
+    dt->setClase((*itMens)->getClase()->getCodigo());
+  }
+  return nuevo;
+};
+
+void ControladorClase::enviarMensaje(string contenido){
+  this->setContenidoMensaje(contenido);
+  this->setIdAResponder(-1);//si no es respuesta a nada lo dejo constante -1
+};
+
+void ControladorClase::enviarRespuesta(int id,string contenido){
+  this->setContenidoMensaje(contenido);
+  this->setIdAResponder(id);
+};
+
+void ControladorClase::confirmarEnvio(){
+  this->handler->agregarMensaje(coleccionGlobalMensajes->size(), (idAResponder!=-1), idAResponder, contenidoMensaje);
+};
+
+void ControladorClase::cancelarEnvio(){
+
+};
+
 
 
 //ASITENCIA A CLASE EN VIVO

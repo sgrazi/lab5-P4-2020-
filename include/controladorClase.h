@@ -17,6 +17,7 @@ class Asignatura;
 class Estudiante;
 class Docente;
 class Clase;
+class handlerMensajes;
 
 class ControladorClase{
 	private:
@@ -24,10 +25,14 @@ class ControladorClase{
 		string emailUserActual;
 		dtInfoClase* infoParaCreacionClase;
 		int claseAFinalizar;
+		string contenidoMensaje;
+		int idAResponder;
+		hendlerMensajes* handler;
 		map<int,Asignatura*>* coleccionGlobalAsignaturas;
 		map<string,Estudiante*>* coleccionGlobalEstudiantes;
 		map<string,Docente*>* coleccionGlobalDocentes;
 		map<int,Clase*>* coleccionGlobalClases;
+		map<int,Mensaje*>* coleccionGlobalMensajes;
 	public:
 		ControladorClase();
 		void setPasswordUserActual(string);
@@ -38,11 +43,16 @@ class ControladorClase{
 		string getEmailUserActual();
 		//dtInfoClase* getInfoParaCreacionClase();
 		int getClaseAFinalizar();
+		void setContenidoMensaje(string);
+		string getContenidoMensaje();
+		void setIdAResponder(int);
+		int getIdAResponder();
 		//COLECCIONES
 		void setColEst(map<string,Estudiante*>*);
 		void setColDoc(map<string,Docente*>*);
 		void setColAsig(map<int,Asignatura*>*);
 		void setColCla(map<int,Clase*>*);
+		void setColMens(map<int,Mensaje*>*);
 
 		//INICIO DE CLASE
 		void iniciarSesion(string,string);
@@ -65,12 +75,12 @@ class ControladorClase{
 		void cancelarFin();
 
 		//ENVIO DE MENSAJE
-		set<dtClase> consultarClasesParticipando();/*
+		set<dtClase> consultarClasesParticipando();
 		set<dtMensaje> consultarMensajes(int);
 		void enviarMensaje(string);
-		void enviarRespuesta(string,string);
+		void enviarRespuesta(int,string);
 		void confirmarEnvio();
-		void cancelarEnvio();*/
+		void cancelarEnvio();
 
 		//ASISTENCIA A CLASE EN VIVO
 		set<dtAsignatura> consultarAsigIns();

@@ -48,7 +48,7 @@ class Clase{
     dtFecha getFechaInicio();
     dtFecha getFechaFin();
     list<UsrCla*> getParticipantes();
-
+    set<Mensaje*> getMensajes();
     string getEmailCreador();
     int getCodigoAsig();
 

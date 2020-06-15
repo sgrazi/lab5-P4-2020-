@@ -13,7 +13,7 @@ class HandlerMensajes{
   public:
     HandlerMensajes();
 
-    void agregarMensaje(); //cual es el tipo de retorno? en el dcd no estaba, puse void
+    void agregarMensaje(int , bool , int , string ); //cual es el tipo de retorno? en el dcd no estaba, puse void
     void agregarObs(Usuario);
     void eliminarObs(Usuario);
 

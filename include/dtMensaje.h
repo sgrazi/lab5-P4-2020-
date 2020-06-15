@@ -19,13 +19,13 @@ class dtMensaje{
     void setFecha(dtFecha);
     void setEnRespuestaA(int);
     void setClase(int);
-    int getId();
-    string getContenido();
-    dtFecha getFecha();
-    int getEnRespuestaA();
-    int getClase();
+    int getId() const ;
+    string getContenido() const ;
+    dtFecha getFecha() const ;
+    int getEnRespuestaA() const ;
+    int getClase() const ;
 
     ~dtMensaje();
-    //bool operator<(const Mensaje &right); //si colecciones se implementan con set esto es necesario
+    bool operator<(const dtMensaje &right); //si colecciones se implementan con set esto es necesario
 };
 #endif
