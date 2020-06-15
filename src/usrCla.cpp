@@ -13,16 +13,19 @@ Estudiante* UsrCla::getEst(){ return est;};
 void UsrCla::setClase(Clase* c){ this->clase = c;};
 Clase* UsrCla::getClase(){ return clase;};
 
-//void setVisualizacion(Visualizacion*);
+void UsrCla::setVisualizacion(Visualizacion* v){
+  vis.insert(vis.end(),v);
+};
+
 //Visualizacion* UsrCla::getVis();
 
 //int UsrCla::getCodigoClase(){};
 //string UsrCla::getEmailUser(){};
 
-void UsrCla::marcarFin(dtFecha fecha){
-  if(vis->getFechaFinVis() == fechaNula)
-    vis->setFechaFinVis(fecha);
-  vis->setEnVivo(true);
+void UsrCla::marcarFin(dtFecha fecha){//como es clase en vivo solo hay una visualizacion, solo marco el principio de la lista
+  if((*vis.begin())->getFechaFinVis() == fechaNula)
+    (*vis.begin())->setFechaFinVis(fecha);
+  (*vis.begin())->setEnVivo(true);
 };
 //void UsrCla::iniciarVis(){};
 //UsrCla::~UsrCla(){};

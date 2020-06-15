@@ -50,8 +50,15 @@ list<UsrCla*> Clase::getParticipantes(){
   return participantes;
 };
 
+string Clase::getEmailCreador(){
+  return creador->getEmail();
+};
+
 int Clase::getCodigoAsig(){
   return asig->getCodigo();
+};
+void Clase::nuevaVis(UsrCla* c){//inserta el usrcla al final
+  participantes.insert(participantes.end(),c);
 };
 
 void Clase::visualizar(Estudiante* e){/*

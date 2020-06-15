@@ -2,7 +2,7 @@
 #include "../include/estudiante.h"
 #include "../include/dtFecha.h"
 
-const dtFecha fechaNula(0,0,0,0,0,0)
+const dtFecha fechaNula(0,0,0,0,0,0);
 
 Asignatura::Asignatura(){//inicializo las colecciones vacias
   map<string,Estudiante*>* a = new map<string,Estudiante*>;
@@ -40,10 +40,11 @@ map<string,Estudiante*>* Asignatura::getInscriptos(){
 map<int,Clase*>* Asignatura::getClases(){
   return clases;
 };
-set<dtClase>ClasesEnVivo(){
+
+set<dtClase> Asignatura::clasesEnVivo(){
   set<dtClase> nuevo;
   for(auto it = this->clases->begin(); it!=clases->end(); ++it){
-    if(it->second->getFechaFin() == fechaNula){ //definir esta constante y sobrecargar == para dtFecha
+    if(it->second->getFechaFin() == fechaNula){
       dtClase* dt = new dtClase();
       dt->setNombre(it->second->getNombre());
       dt->setCodigo(it->second->getCodigo());
@@ -51,7 +52,7 @@ set<dtClase>ClasesEnVivo(){
       dt->setFechaFin(fechaNula);
       dt->setTipo(it->second->getTipo());
       dt->setUrl(it->second->getUrl());
-      dt->setCreador(this->getEmail());
+      dt->setCreador(it->second->getEmailCreador());
       dt->setAsig(it->second->getCodigoAsig());
       nuevo.insert(*dt);
     }

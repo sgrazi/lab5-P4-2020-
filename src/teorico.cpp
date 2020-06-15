@@ -12,7 +12,7 @@ int Teorico::getAsistentes(){
 int Teorico::calcularAsistentes(){
   int i = 0;
   for(auto it = getParticipantes().begin(); it!=getParticipantes().end(); ++it){
-    (*it)->marcarFin(this->getFechaFin());
+    (*it)->marcarFin(this->getFechaFin());//como es clase en vivo solo hay una visualizacion
     i++;
   }
   this->setAsistentes(i);

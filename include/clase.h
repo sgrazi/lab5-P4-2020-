@@ -25,7 +25,7 @@ class Clase{
     dtFecha fechaInicio;
     dtFecha fechaFin;
     Docente* creador;
-    set<UsrCla*> participantes; //list porque usrcla no tiene identificador
+    list<UsrCla*> participantes; //list porque usrcla no tiene identificador y no se puede hacer un set
     set<Mensaje*> mensajes;
     Asignatura *asig;
     tipoClase tipo;
@@ -47,9 +47,12 @@ class Clase{
     string getUrl();
     dtFecha getFechaInicio();
     dtFecha getFechaFin();
-    void nuevaVis(UsrCla*); //implementar
     list<UsrCla*> getParticipantes();
+
+    string getEmailCreador();
     int getCodigoAsig();
+
+    void nuevaVis(UsrCla*);
 
     void visualizar(Estudiante*);
 
