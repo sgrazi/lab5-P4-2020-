@@ -3,13 +3,15 @@
 #include "../include/mensaje.h"
 #include "../include/clase.h"
 #include "../include/dtMensaje.h"
+#include <iostream>
 
 HandlerMensajes::HandlerMensajes(){
-
+  map<string,Usuario*>* a = new map<string,Usuario*>;
+  this->observers = a;
 };
 
-void setColMens(map<int,Mensaje*>*);
-void setColCla(map<int,Clase*>*);
+void HandlerMensajes::setColMens(map<int,Mensaje*>* c){ this->coleccionGlobalMensajes = c;};
+void HandlerMensajes::setColCla(map<int,Clase*>* c){ this->coleccionGlobalClases = c;};
 
 Mensaje* HandlerMensajes::agregarMensaje(int codigo, bool esRespuesta, int idRes, string contenidoMensaje, dtFecha fecha, int codigoClase){ //cual es el tipo de retorno? en el dcd no estaba, puse void
 
@@ -22,7 +24,7 @@ Mensaje* HandlerMensajes::agregarMensaje(int codigo, bool esRespuesta, int idRes
   dt->setContenido(contenidoMensaje);
   dt->setFecha(fecha);
   dt->setClase(codigoClase);
-  dt->setAsignatura(coleccionGlobalClases->find(codigoClase)->second->getCodigoAsig());
+  dt->setAsignatura(this->coleccionGlobalClases->find(codigoClase)->second->getCodigoAsig());
 
   Mensaje* nuevo = new Mensaje();//creo el mensaje nuevo
   nuevo->setId(codigo);
@@ -34,7 +36,7 @@ Mensaje* HandlerMensajes::agregarMensaje(int codigo, bool esRespuesta, int idRes
     nuevo->setEnRespuestaA(NULL);
   nuevo->setClase(coleccionGlobalClases->find(codigoClase)->second);
 
-  coleccionGlobalMensajes->insert(pair<int,Mensaje*>(codigo,nuevo));//agrego el mensaje a la coleccion
+  coleccionGlobalMensajes->insert(pair<int,Mensaje*>(codigo,nuevo));//agrego el mensaje a la coleccion global
 
   for(auto itObs = observers->begin(); itObs!=observers->end(); ++itObs){//notifico a los observers
     bool aplica = itObs->second->aplicaNotificacion(*dt);

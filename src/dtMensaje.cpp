@@ -22,6 +22,6 @@ int dtMensaje::getAsignatura() const {  return asignatura;};
 
 dtMensaje::~dtMensaje(){};
 
-bool dtMensaje::operator<(const dtMensaje &right){
+bool dtMensaje::operator<(const dtMensaje &right) const {
   return (this->id < right.getId());
 };

@@ -53,6 +53,7 @@ class Clase{
     int getCodigoAsig();
 
     void nuevaVis(UsrCla*);
+    void agregarMensaje(Mensaje*);
 
     void visualizar(Estudiante*);
 

@@ -52,6 +52,8 @@ void ControladorClase::setColAsig(map<int,Asignatura*>* c){this->coleccionGlobal
 void ControladorClase::setColCla(map<int,Clase*>* c){this->coleccionGlobalClases=c;};
 void ControladorClase::setColMens(map<int,Mensaje*>* c){this->coleccionGlobalMensajes=c;};
 
+void ControladorClase::setHandler(HandlerMensajes* c){this->handler = c;};
+
 //INICIO DE CLASE
 void ControladorClase::iniciarSesion(string e, string p){
   this->setPasswordUserActual(p);
@@ -204,9 +206,13 @@ set<dtMensaje> ControladorClase::consultarMensajes(int codigoClase){
     dt->setId((*itMens)->getId());
     dt->setContenido((*itMens)->getContenido());
     dt->setFecha((*itMens)->getFecha());
-    dt->setEnRespuestaA((*itMens)->getEnRespuestaA()->getId());
+    if((*itMens)->getEnRespuestaA()==NULL)
+      dt->setEnRespuestaA(-1);
+    else
+      dt->setEnRespuestaA((*itMens)->getEnRespuestaA()->getId());
     dt->setClase((*itMens)->getClase()->getCodigo());
     dt->setAsignatura((*itMens)->getClase()->getCodigoAsig());
+    nuevo.insert(*dt);
   }
   return nuevo;
 };
@@ -226,6 +232,8 @@ void ControladorClase::confirmarEnvio(){
   Mensaje* m = this->handler->agregarMensaje(coleccionGlobalMensajes->size(), (idAResponder!=-1), idAResponder, contenidoMensaje, fecha, getCodigoClase());
   auto itUser = coleccionGlobalEstudiantes->find(emailUserActual);
   itUser->second->agregarMensaje(m);
+  auto itClase = coleccionGlobalClases->find(getCodigoClase());
+  itClase->second->agregarMensaje(m);
 };
 
 void ControladorClase::cancelarEnvio(){

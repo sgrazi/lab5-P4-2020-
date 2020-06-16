@@ -58,6 +58,8 @@ class ControladorClase{
 		void setColCla(map<int,Clase*>*);
 		void setColMens(map<int,Mensaje*>*);
 
+		void setHandler(HandlerMensajes*);
+
 		//INICIO DE CLASE
 		void iniciarSesion(string,string);
 		set<dtAsignatura> consultarAsignaturasDocente();

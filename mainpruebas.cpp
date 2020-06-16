@@ -54,6 +54,8 @@ int main(){
   map<int,Clase*>* colClases = &coleccionGlobalClases;
   map<int,Mensaje*>* colMensajes = &coleccionGlobalMensajes;
 
+  HandlerMensajes* h = new HandlerMensajes();
+
   ControladorUsuario* Cu = new ControladorUsuario();
   ControladorAsignatura* Ca = new ControladorAsignatura();
   ControladorClase* Cc = new ControladorClase();
@@ -70,6 +72,9 @@ int main(){
   Cc->setColAsig(colAsignaturas);
   Cc->setColCla(colClases);
   Cc->setColMens(colMensajes);
+  Cc->setHandler(h);
+  h->setColMens(colMensajes);
+  h->setColCla(colClases);
 
   //ALTA DE USUARIO
   Cu->agregarEstudiante("nombre","pass","email","url","1.234.567-8");
@@ -130,14 +135,14 @@ int main(){
   Cc->iniciarSesion("email2","123");
 
   set<dtAsignatura> setA = Cc->consultarAsignaturasDocente();
-  for(auto it = setA.begin(); it!=setA.end(); it++){
+  /*for(auto it = setA.begin(); it!=setA.end(); it++){
     cout << "Asignatura es " << it->getNombre() << "\n";
-  }
+  }*/
 
   tipoClase t = Cc->rolDocente(1);
-  if(t==teorico)
+  /*if(t==teorico)
     cout << "Rol es teorico\n";
-
+  */
   dtFecha* fecha = new dtFecha();
   fecha->setAnio(2020);
   fecha->setMes(6);
@@ -174,17 +179,7 @@ int main(){
     cout << "No quedan clases sin terminar\n";
   }
 */
-  //ENVIO DE MENSAJE
-
-  //set<DtClase> clasesP = Cc->consultarClasesParticipando();
-/*  set<DtMensaje> consultarMensajes(codigo:string);
-  void enviarMensaje(mensaje:string);
-  void enviarRespuesta(id:string,mensaje:string);
-  void confirmarEnvio();
-  void cancelarEnvio();
-*/
-
-  //ASISTENCIA A CLASE EN VIVO
+    //ASISTENCIA A CLASE EN VIVO
 
   Cc->iniciarSesion("email","pass");
 
@@ -194,21 +189,40 @@ int main(){
   }*/
 
   set<dtClase> clasesA = Cc->consultarClasesVivo(1);
-  for(auto it = clasesA.begin(); it!=clasesA.end(); ++it){
+  /*for(auto it = clasesA.begin(); it!=clasesA.end(); ++it){
     cout << it->getNombre() << "  "<< it->getCodigo() <<"\n";
-  }
+  }*/
 
   dtClase clase1 = Cc->asistirClaseVivo(0);
 
   Cc->confirmarAsistenciaVivo();
 
-  Estudiante* est = coleccionGlobalEstudiantes.find("email")->second;
+  /*Estudiante* est = coleccionGlobalEstudiantes.find("email")->second;
   set<UsrCla*> lista = est->getClasesParticipa();
   for(auto it = lista.begin(); it!=lista.end(); ++it){
     cout << (*it)->getClase()->getNombre() <<"\n";
-  }
+  }*/
 
   void cancelarAsistencia();
+
+  //ENVIO DE MENSAJE
+
+  set<dtClase> clasesP = Cc->consultarClasesParticipando();
+  /*for(auto it = clasesP.begin(); it!=clasesP.end(); ++it){
+    cout << "nombre: "<<it->getNombre() << "  codigo: "<< it->getCodigo() <<"\n";
+  }*/
+  set<dtMensaje> mens = Cc->consultarMensajes(0);
+  cout << "antes: "<< mens.size() <<"\n";
+
+  Cc->enviarMensaje(" este es un mensaje ");
+  //void enviarRespuesta(int,string);
+  Cc->confirmarEnvio();
+
+  mens = Cc->consultarMensajes(0);
+  cout << "despues:" <<mens.size() <<"\n";
+
+  //Cc->cancelarEnvio();
+
 
   //Finalización de asistencia a clase en vivo
 

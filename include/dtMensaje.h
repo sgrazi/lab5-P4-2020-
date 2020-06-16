@@ -29,6 +29,6 @@ class dtMensaje{
     int getAsignatura() const ;
 
     ~dtMensaje();
-    bool operator<(const dtMensaje &right); //si colecciones se implementan con set esto es necesario
+    bool operator<(const dtMensaje &right) const ; //si colecciones se implementan con set esto es necesario
 };
 #endif
