@@ -114,14 +114,14 @@ int main(){
   };
 
   //INSCRIPCION A ASIGNATURA
-  /*
+
   Cu->iniciarSesion("email","pass");
-  set<dtAsignatura> set = Cu->consultarAsigNoIns();
+  /*set<dtAsignatura> set = Cu->consultarAsigNoIns();
   for(auto it = set.begin(); it!=set.end(); it++)
     cout << it->getNombre();
-  cout << "\n";
+  cout << "\n";*/
   Cu->inscribir(1);
-  Cu->confirmarInscripcion();
+  Cu->confirmarInscripcion();/*
   set = Cu->consultarAsigNoIns();
   for(auto it = set.begin(); it!=set.end(); it++)
     cout << it->getNombre();*/
@@ -157,7 +157,7 @@ int main(){
   cout << "clase en docente: " <<clasesd->begin()->second->getNombre() << "\n";*/
 
   //FINALIZACION DE CLASE
-
+/*
   set<dtClase> sinFin = Cc->consultarClasesEnVivo();
 
   for(auto iterador = sinFin.begin(); iterador!=sinFin.end(); iterador++){
@@ -173,18 +173,42 @@ int main(){
   if(sinFin.begin()==sinFin.end()){
     cout << "No quedan clases sin terminar\n";
   }
+*/
+  //ENVIO DE MENSAJE
 
-  //Envío de mensaje
-/*
-  set<DtClase> consultarClasesParticipando();
-  set<DtMensaje> consultarMensajes(codigo:string);
+  //set<DtClase> clasesP = Cc->consultarClasesParticipando();
+/*  set<DtMensaje> consultarMensajes(codigo:string);
   void enviarMensaje(mensaje:string);
   void enviarRespuesta(id:string,mensaje:string);
   void confirmarEnvio();
   void cancelarEnvio();
 */
 
-  //Asistencia a clase en vivo
+  //ASISTENCIA A CLASE EN VIVO
+
+  Cc->iniciarSesion("email","pass");
+
+  set<dtAsignatura> asigIns = Cc->consultarAsigIns();
+  /*for(auto it = asigIns.begin(); it!=asigIns.end(); ++it){
+    cout << it->getCodigo() <<"\n";
+  }*/
+
+  set<dtClase> clasesA = Cc->consultarClasesVivo(1);
+  for(auto it = clasesA.begin(); it!=clasesA.end(); ++it){
+    cout << it->getNombre() << "  "<< it->getCodigo() <<"\n";
+  }
+
+  dtClase clase1 = Cc->asistirClaseVivo(0);
+
+  Cc->confirmarAsistenciaVivo();
+
+  Estudiante* est = coleccionGlobalEstudiantes.find("email")->second;
+  set<UsrCla*> lista = est->getClasesParticipa();
+  for(auto it = lista.begin(); it!=lista.end(); ++it){
+    cout << (*it)->getClase()->getNombre() <<"\n";
+  }
+
+  void cancelarAsistencia();
 
   //Finalización de asistencia a clase en vivo
 

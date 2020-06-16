@@ -32,6 +32,7 @@ class UsrCla{
     void marcarFin(dtFecha);
     //void iniciarVis();
     ~UsrCla();
+    bool operator<(const UsrCla &right){return true;}; //si colecciones se implementan con set esto es necesario
 
 };
 

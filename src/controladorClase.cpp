@@ -13,7 +13,7 @@
 #include "../include/dtClase.h"
 #include "../include/dtMensaje.h"
 #include "../include/visualizacion.h"
-#include "../include/handlerMensajes.h"
+#include <iostream>
 #include <string>
 #include <set>
 #include <map>
@@ -178,7 +178,7 @@ dtFecha ControladorClase::generarFecha(){//NO TERMINADA, HAY QUE IMPLEMENTAR EL 
 set<dtClase> ControladorClase::consultarClasesParticipando(){
   set<dtClase> nuevo;
   auto itUser = coleccionGlobalEstudiantes->find(emailUserActual);
-  list<UsrCla*> lista = itUser->second->getClasesParticipa();
+  set<UsrCla*> lista = itUser->second->getClasesParticipa();
   for(auto itLista = lista.begin(); itLista!=lista.end(); itLista++){
     dtClase *dt = new dtClase();
     dt->setNombre((*itLista)->getClase()->getNombre());
@@ -243,8 +243,27 @@ set<dtClase> ControladorClase::consultarClasesDiferido(int a){
 };
 dtClase ControladorClase::AsistirClaseDiferido(int){};*/
 
+set<dtClase> ControladorClase::consultarClasesVivo(int a){
+  set<dtClase> nuevo;
+  for(auto itCla=coleccionGlobalAsignaturas->find(a)->second->getClases()->begin(); itCla!=coleccionGlobalAsignaturas->find(a)->second->getClases()->end(); ++itCla){
+    if(itCla->second->getFechaFin()==fechaNula){
+      dtClase *dt = new dtClase();
+      dt->setNombre(itCla->second->getNombre());
+      dt->setCodigo(itCla->second->getCodigo());
+      dt->setFechaInicio(itCla->second->getFechaInicio());
+      dt->setFechaFin(itCla->second->getFechaFin());
+      dt->setTipo(itCla->second->getTipo());
+      dt->setUrl(itCla->second->getUrl());
+      dt->setCreador(itCla->second->getEmailCreador());
+      dt->setAsig(itCla->second->getCodigoAsig());
+      nuevo.insert(*dt);
+    }
+  }
+  return nuevo;
+};
+
 dtClase ControladorClase::asistirClaseVivo(int codigoClase){
-  this->claseAFinalizar = codigoClase;
+  this->claseAFinalizar = codigoClase; //usa claseAFinalizar porque es la variable mas parecida?
   dtClase* dt = new dtClase();
   auto it = coleccionGlobalClases->find(codigoClase);
 
@@ -261,16 +280,13 @@ dtClase ControladorClase::asistirClaseVivo(int codigoClase){
 };
 
 void ControladorClase::confirmarAsistenciaVivo(){
-  auto itEst = this->coleccionGlobalEstudiantes->find(this->emailUserActual);
-  Estudiante* est = itEst->second; // busco el estudiante
-  auto itAsig = this->coleccionGlobalClases->find(this->claseAFinalizar);
-  Clase* clase = itAsig->second; //busco la clase
+  Estudiante* est = this->coleccionGlobalEstudiantes->find(this->emailUserActual)->second; // busco el estudiante
+  Clase* clase = this->coleccionGlobalClases->find(this->claseAFinalizar)->second; //busco la clase
 
   UsrCla* asistencia = NULL;
-
   auto it = est->getClasesParticipa().begin();
   bool sigue = true; //SE BUSCA SI YA EXISTIA UN USRCLA
-  while( it!=est->getClasesParticipa().end() && sigue ){
+  while(it!=est->getClasesParticipa().end() && sigue ){
     //UsrCla *current = *it;
     if ((*it)->getClase()->getCodigo() == clase->getCodigo() ) {
       sigue = false;
@@ -281,7 +297,7 @@ void ControladorClase::confirmarAsistenciaVivo(){
   };
                            //SI NO EXISTIA SE GENERA Y ASOCIA
   if(asistencia==NULL){
-    asistencia = new UsrCla;
+    asistencia = new UsrCla();
     asistencia->setEstudiante(est);
     asistencia->setClase(clase);
     est->asistir(asistencia);
@@ -297,8 +313,6 @@ void ControladorClase::confirmarAsistenciaVivo(){
 void ControladorClase::cancelarAsistencia(){
 
 };
-
-
 
 set<dtInfoClase> ControladorClase::desplegarInfoClases(string){};
 

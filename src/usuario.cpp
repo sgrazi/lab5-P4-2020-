@@ -6,6 +6,7 @@
 #include "../include/usrCla.h"
 
 #include <set>
+#include <iostream>
 
 Usuario::Usuario(){
 
@@ -49,9 +50,9 @@ void Usuario::setModoSus(int a){ this->modoSus = a;};
 int Usuario::getModoSus(){ return modoSus;};
 
 void Usuario::asistir(UsrCla* c){
-  clasesParticipa.insert(clasesParticipa.end(),c);
+  this->clasesParticipa.insert(c);
 };
-list<UsrCla*> Usuario::getClasesParticipa(){
+set<UsrCla*> Usuario::getClasesParticipa(){
   return clasesParticipa;
 };
 

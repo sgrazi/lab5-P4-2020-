@@ -88,8 +88,9 @@ class ControladorClase{
 
 		//ASISTENCIA A CLASE EN VIVO
 		set<dtAsignatura> consultarAsigIns();
+		set<dtClase> consultarClasesVivo(int a);
 		dtClase asistirClaseVivo(int);
-		set<dtClase> consultarClasesDiferido(int);
+		//set<dtClase> consultarClasesDiferido(int);
 		//dtClase AsistirClaseDiferido(int);
 		set<dtMensaje> confirmarAsistenciaDiferido();
 		void confirmarAsistenciaVivo();

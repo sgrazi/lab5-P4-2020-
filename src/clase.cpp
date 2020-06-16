@@ -59,8 +59,8 @@ string Clase::getEmailCreador(){
 int Clase::getCodigoAsig(){
   return asig->getCodigo();
 };
-void Clase::nuevaVis(UsrCla* c){//inserta el usrcla al final
-  participantes.insert(participantes.end(),c);
+void Clase::nuevaVis(UsrCla* c){//inserta el usrcla 
+  participantes.insert(participantes.begin(),c);
 };
 
 void Clase::visualizar(Estudiante* e){/*

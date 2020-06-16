@@ -3,7 +3,6 @@
 
 #include <string>
 #include <set>
-#include <list>
 
 using namespace std;
 
@@ -23,7 +22,7 @@ class Usuario{
     set<Mensaje*> mensajes;
     int modoSus;
     EstrategiaNotifs* aplica;
-    list<UsrCla*> clasesParticipa;
+    set<UsrCla*> clasesParticipa;
   public:
     Usuario();
     void setNombre(string);
@@ -42,7 +41,7 @@ class Usuario{
 
     void agregarMensaje(Mensaje*);
     void asistir(UsrCla*);
-    list<UsrCla*> getClasesParticipa();
+    set<UsrCla*> getClasesParticipa();
 
     bool aplicaNotificacion(dtMensaje);
     void notificar(dtMensaje);
