@@ -1,6 +1,8 @@
 #include "../include/controladorAsignatura.h"
 #include "../include/dtAsignatura.h"
 #include "../include/dtDocente.h"
+#include "../include/clase.h"
+#include "../include/DtDictado.h"
 
 using namespace std;
 
@@ -104,6 +106,25 @@ void ControladorAsignatura::confirmarAsignacion(){
 void ControladorAsignatura::cancelarAsignacion(){
 
 };
+
+set<DtDictado> ControladorAsignatura::tiempoDictado(){
+  set<DtDictado> nuevo;
+  map<int,Asignatura*> :: iterator it;
+  for (it=coleccionGlobalAsignaturas->begin(); it!=coleccionGlobalAsignaturas->end() ;++it){
+      map<int,Clase*>* :: iterator itclases;
+      int tiempo=0;
+      for (itclases=clases->begin(); itclases!=clases->end() ;++itclases){
+          tiempo+=(itclases->getFechaFin()-itclases->getFechaInicio());
+        };
+      DtDictado dictado = new DtDictado();
+      dictado.codAsig=it->getCodigo();
+      dictado.TiempoDictado = tiempo;
+      //dictado.nombreAsig = it->getNombre();
+      nuevo.insert(dictado);
+  };
+  return nuevo;
+};
+
 void ControladorAsignatura::eliminarAsignatura(string){
 
 };
