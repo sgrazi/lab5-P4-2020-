@@ -52,8 +52,6 @@ void ControladorClase::setColAsig(map<int,Asignatura*>* c){this->coleccionGlobal
 void ControladorClase::setColCla(map<int,Clase*>* c){this->coleccionGlobalClases=c;};
 void ControladorClase::setColMens(map<int,Mensaje*>* c){this->coleccionGlobalMensajes=c;};
 
-void ControladorClase::setHandler(HandlerMensajes* c){this->handler = c;};
-
 //INICIO DE CLASE
 void ControladorClase::iniciarSesion(string e, string p){
   this->setPasswordUserActual(p);
@@ -206,13 +204,9 @@ set<dtMensaje> ControladorClase::consultarMensajes(int codigoClase){
     dt->setId((*itMens)->getId());
     dt->setContenido((*itMens)->getContenido());
     dt->setFecha((*itMens)->getFecha());
-    if((*itMens)->getEnRespuestaA()==NULL)
-      dt->setEnRespuestaA(-1);
-    else
-      dt->setEnRespuestaA((*itMens)->getEnRespuestaA()->getId());
+    dt->setEnRespuestaA((*itMens)->getEnRespuestaA()->getId());
     dt->setClase((*itMens)->getClase()->getCodigo());
     dt->setAsignatura((*itMens)->getClase()->getCodigoAsig());
-    nuevo.insert(*dt);
   }
   return nuevo;
 };
@@ -232,8 +226,6 @@ void ControladorClase::confirmarEnvio(){
   Mensaje* m = this->handler->agregarMensaje(coleccionGlobalMensajes->size(), (idAResponder!=-1), idAResponder, contenidoMensaje, fecha, getCodigoClase());
   auto itUser = coleccionGlobalEstudiantes->find(emailUserActual);
   itUser->second->agregarMensaje(m);
-  auto itClase = coleccionGlobalClases->find(getCodigoClase());
-  itClase->second->agregarMensaje(m);
 };
 
 void ControladorClase::cancelarEnvio(){
@@ -321,6 +313,79 @@ void ControladorClase::confirmarAsistenciaVivo(){
 void ControladorClase::cancelarAsistencia(){
 
 };
+
+//FINALIZACION ASISTENCIA A CLASE EN VIVO
+
+set<DtClase*> controladorClase:: consultarClasesParticipandoVivo(){
+  set<DtClase*> clasesAsistiendo;
+  auto itEst = this->coleccionGlobalEstudiantes->find(this->emailUserActual);
+  Estudiante* est = itEst->second; // busco el estudiante
+
+  for( auto it =est->getClasesParticipa().begin(); it =est->getClasesParticipa().end();++it){ //for que recorre la coleccion de UsrCla
+    bool buscando = true;
+    //set<Visualizacion*> coleccionVis = *it->getVis(); IMPLEMENTAR
+    auto itVis = coleccionVis.begin();
+
+    while(itVis!=coleccionVis.end()&&buscando){  //While que recorre las visualizaciones de cada UsrCla buscando si hay alguna en vivo
+      if (((*itVis)->getEnVivo== true) && ((*itVis)->getFechaFinVis==fechaNula)  ){
+        buscando = false;
+      }
+      else
+       ++itVis;
+    };
+    if(!buscando){
+      dtClase* dt = new dtClase();
+      dt->setNombre((*it)->getClase()->getNombre());
+      dt->setCodigo((*it)->getClase()->getCodigo());
+      dt->setFechaInicio((*it)->getClase()->getFechaInicio());
+      dt->setFechaFin((*it)->getClase()->getFechaFin());
+      dt->setTipo((*it)->getClase()->getTipo());
+      dt->setUrl((*it)->getClase()->getUrl());
+      dt->setCreador((*it)->getClase()->getEmailCreador());
+      dt->setAsig((*it)->getClase()->getCodigoAsig());
+      clasesAsistiendo.insert(dt);
+    }
+  };
+  return clasesAsistiendo;
+};
+
+void controladorClase::finalizarAsistencia(int codigoClase) {
+  this->setClaseAFinalizar(codigoClase);
+};
+
+void controladorClase::confirmarSalida(){
+  auto itEst = this->coleccionGlobalEstudiantes->find(this->emailUserActual);
+  Estudiante* est = itEst->second; // busco el estudiante
+
+
+  auto it = est->getClasesParticipa().begin();
+  bool sigue = true; // SE BUSCA EL UsrCla DE LA CLASE DE LA QUE SE VA A SALIR
+
+  UsrCla* asistencia = NULL;
+
+  while( it!=est->getClasesParticipa().end() && sigue ) {
+    if ((*it)->getClase()->getCodigo() == this->claseAFinalizar) {
+      sigue = false;
+      asistencia = *it;
+    }
+    else
+      ++it;
+    };
+  //auto itVis=asistencia->getVis().begin(); IMPLEMENTAR 
+  sigue = true;
+  while(itVis!=asistencia->getVis().begin() && sigue ){
+    if((*itVis)->getEnVivo == true && (*itVis)->getFechaFinVis == fechaNula){
+      sigue = false;
+      (*itVis)->setFechaFinVis(generarFecha);
+    }
+    else
+      ++itVis;
+  };
+};
+};
+
+void controladorClase::cancelarSalida(){};
+
 
 set<dtInfoClase> ControladorClase::desplegarInfoClases(string){};
 

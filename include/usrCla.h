@@ -15,7 +15,7 @@ class Visualizacion;
 
 class UsrCla{
   private:
-    list<Visualizacion*> vis;
+    set<Visualizacion*> vis;
     Estudiante *est;
     Clase *clase;
   public:
@@ -23,7 +23,7 @@ class UsrCla{
     void setVisualizacion(Visualizacion*); //hacer coleccion de visualizacion
     void setEstudiante(Estudiante*);
     void setClase(Clase*);
-    //list<Visualizacion*> getVis();
+    //set<Visualizacion*> getVis(); IMPLEMENTAR
     Estudiante* getEst();
     Clase* getClase();
 
