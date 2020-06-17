@@ -49,11 +49,11 @@ Mensaje* HandlerMensajes::agregarMensaje(int codigo, bool esRespuesta, int idRes
   return nuevo;
 };
 
-void HandlerMensajes::agregarObs(Usuario*){
-
+void HandlerMensajes::agregarObs(Usuario* u){
+  observers->insert(pair<string,Usuario*> (u->getEmail(),u));
 };
-void HandlerMensajes::eliminarObs(Usuario*){
-
+void HandlerMensajes::eliminarObs(Usuario* u){
+  observers->erase(u->getEmail());
 };
 HandlerMensajes::~HandlerMensajes(){
 

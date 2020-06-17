@@ -101,7 +101,7 @@ class ControladorClase{
 
 		set<dtInfoClase> desplegarInfoClases(string);
 		//FINALIZACION A CLASE EN VIVO
-		set<DtClase*>  consultarClasesParticipandoVivo();
+		set<dtClase*>  consultarClasesParticipandoVivo();
 		void finalizarAsistencia(int codigoClase);
 		void confirmarSalida();
 		void cancelarSalida();

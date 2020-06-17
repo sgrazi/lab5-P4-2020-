@@ -41,6 +41,7 @@
 
 using namespace std;
 
+map<string,Usuario*> coleccionGlobalUsuarios;
 map<string,Estudiante*> coleccionGlobalEstudiantes;
 map<string,Docente*> coleccionGlobalDocentes;
 map<int,Asignatura*> coleccionGlobalAsignaturas;
@@ -48,11 +49,13 @@ map<int,Clase*> coleccionGlobalClases;
 map<int,Mensaje*> coleccionGlobalMensajes;
 int main(){
 
+  map<string,Usuario*>* colUsuarios = &coleccionGlobalUsuarios;
   map<string,Estudiante*>* colEstudiantes = &coleccionGlobalEstudiantes;
   map<string,Docente*>* colDocentes = &coleccionGlobalDocentes;
   map<int,Asignatura*>* colAsignaturas = &coleccionGlobalAsignaturas;
   map<int,Clase*>* colClases = &coleccionGlobalClases;
   map<int,Mensaje*>* colMensajes = &coleccionGlobalMensajes;
+
 
   HandlerMensajes* h = new HandlerMensajes();
 
@@ -62,6 +65,7 @@ int main(){
 
   //los controladores tienen punteros a las colecciones en atributos
   //de esta manera las colecciones se declaran en el main y son unicas para todo controlador que necesite usarlas
+  Cu->setColUser(colUsuarios);
   Cu->setColEst(colEstudiantes);
   Cu->setColDoc(colDocentes);
   Cu->setColAsig(colAsignaturas);
@@ -227,6 +231,8 @@ int main(){
   //Finalización de asistencia a clase en vivo
 
   //Tiempo de dictado de clases
+
+  set<DtDictado> dictado = Ca->tiempoDictado()
 
   //Tiempo de asistencia a clase
 

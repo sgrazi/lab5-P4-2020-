@@ -52,6 +52,8 @@ void ControladorClase::setColAsig(map<int,Asignatura*>* c){this->coleccionGlobal
 void ControladorClase::setColCla(map<int,Clase*>* c){this->coleccionGlobalClases=c;};
 void ControladorClase::setColMens(map<int,Mensaje*>* c){this->coleccionGlobalMensajes=c;};
 
+void ControladorClase::setHandler(HandlerMensajes* h){ this->handler = h;};
+
 //INICIO DE CLASE
 void ControladorClase::iniciarSesion(string e, string p){
   this->setPasswordUserActual(p);
@@ -371,7 +373,7 @@ void controladorClase::confirmarSalida(){
     else
       ++it;
     };
-  //auto itVis=asistencia->getVis().begin(); IMPLEMENTAR 
+  //auto itVis=asistencia->getVis().begin(); IMPLEMENTAR
   sigue = true;
   while(itVis!=asistencia->getVis().begin() && sigue ){
     if((*itVis)->getEnVivo == true && (*itVis)->getFechaFinVis == fechaNula){

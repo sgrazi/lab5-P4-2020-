@@ -7,7 +7,9 @@
 #include "iControladorUsuario.h"
 #include "usrCla.h"
 #include "estudiante.h"
+#include "handlerMensajes.h"
 #include "docente.h"
+
 
 #include <map>
 #include <set>
@@ -28,6 +30,8 @@ class ControladorUsuario: public IControladorUsuario{
 		string emailUserActual;
 		int nuevoModoSus;
 		int asignaturaAIns;
+		HandlerMensajes* handler;
+		map<string,Usuario*>* ColeccionGlobalUsuarios;
 		map<string,Estudiante*>* coleccionGlobalEstudiantes;
 		map<string,Docente*>* coleccionGlobalDocentes;
 		map<int,Asignatura*>* coleccionGlobalAsignaturas;
@@ -57,9 +61,12 @@ class ControladorUsuario: public IControladorUsuario{
 		void setNuevoModoSus(int);
 		void setAsignaturaAIns(int);
 		//COLECCIONES
+		void setColUser(map<string,Usuario*>*);
 		void setColEst(map<string,Estudiante*>*);
 		void setColDoc(map<string,Docente*>*);
 		void setColAsig(map<int,Asignatura*>*);
+
+		void setHandler(HandlerMensajes*);
 
 		void iniciarSesion(string,string);
 
@@ -75,10 +82,12 @@ class ControladorUsuario: public IControladorUsuario{
 		void confirmarInscripcion();
 		void cancelarInscripcion();
 
-		set<dtNotificacion> consultarNotifs();
+		//SUSCRIBIRSE A NOTIFICACIONES
 		void cambiarModoSus(int);
 		void cancelarCambio();
 		void confirmarCambio();
+
+		set<dtNotificacion> consultarNotifs();
 		void desuscribirse();
 
 		~ControladorUsuario();

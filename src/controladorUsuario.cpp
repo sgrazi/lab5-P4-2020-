@@ -46,9 +46,12 @@ void ControladorUsuario::setNuevoModoSus(int modo){  this->nuevoModoSus = modo;}
 int ControladorUsuario::getAsignaturaAIns(){ return asignaturaAIns;};
 void ControladorUsuario::setAsignaturaAIns(int a){ this->asignaturaAIns = a;};
 
+void ControladorUsuario::setColUser(map<string,Usuario*>* c){ this->ColeccionGlobalUsuarios = c;};
 void ControladorUsuario::setColEst(map<string,Estudiante*>* c){ this->coleccionGlobalEstudiantes = c;};
 void ControladorUsuario::setColDoc(map<string,Docente*>* c){ this->coleccionGlobalDocentes = c;};
 void ControladorUsuario::setColAsig(map<int,Asignatura*>* c){ this->coleccionGlobalAsignaturas = c;};
+
+void ControladorUsuario::setHandler(HandlerMensajes* h){ this->handler = h;};
 
 void ControladorUsuario::iniciarSesion(string email, string pass){
   //member(); buscar si las credenciales existen en la coleccion
@@ -85,6 +88,7 @@ void ControladorUsuario::confirmarAlta(){
     nuevo->setCI(getCedulaEst());
     this->coleccionGlobalEstudiantes->insert(pair<string,Estudiante*>(nuevo->getEmail(),nuevo));
     //coleccionGlobalEstudiantes[nuevo->getEmail()]=nuevo;
+    this->ColeccionGlobalUsuarios->insert(pair<string,Usuario*>(nuevo->getEmail(),nuevo));
 
   }
   else{
@@ -96,6 +100,7 @@ void ControladorUsuario::confirmarAlta(){
     nuevo->setInstituto(getInstitutoDoc());
     this->coleccionGlobalDocentes->insert(pair<string,Docente*>(nuevo->getEmail(),nuevo));
     //coleccionGlobalDocentes[nuevo->getEmail()]=nuevo;
+    this->ColeccionGlobalUsuarios->insert(pair<string,Usuario*>(nuevo->getEmail(),nuevo));
   }
 };
 
@@ -150,28 +155,29 @@ set<dtNotificacion> ControladorUsuario::consultarNotifs(){
 };
 
 void ControladorUsuario::cambiarModoSus(int modo){
-  if((modo == 1) | (modo == 2) | (modo == 3))
-    setNuevoModoSus(modo);
-  //else
-    //mandar warning?
+  switch (modo) {
+    case 3:this->nuevoModoSus = 3;
+      break;
+    default: cout << "Modo no valido.\n";
+  }
 };
 
-void ControladorUsuario::confirmarCambio(){/*
-  usuario* user = find(getEmailUser(),ColeccionGlobalUsuarios);//CORREGIR, notacion inventada
-  switch (modo){
+void ControladorUsuario::confirmarCambio(){
+  auto itUser = ColeccionGlobalUsuarios->find(getEmailUser());
+  this->handler->agregarObs(itUser->second);
+  EstrategiaNotifs *strat;
+  switch (nuevoModoSus){//siemopre va a ser 3
     case 1:
-      estrategiaModoSus1 *strat = new estrategiaModoSus1();
-      user->setAplica(strat);
+      //nada
     break;
     case 2:
-      estrategiaModoSus2 *strat = new estrategiaModoSus2();
-      user->setAplica(strat);
+      //nada
     break;
     case 3:
-      estrategiaModoSus3 *strat = new estrategiaModoSus3();
-      user->setAplica(strat);
+      strat = new EstrategiaModoSus3();
+      itUser->second->setAplica(strat);
     break;
-  }*/
+  }
 };
 
 void ControladorUsuario::cancelarCambio(){

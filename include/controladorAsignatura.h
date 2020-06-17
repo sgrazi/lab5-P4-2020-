@@ -54,15 +54,20 @@ class ControladorAsignatura{
 		void agregarAsignatura(string,int,bool,bool,bool);
 		void confirmarAlta();
 		void cancelarAlta();
-
+		//ASIGNACION DE DOC A ASIG
 		set<dtAsignatura> consultarAsignaturas();
 		map<string,dtDocente> consultarDocentesLibres(int); //list porque no esta definido como ordenar a los docentes en un map
 		void asignarDocente(string,int,tipoClase);
 		void confirmarAsignacion();
 		void cancelarAsignacion();
+
+		//ELIM DE ASIG
 		void eliminarAsignatura(string);
 		void confirmarElim();
 		void cancelarElim();
+
+		//TIEMPO DICTADO CLASES
+		set<DtDictado> tiempoDictado()
 
 		~ControladorAsignatura();
 };
