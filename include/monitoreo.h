@@ -8,8 +8,9 @@ class Monitoreo : public Clase{
   private:
     Estudiante* habilitados [15];
   public://faltan funciones de manejo de relaciones
+    void setNombre(string);
+
     Monitoreo();
     ~Monitoreo();
-    int calcularAsistentes();
 };
 #endif

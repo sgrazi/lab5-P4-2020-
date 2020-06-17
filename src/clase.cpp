@@ -49,7 +49,7 @@ dtFecha Clase::getFechaFin(){
 set<Mensaje*> Clase::getMensajes(){
   return mensajes;
 };
-list<UsrCla*> Clase::getParticipantes(){
+set<UsrCla*> Clase::getParticipantes(){
   return participantes;
 };
 
@@ -61,7 +61,7 @@ int Clase::getCodigoAsig(){
   return asig->getCodigo();
 };
 void Clase::nuevaVis(UsrCla* c){//inserta el usrcla
-  participantes.insert(participantes.begin(),c);
+  participantes.insert(c);
 };
 
 void Clase::agregarMensaje(Mensaje* m){
