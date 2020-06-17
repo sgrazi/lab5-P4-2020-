@@ -173,7 +173,7 @@ void ControladorClase::cancelarFin(){
 };
 
 dtFecha ControladorClase::generarFecha(){//NO TERMINADA, HAY QUE IMPLEMENTAR EL RELOJ DEL SISTEMA QUE ELLOS PIDEN
-  return dtFecha(1,1,1,1,1,1);
+  return dtFecha(2020,6,1,1,1,1);
 };
 
 //ENVIO DE MENSAJE
@@ -391,7 +391,7 @@ void ControladorClase::confirmarSalida(){
 
   auto itVis=asistencia->getVis().begin();
   sigue = true;
-  
+
   while(itVis!=asistencia->getVis().end() && sigue ){
     if((*itVis)->getEnVivo()== true && (*itVis)->getFechaFinVis()== fechaNula){
       sigue = false;

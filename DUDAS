@@ -9,3 +9,6 @@ ejemplo, en iniciar sesion asegurarnos que el usuario ingresado es alguien en el
 o tambien, al llamar consultarAsignaturasDocente(), asegurarnos que el usuario que inicio sesion en el sistema es docente
 
 dtUsuario no se para que tiene atributo password pero ok
+
+COSAS PARA REVISAR
+  -al finalizar clase hay que finalizar la asistencia de todos los que estan viendo

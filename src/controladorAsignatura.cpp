@@ -111,15 +111,11 @@ set<DtDictado> ControladorAsignatura::tiempoDictado(){
   set<DtDictado> nuevo;
   map<int,Asignatura*> :: iterator it;
   for (it=coleccionGlobalAsignaturas->begin(); it!=coleccionGlobalAsignaturas->end() ;++it){
-      //auto itclases = map<int,Clase*>*;
       int tiempo=0;
-      for (auto itclases=coleccionGlobalClases->begin(); itclases!=coleccionGlobalClases->end() ;++itclases){
+      for (auto itclases=it->second->getClases()->begin(); itclases!=it->second->getClases()->end() ;++itclases){
           tiempo+=(itclases->second->getFechaFin() - itclases->second->getFechaInicio());
         };
-      DtDictado *dictado = new DtDictado(it->second->getCodigo(),tiempo);/*
-      dictado->codAsig=it->second->getCodigo();
-      dictado->TiempoDictado = tiempo;*/
-      //dictado.nombreAsig = it->getNombre();
+      DtDictado *dictado = new DtDictado(it->second->getCodigo(),tiempo);
       nuevo.insert(*dictado);
   };
   return nuevo;
