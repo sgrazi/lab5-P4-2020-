@@ -8,6 +8,8 @@ class EstrategiaNotifs{
   private:
     Usuario* user;
   public:
+    void setUser(Usuario*);
+    Usuario* getUser();
     virtual bool aplicaNotificacion(dtMensaje) = 0;
 
     virtual ~EstrategiaNotifs(){};

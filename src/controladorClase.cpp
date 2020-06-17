@@ -323,17 +323,16 @@ set<dtClase*> ControladorClase::consultarClasesParticipandoVivo(){
   auto itEst = this->coleccionGlobalEstudiantes->find(this->emailUserActual);
   Estudiante* est = itEst->second; // busco el estudiante
 
-  for( auto it =est->getClasesParticipa().begin(); it!=est->getClasesParticipa().end();++it){ //for que recorre la coleccion de UsrCla
+  for(auto it =est->getClasesParticipa().begin(); it!=est->getClasesParticipa().end();++it){ //for que recorre la coleccion de UsrCla
     bool buscando = true;
-    //set<Visualizacion*> coleccionVis = *it->getVis(); IMPLEMENTAR
+    set<Visualizacion*> coleccionVis = (*it)->getVis();// IMPLEMENTAR
     auto itVis = coleccionVis.begin();
-
-    while(itVis!=coleccionVis.end() && buscando){  //While que recorre las visualizaciones de cada UsrCla buscando si hay alguna en vivo
-      if (((*itVis)->getEnVivo== true) && ((*itVis)->getFechaFinVis==fechaNula)  ){
+    while(itVis!=coleccionVis.end() && buscando){  //While que recorre las visualizaciones del UsrCla buscando si hay alguna en vivo
+      if (((*itVis)->getEnVivo()== true) && ((*itVis)->getFechaFinVis()==fechaNula)  ){
         buscando = false;
       }
       else
-       ++itVis;
+        ++itVis;
     };
     if(!buscando){
       dtClase* dt = new dtClase();
@@ -373,10 +372,10 @@ void ControladorClase::confirmarSalida(){
     else
       ++it;
     };
-  //auto itVis=asistencia->getVis().begin(); IMPLEMENTAR
+  auto itVis=asistencia->getVis().begin();
   sigue = true;
   while(itVis!=asistencia->getVis().begin() && sigue ){
-    if((*itVis)->getEnVivo == true && (*itVis)->getFechaFinVis == fechaNula){
+    if((*itVis)->getEnVivo()== true && (*itVis)->getFechaFinVis()== fechaNula){
       sigue = false;
       (*itVis)->setFechaFinVis(generarFecha());
     }

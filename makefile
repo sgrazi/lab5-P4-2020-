@@ -4,7 +4,7 @@ HDIR = include
 CPPDIR  = src
 ODIR = obj
 
-CLASES = dtFecha controladorUsuario usuario docente estudiante dtUsuario dtDocente dtEstudiante dtAsignatura controladorAsignatura asignatura rol dtInfoClase controladorClase mensaje clase teorico practico monitoreo usrCla dtClase visualizacion dtMensaje dtNotificacion handlerMensajes DtDictado
+CLASES = dtFecha controladorUsuario usuario docente estudiante dtUsuario dtDocente dtEstudiante dtAsignatura controladorAsignatura asignatura rol dtInfoClase controladorClase mensaje clase teorico practico monitoreo usrCla dtClase visualizacion dtMensaje dtNotificacion handlerMensajes DtDictado estrategiaNotifs estrategiaModoSus3
 
 # cadena de archivos, con directorio y extensión
 HS   = $(CLASES:%=$(HDIR)/%.h)
@@ -58,3 +58,5 @@ clean:
 	rm obj/visualizacion.o
 	rm obj/dtMensaje.o
 	rm obj/DtDictado.o
+	rm obj/estrategiaNotifs.o
+	rm obj/estrategiaModoSus3.o

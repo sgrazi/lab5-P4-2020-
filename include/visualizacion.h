@@ -16,11 +16,14 @@ class Visualizacion{
     void setEnVivo(bool);
     void setFechaInicioVis(dtFecha);
     void setFechaFinVis(dtFecha);
+    void setUsrCla(UsrCla*);
     bool getEnVivo();
     dtFecha getFechaInicioVis();
     dtFecha getFechaFinVis();
+    UsrCla* getUsrCla();
 
     dtFecha generarFecha();
+    //bool operator<(const Visualizacion &right){return true;}; //si colecciones se implementan con set esto es necesario
 
     ~Visualizacion();
 };

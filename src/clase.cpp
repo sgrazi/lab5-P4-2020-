@@ -1,5 +1,6 @@
 #include "../include/clase.h"
 #include "../include/asignatura.h"
+#include "../include/visualizacion.h"
 Clase::Clase(){
 
 };
@@ -66,6 +67,17 @@ void Clase::nuevaVis(UsrCla* c){//inserta el usrcla
 void Clase::agregarMensaje(Mensaje* m){
   this->mensajes.insert(m);
 };
+
+/*set<Visualizacion*> getVis(){
+  set<Visualizacion*> nuevo;
+  for(auto it = participantes.begin(); it!=participantes.end(); ++it){//para cada usrcla en la clase
+    set<Visualizacion*> visualizacionesUsuario = (*it)->getVis();
+    for(auto it2 = visualizacionesUsuario.begin(); it2!=visualizacionesUsuario.end();it2++){//para cada visualizacion de ese usrcla
+      nuevo.insert(*it2);
+    }
+  }
+  return nuevo;
+};*/
 
 void Clase::visualizar(Estudiante* e){/*
   //puse las funciones member find y add como si existieran, no vi nada de la implementacion de coleccion que nos dieron

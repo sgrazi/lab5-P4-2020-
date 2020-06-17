@@ -1,7 +1,7 @@
 #ifndef ESTCLA_H
 #define ESTCLA_H
 #include <string>
-#include <list>
+#include <set>
 #include "dtFecha.h"
 //#include "visualizacion.h"
 //#include "estudiante.h"
@@ -23,12 +23,10 @@ class UsrCla{
     void setVisualizacion(Visualizacion*); //hacer coleccion de visualizacion
     void setEstudiante(Estudiante*);
     void setClase(Clase*);
-    //set<Visualizacion*> getVis(); IMPLEMENTAR
     Estudiante* getEst();
     Clase* getClase();
 
-    //int getCodigoClase();
-    //string getEmailUser();
+    set<Visualizacion*> getVis();
     void marcarFin(dtFecha);
     //void iniciarVis();
     ~UsrCla();

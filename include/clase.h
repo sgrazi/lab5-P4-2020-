@@ -55,6 +55,8 @@ class Clase{
     void nuevaVis(UsrCla*);
     void agregarMensaje(Mensaje*);
 
+    //set<Visualizacion*> getVis();
+
     void visualizar(Estudiante*);
 
     ~Clase();

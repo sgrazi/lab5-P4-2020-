@@ -6,10 +6,10 @@ class dtMensaje;
 
 class EstrategiaModoSus3 : public EstrategiaNotifs{
   public:
-    EstrategiaModoSus3();
+    EstrategiaModoSus3(){};
 
     bool aplicaNotificacion(dtMensaje);
 
-    ~EstrategiaModoSus3();
+    ~EstrategiaModoSus3(){};
 };
 #endif

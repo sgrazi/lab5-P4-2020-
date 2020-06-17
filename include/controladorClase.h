@@ -19,6 +19,7 @@ class Estudiante;
 class Docente;
 class Clase;
 class Mensaje;
+class Visualizacion;
 
 class ControladorClase{
 	private:

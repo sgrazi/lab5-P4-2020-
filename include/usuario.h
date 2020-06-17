@@ -38,6 +38,7 @@ class Usuario{
     int getModoSus();
     set<dtNotificacion*> getNotificaciones();
     EstrategiaNotifs* getAplica();
+    set<Mensaje*> getMensajes();
 
     void agregarMensaje(Mensaje*);
     void asistir(UsrCla*);

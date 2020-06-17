@@ -45,6 +45,9 @@ set<dtNotificacion*> Usuario::getNotificaciones(){
 EstrategiaNotifs* Usuario::getAplica(){
   return aplica;
 };
+set<Mensaje*> Usuario::getMensajes(){
+  return mensajes;
+};
 
 void Usuario::setModoSus(int a){ this->modoSus = a;};
 int Usuario::getModoSus(){ return modoSus;};

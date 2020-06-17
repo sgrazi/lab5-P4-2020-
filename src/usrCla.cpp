@@ -17,7 +17,7 @@ void UsrCla::setVisualizacion(Visualizacion* v){
   vis.insert(vis.end(),v);
 };
 
-//Visualizacion* UsrCla::getVis();
+set<Visualizacion*> UsrCla::getVis(){ return vis;};
 
 //int UsrCla::getCodigoClase(){};
 //string UsrCla::getEmailUser(){};

@@ -2,7 +2,7 @@
 
 DtDictado::DtDictado(){};
 DtDictado::DtDictado(int a,int b):codAsig(a),TiempoDictado(b){};
-bool operator<(const DtDictado &right) const{
+bool DtDictado::operator<(const DtDictado &right) const{
     return codAsig < right.codAsig;
 };
 DtDictado::~DtDictado(){};

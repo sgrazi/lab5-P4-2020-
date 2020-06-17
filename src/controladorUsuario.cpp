@@ -1,6 +1,7 @@
 #include "../include/controladorUsuario.h"
 #include "../include/docente.h"
 #include "../include/estudiante.h"
+#include "../include/estrategiaNotifs.h"
 #include "../include/estrategiaModoSus1.h"
 #include "../include/estrategiaModoSus2.h"
 #include "../include/estrategiaModoSus3.h"

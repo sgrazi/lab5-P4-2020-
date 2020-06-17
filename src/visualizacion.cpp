@@ -21,6 +21,12 @@ dtFecha Visualizacion::getFechaInicioVis(){
 dtFecha Visualizacion::getFechaFinVis(){
   return fechaFinVis;
 };
+void Visualizacion::setUsrCla(UsrCla* c){
+  this->usrcla = c;
+};
+UsrCla* Visualizacion::getUsrCla(){
+  return usrcla;
+};
 dtFecha Visualizacion::generarFecha(){ //TERMINAR, PLACEHOLDER
   return dtFecha(1,1,1,1,1,1);
 };
