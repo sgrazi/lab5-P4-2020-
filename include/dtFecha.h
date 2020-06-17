@@ -33,5 +33,6 @@ class dtFecha {
     int getMinuto() const ;
     int getSegundo() const ;
     bool operator==(const dtFecha& fecha) const;
+    int operator-(const dtFecha& fecha);
 };
 #endif

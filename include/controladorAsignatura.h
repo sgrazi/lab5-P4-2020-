@@ -7,6 +7,7 @@
 #include "dtAsignatura.h"
 #include "dtDocente.h"
 #include "tipoClase.h"
+#include "DtDictado.h"
 
 #include <string>
 #include <set>
@@ -27,6 +28,7 @@ class ControladorAsignatura{
 		int asigAEliminar;
 		map<int,Asignatura*>* coleccionGlobalAsignaturas;
 		map<string,Docente*>* coleccionGlobalDocentes;
+		map<int,Clase*>* coleccionGlobalClases;
 	public:
 		ControladorAsignatura();
 		void setEmailDocente(string);
@@ -50,6 +52,7 @@ class ControladorAsignatura{
 		//colecciones
 		void setColAsig(map<int,Asignatura*>*);
 		void setColDoc(map<string,Docente*>*);
+		void setColCla(map<int,Clase*>*);
 		//ALTA DE ASIG
 		void agregarAsignatura(string,int,bool,bool,bool);
 		void confirmarAlta();
@@ -67,7 +70,7 @@ class ControladorAsignatura{
 		void cancelarElim();
 
 		//TIEMPO DICTADO CLASES
-		set<DtDictado> tiempoDictado()
+		set<DtDictado> tiempoDictado();
 
 		~ControladorAsignatura();
 };

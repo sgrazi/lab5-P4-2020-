@@ -1,4 +1,6 @@
 #include "../include/dtFecha.h"
+#include <iostream>
+#include <cmath>
 
 dtFecha::dtFecha(){
 
@@ -43,4 +45,8 @@ int dtFecha::getSegundo() const { return segundo;};
 
 bool dtFecha::operator==(const dtFecha& fecha) const{
   return ((this->anio == fecha.getAnio())&&(this->mes == fecha.getMes())&&(this->dia == fecha.getDia())&&(this->hora == fecha.getHora())&&(this->minuto == fecha.getMinuto())&&(this->segundo == fecha.getSegundo()));
+};
+
+int dtFecha::operator-(const dtFecha& y){
+  return (this->anio*365*24*60*60 - y.getAnio()*365*24*60*60) + round((this->mes*30.416*24*60*60)-(y.getMes()*30.416*24*60*60)) + (this->dia*24*60*60 - y.getDia()*24*60*60) + (this->hora*60*60 - y.getHora()*60*60) + (this->minuto*60 - y.getMinuto()*60) + (this->segundo - y.getSegundo());
 };

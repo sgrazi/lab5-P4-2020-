@@ -14,7 +14,7 @@
 //#include "include/headers/estrategiaNotifs.h"
 #include "include/estudiante.h"
 //#include "include/headers/factory.h"
-//#include "include/headers/handlerMensajes.h"
+#include "include/handlerMensajes.h"
 #include "include/iControladorAsignatura.h"
 #include "include/iControladorClase.h"
 #include "include/iControladorUsuario.h"
@@ -38,8 +38,10 @@
 //#include "include/dts/dtTeorico.h"
 #include "include/dtUsuario.h"
 //#include "include/dts/dtVisualizacion.h"
+//#include "include/DtDictado.h"
 
 using namespace std;
+
 
 map<string,Usuario*> coleccionGlobalUsuarios;
 map<string,Estudiante*> coleccionGlobalEstudiantes;
@@ -232,7 +234,7 @@ int main(){
 
   //Tiempo de dictado de clases
 
-  set<DtDictado> dictado = Ca->tiempoDictado()
+  set<DtDictado> dictado = Ca->tiempoDictado();
 
   //Tiempo de asistencia a clase
 

@@ -2,7 +2,6 @@
 #include "../include/dtAsignatura.h"
 #include "../include/dtDocente.h"
 #include "../include/clase.h"
-#include "../include/DtDictado.h"
 
 using namespace std;
 
@@ -35,6 +34,7 @@ int ControladorAsignatura::getAsigAEliminar(){ return asigAEliminar;};
 
 void ControladorAsignatura::setColAsig(map<int,Asignatura*>* c){ this->coleccionGlobalAsignaturas = c;};
 void ControladorAsignatura::setColDoc(map<string,Docente*>* c){ this->coleccionGlobalDocentes = c;};
+void ControladorAsignatura::setColCla(map<int,Clase*>* c){this->coleccionGlobalClases=c;};
 
 void ControladorAsignatura::agregarAsignatura(string n, int c, bool t, bool p, bool m){
   this->setNombreAsig(n);
@@ -111,16 +111,16 @@ set<DtDictado> ControladorAsignatura::tiempoDictado(){
   set<DtDictado> nuevo;
   map<int,Asignatura*> :: iterator it;
   for (it=coleccionGlobalAsignaturas->begin(); it!=coleccionGlobalAsignaturas->end() ;++it){
-      map<int,Clase*>* :: iterator itclases;
+      //auto itclases = map<int,Clase*>*;
       int tiempo=0;
-      for (itclases=clases->begin(); itclases!=clases->end() ;++itclases){
-          tiempo+=(itclases->getFechaFin()-itclases->getFechaInicio());
+      for (auto itclases=coleccionGlobalClases->begin(); itclases!=coleccionGlobalClases->end() ;++itclases){
+          tiempo+=(itclases->second->getFechaFin() - itclases->second->getFechaInicio());
         };
-      DtDictado dictado = new DtDictado();
-      dictado.codAsig=it->getCodigo();
-      dictado.TiempoDictado = tiempo;
+      DtDictado *dictado = new DtDictado(it->second->getCodigo(),tiempo);/*
+      dictado->codAsig=it->second->getCodigo();
+      dictado->TiempoDictado = tiempo;*/
       //dictado.nombreAsig = it->getNombre();
-      nuevo.insert(dictado);
+      nuevo.insert(*dictado);
   };
   return nuevo;
 };

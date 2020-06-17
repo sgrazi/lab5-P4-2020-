@@ -318,17 +318,17 @@ void ControladorClase::cancelarAsistencia(){
 
 //FINALIZACION ASISTENCIA A CLASE EN VIVO
 
-set<DtClase*> controladorClase:: consultarClasesParticipandoVivo(){
-  set<DtClase*> clasesAsistiendo;
+set<dtClase*> ControladorClase::consultarClasesParticipandoVivo(){
+  set<dtClase*> clasesAsistiendo;
   auto itEst = this->coleccionGlobalEstudiantes->find(this->emailUserActual);
   Estudiante* est = itEst->second; // busco el estudiante
 
-  for( auto it =est->getClasesParticipa().begin(); it =est->getClasesParticipa().end();++it){ //for que recorre la coleccion de UsrCla
+  for( auto it =est->getClasesParticipa().begin(); it!=est->getClasesParticipa().end();++it){ //for que recorre la coleccion de UsrCla
     bool buscando = true;
     //set<Visualizacion*> coleccionVis = *it->getVis(); IMPLEMENTAR
     auto itVis = coleccionVis.begin();
 
-    while(itVis!=coleccionVis.end()&&buscando){  //While que recorre las visualizaciones de cada UsrCla buscando si hay alguna en vivo
+    while(itVis!=coleccionVis.end() && buscando){  //While que recorre las visualizaciones de cada UsrCla buscando si hay alguna en vivo
       if (((*itVis)->getEnVivo== true) && ((*itVis)->getFechaFinVis==fechaNula)  ){
         buscando = false;
       }
@@ -351,11 +351,11 @@ set<DtClase*> controladorClase:: consultarClasesParticipandoVivo(){
   return clasesAsistiendo;
 };
 
-void controladorClase::finalizarAsistencia(int codigoClase) {
+void ControladorClase::finalizarAsistencia(int codigoClase) {
   this->setClaseAFinalizar(codigoClase);
 };
 
-void controladorClase::confirmarSalida(){
+void ControladorClase::confirmarSalida(){
   auto itEst = this->coleccionGlobalEstudiantes->find(this->emailUserActual);
   Estudiante* est = itEst->second; // busco el estudiante
 
@@ -378,15 +378,15 @@ void controladorClase::confirmarSalida(){
   while(itVis!=asistencia->getVis().begin() && sigue ){
     if((*itVis)->getEnVivo == true && (*itVis)->getFechaFinVis == fechaNula){
       sigue = false;
-      (*itVis)->setFechaFinVis(generarFecha);
+      (*itVis)->setFechaFinVis(generarFecha());
     }
     else
       ++itVis;
-  };
-};
+  }
 };
 
-void controladorClase::cancelarSalida(){};
+
+void ControladorClase::cancelarSalida(){};
 
 
 set<dtInfoClase> ControladorClase::desplegarInfoClases(string){};
