@@ -26,6 +26,7 @@ void Usuario::setImagen(string imagen){
 
 void Usuario::setAplica(EstrategiaNotifs* e){
   this->aplica = e;
+  this->modoSus = 3;//el modo siempre va a ser 3
 };
 string Usuario::getNombre(){
   return nombre;

@@ -71,6 +71,7 @@ int main(){
   Cu->setColEst(colEstudiantes);
   Cu->setColDoc(colDocentes);
   Cu->setColAsig(colAsignaturas);
+  Cu->setHandler(h);
   Ca->setColDoc(colDocentes);
   Ca->setColAsig(colAsignaturas);
   Cc->setColEst(colEstudiantes);
@@ -213,32 +214,34 @@ int main(){
 
   //ENVIO DE MENSAJE
 
-  //set<dtClase> clasesP = Cc->consultarClasesParticipando();
+  set<dtClase> clasesP = Cc->consultarClasesParticipando();
   /*for(auto it = clasesP.begin(); it!=clasesP.end(); ++it){
     cout << "nombre: "<<it->getNombre() << "  codigo: "<< it->getCodigo() <<"\n";
   }*/
-  //set<dtMensaje> mens = Cc->consultarMensajes(0);
+  set<dtMensaje> mens = Cc->consultarMensajes(0);
   //cout << "antes: "<< mens.size() <<"\n";
 
-  //Cc->enviarMensaje(" este es un mensaje ");
-  //void enviarRespuesta(int,string);
-  //Cc->confirmarEnvio();
+  Cc->enviarMensaje("este es un mensaje ");
 
-  //mens = Cc->consultarMensajes(0);
-  //cout << "despues:" <<mens.size() <<"\n";
+  Cc->confirmarEnvio();
 
+  auto itMens = coleccionGlobalMensajes.begin();
+  cout << itMens->second->getContenido() << '\n';
+
+  Cc->enviarRespuesta(0,"esta es una respuesta");
+
+  Cc->confirmarEnvio();
+  itMens++;
+  cout << itMens->second->getContenido() << '\n';
   //Cc->cancelarEnvio();
 
 
   //FINALIZACION DE ASISTENCIA A CLASE EN VIVO
-/*
-  auto ahre = coleccionGlobalUsuarios.find("email");
-  UsrCla* hola = *(ahre->second->getClasesParticipa().begin());
-    cout << hola->getClase()->getNombre();*/
-  set<dtClase*> setDeClasesEnVivo = Cc->consultarClasesParticipandoVivo();/*
+
+/*set<dtClase*> setDeClasesEnVivo = Cc->consultarClasesParticipandoVivo();
   for(auto it = setDeClasesEnVivo.begin(); it!=setDeClasesEnVivo.end(); ++it){
     cout << "nombre: "<<(*it)->getNombre() << "  codigo: "<< (*it)->getCodigo() <<"\n";
-  }*/
+  }
   Cc->finalizarAsistencia(0);
   Cc->confirmarSalida();
 
@@ -246,19 +249,23 @@ int main(){
   for(auto it = setDeClasesEnVivo.begin(); it!=setDeClasesEnVivo.end(); ++it){
     cout << "nombre: "<<(*it)->getNombre() << "  codigo: "<< (*it)->getCodigo() <<"\n";
   }
+*/
   //cancelarSalida();
 
-  //Tiempo de dictado de clases
+  //TIEMPO DICTADO DE CLASES
 
   //set<DtDictado> dictado = Ca->tiempoDictado();
 
-  //Tiempo de asistencia a clase
+  //TIEMPO DE ASISTENCIA A CLASE
 
-  //Eliminación de asignatura
+  //ELIMINACION DE ASIGNATURA
 
-  //Suscribirse a notificaciones (solo el tercer modo, respuesta a un mensaje del usuario)
+  //SUSCRIBIRSE A NOTIFICACIONES (solo el tercer modo, respuesta a un mensaje del usuario)
+  Cu->cambiarModoSus(3);
+  //Cu->cancelarCambio();
+  Cu->confirmarCambio();
 
-  //Consulta de notificaciones
+  //CONSULTA DE NOTIFICACIONES
 
 
 
