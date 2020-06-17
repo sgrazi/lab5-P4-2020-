@@ -8,6 +8,7 @@
 #include "dtClase.h"
 #include "dtMensaje.h"
 #include "handlerMensajes.h"
+#include "DtTiempoDeClase.h"
 #include <string>
 #include <set>
 #include <map>
@@ -105,6 +106,9 @@ class ControladorClase{
 		void finalizarAsistencia(int codigoClase);
 		void confirmarSalida();
 		void cancelarSalida();
+
+		//TIEMPO DE ASISTENCIA A CLASE
+		set<DtTiempoDeClase> consultarTiempoClaseDocente(int codigo);
 
 		~ControladorClase();
 };
