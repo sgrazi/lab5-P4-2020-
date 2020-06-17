@@ -27,6 +27,8 @@ class HandlerMensajes{
     void agregarObs(Usuario*);
     void eliminarObs(Usuario*);
 
+    void listaObservers();//auxiliar para debuggear los observers
+
     ~HandlerMensajes();
 };
 #endif

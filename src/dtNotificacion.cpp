@@ -3,15 +3,15 @@
 dtNotificacion::dtNotificacion(){};
 
 void dtNotificacion::setCodigoAsig(int c){ this->codigoAsig = c;};
-int dtNotificacion::getCodigoAsig(){ return codigoAsig;};
+int dtNotificacion::getCodigoAsig() const { return codigoAsig;};
 
 void dtNotificacion::setCodigoClase(int c){ this->codigoClase = c;};
-int dtNotificacion::getCodigoClase(){ return codigoClase;};
+int dtNotificacion::getCodigoClase() const { return codigoClase;};
 
 void dtNotificacion::setIdMensaje(int i){ this->idMensaje = i;};
-int dtNotificacion::getIdMensaje(){ return idMensaje;};
+int dtNotificacion::getIdMensaje() const { return idMensaje;};
 
 void dtNotificacion::setContenidoMensaje(string c){ this->contenidoMensaje = c;};
-string dtNotificacion::getContenidoMensaje(){ return contenidoMensaje;};
+string dtNotificacion::getContenidoMensaje() const { return contenidoMensaje;};
 
 dtNotificacion::~dtNotificacion(){};

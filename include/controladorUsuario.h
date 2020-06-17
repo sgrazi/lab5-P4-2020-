@@ -87,7 +87,9 @@ class ControladorUsuario: public IControladorUsuario{
 		void cancelarCambio();
 		void confirmarCambio();
 
+		//CONSULTAR NOTIFICACIONES
 		set<dtNotificacion> consultarNotifs();
+
 		void desuscribirse();
 
 		~ControladorUsuario();

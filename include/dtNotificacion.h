@@ -17,11 +17,13 @@ public:
   void setCodigoClase(int);
   void setIdMensaje(int);
   void setContenidoMensaje(string);
-  int getCodigoAsig();
-  int getCodigoClase();
-  int getIdMensaje();
-  string getContenidoMensaje();
+  int getCodigoAsig() const ;
+  int getCodigoClase() const ;
+  int getIdMensaje() const ;
+  string getContenidoMensaje() const ;
 
   ~dtNotificacion();
+
+  bool operator<(const dtNotificacion &right) const {return true;};
 };
 #endif

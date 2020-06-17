@@ -152,7 +152,27 @@ void ControladorUsuario::cancelarInscripcion(){
 };
 
 set<dtNotificacion> ControladorUsuario::consultarNotifs(){
+  set<dtNotificacion> nuevo;
+  auto itEst = this->coleccionGlobalEstudiantes->find(emailUserActual);
+  auto it = itEst->second->getNotificaciones().begin();
+  dtNotificacion* puntero = (*it);
+  if(puntero==NULL)
+    cout << "nulo";
 
+  for(auto it = itEst->second->getNotificaciones().begin(); it!=itEst->second->getNotificaciones().end();++it){
+      dtNotificacion* dt = new dtNotificacion();
+      dt->setCodigoAsig((*it)->getCodigoAsig());
+      dt->setCodigoClase((*it)->getCodigoClase());
+      dt->setIdMensaje((*it)->getIdMensaje());
+      //(*it)->getContenidoMensaje() //esto va dentro del setContenidoMensaje
+      string a = "...yo no puedo creer esto lpm\n";
+      dt->setContenidoMensaje(a);//PROBLEMA ESTA ACA
+      //si le paso una variable da segmentation fault, si le paso un string tipo "ejemplo" asi dentro de "" anda perfecto
+      //NO ENTIENDO POR QUE ???????
+      nuevo.insert(*dt);
+  }
+
+  return nuevo;
 };
 
 void ControladorUsuario::cambiarModoSus(int modo){
@@ -164,7 +184,7 @@ void ControladorUsuario::cambiarModoSus(int modo){
 };
 
 void ControladorUsuario::confirmarCambio(){
-  auto itUser = ColeccionGlobalUsuarios->find(getEmailUser());
+  auto itUser = ColeccionGlobalUsuarios->find(getEmailUserActual());
   this->handler->agregarObs(itUser->second);
   EstrategiaNotifs *strat;
   switch (nuevoModoSus){//siemopre va a ser 3
@@ -176,6 +196,7 @@ void ControladorUsuario::confirmarCambio(){
     break;
     case 3:
       strat = new EstrategiaModoSus3();
+      strat->setUser(itUser->second);
       itUser->second->setAplica(strat);
     break;
   }

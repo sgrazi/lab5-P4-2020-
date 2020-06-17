@@ -58,3 +58,8 @@ void HandlerMensajes::eliminarObs(Usuario* u){
 HandlerMensajes::~HandlerMensajes(){
 
 };
+
+void HandlerMensajes::listaObservers(){
+  for(auto it = observers->begin();it!=observers->end();it++)
+    cout << it->second->getNombre();
+};

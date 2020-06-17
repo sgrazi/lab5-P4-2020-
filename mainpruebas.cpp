@@ -84,10 +84,10 @@ int main(){
   h->setColCla(colClases);
 
   //ALTA DE USUARIO
-  Cu->agregarEstudiante("nombre","pass","email","url","1.234.567-8");
+  Cu->agregarEstudiante("estudiante","pass","email","url","1.234.567-8");
   Cu->confirmarAlta();
 
-  Cu->agregarDocente("aaaaaa","123","email2","a","s");
+  Cu->agregarDocente("docente","123","email2","a","s");
   Cu->confirmarAlta();
 
   //ALTA DE ASIG
@@ -126,7 +126,7 @@ int main(){
   };
 
   //INSCRIPCION A ASIGNATURA
-
+  Cc->iniciarSesion("email","pass");
   Cu->iniciarSesion("email","pass");
   /*set<dtAsignatura> set = Cu->consultarAsigNoIns();
   for(auto it = set.begin(); it!=set.end(); it++)
@@ -140,13 +140,14 @@ int main(){
 
   //INICIO DE CLASE
   Cc->iniciarSesion("email2","123");
+  Cc->iniciarSesion("email2","123");
 
   set<dtAsignatura> setA = Cc->consultarAsignaturasDocente();
   /*for(auto it = setA.begin(); it!=setA.end(); it++){
     cout << "Asignatura es " << it->getNombre() << "\n";
   }*/
 
-  tipoClase t = Cc->rolDocente(1);
+  //tipoClase t = Cc->rolDocente(1);
   /*if(t==teorico)
     cout << "Rol es teorico\n";
   */
@@ -187,7 +188,7 @@ int main(){
   }
 */
     //ASISTENCIA A CLASE EN VIVO
-
+  Cu->iniciarSesion("email","pass");
   Cc->iniciarSesion("email","pass");
 
   set<dtAsignatura> asigIns = Cc->consultarAsigIns();
@@ -212,27 +213,36 @@ int main(){
 
   void cancelarAsistencia();
 
+
+  //SUSCRIBIRSE A NOTIFICACIONES (solo el tercer modo, respuesta a un mensaje del usuario)
+
+  Cu->cambiarModoSus(3);
+  //Cu->cancelarCambio();
+  Cu->confirmarCambio();
+
+
   //ENVIO DE MENSAJE
 
-  set<dtClase> clasesP = Cc->consultarClasesParticipando();
+    set<dtClase> clasesP = Cc->consultarClasesParticipando();
   /*for(auto it = clasesP.begin(); it!=clasesP.end(); ++it){
     cout << "nombre: "<<it->getNombre() << "  codigo: "<< it->getCodigo() <<"\n";
   }*/
-  set<dtMensaje> mens = Cc->consultarMensajes(0);
+    set<dtMensaje> mens = Cc->consultarMensajes(0);
   //cout << "antes: "<< mens.size() <<"\n";
 
-  Cc->enviarMensaje("este es un mensaje ");
+    Cc->enviarMensaje("este es un mensaje ");
 
-  Cc->confirmarEnvio();
+    Cc->confirmarEnvio();
 
-  auto itMens = coleccionGlobalMensajes.begin();
-  cout << itMens->second->getContenido() << '\n';
+  //auto itMens = coleccionGlobalMensajes.begin();
+  //cout << itMens->second->getContenido() << '\n';
 
-  Cc->enviarRespuesta(0,"esta es una respuesta");
+    Cc->enviarRespuesta(0,"esta es una respuesta");
 
-  Cc->confirmarEnvio();
-  itMens++;
-  cout << itMens->second->getContenido() << '\n';
+    Cc->confirmarEnvio();
+  //itMens++;
+  //cout << itMens->second->getContenido() << '\n';
+
   //Cc->cancelarEnvio();
 
 
@@ -260,14 +270,12 @@ int main(){
 
   //ELIMINACION DE ASIGNATURA
 
-  //SUSCRIBIRSE A NOTIFICACIONES (solo el tercer modo, respuesta a un mensaje del usuario)
-  Cu->cambiarModoSus(3);
-  //Cu->cancelarCambio();
-  Cu->confirmarCambio();
-
   //CONSULTA DE NOTIFICACIONES
 
-
+  set<dtNotificacion> notificaciones = Cu->consultarNotifs();
+  for(auto it = notificaciones.begin(); it!=notificaciones.end(); ++it){
+    cout << "te respondieron: "<<it->getContenidoMensaje() << "\n";
+  }
 
   return 0;
 }
