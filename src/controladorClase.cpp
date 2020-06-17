@@ -391,7 +391,7 @@ void ControladorClase::confirmarSalida(){
 
   auto itVis=asistencia->getVis().begin();
   sigue = true;
-
+  
   while(itVis!=asistencia->getVis().end() && sigue ){
     if((*itVis)->getEnVivo()== true && (*itVis)->getFechaFinVis()== fechaNula){
       sigue = false;
@@ -404,42 +404,6 @@ void ControladorClase::confirmarSalida(){
 
 
 void ControladorClase::cancelarSalida(){};
-
-set<DtTiempoDeClase> ControladorClase::consultarTiempoClaseDocente(int codigo){
-  set<DtTiempoDeClase> nuevo;
-  auto itAsig = this->coleccionGlobalAsignaturas->find(codigo);
-  int tiempo=0;
-  int divisor=0;
-  for(auto itCla =itAsig->second->getClases()->begin(); itCla!=itAsig->second->getClases()->end();++itCla){
-   if(itCla->second->getEmailCreador()==this->emailUserActual){
-    tiempo=0;
-    divisor=0;
-    DtTiempoDeClase *tiempoClase= new DtTiempoDeClase();
-    tiempoClase->setNombre(itCla->second->getNombre());
-    tiempoClase->setCodClase(itCla->second->getCodigo());
-    for(auto itEstCla =itCla->second->getParticipantes().begin(); itEstCla!=itCla->second->getParticipantes().end();++itEstCla){
-      for(auto itVis =(*itEstCla)->getVis().begin(); itVis!=(*itEstCla)->getVis().end();++itVis){
-        if((*itVis)->getEnVivo()==true && !((*itVis)->getFechaFinVis()==fechaNula)){
-          divisor++;
-          tiempo+=3600*((*itVis)->getFechaFinVis().getHora() - (*itVis)->getFechaInicioVis().getHora());
-          tiempo+=60*((*itVis)->getFechaFinVis().getMinuto() - (*itVis)->getFechaInicioVis().getMinuto());
-          tiempo+=((*itVis)->getFechaFinVis().getSegundo() - (*itVis)->getFechaInicioVis().getSegundo());
-          tiempoClase->setTiempo(tiempoClase->getTiempo()+tiempo);
-        }
-      }
-    }
-    if(divisor!=0){
-      tiempoClase->setTiempo(tiempoClase->getTiempo()/divisor);
-      nuevo.insert(*tiempoClase);
-    }
-    else{
-      tiempoClase->setTiempo(0);
-      nuevo.insert(*tiempoClase);
-    }
-   }
-  }
-  return nuevo;
-};
 
 
 set<dtInfoClase> ControladorClase::desplegarInfoClases(string){};

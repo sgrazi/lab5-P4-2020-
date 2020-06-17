@@ -49,7 +49,7 @@ dtFecha Clase::getFechaFin(){
 set<Mensaje*> Clase::getMensajes(){
   return mensajes;
 };
-set<UsrCla*> Clase::getParticipantes(){
+list<UsrCla*> Clase::getParticipantes(){
   return participantes;
 };
 

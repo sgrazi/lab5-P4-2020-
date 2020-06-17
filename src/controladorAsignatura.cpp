@@ -114,9 +114,7 @@ set<DtDictado> ControladorAsignatura::tiempoDictado(){
       //auto itclases = map<int,Clase*>*;
       int tiempo=0;
       for (auto itclases=coleccionGlobalClases->begin(); itclases!=coleccionGlobalClases->end() ;++itclases){
-          tiempo+=3600*(itclases->second->getFechaFin().getHora() - itclases->second->getFechaInicio().getHora());
-          tiempo+=60*(itclases->second->getFechaFin().getMinuto() - itclases->second->getFechaInicio().getMinuto());
-          tiempo+=(itclases->second->getFechaFin().getSegundo() - itclases->second->getFechaInicio().getSegundo());
+          tiempo+=(itclases->second->getFechaFin() - itclases->second->getFechaInicio());
         };
       DtDictado *dictado = new DtDictado(it->second->getCodigo(),tiempo);/*
       dictado->codAsig=it->second->getCodigo();
