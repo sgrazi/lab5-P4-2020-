@@ -213,28 +213,44 @@ int main(){
 
   //ENVIO DE MENSAJE
 
-  set<dtClase> clasesP = Cc->consultarClasesParticipando();
+  //set<dtClase> clasesP = Cc->consultarClasesParticipando();
   /*for(auto it = clasesP.begin(); it!=clasesP.end(); ++it){
     cout << "nombre: "<<it->getNombre() << "  codigo: "<< it->getCodigo() <<"\n";
   }*/
-  set<dtMensaje> mens = Cc->consultarMensajes(0);
-  cout << "antes: "<< mens.size() <<"\n";
+  //set<dtMensaje> mens = Cc->consultarMensajes(0);
+  //cout << "antes: "<< mens.size() <<"\n";
 
-  Cc->enviarMensaje(" este es un mensaje ");
+  //Cc->enviarMensaje(" este es un mensaje ");
   //void enviarRespuesta(int,string);
-  Cc->confirmarEnvio();
+  //Cc->confirmarEnvio();
 
-  mens = Cc->consultarMensajes(0);
-  cout << "despues:" <<mens.size() <<"\n";
+  //mens = Cc->consultarMensajes(0);
+  //cout << "despues:" <<mens.size() <<"\n";
 
   //Cc->cancelarEnvio();
 
 
-  //Finalización de asistencia a clase en vivo
+  //FINALIZACION DE ASISTENCIA A CLASE EN VIVO
+/*
+  auto ahre = coleccionGlobalUsuarios.find("email");
+  UsrCla* hola = *(ahre->second->getClasesParticipa().begin());
+    cout << hola->getClase()->getNombre();*/
+  set<dtClase*> setDeClasesEnVivo = Cc->consultarClasesParticipandoVivo();/*
+  for(auto it = setDeClasesEnVivo.begin(); it!=setDeClasesEnVivo.end(); ++it){
+    cout << "nombre: "<<(*it)->getNombre() << "  codigo: "<< (*it)->getCodigo() <<"\n";
+  }*/
+  Cc->finalizarAsistencia(0);
+  Cc->confirmarSalida();
+
+  setDeClasesEnVivo = Cc->consultarClasesParticipandoVivo();
+  for(auto it = setDeClasesEnVivo.begin(); it!=setDeClasesEnVivo.end(); ++it){
+    cout << "nombre: "<<(*it)->getNombre() << "  codigo: "<< (*it)->getCodigo() <<"\n";
+  }
+  //cancelarSalida();
 
   //Tiempo de dictado de clases
 
-  set<DtDictado> dictado = Ca->tiempoDictado();
+  //set<DtDictado> dictado = Ca->tiempoDictado();
 
   //Tiempo de asistencia a clase
 

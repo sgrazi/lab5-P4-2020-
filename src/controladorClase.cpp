@@ -13,6 +13,7 @@
 #include "../include/dtClase.h"
 #include "../include/dtMensaje.h"
 #include "../include/visualizacion.h"
+#include "../include/usrCla.h"
 #include <iostream>
 #include <string>
 #include <set>
@@ -325,25 +326,40 @@ set<dtClase*> ControladorClase::consultarClasesParticipandoVivo(){
 
   for(auto it =est->getClasesParticipa().begin(); it!=est->getClasesParticipa().end();++it){ //for que recorre la coleccion de UsrCla
     bool buscando = true;
-    set<Visualizacion*> coleccionVis = (*it)->getVis();// IMPLEMENTAR
+    UsrCla* usercla =  (*it);/*
+    if(hola==NULL)
+      cout << "r";
+    else{
+      Clase* c = hola->getClase();
+      if(c==NULL)
+        cout << "r2";
+      else
+        cout << c->getNombre();
+    }*/
+    set<Visualizacion*> coleccionVis = (*it)->getVis();
     auto itVis = coleccionVis.begin();
-    while(itVis!=coleccionVis.end() && buscando){  //While que recorre las visualizaciones del UsrCla buscando si hay alguna en vivo
-      if (((*itVis)->getEnVivo()== true) && ((*itVis)->getFechaFinVis()==fechaNula)  ){
+    while(itVis!=coleccionVis.end() && buscando){ //While que recorre las visualizaciones del UsrCla buscando si hay alguna en vivo
+      if ((*itVis)->getEnVivo()==true && (*itVis)->getFechaFinVis()==fechaNula){
         buscando = false;
       }
       else
         ++itVis;
     };
+
     if(!buscando){
       dtClase* dt = new dtClase();
-      dt->setNombre((*it)->getClase()->getNombre());
-      dt->setCodigo((*it)->getClase()->getCodigo());
-      dt->setFechaInicio((*it)->getClase()->getFechaInicio());
-      dt->setFechaFin((*it)->getClase()->getFechaFin());
-      dt->setTipo((*it)->getClase()->getTipo());
-      dt->setUrl((*it)->getClase()->getUrl());
-      dt->setCreador((*it)->getClase()->getEmailCreador());
-      dt->setAsig((*it)->getClase()->getCodigoAsig());
+      /*Clase* cla = it->getClase();
+      if(cla==NULL){
+        cout << "opa2";
+      }*/
+      dt->setNombre(usercla->getClase()->getNombre());
+      dt->setCodigo(usercla->getClase()->getCodigo());
+      dt->setFechaInicio(usercla->getClase()->getFechaInicio());
+      dt->setFechaFin(usercla->getClase()->getFechaFin());
+      dt->setTipo(usercla->getClase()->getTipo());
+      dt->setUrl(usercla->getClase()->getUrl());
+      dt->setCreador(usercla->getClase()->getEmailCreador());
+      dt->setAsig(usercla->getClase()->getCodigoAsig());
       clasesAsistiendo.insert(dt);
     }
   };
@@ -372,9 +388,11 @@ void ControladorClase::confirmarSalida(){
     else
       ++it;
     };
+
   auto itVis=asistencia->getVis().begin();
   sigue = true;
-  while(itVis!=asistencia->getVis().begin() && sigue ){
+  
+  while(itVis!=asistencia->getVis().end() && sigue ){
     if((*itVis)->getEnVivo()== true && (*itVis)->getFechaFinVis()== fechaNula){
       sigue = false;
       (*itVis)->setFechaFinVis(generarFecha());

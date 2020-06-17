@@ -99,9 +99,8 @@ class ControladorClase{
 		void confirmarAsistenciaVivo();
 		void cancelarAsistencia();
 
-
 		set<dtInfoClase> desplegarInfoClases(string);
-		//FINALIZACION A CLASE EN VIVO
+		//FINALIZACION ASISTENCIA A CLASE EN VIVO
 		set<dtClase*>  consultarClasesParticipandoVivo();
 		void finalizarAsistencia(int codigoClase);
 		void confirmarSalida();
