@@ -17,6 +17,7 @@
 
 using namespace std;
 
+
 class ControladorUsuario: public IControladorUsuario{
 	private:
 		bool userEsEst;
@@ -35,9 +36,11 @@ class ControladorUsuario: public IControladorUsuario{
 		map<string,Estudiante*>* coleccionGlobalEstudiantes;
 		map<string,Docente*>* coleccionGlobalDocentes;
 		map<int,Asignatura*>* coleccionGlobalAsignaturas;
+		static ControladorUsuario* instancia;
+		ControladorUsuario();
 
 	public:
-		ControladorUsuario();
+		static ControladorUsuario* getInstancia();
 		bool getUserEsEst();
 		string getNombreUser();
 		string getPasswordUser();

@@ -5,8 +5,15 @@
 
 using namespace std;
 
+ControladorAsignatura* ControladorAsignatura::instancia = NULL;
 
 ControladorAsignatura::ControladorAsignatura(){};
+
+ControladorAsignatura* ControladorAsignatura::getInstancia() {
+  if (instancia == NULL)
+    instancia = new ControladorAsignatura();
+  return instancia;
+};
 
 void ControladorAsignatura::setEmailDocente(string e){  this->emailDocente = e;};
 string ControladorAsignatura::getEmailDocente(){  return emailDocente;};

@@ -49,8 +49,9 @@ map<string,Docente*> coleccionGlobalDocentes;
 map<int,Asignatura*> coleccionGlobalAsignaturas;
 map<int,Clase*> coleccionGlobalClases;
 map<int,Mensaje*> coleccionGlobalMensajes;
-int main(){
 
+
+int main(){
   map<string,Usuario*>* colUsuarios = &coleccionGlobalUsuarios;
   map<string,Estudiante*>* colEstudiantes = &coleccionGlobalEstudiantes;
   map<string,Docente*>* colDocentes = &coleccionGlobalDocentes;
@@ -61,9 +62,9 @@ int main(){
 
   HandlerMensajes* h = new HandlerMensajes();
 
-  ControladorUsuario* Cu = new ControladorUsuario();
-  ControladorAsignatura* Ca = new ControladorAsignatura();
-  ControladorClase* Cc = new ControladorClase();
+  ControladorUsuario* Cu = ControladorUsuario::getInstancia();
+  ControladorAsignatura* Ca = ControladorAsignatura::getInstancia();
+  ControladorClase* Cc = ControladorClase::getInstancia();
 
   //los controladores tienen punteros a las colecciones en atributos
   //de esta manera las colecciones se declaran en el main y son unicas para todo controlador que necesite usarlas
@@ -163,6 +164,9 @@ int main(){
 
   Cc->confirmarInicio();
 
+  Cc->finalizarClase(1);
+
+  Cc->confirmarFin();
   /*auto clasesa = coleccionGlobalAsignaturas.find(1)->second->getClases();
   cout << "clase en asignatura: " << clasesa->begin()->second->getNombre() << "\n";
 
@@ -264,7 +268,11 @@ int main(){
 
   //TIEMPO DICTADO DE CLASES
 
-  //set<DtDictado> dictado = Ca->tiempoDictado();
+  set<DtDictado> dictado = Ca->tiempoDictado();
+  for(auto itf = dictado.begin(); itf!=dictado.end(); ++itf){
+    cout << "codigo: "<<itf->getCodAsig() << "  tiempo: "<< itf->getTiempoDictado() <<"\n";
+  }
+
 
   //TIEMPO DE ASISTENCIA A CLASE
 
@@ -276,6 +284,7 @@ int main(){
   for(auto it = notificaciones.begin(); it!=notificaciones.end(); ++it){
     cout << "te respondieron: "<<it->getContenidoMensaje() << "\n";
   }
+
 
   return 0;
 }

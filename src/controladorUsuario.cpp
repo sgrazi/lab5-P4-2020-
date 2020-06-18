@@ -11,7 +11,15 @@
 
 #include <iostream>
 
+ControladorUsuario* ControladorUsuario::instancia = NULL;
+
 ControladorUsuario::ControladorUsuario(){
+};
+
+ControladorUsuario* ControladorUsuario::getInstancia() {
+  if (instancia == NULL)
+    instancia = new ControladorUsuario();
+  return instancia;
 };
 
 bool ControladorUsuario::getUserEsEst(){  return userEsEst;};

@@ -6,6 +6,10 @@ class DtDictado{
   public:
     DtDictado();
     DtDictado(int,int);
+    void setCodAsig(int cod);
+    void setTiempoDictado(int tiempo);
+    int getCodAsig() const;
+    int getTiempoDictado() const;
     bool operator<(const DtDictado &right) const ;
     ~DtDictado();
 };

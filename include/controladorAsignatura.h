@@ -8,6 +8,7 @@
 #include "dtDocente.h"
 #include "tipoClase.h"
 #include "DtDictado.h"
+#include "iControladorAsignatura.h"
 
 #include <string>
 #include <set>
@@ -15,8 +16,7 @@
 
 using namespace std;
 
-
-class ControladorAsignatura{
+class ControladorAsignatura:public IControladorAsignatura{
 	private:
 		string emailDocente;
 		string nombreAsig;
@@ -29,8 +29,10 @@ class ControladorAsignatura{
 		map<int,Asignatura*>* coleccionGlobalAsignaturas;
 		map<string,Docente*>* coleccionGlobalDocentes;
 		map<int,Clase*>* coleccionGlobalClases;
-	public:
+		static ControladorAsignatura* instancia;
 		ControladorAsignatura();
+	public:
+		static ControladorAsignatura* getInstancia();
 		void setEmailDocente(string);
 		void setNombreAsig(string);
 		void setCodigoAsig(int);
@@ -47,7 +49,6 @@ class ControladorAsignatura{
 		bool getAceptaMon();
 		tipoClase getRolDoc();
 		int getAsigAEliminar();
-		void setNombreAsig();
 
 		//colecciones
 		void setColAsig(map<int,Asignatura*>*);

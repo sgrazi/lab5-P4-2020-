@@ -9,6 +9,7 @@
 #include "dtMensaje.h"
 #include "handlerMensajes.h"
 #include "DtTiempoDeClase.h"
+#include "iControladorClase.h"
 #include <string>
 #include <set>
 #include <map>
@@ -22,7 +23,8 @@ class Clase;
 class Mensaje;
 class Visualizacion;
 
-class ControladorClase{
+
+class ControladorClase: public IControladorClase{
 	private:
 		string passwordUserActual;
 		string emailUserActual;
@@ -37,8 +39,10 @@ class ControladorClase{
 		map<string,Docente*>* coleccionGlobalDocentes;
 		map<int,Clase*>* coleccionGlobalClases;
 		map<int,Mensaje*>* coleccionGlobalMensajes;
-	public:
+		static ControladorClase* instancia;
 		ControladorClase();
+	public:
+		static ControladorClase* getInstancia();
 		void setPasswordUserActual(string);
 		void setEmailUserActual(string);
 		//void setInfoParaCreacionClase(dtInfoClase*);
@@ -100,7 +104,7 @@ class ControladorClase{
 		void confirmarAsistenciaVivo();
 		void cancelarAsistencia();
 
-		set<dtInfoClase> desplegarInfoClases(string);
+		//set<dtInfoClase> desplegarInfoClases(string);
 		//FINALIZACION ASISTENCIA A CLASE EN VIVO
 		set<dtClase*>  consultarClasesParticipandoVivo();
 		void finalizarAsistencia(int codigoClase);

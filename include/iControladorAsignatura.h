@@ -10,8 +10,8 @@ using namespace std;
 class IControladorAsignatura{
 	public:
 		virtual set<dtAsignatura> consultarAsignaturas() = 0;
-		virtual set<dtDocente> consultarDocentesLibres(string) = 0;
-		virtual void asignarDocente(string,string,tipoClase) = 0;
+		virtual map<string,dtDocente> consultarDocentesLibres(int) = 0;
+		virtual void asignarDocente(string,int,tipoClase) = 0;
 		virtual void confirmarAsignacion() = 0;
 		virtual void cancelarAsignacion() = 0;
 		virtual void eliminarAsignatura(string) = 0;

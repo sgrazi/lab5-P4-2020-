@@ -23,9 +23,18 @@ const dtFecha fechaNula(0,0,0,0,0,0);
 
 using namespace std;
 
+ControladorClase* ControladorClase::instancia = NULL;
+
 ControladorClase::ControladorClase(){
 
 };
+
+ControladorClase* ControladorClase::getInstancia() {
+  if (instancia == NULL)
+    instancia = new ControladorClase();
+  return instancia;
+};
+
 void ControladorClase::setPasswordUserActual(string p){ this->passwordUserActual= p;};
 string ControladorClase::getPasswordUserActual(){ return passwordUserActual;};
 
@@ -442,6 +451,6 @@ set<DtTiempoDeClase> ControladorClase::consultarTiempoClaseDocente(int codigo){
 };
 
 
-set<dtInfoClase> ControladorClase::desplegarInfoClases(string){};
+//set<dtInfoClase> ControladorClase::desplegarInfoClases(string){};
 
 ControladorClase::~ControladorClase(){};
