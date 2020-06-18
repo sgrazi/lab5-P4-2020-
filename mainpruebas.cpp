@@ -273,6 +273,14 @@ int main(){
   //TIEMPO DE ASISTENCIA A CLASE
 
   //ELIMINACION DE ASIGNATURA
+   Ca->eliminarAsignatura("calculo");
+  Ca->confirmarElim();
+  Ca->eliminarAsignatura("calculo2");
+  Ca->confirmarElim();
+  
+  
+  
+  
 
   //CONSULTA DE NOTIFICACIONES
   /*
