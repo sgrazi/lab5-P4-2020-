@@ -168,19 +168,11 @@ int main(){
 
   Cc->confirmarInicio();
 
-<<<<<<< HEAD
-  if(coleccionGlobalClases.begin()!=coleccionGlobalClases.end())
-   cout << "se hizo bien 1";
-
-/*
-=======
->>>>>>> separado
   auto clasesa = coleccionGlobalAsignaturas.find(1)->second->getClases();
   cout << "clase en asignatura: " << clasesa->begin()->second->getNombre() << "\n";
 
   auto clasesd = coleccionGlobalAsignaturas.find(1)->second->getClases();
-<<<<<<< HEAD
-  cout << "clase en docente: " <<clasesd->begin()->second->getNombre() << "\n";*/
+  cout << "clase en docente: " <<clasesd->begin()->second->getNombre() << "\n";
 
   //FINALIZACION DE CLASE
 
@@ -205,9 +197,6 @@ int main(){
   if(sinFin.begin()==sinFin.end()){
     cout << "No quedan clases sin terminar\n";
   }*/
-=======
-  cout << "clase en docente: " <<clasesd->begin()->second->getNombre() << "\n";
->>>>>>> separado
 
   //ASISTENCIA A CLASE EN VIVO
     //Cu->iniciarSesion("emailE","pass");
@@ -298,9 +287,8 @@ int main(){
 
     Cc->confirmarFin();
 
-    set<dtClase> sinFin = Cc->consultarClasesEnVivo();
+    sinFin = Cc->consultarClasesEnVivo();
 
-<<<<<<< HEAD
   //ELIMINACION DE ASIGNATURA
    Ca->eliminarAsignatura("calculo");
   Ca->confirmarElim();
@@ -310,11 +298,6 @@ int main(){
 
 
 
-=======
-    if(sinFin.begin()==sinFin.end()){
-      cout << "No quedan clases sin terminar\n";
-    }
->>>>>>> separado
 
     //TIEMPO DICTADO DE CLASES
   /*
