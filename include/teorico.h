@@ -6,11 +6,11 @@ class Teorico : public Clase{
   private:
     int asistentes;
   public:
-        
     Teorico();
+
+    void auxiliar();
     void setAsistentes(int);
     int getAsistentes();
-    int calcularAsistentes();
 
     ~Teorico();
 };

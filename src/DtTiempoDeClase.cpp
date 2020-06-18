@@ -8,6 +8,6 @@ void DtTiempoDeClase::setCodClase(int cod){this->codClase = cod;};
 bool DtTiempoDeClase::operator<(const DtTiempoDeClase &right) const{
     return codClase < right.codClase;
 };
-string DtTiempoDeClase::getNombre(){return this->nombre;};
-int DtTiempoDeClase::getTiempo(){return this->tiempo;};
-int DtTiempoDeClase::getCodClase(){return this->codClase;};
+string DtTiempoDeClase::getNombre() const {return this->nombre;};
+int DtTiempoDeClase::getTiempo() const {return this->tiempo;};
+int DtTiempoDeClase::getCodClase() const {return this->codClase;};

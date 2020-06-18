@@ -30,3 +30,9 @@ void dtInfoClase::agregarHabilitado(string email){
   this->habilitados[cantHabilitados] = email;
   this->cantHabilitados++;
 };
+int dtInfoClase::getCantHabilitados(){
+  return cantHabilitados;
+};
+array<string, 15> dtInfoClase::getHabilitados(){
+  return habilitados;
+};

@@ -12,9 +12,9 @@ public:
   void setNombre(string nombre);
   void setTiempo(int tiempo);
   void setCodClase(int cod);
-  string getNombre();
-  int getTiempo();
-  int getCodClase();
+  string getNombre() const ;
+  int getTiempo() const ;
+  int getCodClase() const ;
   bool operator<(const DtTiempoDeClase &right) const ;
   ~DtTiempoDeClase(){};
 };

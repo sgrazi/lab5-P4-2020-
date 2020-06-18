@@ -85,10 +85,10 @@ int main(){
   h->setColCla(colClases);
 
   //ALTA DE USUARIO
-  Cu->agregarEstudiante("estudiante","pass","email","url","1.234.567-8");
+  Cu->agregarEstudiante("estudiante","pass","emailE","url","1.234.567-8");
   Cu->confirmarAlta();
 
-  Cu->agregarDocente("docente","123","email2","a","s");
+  Cu->agregarDocente("docente","123","emailD","a","s");
   Cu->confirmarAlta();
 
   //ALTA DE ASIG
@@ -118,18 +118,18 @@ int main(){
 */
 
   //asigno el docente
-  Ca->asignarDocente("email2",1,teorico);
+  Ca->asignarDocente("emailD",1,teorico);
   Ca->confirmarAsignacion();
   //me fijo si aparece en docentes libres
-  map<string,dtDocente> ds = Ca->consultarDocentesLibres(1);
+  //map<string,dtDocente> ds = Ca->consultarDocentesLibres(1);
 
-  for(auto ite2 = ds.begin(); ite2!=ds.end() ; ite2++){
+  /*for(auto ite2 = ds.begin(); ite2!=ds.end() ; ite2++){
       cout << "Email docente libre de la asig calculo: "<< ite2->first << "\n";
-  };
+  };*/
 
   //INSCRIPCION A ASIGNATURA
-  Cc->iniciarSesion("email","pass");
-  Cu->iniciarSesion("email","pass");
+  Cc->iniciarSesion("emailE","pass");
+  Cu->iniciarSesion("emailE","pass");
   /*set<dtAsignatura> set = Cu->consultarAsigNoIns();
   for(auto it = set.begin(); it!=set.end(); it++)
     cout << it->getNombre();
@@ -141,10 +141,10 @@ int main(){
     cout << it->getNombre();*/
 
   //INICIO DE CLASE
-  Cc->iniciarSesion("email2","123");
-  Cc->iniciarSesion("email2","123");
+  Cc->iniciarSesion("emailD","123");
+  Cc->iniciarSesion("emailD","123");
 
-  set<dtAsignatura> setA = Cc->consultarAsignaturasDocente();
+  //set<dtAsignatura> setA = Cc->consultarAsignaturasDocente();
   /*for(auto it = setA.begin(); it!=setA.end(); it++){
     cout << "Asignatura es " << it->getNombre() << "\n";
   }*/
@@ -168,14 +168,18 @@ int main(){
 
   Cc->confirmarInicio();
 
+<<<<<<< HEAD
   if(coleccionGlobalClases.begin()!=coleccionGlobalClases.end())
    cout << "se hizo bien 1";
 
 /*
+=======
+>>>>>>> separado
   auto clasesa = coleccionGlobalAsignaturas.find(1)->second->getClases();
   cout << "clase en asignatura: " << clasesa->begin()->second->getNombre() << "\n";
 
   auto clasesd = coleccionGlobalAsignaturas.find(1)->second->getClases();
+<<<<<<< HEAD
   cout << "clase en docente: " <<clasesd->begin()->second->getNombre() << "\n";*/
 
   //FINALIZACION DE CLASE
@@ -201,24 +205,27 @@ int main(){
   if(sinFin.begin()==sinFin.end()){
     cout << "No quedan clases sin terminar\n";
   }*/
+=======
+  cout << "clase en docente: " <<clasesd->begin()->second->getNombre() << "\n";
+>>>>>>> separado
 
   //ASISTENCIA A CLASE EN VIVO
-    //Cu->iniciarSesion("email","pass");
-    //Cc->iniciarSesion("email","pass");
+    //Cu->iniciarSesion("emailE","pass");
+    //Cc->iniciarSesion("emailE","pass");
 
     //set<dtAsignatura> asigIns = Cc->consultarAsigIns();
   /*for(auto it = asigIns.begin(); it!=asigIns.end(); ++it){
     cout << it->getCodigo() <<"\n";
   }*/
 
-    //set<dtClase> clasesA = Cc->consultarClasesVivo(1);
+//    set<dtClase> clasesA = Cc->consultarClasesVivo(1); // 1 es "calculo"
   /*for(auto it = clasesA.begin(); it!=clasesA.end(); ++it){
     cout << it->getNombre() << "  "<< it->getCodigo() <<"\n";
   }*/
 
-    //dtClase clase1 = Cc->asistirClaseVivo(0);
+//    dtClase clase1 = Cc->asistirClaseVivo(0); //0 es "clase 1"
 
-    //Cc->confirmarAsistenciaVivo();
+//    Cc->confirmarAsistenciaVivo();
 
   /*Estudiante* est = coleccionGlobalEstudiantes.find("email")->second;
   set<UsrCla*> lista = est->getClasesParticipa();
@@ -229,63 +236,71 @@ int main(){
     //void cancelarAsistencia();
 
 
-  //SUSCRIBIRSE A NOTIFICACIONES (solo el tercer modo, respuesta a un mensaje del usuario)
+    //SUSCRIBIRSE A NOTIFICACIONES (solo el tercer modo, respuesta a un mensaje del usuario)
 
-  //Cu->cambiarModoSus(3);
-  //Cu->cancelarCambio();
-  //Cu->confirmarCambio();
-
-
-  //ENVIO DE MENSAJE
-
-    //set<dtClase> clasesP = Cc->consultarClasesParticipando();
-  /*for(auto it = clasesP.begin(); it!=clasesP.end(); ++it){
-    cout << "nombre: "<<it->getNombre() << "  codigo: "<< it->getCodigo() <<"\n";
-  }*/
-    //set<dtMensaje> mens = Cc->consultarMensajes(0);
-  //cout << "antes: "<< mens.size() <<"\n";
-
-    //Cc->enviarMensaje("este es un mensaje ");
-
-    //Cc->confirmarEnvio();
-
-  //auto itMens = coleccionGlobalMensajes.begin();
-  //cout << itMens->second->getContenido() << '\n';
-
-    //Cc->enviarRespuesta(0,"esta es una respuesta");
-
-    //Cc->confirmarEnvio();
-  //itMens++;
-  //cout << itMens->second->getContenido() << '\n';
-
-  //Cc->cancelarEnvio();
+    //Cu->cambiarModoSus(3);
+    //Cu->cancelarCambio();
+    //Cu->confirmarCambio();
 
 
-  //FINALIZACION DE ASISTENCIA A CLASE EN VIVO
+    //ENVIO DE MENSAJE
 
-/*set<dtClase*> setDeClasesEnVivo = Cc->consultarClasesParticipandoVivo();
-  for(auto it = setDeClasesEnVivo.begin(); it!=setDeClasesEnVivo.end(); ++it){
-    cout << "nombre: "<<(*it)->getNombre() << "  codigo: "<< (*it)->getCodigo() <<"\n";
-  }
-  Cc->finalizarAsistencia(0);
-  Cc->confirmarSalida();
+      //set<dtClase> clasesP = Cc->consultarClasesParticipando();
+    /*for(auto it = clasesP.begin(); it!=clasesP.end(); ++it){
+      cout << "nombre: "<<it->getNombre() << "  codigo: "<< it->getCodigo() <<"\n";
+    }*/
+      //set<dtMensaje> mens = Cc->consultarMensajes(0);
+    //cout << "antes: "<< mens.size() <<"\n";
 
-  setDeClasesEnVivo = Cc->consultarClasesParticipandoVivo();
-  for(auto it = setDeClasesEnVivo.begin(); it!=setDeClasesEnVivo.end(); ++it){
-    cout << "nombre: "<<(*it)->getNombre() << "  codigo: "<< (*it)->getCodigo() <<"\n";
-  }
-*/
-  //cancelarSalida();
+      //Cc->enviarMensaje("este es un mensaje ");
 
-  //TIEMPO DICTADO DE CLASES
+      //Cc->confirmarEnvio();
 
-  set<DtDictado> dictado = Ca->tiempoDictado();
-  for(auto it = dictado.begin(); it!=dictado.end(); ++it){
-    cout << "asig: "<< it->getCodigoAsig() <<" tiempo dictado: "<<it->getTiempoDictado() << "\n";
-  }
+    //auto itMens = coleccionGlobalMensajes.begin();
+    //cout << itMens->second->getContenido() << '\n';
 
-  //TIEMPO DE ASISTENCIA A CLASE
+      //Cc->enviarRespuesta(0,"esta es una respuesta");
 
+      //Cc->confirmarEnvio();
+    //itMens++;
+    //cout << itMens->second->getContenido() << '\n';
+
+    //Cc->cancelarEnvio();
+
+
+    //FINALIZACION DE ASISTENCIA A CLASE EN VIVO
+
+  /*set<dtClase*> setDeClasesEnVivo = Cc->consultarClasesParticipandoVivo();
+    for(auto it = setDeClasesEnVivo.begin(); it!=setDeClasesEnVivo.end(); ++it){
+      cout << "nombre: "<<(*it)->getNombre() << "  codigo: "<< (*it)->getCodigo() <<"\n";
+    }*/
+//    Cc->finalizarAsistencia(0);
+//    Cc->confirmarSalida();
+
+    /*setDeClasesEnVivo = Cc->consultarClasesParticipandoVivo();
+    for(auto it = setDeClasesEnVivo.begin(); it!=setDeClasesEnVivo.end(); ++it){
+      cout << "nombre: "<<(*it)->getNombre() << "  codigo: "<< (*it)->getCodigo() <<"\n";
+    }*/
+
+    //cancelarSalida();
+
+    //FINALIZACION DE CLASE
+    Cc->iniciarSesion("emailD","123");
+    Cc->iniciarSesion("emailD","123");
+
+    //set<dtClase> sinFin = Cc->consultarClasesEnVivo();
+
+    /*for(auto iterador = sinFin.begin(); iterador!=sinFin.end(); iterador++){
+      cout << "Codigo de clase sin terminar: " << iterador->getCodigo() << "\n";
+    }*/
+
+    Cc->finalizarClase(0);
+
+    Cc->confirmarFin();
+
+    set<dtClase> sinFin = Cc->consultarClasesEnVivo();
+
+<<<<<<< HEAD
   //ELIMINACION DE ASIGNATURA
    Ca->eliminarAsignatura("calculo");
   Ca->confirmarElim();
@@ -295,13 +310,34 @@ int main(){
 
 
 
+=======
+    if(sinFin.begin()==sinFin.end()){
+      cout << "No quedan clases sin terminar\n";
+    }
+>>>>>>> separado
 
-  //CONSULTA DE NOTIFICACIONES
+    //TIEMPO DICTADO DE CLASES
   /*
-  set<dtNotificacion> notificaciones = Cu->consultarNotifs();
-  for(auto it = notificaciones.begin(); it!=notificaciones.end(); ++it){
-    cout << "te respondieron: "<<it->getContenidoMensaje() << "\n";
-  }*/
+    set<DtDictado> dictado = Ca->tiempoDictado();
+    for(auto it = dictado.begin(); it!=dictado.end(); ++it){
+      cout << "asig: "<< it->getCodigoAsig() <<" tiempo dictado: "<<it->getTiempoDictado() << "\n";
+    }
+  */
+    //TIEMPO DE ASISTENCIA A CLASE
+    //set<DtTiempoDeClase> tiempoAsistencia = Cc->consultarTiempoClaseDocente(1);
+    /*for(auto it = tiempoAsistencia.begin(); it!=tiempoAsistencia.end(); ++it){
+      cout << "t: "<<it->getTiempo() << "\n";
+    }*/
+    //ELIMINACION DE ASIGNATURA
+
+    //CONSULTA DE NOTIFICACIONES
+    /*
+    set<dtNotificacion> notificaciones = Cu->consultarNotifs();
+    for(auto it = notificaciones.begin(); it!=notificaciones.end(); ++it){
+      cout << "te respondieron: "<<it->getContenidoMensaje() << "\n";
+    }*/
+
+
 
   return 0;
 }

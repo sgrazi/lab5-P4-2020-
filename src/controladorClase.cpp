@@ -108,33 +108,76 @@ void ControladorClase::agregarHabilitado(string email){//que pasa si quiero agre
 dtInfoClase ControladorClase::desplegarInfoClase(){
   return *infoParaCreacionClase;
 };
-void ControladorClase::confirmarInicio(){
+void ControladorClase::confirmarInicio(){//se separa en dos casos que hacen lo mismo, no se por que si no es asi tira seg faul
   auto itDoc = this->coleccionGlobalDocentes->find(emailUserActual);
   auto itAsig = this->coleccionGlobalAsignaturas->find(infoParaCreacionClase->getCodigo());
   Clase* clase;
-  if(infoParaCreacionClase->getTipo() == teorico)
+  Teorico* teoAux;
+  Monitoreo* monAux;
+  if(infoParaCreacionClase->getTipo() == teorico){
     clase = new Teorico();
+  }
   else
     if(infoParaCreacionClase->getTipo() == practico)
       clase = new Practico();
     else
       clase = new Monitoreo();
 
-  clase->setCodigo(itAsig->second->getClases()->size());//fijarme cantidad de clases en la asignatura y ponerle codigo igual a eso +1
-  clase->setNombre(infoParaCreacionClase->getNombre());
-  clase->setUrl("clases.com/" + clase->getCodigo());
-  clase->setFechaInicio(infoParaCreacionClase->getFechaInicio());
-  clase->setFechaFin(fechaNula);
-  clase->setCreador(itDoc->second);
-  clase->setAsig(itAsig->second);
-  clase->setTipo(infoParaCreacionClase->getTipo());
+  if(infoParaCreacionClase->getTipo() == teorico){
+    teoAux = dynamic_cast<Teorico*>(clase);
+    teoAux->setAsistentes(0);
+    teoAux->setCodigo(itAsig->second->getClases()->size());//fijarme cantidad de clases en la asignatura y ponerle codigo igual a eso +1
+    teoAux->setNombre(infoParaCreacionClase->getNombre());
+    teoAux->setUrl("clases.com/" + clase->getCodigo());
+    teoAux->setFechaInicio(infoParaCreacionClase->getFechaInicio());
+    teoAux->setFechaFin(fechaNula);
+    teoAux->setCreador(itDoc->second);
+    teoAux->setAsig(itAsig->second);
+    teoAux->setTipo(infoParaCreacionClase->getTipo());
 
-  //FALTA PARTE DE LA LISTA DE HABILITADOS DEL MONITOREO
+    itDoc->second->agregarClaseNueva(teoAux);
+    itAsig->second->agregarClaseNueva(teoAux);
 
-  itDoc->second->agregarClaseNueva(clase);
-  itAsig->second->agregarClaseNueva(clase);
+    this->coleccionGlobalClases->insert(pair<int,Clase*> (teoAux->getCodigo(),teoAux));
+  }
+  else{
+    if(infoParaCreacionClase->getTipo() == monitoreo){
+      monAux = dynamic_cast<Monitoreo*>(clase);
+      monAux->setCodigo(itAsig->second->getClases()->size());//fijarme cantidad de clases en la asignatura y ponerle codigo igual a eso +1
+      monAux->setNombre(infoParaCreacionClase->getNombre());
+      monAux->setUrl("clases.com/" + clase->getCodigo());
+      monAux->setFechaInicio(infoParaCreacionClase->getFechaInicio());
+      monAux->setFechaFin(fechaNula);
+      monAux->setCreador(itDoc->second);
+      monAux->setAsig(itAsig->second);
+      monAux->setTipo(infoParaCreacionClase->getTipo());
 
-  this->coleccionGlobalClases->insert(pair<int,Clase*> (clase->getCodigo(),clase));
+      auto arregloEmails = infoParaCreacionClase->getHabilitados();
+      for(int i=0;i<infoParaCreacionClase->getCantHabilitados();++i){//creo la lista de habilitados
+        monAux->agregarHabilitado(this->coleccionGlobalEstudiantes->find(arregloEmails[i])->second);
+      }
+      itDoc->second->agregarClaseNueva(monAux);
+      itAsig->second->agregarClaseNueva(monAux);
+
+      this->coleccionGlobalClases->insert(pair<int,Clase*> (monAux->getCodigo(),monAux));
+    }
+    else{ //practico
+      clase->setCodigo(itAsig->second->getClases()->size());//fijarme cantidad de clases en la asignatura y ponerle codigo igual a eso +1
+      clase->setNombre(infoParaCreacionClase->getNombre());
+      clase->setUrl("clases.com/" + clase->getCodigo());
+      clase->setFechaInicio(infoParaCreacionClase->getFechaInicio());
+      clase->setFechaFin(fechaNula);
+      clase->setCreador(itDoc->second);
+      clase->setAsig(itAsig->second);
+      clase->setTipo(infoParaCreacionClase->getTipo());
+
+      itDoc->second->agregarClaseNueva(clase);
+      itAsig->second->agregarClaseNueva(clase);
+
+      this->coleccionGlobalClases->insert(pair<int,Clase*> (clase->getCodigo(),clase));
+    }
+
+  }
 
 };
 
@@ -164,8 +207,8 @@ void ControladorClase::confirmarFin(){
   dtFecha fechaFin = generarFecha();
   itCla->second->setFechaFin(fechaFin);
 
-  if(itCla->second->getTipo()==teorico)
-      itCla->second->calcularAsistentes();
+  /*if(itCla->second->getTipo()==teorico){} VIEJO, no hace falta calcular asistentes ahora
+      itCla->second->calcularAsistentes();*/
 };
 
 void ControladorClase::cancelarFin(){
@@ -305,11 +348,18 @@ void ControladorClase::confirmarAsistenciaVivo(){
     asistencia->setClase(clase);
     est->asistir(asistencia);
     clase->nuevaVis(asistencia);
+
+    if(clase->getTipo() == teorico){//añado 1 a los asistentes
+      Teorico* clase = dynamic_cast<Teorico*>(clase);
+      clase->setAsistentes(clase->getAsistentes()+1);
+    }
+
   };
                            // SETEO GENERAL DE LA VISUALIZACION
   Visualizacion* vis = new Visualizacion();
   vis->setEnVivo(true);
   vis->setFechaInicioVis(generarFecha());
+  vis->setFechaFinVis(fechaNula);
   asistencia->setVisualizacion(vis); //ver.h y arreglar esta funcion
 };
 
@@ -405,7 +455,42 @@ void ControladorClase::confirmarSalida(){
 
 void ControladorClase::cancelarSalida(){};
 
+set<DtTiempoDeClase> ControladorClase::consultarTiempoClaseDocente(int codigo){
+  set<DtTiempoDeClase> nuevo;
+  auto itAsig = this->coleccionGlobalAsignaturas->find(codigo);
+  int tiempo=0;
+  int divisor=0;
+  for(auto itCla =itAsig->second->getClases()->begin(); itCla!=itAsig->second->getClases()->end();++itCla){
+    if(itCla->second->getEmailCreador()==this->emailUserActual){
+      tiempo=0;
+      divisor=0;
+      DtTiempoDeClase *tiempoClase= new DtTiempoDeClase();
+      tiempoClase->setNombre(itCla->second->getNombre());
+      tiempoClase->setCodClase(itCla->second->getCodigo());
+      for(auto itEstCla =itCla->second->getParticipantes().begin(); itEstCla!=itCla->second->getParticipantes().end();++itEstCla){
+        for(auto itVis =(*itEstCla)->getVis().begin(); itVis!=(*itEstCla)->getVis().end();++itVis){
+          if((*itVis)->getEnVivo()==true && !((*itVis)->getFechaFinVis()==fechaNula)){
+            divisor++;
+            tiempo+=3600*((*itVis)->getFechaFinVis().getHora() - (*itVis)->getFechaInicioVis().getHora());
+            tiempo+=60*((*itVis)->getFechaFinVis().getMinuto() - (*itVis)->getFechaInicioVis().getMinuto());
+            tiempo+=((*itVis)->getFechaFinVis().getSegundo() - (*itVis)->getFechaInicioVis().getSegundo());
+            tiempoClase->setTiempo(tiempoClase->getTiempo()+tiempo);
+          }
+        }
+      }
+      if(divisor!=0){
+        tiempoClase->setTiempo(tiempoClase->getTiempo()/divisor);
+        nuevo.insert(*tiempoClase);
+      }
+      else{
+        tiempoClase->setTiempo(0);
+        nuevo.insert(*tiempoClase);
+      }
+    }
+  }
+  return nuevo;
+};
 
-set<dtInfoClase> ControladorClase::desplegarInfoClases(string){};
+//set<dtInfoClase> ControladorClase::desplegarInfoClases(string){};
 
 ControladorClase::~ControladorClase(){};
