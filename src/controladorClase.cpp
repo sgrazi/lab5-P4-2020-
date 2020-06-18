@@ -213,9 +213,17 @@ void ControladorClase::confirmarFin(){
   auto itCla = coleccionGlobalClases->find(this->claseAFinalizar);
   dtFecha fechaFin = generarFecha();
   itCla->second->setFechaFin(fechaFin);
-/*
-  if(itCla->second->getTipo()==teorico)
-      itCla->second->calcularAsistentes();*/
+
+  set<UsrCla*> participantes = itCla->second->getParticipantes();
+  for(auto itUser = participantes.begin(); itUser!=participantes.end(); itUser++){//para cada visualizacion que no haya terminado
+    auto itVis = (*itUser)->getVis().begin();
+    if((*itVis)->getFechaFinVis() == fechaNula){//finalizo la asistencia
+      iniciarSesion((*itUser)->getEst()->getEmail(),(*itUser)->getEst()->getPassword());
+      finalizarAsistencia(claseAFinalizar);
+      confirmarSalida();
+    }
+  }
+  iniciarSesion(itCla->second->getEmailCreador(),"password que no importa porque nunca verificamos");//vuelvo a dejar al docente como el usuario actual
 };
 
 void ControladorClase::cancelarFin(){
@@ -233,16 +241,19 @@ set<dtClase> ControladorClase::consultarClasesParticipando(){
   auto itUser = coleccionGlobalEstudiantes->find(emailUserActual);
   set<UsrCla*> lista = itUser->second->getClasesParticipa();
   for(auto itLista = lista.begin(); itLista!=lista.end(); itLista++){
-    dtClase *dt = new dtClase();
-    dt->setNombre((*itLista)->getClase()->getNombre());
-    dt->setCodigo((*itLista)->getClase()->getCodigo());
-    dt->setFechaInicio((*itLista)->getClase()->getFechaInicio());
-    dt->setFechaFin((*itLista)->getClase()->getFechaFin());
-    dt->setTipo((*itLista)->getClase()->getTipo());
-    dt->setUrl((*itLista)->getClase()->getUrl());
-    dt->setCreador((*itLista)->getClase()->getEmailCreador());
-    dt->setAsig((*itLista)->getClase()->getCodigoAsig());
-    nuevo.insert(*dt);
+    auto itVis = (*itLista)->getVis().begin();
+    if((*itVis)->getFechaFinVis() == fechaNula){//si la visualizacion mas reciente aun no termino (esta viendo aun)
+      dtClase *dt = new dtClase();
+      dt->setNombre((*itLista)->getClase()->getNombre());
+      dt->setCodigo((*itLista)->getClase()->getCodigo());
+      dt->setFechaInicio((*itLista)->getClase()->getFechaInicio());
+      dt->setFechaFin((*itLista)->getClase()->getFechaFin());
+      dt->setTipo((*itLista)->getClase()->getTipo());
+      dt->setUrl((*itLista)->getClase()->getUrl());
+      dt->setCreador((*itLista)->getClase()->getEmailCreador());
+      dt->setAsig((*itLista)->getClase()->getCodigoAsig());
+      nuevo.insert(*dt);
+    }
   }
   return nuevo;
 };
@@ -455,38 +466,40 @@ void ControladorClase::confirmarSalida(){
 
 void ControladorClase::cancelarSalida(){};
 
+//TIEMPO DE ASISTENCIA A CLASE
+
 set<DtTiempoDeClase> ControladorClase::consultarTiempoClaseDocente(int codigo){
   set<DtTiempoDeClase> nuevo;
   auto itAsig = this->coleccionGlobalAsignaturas->find(codigo);
   int tiempo=0;
   int divisor=0;
   for(auto itCla =itAsig->second->getClases()->begin(); itCla!=itAsig->second->getClases()->end();++itCla){
-   if(itCla->second->getEmailCreador()==this->emailUserActual){
-    tiempo=0;
-    divisor=0;
-    DtTiempoDeClase *tiempoClase= new DtTiempoDeClase();
-    tiempoClase->setNombre(itCla->second->getNombre());
-    tiempoClase->setCodClase(itCla->second->getCodigo());
-    for(auto itEstCla =itCla->second->getParticipantes().begin(); itEstCla!=itCla->second->getParticipantes().end();++itEstCla){
-      for(auto itVis =(*itEstCla)->getVis().begin(); itVis!=(*itEstCla)->getVis().end();++itVis){
-        if((*itVis)->getEnVivo()==true && !((*itVis)->getFechaFinVis()==fechaNula)){
-          divisor++;
-          tiempo+=3600*((*itVis)->getFechaFinVis().getHora() - (*itVis)->getFechaInicioVis().getHora());
-          tiempo+=60*((*itVis)->getFechaFinVis().getMinuto() - (*itVis)->getFechaInicioVis().getMinuto());
-          tiempo+=((*itVis)->getFechaFinVis().getSegundo() - (*itVis)->getFechaInicioVis().getSegundo());
-          tiempoClase->setTiempo(tiempoClase->getTiempo()+tiempo);
+    if(itCla->second->getEmailCreador()==this->emailUserActual){
+      tiempo=0;
+      divisor=0;
+      DtTiempoDeClase *tiempoClase= new DtTiempoDeClase();
+      tiempoClase->setNombre(itCla->second->getNombre());
+      tiempoClase->setCodClase(itCla->second->getCodigo());
+      for(auto itEstCla =itCla->second->getParticipantes().begin(); itEstCla!=itCla->second->getParticipantes().end();++itEstCla){
+        for(auto itVis =(*itEstCla)->getVis().begin(); itVis!=(*itEstCla)->getVis().end();++itVis){
+          if((*itVis)->getEnVivo()==true && !((*itVis)->getFechaFinVis()==fechaNula)){
+            divisor++;
+            tiempo+=3600*((*itVis)->getFechaFinVis().getHora() - (*itVis)->getFechaInicioVis().getHora());
+            tiempo+=60*((*itVis)->getFechaFinVis().getMinuto() - (*itVis)->getFechaInicioVis().getMinuto());
+            tiempo+=((*itVis)->getFechaFinVis().getSegundo() - (*itVis)->getFechaInicioVis().getSegundo());
+            tiempoClase->setTiempo(tiempoClase->getTiempo()+tiempo);
+          }
         }
       }
+      if(divisor!=0){
+        tiempoClase->setTiempo(tiempoClase->getTiempo()/divisor);
+        nuevo.insert(*tiempoClase);
+      }
+      else{
+        tiempoClase->setTiempo(0);
+        nuevo.insert(*tiempoClase);
+      }
     }
-    if(divisor!=0){
-      tiempoClase->setTiempo(tiempoClase->getTiempo()/divisor);
-      nuevo.insert(*tiempoClase);
-    }
-    else{
-      tiempoClase->setTiempo(0);
-      nuevo.insert(*tiempoClase);
-    }
-   }
   }
   return nuevo;
 };
