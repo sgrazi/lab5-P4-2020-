@@ -4,6 +4,8 @@
 Clase::Clase(){
 
 };
+void Clase::auxiliar(){};
+
 void Clase::setNombre(string nombre){
   this->nombre = nombre;
 };

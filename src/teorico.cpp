@@ -6,11 +6,11 @@
 
 const dtFecha fechaNula(0,0,0,0,0,0);
 
+void Teorico::auxiliar(){};
+
 Teorico::Teorico(){
   this->setTipo(teorico); //invariable, una clase de tipo teorico tiene en el atributo "tipo" el valor "teorico", se otroga este valor cuando se la crea, es correcto esto?
 };
-
-void Teorico::setNombre(string nom){this->setNombre(nom);};
 
 void Teorico::setAsistentes(int a){
   this->asistentes = a;

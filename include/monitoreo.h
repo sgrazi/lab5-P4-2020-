@@ -6,11 +6,15 @@ class Estudiante;
 
 class Monitoreo : public Clase{
   private:
-    Estudiante* habilitados [15];
+    int cantHabilitados;
+    Estudiante* habilitados[15];
   public://faltan funciones de manejo de relaciones
-    void setNombre(string);
+    void auxiliar();
 
     Monitoreo();
+
+    void agregarHabilitado(Estudiante*);
+
     ~Monitoreo();
 };
 #endif

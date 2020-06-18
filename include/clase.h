@@ -32,7 +32,8 @@ class Clase{
 
   public://faltan funciones de manejo de relaciones
     Clase();
-    virtual void setNombre(string);
+    virtual void auxiliar();
+    void setNombre(string);
     void setCodigo(int);
     void setUrl(string);
     void setFechaInicio(dtFecha);

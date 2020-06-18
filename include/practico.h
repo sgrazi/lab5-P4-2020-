@@ -4,7 +4,7 @@
 
 class Practico : public Clase{
   public:
-    void setNombre(string);
+    void auxiliar();
 
     Practico();
     ~Practico();

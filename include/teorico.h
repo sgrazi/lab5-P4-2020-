@@ -8,7 +8,7 @@ class Teorico : public Clase{
   public:
     Teorico();
 
-    void setNombre(string);
+    void auxiliar();
     void setAsistentes(int);
     int getAsistentes();
 
