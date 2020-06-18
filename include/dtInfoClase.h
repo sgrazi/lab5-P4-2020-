@@ -3,7 +3,7 @@
 #include "dtFecha.h"
 #include "tipoClase.h"
 #include <string>
-
+#include <array>
 using namespace std;
 
 //forward declaration
@@ -19,7 +19,7 @@ class dtInfoClase{
     int codigo; //codigo de la asignatura de la clase
     string iniciadaPor;
     int cantHabilitados;
-    string habilitados[15]; //emails de los habilitados
+    array<string, 15> habilitados; //emails de los habilitados
     int asistentes;
   public:
     dtInfoClase(){
@@ -33,6 +33,8 @@ class dtInfoClase{
     void setTipo(tipoClase);
     void setIniciadaPor(string);
     void setAsistentes(int);
+    int getCantHabilitados();
+    array<string, 15> getHabilitados();
     int getCodigo();
     string getNombre();
     string getUrl();

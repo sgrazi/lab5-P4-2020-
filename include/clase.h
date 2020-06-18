@@ -25,14 +25,14 @@ class Clase{
     dtFecha fechaInicio;
     dtFecha fechaFin;
     Docente* creador;
-    set<UsrCla*> participantes; //list porque usrcla no tiene identificador y no se puede hacer un set (cambié porque sino no compilaba)
+    set<UsrCla*> participantes;
     set<Mensaje*> mensajes;
     Asignatura *asig;
     tipoClase tipo;
 
   public://faltan funciones de manejo de relaciones
     Clase();
-    virtual int calcularAsistentes() = 0;
+    virtual void auxiliar();
     void setNombre(string);
     void setCodigo(int);
     void setUrl(string);
@@ -60,6 +60,5 @@ class Clase{
     void visualizar(Estudiante*);
 
     ~Clase();
-    //bool operator<(const Clase &right); //si colecciones se implementan con set esto es necesario
 };
 #endif

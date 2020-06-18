@@ -26,5 +26,6 @@ class Visualizacion{
     //bool operator<(const Visualizacion &right){return true;}; //si colecciones se implementan con set esto es necesario
 
     ~Visualizacion();
+    bool operator<(const Visualizacion &right){return true;};
 };
 #endif

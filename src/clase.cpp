@@ -4,6 +4,8 @@
 Clase::Clase(){
 
 };
+void Clase::auxiliar(){};
+
 void Clase::setNombre(string nombre){
   this->nombre = nombre;
 };
@@ -61,7 +63,7 @@ int Clase::getCodigoAsig(){
   return asig->getCodigo();
 };
 void Clase::nuevaVis(UsrCla* c){//inserta el usrcla
-  participantes.insert(participantes.begin(),c);
+  participantes.insert(c);
 };
 
 void Clase::agregarMensaje(Mensaje* m){

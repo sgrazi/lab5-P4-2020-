@@ -14,7 +14,7 @@ void UsrCla::setClase(Clase* c){ this->clase = c;};
 Clase* UsrCla::getClase(){ return clase;};
 
 void UsrCla::setVisualizacion(Visualizacion* v){
-  vis.insert(vis.end(),v);
+  vis.insert(v);//la visualizacion mas reciente siempre la pongo al inicio
 };
 
 set<Visualizacion*> UsrCla::getVis(){ return vis;};

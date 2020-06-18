@@ -4,8 +4,9 @@
 
 class Practico : public Clase{
   public:
+    void auxiliar();
+
     Practico();
     ~Practico();
-    int calcularAsistentes();
 };
 #endif
