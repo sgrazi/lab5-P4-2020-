@@ -116,6 +116,7 @@ int main(){
       cout << "Email docente libre de la asig calculo: "<< ite2->first << "\n";
   }; //consultarDocentesLibres() funca
 */
+
   //asigno el docente
   Ca->asignarDocente("email2",1,teorico);
   Ca->confirmarAsignacion();
@@ -162,9 +163,16 @@ int main(){
 
   Cc->iniciarClase(1,"Clase 1",teorico,*fecha);
 
+  if(coleccionGlobalClases.begin()!=coleccionGlobalClases.end())
+   cout << "se hizo bien 0";
+
   Cc->confirmarInicio();
 
-  /*auto clasesa = coleccionGlobalAsignaturas.find(1)->second->getClases();
+  if(coleccionGlobalClases.begin()!=coleccionGlobalClases.end())
+   cout << "se hizo bien 1";
+
+/*
+  auto clasesa = coleccionGlobalAsignaturas.find(1)->second->getClases();
   cout << "clase en asignatura: " << clasesa->begin()->second->getNombre() << "\n";
 
   auto clasesd = coleccionGlobalAsignaturas.find(1)->second->getClases();
@@ -182,9 +190,15 @@ int main(){
 
   Cc->confirmarFin();
 
-  //sinFin = Cc->consultarClasesEnVivo();
+  set<dtClase> sinFin = Cc->consultarClasesEnVivo();
 
-  /*if(sinFin.begin()==sinFin.end()){
+  if(coleccionGlobalClases.begin()==coleccionGlobalClases.end())
+    cout << "se hizo bien 3";
+   else
+    cout << "no se hizo bien";
+
+ /*
+  if(sinFin.begin()==sinFin.end()){
     cout << "No quedan clases sin terminar\n";
   }*/
 
@@ -277,10 +291,10 @@ int main(){
   Ca->confirmarElim();
   Ca->eliminarAsignatura("calculo2");
   Ca->confirmarElim();
-  
-  
-  
-  
+
+
+
+
 
   //CONSULTA DE NOTIFICACIONES
   /*
