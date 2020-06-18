@@ -181,7 +181,7 @@ int main(){
   /*for(auto iterador = sinFin.begin(); iterador!=sinFin.end(); iterador++){
     cout << "Codigo de clase sin terminar: " << iterador->getCodigo() << "\n";
   }*/
-
+/*
   Cc->finalizarClase(0);
 
   Cc->confirmarFin();
@@ -192,7 +192,7 @@ int main(){
     cout << "se hizo bien 3";
    else
     cout << "no se hizo bien";
-
+*/
  /*
   if(sinFin.begin()==sinFin.end()){
     cout << "No quedan clases sin terminar\n";
