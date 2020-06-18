@@ -9,7 +9,7 @@
 #include <iostream>
 
 Usuario::Usuario(){
-
+  this->modoSus = 0;
 };
 void Usuario::setNombre(string nombre){
   this->nombre = nombre;
@@ -61,7 +61,10 @@ set<UsrCla*> Usuario::getClasesParticipa(){
 };
 
 bool Usuario::aplicaNotificacion(dtMensaje d){
-  return (aplica->aplicaNotificacion(d));
+  bool res = false;
+  if(modoSus!=0)
+    res =(aplica->aplicaNotificacion(d));
+  return res;
 };
 
 void Usuario::agregarMensaje(Mensaje* m){

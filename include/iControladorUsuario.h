@@ -15,7 +15,7 @@ class IControladorUsuario{
 		virtual void agregarDocente(string,string,string,string,string) = 0;
 		virtual void confirmarAlta() = 0;
 		virtual void cancelarAlta() = 0;
-		virtual set<dtNotificacion> consultarNotifs() = 0; 
+		virtual set<dtNotificacion*> consultarNotifs() = 0; 
 		virtual void cambiarModoSus(int) = 0;
 		virtual void cancelarCambio() = 0;
 		virtual void confirmarCambio() = 0;

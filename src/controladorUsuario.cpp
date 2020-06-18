@@ -159,28 +159,26 @@ void ControladorUsuario::cancelarInscripcion(){
 
 };
 
-set<dtNotificacion> ControladorUsuario::consultarNotifs(){
+set<dtNotificacion*> ControladorUsuario::consultarNotifs(){
+  auto itEst = this->coleccionGlobalEstudiantes->find(emailUserActual);
+  return itEst->second->getNotificaciones();
+  /*VIEJO
   set<dtNotificacion> nuevo;
   auto itEst = this->coleccionGlobalEstudiantes->find(emailUserActual);
   auto it = itEst->second->getNotificaciones().begin();
   dtNotificacion* puntero = (*it);
-  if(puntero==NULL)
-    cout << "nulo";
+  //cout <<  puntero->getContenidoMensaje();
 
   for(auto it = itEst->second->getNotificaciones().begin(); it!=itEst->second->getNotificaciones().end();++it){
       dtNotificacion* dt = new dtNotificacion();
-      dt->setCodigoAsig((*it)->getCodigoAsig());
-      dt->setCodigoClase((*it)->getCodigoClase());
-      dt->setIdMensaje((*it)->getIdMensaje());
-      //(*it)->getContenidoMensaje() //esto va dentro del setContenidoMensaje
-      string a = "...yo no puedo creer esto lpm\n";
-      dt->setContenidoMensaje(a);//PROBLEMA ESTA ACA
-      //si le paso una variable da segmentation fault, si le paso un string tipo "ejemplo" asi dentro de "" anda perfecto
-      //NO ENTIENDO POR QUE ???????
+      dt->setCodigoAsig(puntero->getCodigoAsig());
+      dt->setCodigoClase(puntero->getCodigoClase());
+      dt->setIdMensaje(puntero->getIdMensaje());
+      dt->setContenidoMensaje("hola");
       nuevo.insert(*dt);
   }
 
-  return nuevo;
+  return nuevo;*/
 };
 
 void ControladorUsuario::cambiarModoSus(int modo){

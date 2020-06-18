@@ -91,7 +91,7 @@ class ControladorUsuario: public IControladorUsuario{
 		void confirmarCambio();
 
 		//CONSULTAR NOTIFICACIONES
-		set<dtNotificacion> consultarNotifs();
+		set<dtNotificacion*> consultarNotifs();
 
 		void desuscribirse();
 

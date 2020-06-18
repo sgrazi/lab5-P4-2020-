@@ -174,6 +174,7 @@ int main(){
   auto clasesd = coleccionGlobalAsignaturas.find(1)->second->getClases();
   cout << "clase en docente: " <<clasesd->begin()->second->getNombre() << "\n";
 
+
   //FINALIZACION DE CLASE
 
   //set<dtClase> sinFin = Cc->consultarClasesEnVivo();
@@ -199,22 +200,22 @@ int main(){
   }*/
 
   //ASISTENCIA A CLASE EN VIVO
-    //Cu->iniciarSesion("emailE","pass");
-    //Cc->iniciarSesion("emailE","pass");
+    Cu->iniciarSesion("emailE","pass");
+    Cc->iniciarSesion("emailE","pass");
 
-    //set<dtAsignatura> asigIns = Cc->consultarAsigIns();
+    set<dtAsignatura> asigIns = Cc->consultarAsigIns();
   /*for(auto it = asigIns.begin(); it!=asigIns.end(); ++it){
     cout << it->getCodigo() <<"\n";
   }*/
 
-//    set<dtClase> clasesA = Cc->consultarClasesVivo(1); // 1 es "calculo"
+    set<dtClase> clasesA = Cc->consultarClasesVivo(1); // 1 es "calculo"
   /*for(auto it = clasesA.begin(); it!=clasesA.end(); ++it){
     cout << it->getNombre() << "  "<< it->getCodigo() <<"\n";
   }*/
 
-//    dtClase clase1 = Cc->asistirClaseVivo(0); //0 es "clase 1"
+    dtClase clase1 = Cc->asistirClaseVivo(0); //0 es "clase 1"
 
-//    Cc->confirmarAsistenciaVivo();
+    Cc->confirmarAsistenciaVivo();
 
   /*Estudiante* est = coleccionGlobalEstudiantes.find("email")->second;
   set<UsrCla*> lista = est->getClasesParticipa();
@@ -227,30 +228,30 @@ int main(){
 
     //SUSCRIBIRSE A NOTIFICACIONES (solo el tercer modo, respuesta a un mensaje del usuario)
 
-    //Cu->cambiarModoSus(3);
+    Cu->cambiarModoSus(3);
     //Cu->cancelarCambio();
-    //Cu->confirmarCambio();
+    Cu->confirmarCambio();
 
 
     //ENVIO DE MENSAJE
 
-      //set<dtClase> clasesP = Cc->consultarClasesParticipando();
+    set<dtClase> clasesP = Cc->consultarClasesParticipando();
     /*for(auto it = clasesP.begin(); it!=clasesP.end(); ++it){
       cout << "nombre: "<<it->getNombre() << "  codigo: "<< it->getCodigo() <<"\n";
     }*/
-      //set<dtMensaje> mens = Cc->consultarMensajes(0);
+    set<dtMensaje> mens = Cc->consultarMensajes(0);
     //cout << "antes: "<< mens.size() <<"\n";
 
-      //Cc->enviarMensaje("este es un mensaje ");
+    Cc->enviarMensaje("este es un mensaje ");
 
-      //Cc->confirmarEnvio();
+    Cc->confirmarEnvio();
 
     //auto itMens = coleccionGlobalMensajes.begin();
     //cout << itMens->second->getContenido() << '\n';
 
-      //Cc->enviarRespuesta(0,"esta es una respuesta");
+    Cc->enviarRespuesta(0,"esta es una respuesta");
 
-      //Cc->confirmarEnvio();
+    Cc->confirmarEnvio();
     //itMens++;
     //cout << itMens->second->getContenido() << '\n';
 
@@ -274,8 +275,8 @@ int main(){
     //cancelarSalida();
 
     //FINALIZACION DE CLASE
-    Cc->iniciarSesion("emailD","123");
-    Cc->iniciarSesion("emailD","123");
+      //Cc->iniciarSesion("emailD","123");
+      //Cc->iniciarSesion("emailD","123");
 
     //set<dtClase> sinFin = Cc->consultarClasesEnVivo();
 
@@ -283,11 +284,14 @@ int main(){
       cout << "Codigo de clase sin terminar: " << iterador->getCodigo() << "\n";
     }*/
 
-    Cc->finalizarClase(0);
+      //Cc->finalizarClase(0);
 
-    Cc->confirmarFin();
+      //Cc->confirmarFin();
 
-    set<dtClase> sinFin = Cc->consultarClasesEnVivo();
+    /*set<dtClase> sinFin = Cc->consultarClasesEnVivo();
+    for(auto iterador = sinFin.begin(); iterador!=sinFin.end(); iterador++){
+      cout << "Codigo de clase sin terminar: " << iterador->getCodigo() << "\n";
+    }*/
 
   //ELIMINACION DE ASIGNATURA
   /*
@@ -315,11 +319,11 @@ int main(){
     //ELIMINACION DE ASIGNATURA
 
     //CONSULTA DE NOTIFICACIONES
-    /*
-    set<dtNotificacion> notificaciones = Cu->consultarNotifs();
+
+    set<dtNotificacion*> notificaciones = Cu->consultarNotifs();
     for(auto it = notificaciones.begin(); it!=notificaciones.end(); ++it){
-      cout << "te respondieron: "<<it->getContenidoMensaje() << "\n";
-    }*/
+      cout << "te respondieron: "<<(*it)->getContenidoMensaje() << "\n";
+    }
 
 
 

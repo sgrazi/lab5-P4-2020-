@@ -40,8 +40,9 @@ Mensaje* HandlerMensajes::agregarMensaje(int codigo, bool esRespuesta, int idRes
 
   for(auto itObs = observers->begin(); itObs!=observers->end(); ++itObs){//notifico a los observers
     bool aplica = itObs->second->aplicaNotificacion(*dt);
-    if(aplica)
+    if(aplica){
       itObs->second->notificar(*dt);
+    }
   }
 
   delete dt;
