@@ -190,6 +190,8 @@ void ControladorClase::confirmarInicio(){//se separa en dos casos que hacen lo m
 
 };
 
+void ControladorClase::cancelarInicio(){};
+
 //FINALIZACION DE CLASE
 
 set<dtClase> ControladorClase::consultarClasesEnVivo(){
@@ -211,9 +213,9 @@ void ControladorClase::confirmarFin(){
   auto itCla = coleccionGlobalClases->find(this->claseAFinalizar);
   dtFecha fechaFin = generarFecha();
   itCla->second->setFechaFin(fechaFin);
-
+/*
   if(itCla->second->getTipo()==teorico)
-      itCla->second->calcularAsistentes();
+      itCla->second->calcularAsistentes();*/
 };
 
 void ControladorClase::cancelarFin(){

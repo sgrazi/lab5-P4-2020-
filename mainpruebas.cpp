@@ -61,9 +61,9 @@ int main(){
 
   HandlerMensajes* h = new HandlerMensajes();
 
-  ControladorUsuario* Cu = new ControladorUsuario();
-  ControladorAsignatura* Ca = new ControladorAsignatura();
-  ControladorClase* Cc = new ControladorClase();
+  ControladorUsuario* Cu = ControladorUsuario::getInstancia();
+  ControladorAsignatura* Ca = ControladorAsignatura::getInstancia();
+  ControladorClase* Cc = ControladorClase::getInstancia();
 
   //los controladores tienen punteros a las colecciones en atributos
   //de esta manera las colecciones se declaran en el main y son unicas para todo controlador que necesite usarlas
@@ -287,13 +287,14 @@ int main(){
 
     Cc->confirmarFin();
 
-    sinFin = Cc->consultarClasesEnVivo();
+    set<dtClase> sinFin = Cc->consultarClasesEnVivo();
 
   //ELIMINACION DE ASIGNATURA
+  /*
    Ca->eliminarAsignatura("calculo");
   Ca->confirmarElim();
   Ca->eliminarAsignatura("calculo2");
-  Ca->confirmarElim();
+  Ca->confirmarElim();*/
 
 
 
