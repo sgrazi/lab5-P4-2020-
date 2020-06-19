@@ -31,5 +31,5 @@ int Rol::getCodigoAsig(){
   return asig->getCodigo();
 };
 Rol::~Rol(){
-
+doc->desvincularDoc(this->getCodigoAsig());
 };

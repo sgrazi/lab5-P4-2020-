@@ -32,7 +32,7 @@ class Docente : public Usuario{
     set<dtAsignatura> getInfo();
     void agregarClaseNueva(Clase*);
     set<dtClase> clasesATerminar();
-    void desvincularDoc(Rol);
+    void desvincularDoc(int);
 
     ~Docente();
 };

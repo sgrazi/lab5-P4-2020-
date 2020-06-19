@@ -128,11 +128,13 @@ set<DtDictado> ControladorAsignatura::tiempoDictado(){
   return nuevo;
 };
 
-void ControladorAsignatura::eliminarAsignatura(string){
-
+void ControladorAsignatura::eliminarAsignatura(int codigo){
+setAsigAEliminar(codigo);
 };
 void ControladorAsignatura::confirmarElim(){
-
+  auto asig = coleccionGlobalAsignaturas->find(asigAEliminar);
+    delete asig->second;
+    coleccionGlobalAsignaturas->erase(asigAEliminar);
 };
 void ControladorAsignatura::cancelarElim(){
 

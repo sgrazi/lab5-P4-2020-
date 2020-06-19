@@ -80,8 +80,9 @@ set<dtClase> Docente::clasesATerminar(){
   return nuevo;
 };
 
-void Docente::desvincularDoc(Rol){/*
-  remove(rol,asignaturas);*/
+void Docente::desvincularDoc(int codigoAsignatura){
+
+  this->asignaturas->erase(codigoAsignatura);
 };
 
 Docente::~Docente(){

@@ -28,4 +28,9 @@ void UsrCla::marcarFin(dtFecha fecha){//como es clase en vivo solo hay una visua
   (*vis.begin())->setEnVivo(true);
 };
 //void UsrCla::iniciarVis(){};
-//UsrCla::~UsrCla(){};
+
+UsrCla::~UsrCla(){
+  for(auto itvis =this->vis.begin(); itvis!=this->vis.end();++itvis){
+    delete &itvis;
+  }
+};

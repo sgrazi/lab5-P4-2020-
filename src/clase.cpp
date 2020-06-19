@@ -93,5 +93,10 @@ void Clase::visualizar(Estudiante* e){/*
 
 
 Clase::~Clase(){
-
+  for(auto itmsj =this->mensajes.begin(); itmsj!=this->mensajes.end();++itmsj){
+    delete &itmsj;
+  }
+  for(auto itestcla =this->participantes.begin(); itestcla!=this->participantes.end();++itestcla){
+    delete &itestcla;
+  }
 };

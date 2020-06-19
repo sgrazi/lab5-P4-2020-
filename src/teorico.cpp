@@ -25,7 +25,7 @@ int Teorico::calcularAsistentes(){
     auto visualizaciones = (*it)->getVis().begin();//
     if((*visualizaciones)->getFechaInicioVis()==fechaNula)
       cout << "1";
-    /*
+    
     if((*visualizaciones)->getFechaFinVis() == fechaNula){ //la visualizacion mas reciente siempre esta al inicio
       (*it)->marcarFin(this->getFechaFin());//como es clase en vivo solo hay una visualizacion
       i++;

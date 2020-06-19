@@ -14,10 +14,10 @@ string Estudiante::getCI(){
 void Estudiante::inscribir(Asignatura* a){
   asignaturas->insert(pair<int,Asignatura*> (a->getCodigo(),a));
 };
-void Estudiante::desinscribir(int codigo){/*//inventado
-  Asignatura *asig = find(codigo,ColeccionGlobalAsignaturas);
-  remove(asig,asignaturas);*/
+void Estudiante::desinscribir(int codigo){
+  asignaturas->erase(codigo);
 };
+
 map<int,Asignatura*>* Estudiante::getAsignaturas(){
   return asignaturas;
 };

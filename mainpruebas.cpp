@@ -96,6 +96,14 @@ int main(){
   Ca->confirmarAlta();
   Ca->agregarAsignatura("calculo2",2,1,0,0);
   Ca->confirmarAlta();
+
+  Ca->eliminarAsignatura(1);
+  Ca->confirmarElim();
+  Ca->eliminarAsignatura(2);
+  Ca->confirmarElim();
+  if(coleccionGlobalAsignaturas.begin()==coleccionGlobalAsignaturas.end())
+      cout << "luego quito ambas";
+
   /*
   auto as = coleccionGlobalAsignaturas.find(1);
 

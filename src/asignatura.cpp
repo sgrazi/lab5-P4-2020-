@@ -28,7 +28,7 @@ bool Asignatura::getPractico() const{ return practico;};
 void Asignatura::setMonitoreo(bool m){ this->monitoreo = m;};
 bool Asignatura::getMonitoreo() const{  return monitoreo;};
 
-Asignatura::~Asignatura(){};
+
 
 void Asignatura::agregarRol(Rol* rol){
   this->docentes->insert(pair<string,Rol*>(rol->getDoc()->getEmail(),rol));
@@ -89,3 +89,17 @@ void Asignatura::agregarClaseNueva(Clase* c){
   }
   return nuevo;
 };*/
+Asignatura::~Asignatura(){
+  for(auto itclases = this->clases->begin(); itclases!=clases->end(); ++itclases){
+    delete itclases->second;
+    this->clases->erase(itclases->first);
+  }
+  for(auto itest = this->inscriptos->begin(); itest!=this->inscriptos->end(); ++itest){
+    itest->second->desinscribir(this->codigo);
+    this->inscriptos->erase(itest->first);
+  }
+  for(auto itrol = this->docentes->begin(); itrol!=this->docentes->end(); ++itrol){
+    delete itrol->second;
+    this->docentes->erase(itrol->first);
+  }
+};

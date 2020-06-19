@@ -66,7 +66,7 @@ class ControladorAsignatura:public IControladorAsignatura{
 		void cancelarAsignacion();
 
 		//ELIM DE ASIG
-		void eliminarAsignatura(string);
+		void eliminarAsignatura(int);
 		void confirmarElim();
 		void cancelarElim();
 
