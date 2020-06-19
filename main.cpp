@@ -42,10 +42,10 @@ class Sistema{
       ed = false;
       sn = 0;
       while(!ed){
-        cout << "\n\t¿Desea agregar un estudiante (1) o un docente (0)? \n\tOpcion: ";
+        cout << "\n\t¿Desea agregar un estudiante (E) o un docente (D)? \n\tOpcion: ";
         cin >> entrada;
         switch (entrada){
-          case '1':
+          case 'E':
             ed = true;
             cout << "\n\tIngrese el nombre: ";
             cin >> n;
@@ -59,14 +59,14 @@ class Sistema{
             cin >> var;
             fabrica->getIUsuario()->agregarEstudiante(n, c, e, u, var);
             while(!sn){
-              cout << "\n\t¿Desea confirmar (1) el alta del estudiante? \n\tOpcion: ";
+              cout << "\n\t¿Desea confirmar el alta del estudiante? (S/N)\n\tOpcion: ";
               cin >> entrada;
               switch (entrada) {
-                case '1':
+                case 'S':
                   sn = true;
                   fabrica->getIUsuario()->confirmarAlta();
                 break;
-                case '0':
+                case 'N':
                   sn = true;
                   fabrica->getIUsuario()->cancelarAlta();
                 break;
@@ -76,7 +76,7 @@ class Sistema{
               }
             }
           break;
-          case '2':
+          case 'D':
             ed = true;
             cout << "\n\tIngrese el nombre: ";
             cin >> n;
@@ -93,11 +93,11 @@ class Sistema{
               cout << "\n\t¿Desea confirmar (1) el alta del docente? (S/N) \n\tOpcion: ";
               cin >> entrada;
               switch (entrada) {
-                case '1':
+                case 'S':
                   sn = true;
                   fabrica->getIUsuario()->confirmarAlta();
                 break;
-                case '0':
+                case 'N':
                   sn = true;
                   fabrica->getIUsuario()->cancelarAlta();
                 break;
@@ -132,6 +132,23 @@ class Sistema{
     void enviarMensaje();
     void suscribirANotificaciones();
     void consultarNotificaciones();
+    //display
+    void getDatosUsuarios(){
+      cout << "\n\tEstudiantes en el sistema:";
+      for(auto it = colEstudiantes->begin(); it!=colEstudiantes->end();it++){
+        cout << "\n\tNombre: "<<it->second->getNombre()<< " Email: " <<it->second->getEmail();
+      }
+      cout << "\n\tDocentes en el sistema:";
+      for(auto it = colDocentes->begin(); it!=colDocentes->end();it++){
+        cout << "\n\tNombre: "<<it->second->getNombre()<< " Email: " <<it->second->getEmail();
+      }
+    };
+    void getDatosAsignaturas(){
+
+    };
+    void getDatosClases(){
+
+    };
 };
 
 Factory* Sistema::fabrica = 0;
@@ -200,7 +217,8 @@ int main(){
     cout << "\t2) Docente" << endl;
     cout << "\t3) Estudiante" << endl;
     cout << "\t4) Cargar datos de prueba" << endl;
-    cout << "\t5) Salir" << endl << endl;
+    cout << "\t5) Ver datos en el sistema" << endl;
+    cout << "\t6) Salir" << endl;
     cout << "\n \tOpcion: ";
     cin >> tecla;
 
@@ -291,6 +309,11 @@ int main(){
         cout << "\nCasos de pruebas cargados.";
       break;
       case '5':
+        s->getDatosUsuarios();
+        s->getDatosAsignaturas();
+        s->getDatosClases();
+      break;
+      case '6':
         salir = true;
       break;
       default:

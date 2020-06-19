@@ -96,7 +96,6 @@ void ControladorUsuario::confirmarAlta(){
     nuevo->setImagen(getUrlUser());
     nuevo->setCI(getCedulaEst());
     this->coleccionGlobalEstudiantes->insert(pair<string,Estudiante*>(nuevo->getEmail(),nuevo));
-    //coleccionGlobalEstudiantes[nuevo->getEmail()]=nuevo;
     this->ColeccionGlobalUsuarios->insert(pair<string,Usuario*>(nuevo->getEmail(),nuevo));
 
   }
@@ -108,7 +107,6 @@ void ControladorUsuario::confirmarAlta(){
     nuevo->setImagen(getUrlUser());
     nuevo->setInstituto(getInstitutoDoc());
     this->coleccionGlobalDocentes->insert(pair<string,Docente*>(nuevo->getEmail(),nuevo));
-    //coleccionGlobalDocentes[nuevo->getEmail()]=nuevo;
     this->ColeccionGlobalUsuarios->insert(pair<string,Usuario*>(nuevo->getEmail(),nuevo));
   }
 };
