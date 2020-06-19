@@ -7,6 +7,12 @@
 #include "dtEstudiante.h"
 #include "dtMensaje.h"
 #include "dtFecha.h"
+#include "estudiante.h"
+#include "docente.h"
+#include "asignatura.h"
+#include "clase.h"
+#include "mensaje.h"
+#include "handlerMensajes.h"
 #include "DtTiempoDeClase.h"
 
 #include <string>
@@ -17,6 +23,14 @@ using namespace std;
 
 class IControladorClase{
 	public:
+
+		virtual void setColEst(map<string,Estudiante*>*) = 0;
+		virtual void setColDoc(map<string,Docente*>*) = 0;
+		virtual void setColAsig(map<int,Asignatura*>*) = 0;
+		virtual void setColCla(map<int,Clase*>*) = 0;
+		virtual void setColMens(map<int,Mensaje*>*) = 0;
+		virtual void setHandler(HandlerMensajes*) = 0;
+
 		virtual void iniciarSesion(string,string) = 0;
 		virtual set<dtAsignatura> consultarAsignaturasDocente() = 0;
 		virtual tipoClase rolDocente(int) = 0;

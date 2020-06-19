@@ -4,6 +4,9 @@
 #include "dtAsignatura.h"
 #include "tipoClase.h"
 #include "DtDictado.h"
+#include "docente.h"
+#include "asignatura.h"
+#include "clase.h"
 #include <string>
 #include <set>
 
@@ -11,6 +14,11 @@ using namespace std;
 
 class IControladorAsignatura{
 	public:
+
+		virtual void setColDoc(map<string,Docente*>*) = 0;
+		virtual void setColAsig(map<int,Asignatura*>*) = 0;
+		virtual void setColCla(map<int,Clase*>*) = 0;
+
 		virtual void agregarAsignatura(string,int,bool,bool,bool) = 0;
 		virtual void confirmarAlta() = 0;
 		virtual void cancelarAlta() = 0;

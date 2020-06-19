@@ -2,6 +2,12 @@
 #include <string>
 
 #include "include/factory.h"
+#include "include/asignatura.h"
+#include "include/clase.h"
+#include "include/docente.h"
+#include "include/estudiante.h"
+#include "include/usuario.h"
+
 
 using namespace std;
 
@@ -9,9 +15,18 @@ using namespace std;
 
 class Sistema{
   private:
-    static Sistema* instancia;
     Sistema();
+    static Sistema* instancia;
+
     static Factory* fabrica;
+    static HandlerMensajes* handler;
+
+    static map<string,Usuario*>* colUsuarios;
+    static map<string,Estudiante*>* colEstudiantes;
+    static map<string,Docente*>* colDocentes;
+    static map<int,Asignatura*>* colAsignaturas;
+    static map<int,Clase*>* colClases;
+    static map<int,Mensaje*>* colMensajes;
   public:
     static Sistema* getInstancia();
 
@@ -21,7 +36,7 @@ class Sistema{
     void modificarReloj();
     void consultarReloj();
     void altaDeUsuario(){
-      int entrada;
+      char entrada;
       string n,c,e,u,var;
       bool ed,sn;
       ed = false;
@@ -121,11 +136,45 @@ class Sistema{
 
 Factory* Sistema::fabrica = 0;
 Sistema* Sistema::instancia = 0;
+HandlerMensajes* Sistema::handler = 0;
+map<string,Usuario*>* Sistema::colUsuarios = 0;
+map<string,Estudiante*>* Sistema::colEstudiantes = 0;
+map<string,Docente*>* Sistema::colDocentes = 0;
+map<int,Asignatura*>* Sistema::colAsignaturas = 0;
+map<int,Clase*>* Sistema::colClases = 0;
+map<int,Mensaje*>* Sistema::colMensajes = 0;
 
 Sistema* Sistema::getInstancia(){
     if (instancia == 0)    {
         instancia = new Sistema();
+        //creo la factory
         fabrica = fabrica->getInstancia();
+        //creo el handler
+        handler = new HandlerMensajes();
+        //creo las colecciones
+        colUsuarios = new map<string,Usuario*>;
+        colEstudiantes = new map<string,Estudiante*>;
+        colDocentes = new map<string,Docente*>;
+        colAsignaturas = new map<int,Asignatura*>;
+        colClases = new map<int,Clase*>;
+        colMensajes = new map<int,Mensaje*>;
+        //inicializo las colecciones de los controladores
+        fabrica->getIUsuario()->setColUser(colUsuarios);
+        fabrica->getIUsuario()->setColEst(colEstudiantes);
+        fabrica->getIUsuario()->setColDoc(colDocentes);
+        fabrica->getIUsuario()->setColAsig(colAsignaturas);
+        fabrica->getIUsuario()->setHandler(handler);
+        fabrica->getIAsignatura()->setColDoc(colDocentes);
+        fabrica->getIAsignatura()->setColAsig(colAsignaturas);
+        fabrica->getIAsignatura()->setColCla(colClases);
+        fabrica->getIClase()->setColEst(colEstudiantes);
+        fabrica->getIClase()->setColDoc(colDocentes);
+        fabrica->getIClase()->setColAsig(colAsignaturas);
+        fabrica->getIClase()->setColCla(colClases);
+        fabrica->getIClase()->setColMens(colMensajes);
+        fabrica->getIClase()->setHandler(handler);
+        handler->setColMens(colMensajes);
+        handler->setColCla(colClases);
     }
     return instancia;
 }
