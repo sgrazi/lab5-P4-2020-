@@ -1,6 +1,8 @@
 #include "../include/DtTiempoDeClase.h"
 
-DtTiempoDeClase::DtTiempoDeClase(){};
+DtTiempoDeClase::DtTiempoDeClase(){
+  tiempo = 0;
+};
 DtTiempoDeClase::DtTiempoDeClase(string n,int t,int c):nombre(n),tiempo(t),codClase(c){};
 void DtTiempoDeClase::setNombre(string nombre){this->nombre = nombre;};
 void DtTiempoDeClase::setTiempo(int tiempo){this->tiempo = tiempo;};

@@ -481,12 +481,24 @@ set<DtTiempoDeClase> ControladorClase::consultarTiempoClaseDocente(int codigo){
       tiempoClase->setNombre(itCla->second->getNombre());
       tiempoClase->setCodClase(itCla->second->getCodigo());
       for(auto itEstCla =itCla->second->getParticipantes().begin(); itEstCla!=itCla->second->getParticipantes().end();++itEstCla){
-        for(auto itVis =(*itEstCla)->getVis().begin(); itVis!=(*itEstCla)->getVis().end();++itVis){
+
+        set<Visualizacion*> sett = (*itEstCla)->getVis();
+        for(auto itVis = sett.begin(); itVis!=sett.end();++itVis){
           if((*itVis)->getEnVivo()==true && !((*itVis)->getFechaFinVis()==fechaNula)){
-            divisor++;
+            divisor++;/*
+            cout << "inicio: ";
+            cout << (*itVis)->getFechaInicioVis().getDia() << "/"<< (*itVis)->getFechaInicioVis().getMes() << "/" << (*itVis)->getFechaInicioVis().getAnio()<<"\n";
+            cout << (*itVis)->getFechaInicioVis().getHora() << ":"<<(*itVis)->getFechaInicioVis().getMinuto() << ":"<<(*itVis)->getFechaInicioVis().getSegundo() << "\n";
+            cout << "fin: ";
+            cout << (*itVis)->getFechaFinVis().getDia() << "/"<< (*itVis)->getFechaFinVis().getMes() << "/" << (*itVis)->getFechaFinVis().getAnio()<<"\n";
+            cout << (*itVis)->getFechaFinVis().getHora() << ":"<<(*itVis)->getFechaFinVis().getMinuto() << ":"<<(*itVis)->getFechaFinVis().getSegundo() << "\n";
+            */
+            tiempo+=(*itVis)->getFechaFinVis() - (*itVis)->getFechaInicioVis();
+            //cout << "tiempo :"<< tiempo;
+            /*
             tiempo+=3600*((*itVis)->getFechaFinVis().getHora() - (*itVis)->getFechaInicioVis().getHora());
             tiempo+=60*((*itVis)->getFechaFinVis().getMinuto() - (*itVis)->getFechaInicioVis().getMinuto());
-            tiempo+=((*itVis)->getFechaFinVis().getSegundo() - (*itVis)->getFechaInicioVis().getSegundo());
+            tiempo+=((*itVis)->getFechaFinVis().getSegundo() - (*itVis)->getFechaInicioVis().getSegundo());*/
             tiempoClase->setTiempo(tiempoClase->getTiempo()+tiempo);
           }
         }

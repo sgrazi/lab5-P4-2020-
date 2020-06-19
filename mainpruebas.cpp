@@ -293,13 +293,7 @@ int main(){
       cout << "Codigo de clase sin terminar: " << iterador->getCodigo() << "\n";
     }*/
 
-              //seccion para test de fin clase, se puede setAceptaPra
-              Cu->iniciarSesion("emailE","pass");
-              Cc->iniciarSesion("emailE","pass");
-              set<dtClase> clasesP = Cc->consultarClasesParticipando();
-              for(auto it = clasesP.begin(); it!=clasesP.end(); ++it){
-                cout << "nombre: "<<it->getNombre() << "  codigo: "<< it->getCodigo() <<"\n";
-              }
+
 
   //ELIMINACION DE ASIGNATURA
   /*
@@ -320,10 +314,10 @@ int main(){
     }
   */
     //TIEMPO DE ASISTENCIA A CLASE
-/*    set<DtTiempoDeClase> tiempoAsistencia = Cc->consultarTiempoClaseDocente(1); //1 es calculo
+    set<DtTiempoDeClase> tiempoAsistencia = Cc->consultarTiempoClaseDocente(1); //1 es calculo
     for(auto it = tiempoAsistencia.begin(); it!=tiempoAsistencia.end(); ++it){
       cout << "t: "<<it->getTiempo() << "\n";
-    }*/
+    }
 
     //ELIMINACION DE ASIGNATURA
 
