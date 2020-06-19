@@ -20,7 +20,86 @@ class Sistema{
     //Administrador
     void modificarReloj();
     void consultarReloj();
-    void altaDeUsuario();
+    void altaDeUsuario(){
+      int entrada;
+      string n,c,e,u,var;
+      bool ed,sn;
+      ed = false;
+      sn = 0;
+      while(!ed){
+        cout << "\n\t¿Desea agregar un estudiante (1) o un docente (0)? \n\tOpcion: ";
+        cin >> entrada;
+        switch (entrada){
+          case '1':
+            ed = true;
+            cout << "\n\tIngrese el nombre: ";
+            cin >> n;
+            cout << "\n\tIngrese el email: ";
+            cin >> e;
+            cout << "\n\tIngrese la contraseña: ";
+            cin >> c;
+            cout << "\n\tIngrese la url de la imagen: ";
+            cin >> u;
+            cout << "\n\tIngrese la cédula: ";
+            cin >> var;
+            fabrica->getIUsuario()->agregarEstudiante(n, c, e, u, var);
+            while(!sn){
+              cout << "\n\t¿Desea confirmar (1) el alta del estudiante? \n\tOpcion: ";
+              cin >> entrada;
+              switch (entrada) {
+                case '1':
+                  sn = true;
+                  fabrica->getIUsuario()->confirmarAlta();
+                break;
+                case '0':
+                  sn = true;
+                  fabrica->getIUsuario()->cancelarAlta();
+                break;
+                default:
+                  cout << "\n\tOpcion no válida.";
+                break;
+              }
+            }
+          break;
+          case '2':
+            ed = true;
+            cout << "\n\tIngrese el nombre: ";
+            cin >> n;
+            cout << "\n\tIngrese el email: ";
+            cin >> e;
+            cout << "\n\tIngrese la contraseña: ";
+            cin >> c;
+            cout << "\n\tIngrese la url de la imagen: ";
+            cin >> u;
+            cout << "\n\tIngrese el instituto: ";
+            cin >> var;
+            fabrica->getIUsuario()->agregarDocente(n, c, e, u, var);
+            while(!sn){
+              cout << "\n\t¿Desea confirmar (1) el alta del docente? (S/N) \n\tOpcion: ";
+              cin >> entrada;
+              switch (entrada) {
+                case '1':
+                  sn = true;
+                  fabrica->getIUsuario()->confirmarAlta();
+                break;
+                case '0':
+                  sn = true;
+                  fabrica->getIUsuario()->cancelarAlta();
+                break;
+                default:
+                  cout << "\n\tOpcion no válida.";
+                break;
+              }
+            }
+          break;
+          default:
+            ed = true;
+            cout << "el programa entendio: "<<entrada;
+            cout << "\n\tOpcion no válida.";
+          break;
+        }
+      }
+    };
     void altaDeAsignatura();
     void asignarDocenteAAsignatura();
     void eliminarAsignatura();
@@ -89,6 +168,9 @@ int main(){
         cout << "\n \tOpcion: ";
         cin >> tecla;
         switch (tecla){//agregar las operaciones
+          case '3':
+            s->altaDeUsuario();
+          break;
           default:
             cout << "\nOpcion no valida.\n";
           break;
@@ -167,5 +249,6 @@ int main(){
       break;
     }
   }
+
   return 0;
 }
