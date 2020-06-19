@@ -1,18 +1,18 @@
-all: mainpruebas
+all: main
 
 HDIR = include
 CPPDIR  = src
 ODIR = obj
 
-CLASES = dtFecha controladorUsuario usuario docente estudiante dtUsuario dtDocente dtEstudiante dtAsignatura controladorAsignatura asignatura rol dtInfoClase controladorClase mensaje clase teorico practico monitoreo usrCla dtClase visualizacion dtMensaje reloj dtNotificacion handlerMensajes factory DtDictado DtTiempoDeClase estrategiaNotifs estrategiaModoSus3 
+CLASES = factory dtFecha controladorUsuario usuario docente estudiante dtUsuario dtDocente dtEstudiante dtAsignatura controladorAsignatura asignatura rol dtInfoClase controladorClase mensaje clase teorico practico monitoreo usrCla dtClase visualizacion dtMensaje reloj dtNotificacion handlerMensajes DtDictado DtTiempoDeClase estrategiaNotifs estrategiaModoSus3
 
 # cadena de archivos, con directorio y extensión
 HS   = $(CLASES:%=$(HDIR)/%.h)
 CPPS = $(CLASES:%=$(CPPDIR)/%.cpp)
 OS   = $(CLASES:%=$(ODIR)/%.o)
 
-PRINCIPAL = mainpruebas
-EJECUTABLE = mainpruebas
+PRINCIPAL = main
+EJECUTABLE = main
 
 # compilador
 CC = g++

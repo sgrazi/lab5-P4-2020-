@@ -372,6 +372,7 @@ void ControladorClase::confirmarAsistenciaVivo(){
   vis->setEnVivo(true);
   vis->setFechaInicioVis(generarFecha());
   asistencia->setVisualizacion(vis); //ver.h y arreglar esta funcion
+
 };
 
 void ControladorClase::cancelarAsistencia(){
@@ -387,16 +388,7 @@ set<dtClase*> ControladorClase::consultarClasesParticipandoVivo(){
 
   for(auto it =est->getClasesParticipa().begin(); it!=est->getClasesParticipa().end();++it){ //for que recorre la coleccion de UsrCla
     bool buscando = true;
-    UsrCla* usercla =  (*it);/*
-    if(hola==NULL)
-      cout << "r";
-    else{
-      Clase* c = hola->getClase();
-      if(c==NULL)
-        cout << "r2";
-      else
-        cout << c->getNombre();
-    }*/
+    UsrCla* usercla =  (*it);
     set<Visualizacion*> coleccionVis = (*it)->getVis();
     auto itVis = coleccionVis.begin();
     while(itVis!=coleccionVis.end() && buscando){ //While que recorre las visualizaciones del UsrCla buscando si hay alguna en vivo
@@ -409,10 +401,6 @@ set<dtClase*> ControladorClase::consultarClasesParticipandoVivo(){
 
     if(!buscando){
       dtClase* dt = new dtClase();
-      /*Clase* cla = it->getClase();
-      if(cla==NULL){
-        cout << "opa2";
-      }*/
       dt->setNombre(usercla->getClase()->getNombre());
       dt->setCodigo(usercla->getClase()->getCodigo());
       dt->setFechaInicio(usercla->getClase()->getFechaInicio());
@@ -485,20 +473,8 @@ set<DtTiempoDeClase> ControladorClase::consultarTiempoClaseDocente(int codigo){
         set<Visualizacion*> sett = (*itEstCla)->getVis();
         for(auto itVis = sett.begin(); itVis!=sett.end();++itVis){
           if((*itVis)->getEnVivo()==true && !((*itVis)->getFechaFinVis()==fechaNula)){
-            divisor++;/*
-            cout << "inicio: ";
-            cout << (*itVis)->getFechaInicioVis().getDia() << "/"<< (*itVis)->getFechaInicioVis().getMes() << "/" << (*itVis)->getFechaInicioVis().getAnio()<<"\n";
-            cout << (*itVis)->getFechaInicioVis().getHora() << ":"<<(*itVis)->getFechaInicioVis().getMinuto() << ":"<<(*itVis)->getFechaInicioVis().getSegundo() << "\n";
-            cout << "fin: ";
-            cout << (*itVis)->getFechaFinVis().getDia() << "/"<< (*itVis)->getFechaFinVis().getMes() << "/" << (*itVis)->getFechaFinVis().getAnio()<<"\n";
-            cout << (*itVis)->getFechaFinVis().getHora() << ":"<<(*itVis)->getFechaFinVis().getMinuto() << ":"<<(*itVis)->getFechaFinVis().getSegundo() << "\n";
-            */
+            divisor++;
             tiempo+=(*itVis)->getFechaFinVis() - (*itVis)->getFechaInicioVis();
-            //cout << "tiempo :"<< tiempo;
-            /*
-            tiempo+=3600*((*itVis)->getFechaFinVis().getHora() - (*itVis)->getFechaInicioVis().getHora());
-            tiempo+=60*((*itVis)->getFechaFinVis().getMinuto() - (*itVis)->getFechaInicioVis().getMinuto());
-            tiempo+=((*itVis)->getFechaFinVis().getSegundo() - (*itVis)->getFechaInicioVis().getSegundo());*/
             tiempoClase->setTiempo(tiempoClase->getTiempo()+tiempo);
           }
         }

@@ -96,14 +96,14 @@ int main(){
   Ca->confirmarAlta();
   Ca->agregarAsignatura("calculo2",2,1,0,0);
   Ca->confirmarAlta();
-
+/*
   Ca->eliminarAsignatura(1);
   Ca->confirmarElim();
   Ca->eliminarAsignatura(2);
   Ca->confirmarElim();
   if(coleccionGlobalAsignaturas.begin()==coleccionGlobalAsignaturas.end())
       cout << "luego quito ambas";
-
+*/
   /*
   auto as = coleccionGlobalAsignaturas.find(1);
 
@@ -170,9 +170,9 @@ int main(){
   fecha->setSegundo(0);
 
   Cc->iniciarClase(1,"Clase 1",teorico,*fecha);
-
+/*
   if(coleccionGlobalClases.begin()!=coleccionGlobalClases.end())
-   cout << "se hizo bien 0";
+   cout << "se hizo bien 0";*/
 
   Cc->confirmarInicio();
 /*
@@ -216,7 +216,7 @@ int main(){
     cout << it->getCodigo() <<"\n";
   }*/
 
-    set<dtClase> clasesA = Cc->consultarClasesVivo(1); // 1 es "calculo"
+    //set<dtClase> clasesA = Cc->consultarClasesVivo(1); // 1 es "calculo"
   /*for(auto it = clasesA.begin(); it!=clasesA.end(); ++it){
     cout << it->getNombre() << "  "<< it->getCodigo() <<"\n";
   }*/
@@ -225,7 +225,8 @@ int main(){
 
     Cc->confirmarAsistenciaVivo();
 
-  /*Estudiante* est = coleccionGlobalEstudiantes.find("email")->second;
+/*
+  Estudiante* est = coleccionGlobalEstudiantes.find("email")->second;
   set<UsrCla*> lista = est->getClasesParticipa();
   for(auto it = lista.begin(); it!=lista.end(); ++it){
     cout << (*it)->getClase()->getNombre() <<"\n";
@@ -322,10 +323,10 @@ int main(){
     }
   */
     //TIEMPO DE ASISTENCIA A CLASE
-    set<DtTiempoDeClase> tiempoAsistencia = Cc->consultarTiempoClaseDocente(1); //1 es calculo
+    /*set<DtTiempoDeClase> tiempoAsistencia = Cc->consultarTiempoClaseDocente(1); //1 es calculo
     for(auto it = tiempoAsistencia.begin(); it!=tiempoAsistencia.end(); ++it){
       cout << "t: "<<it->getTiempo() << "\n";
-    }
+    }*/
 
     //ELIMINACION DE ASIGNATURA
 

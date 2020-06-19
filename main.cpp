@@ -1,17 +1,22 @@
 #include <iostream>
 #include <string>
 
+#include "include/factory.h"
+
 using namespace std;
 
 //___CLASE SISTEMA___
 
 class Sistema{
   private:
-    static Sistema* instance;
-      Sistema();
+    static Sistema* instancia;
+    Sistema();
+    static Factory* fabrica;
   public:
-    static Sistema* getInstance();
+    static Sistema* getInstancia();
+
     //operaciones del sistema, puse lo que me parecia, no creo este super correcto todo
+
     //Administrador
     void modificarReloj();
     void consultarReloj();
@@ -35,13 +40,15 @@ class Sistema{
     void consultarNotificaciones();
 };
 
-Sistema* Sistema::instance = 0;
+Factory* Sistema::fabrica = 0;
+Sistema* Sistema::instancia = 0;
 
-Sistema* Sistema::getInstance(){
-    if (instance == 0)    {
-        instance = new Sistema();
+Sistema* Sistema::getInstancia(){
+    if (instancia == 0)    {
+        instancia = new Sistema();
+        fabrica = fabrica->getInstancia();
     }
-    return instance;
+    return instancia;
 }
 
 Sistema::Sistema(){}
@@ -49,7 +56,7 @@ Sistema::Sistema(){}
 //___FIN CLASE SISTEMA___
 
 int main(){
-  Sistema* s = Sistema::getInstance();
+  Sistema* s = Sistema::getInstancia();
 
   cout << "Bienvenido. ";
   bool salir = false;

@@ -4,10 +4,6 @@
 #include <iostream>
 
 #include "asignatura.h"
-#include "dtAsignatura.h"
-#include "dtDocente.h"
-#include "tipoClase.h"
-#include "DtDictado.h"
 #include "iControladorAsignatura.h"
 
 #include <string>

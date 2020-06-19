@@ -1,14 +1,7 @@
 #ifndef CONTROLADOR_CLASE_H
 #define CONTROLADOR_CLASE_H
 #include "tipoClase.h"
-#include "dtInfoClase.h"
-#include "dtFecha.h"
-#include "dtAsignatura.h"
-#include "dtEstudiante.h"
-#include "dtClase.h"
-#include "dtMensaje.h"
 #include "handlerMensajes.h"
-#include "DtTiempoDeClase.h"
 #include "iControladorClase.h"
 #include <string>
 #include <set>
@@ -98,13 +91,9 @@ class ControladorClase: public IControladorClase{
 		set<dtAsignatura> consultarAsigIns();
 		set<dtClase> consultarClasesVivo(int a);
 		dtClase asistirClaseVivo(int);
-		//set<dtClase> consultarClasesDiferido(int);
-		//dtClase AsistirClaseDiferido(int);
-		set<dtMensaje> confirmarAsistenciaDiferido();
 		void confirmarAsistenciaVivo();
 		void cancelarAsistencia();
 
-		//set<dtInfoClase> desplegarInfoClases(string);
 		//FINALIZACION ASISTENCIA A CLASE EN VIVO
 		set<dtClase*>  consultarClasesParticipandoVivo();
 		void finalizarAsistencia(int codigoClase);
