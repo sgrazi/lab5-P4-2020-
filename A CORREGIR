@@ -1,6 +1,13 @@
 asignar docente a asig
       si no hay docentes para asignar, no tengo como salir de la operacion
+alta de user
+      puedo crear usuario con el mismo email(admite uno de cada tipo, y de ahi en adelante se sobreescriben)
+inscribir a asig
+      se rompe si le paso una asig que no existe
 alta de asig
       si en admite teo le tiro 2 rompe
 memoria
       cada vez que se llama a una funcion que devuelve objetos dt, hay que borrarlos luego no?
+iniciar clase
+      se tiene que pedir la fecha de inicio
+      que pasa si el doc no tiene asigs

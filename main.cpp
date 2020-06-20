@@ -10,6 +10,7 @@
 #include "include/usuario.h"
 #include "include/tipoClase.h"
 
+const dtFecha fechaNula(0,0,0,0,0,0);
 
 using namespace std;
 
@@ -457,15 +458,31 @@ class Sistema{
       string nombre,cedula;
       int asig;
       char decision,hab;
+      cout <<"\n\tAsignaturas en las que el docente participa:";
       set<dtAsignatura> opciones = fabrica->getIClase()->consultarAsignaturasDocente();
       for(auto it=opciones.begin();it!=opciones.end();++it){
-        cout << "\n\tNombre: " << it->getNombre()<< "\n\tCodigo: " << it->getCodigo();
+        cout << "\n\tNombre: " << it->getNombre()<< "\tCodigo: " << it->getCodigo();
       }
-      cout << "\n\t¿En cual asignatura desea inciar una clase? (ingrese código):";
-      cin >> asig;
+
+      bool aux=true;
+      while(aux){
+        while (std::cout << "\n\tIngrese el codigo de la asignatura en la que desea iniciar una clase: " && !(std::cin >> asig)) {
+          std::cin.clear(); //clear bad input flag
+          std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); //discard input
+          std::cout << "\tPor favor ingrese un numero.\n";
+        }
+        if(!colAsignaturas->count(asig)){
+          std::cin.clear(); //clear bad input flag
+          std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); //discard input
+          cout << "\tEl codigo no es valido. Por favor intente de nuevo.\n";
+        }
+        else//todo bien, era un numero y un codigo valido
+          aux=false;
+      }
+
       tipoClase tipo = fabrica->getIClase()->rolDocente(asig);
-      cout << "\n\t¿Que nombre tiene la clase?";
-      cin >> nombre;
+      cout << "\n\t¿Que nombre tiene la clase? ";
+      getline(cin >> ws, nombre);
       fabrica->getIClase()->iniciarClase(asig,nombre,tipo,dtFecha(1,1,1,1,1,1)); //METER RELOJ
       if(tipo==monitoreo){
         bool seguir = true;
@@ -572,7 +589,11 @@ class Sistema{
     void getDatosClases(){
       cout << "\n\tClases en el sistema: ";
       for(auto it = colClases->begin(); it!=colClases->end();it++){
-        cout << "\n\t\tNombre: "<<it->second->getNombre()<< " Codigo: " <<it->second->getCodigo();
+        cout << "\n\t\tNombre: \""<<it->second->getNombre()<< "\" Codigo: " <<it->second->getCodigo() << " Finalizada: ";
+        if(it->second->getFechaFin()==fechaNula)
+          cout << "No";
+        else
+          cout << "Si";
       }
     };
 };
