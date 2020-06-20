@@ -17,9 +17,7 @@ class Docente : public Usuario{
   private:
     string instituto;
     map<int,Rol*>* asignaturas; //int es el codigo de la asignatura
-    //set<UsrCla> clasesParticipa;
     map<int,Clase*>* clases;
-    //map<int,Clase> participa;
   public:
     Docente();
     string getInstituto();

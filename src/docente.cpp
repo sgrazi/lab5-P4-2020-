@@ -64,7 +64,7 @@ void Docente::agregarClaseNueva(Clase *c){
 set<dtClase> Docente::clasesATerminar(){
   set<dtClase> nuevo;
   for(auto it = clases->begin(); it!=clases->end(); ++it){
-    if(it->second->getFechaFin() == fechaNula){ //definir esta constante y sobrecargar == para dtFecha
+    if(it->second->getFechaFin() == fechaNula /*&& it->second->getFechaInicio()<*/){
       dtClase* dt = new dtClase();
       dt->setNombre(it->second->getNombre());
       dt->setCodigo(it->second->getCodigo());

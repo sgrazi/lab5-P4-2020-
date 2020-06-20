@@ -302,15 +302,11 @@ set<dtAsignatura> ControladorClase::consultarAsigIns(){
   return itEst->second->getAsignaturasInscripto();
 };
 
-/*
-set<dtClase> ControladorClase::consultarClasesDiferido(int a){
-};
-dtClase ControladorClase::AsistirClaseDiferido(int){};*/
 
 set<dtClase> ControladorClase::consultarClasesVivo(int a){
   set<dtClase> nuevo;
   for(auto itCla=coleccionGlobalAsignaturas->find(a)->second->getClases()->begin(); itCla!=coleccionGlobalAsignaturas->find(a)->second->getClases()->end(); ++itCla){
-    if(itCla->second->getFechaFin()==fechaNula){
+    if(itCla->second->getFechaFin()==fechaNula /*&& itCla->second->getFechaInicio()<*/){
       dtClase *dt = new dtClase();
       dt->setNombre(itCla->second->getNombre());
       dt->setCodigo(itCla->second->getCodigo());

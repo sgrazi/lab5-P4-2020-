@@ -224,104 +224,143 @@ class Sistema{
       bool no_pronto = true;
       while(no_pronto){
         set<dtAsignatura> asignaturas = fabrica->getIAsignatura()->consultarAsignaturas();
-        cout << "\n\tAsignaturas en el sistema:";
-        for(auto it = asignaturas.begin();it != asignaturas.end();it++){
-          cout << "\n\tNombre: " << it->getNombre()<< " Codigo: " << it->getCodigo();
+        if(asignaturas.begin()==asignaturas.end()){
+          cout << "\n\tNo existen asignaturas en el sistema.\n";
+          no_pronto = 0;
         }
-        bool aux=true;
-        while(aux){
-          while (std::cout << "\n\tIngrese el codigo de una asignatura: " && !(std::cin >> codigoAsig)) {
-            std::cin.clear(); //clear bad input flag
-            std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); //discard input
-            std::cout << "\tPor favor ingrese un numero.\n";
+        else{
+          cout << "\n\tAsignaturas en el sistema:";
+          for(auto it = asignaturas.begin();it != asignaturas.end();it++){
+            cout << "\n\tNombre: " << it->getNombre()<< " Codigo: " << it->getCodigo();
           }
-          if(!colAsignaturas->count(codigoAsig)){
-            std::cin.clear(); //clear bad input flag
-            std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); //discard input
-            cout << "\tEl codigo no es valido. Por favor intente de nuevo.\n";
+          bool aux=true;
+          while(aux){
+            while (std::cout << "\n\tIngrese el codigo de una asignatura: " && !(std::cin >> codigoAsig)) {
+              std::cin.clear(); //clear bad input flag
+              std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); //discard input
+              std::cout << "\tPor favor ingrese un numero.\n";
+            }
+            if(!colAsignaturas->count(codigoAsig)){
+              std::cin.clear(); //clear bad input flag
+              std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); //discard input
+              cout << "\tEl codigo no es valido. Por favor intente de nuevo.\n";
+            }
+            else//todo bien, era un numero y un codigo valido
+              aux=false;
           }
-          else//todo bien, era un numero y un codigo valido
-            aux=false;
-        }
-        map<string,dtDocente> docLibres = fabrica->getIAsignatura()->consultarDocentesLibres(codigoAsig);
-        cout << "\n\tLos docentes libres para asignar a la asignatura son: ";
-        for(auto it = docLibres.begin();it != docLibres.end();it++){
-          cout << "\n\tNombre: " << it->second.getNombre()<< " Email: " << it->first;
-        }
-        while(cout << "\n\tIngrese el email del docente a asignar: " && cin >> emailDoc && !colDocentes->count(emailDoc)){
-          std::cin.clear(); //clear bad input flag
-          std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); //discard input
-          std::cout << "\tNo existe un docente con ese email. Por favor intente denuevo.\n";
-        }
-        while(!tipoCorrecto){
-          cout << "\n\tIngrese que tipo de docente es: \n\t1)Teorico\n\t2)Practico\n\t3)Monitoreo\n\tOpcion:";
-          cin >> tipo;
-          switch (tipo) {
-            case 1:
-              tipoCorrecto = 1;
-              admite = fabrica->getIAsignatura()->asignarDocente(emailDoc,codigoAsig,teorico);
-            break;
-            case 2:
-              tipoCorrecto = 1;
-              admite = fabrica->getIAsignatura()->asignarDocente(emailDoc,codigoAsig,practico);
-            break;
-            case 3:
-              tipoCorrecto = 1;
-              admite = fabrica->getIAsignatura()->asignarDocente(emailDoc,codigoAsig,monitoreo);
-            break;
-            default:
-              cout << "\nOpcion no valida.\n";
-            break;
+          map<string,dtDocente> docLibres = fabrica->getIAsignatura()->consultarDocentesLibres(codigoAsig);
+          if(docLibres.begin()==docLibres.end()){
+            cout << "\n\tNo existen docentes en el sistema.\n";
+            no_pronto = 0;
+          }
+          else{
+            cout << "\n\tLos docentes libres para asignar a la asignatura son: ";
+            for(auto it = docLibres.begin();it != docLibres.end();it++){
+              cout << "\n\tNombre: " << it->second.getNombre()<< " Email: " << it->first;
+            }
+            while(cout << "\n\tIngrese el email del docente a asignar: " && cin >> emailDoc && !colDocentes->count(emailDoc)){
+              std::cin.clear(); //clear bad input flag
+              std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); //discard input
+              std::cout << "\tNo existe un docente con ese email. Por favor intente denuevo.\n";
+            }
+            while(!tipoCorrecto){
+              cout << "\n\tIngrese que tipo de docente es: \n\t1)Teorico\n\t2)Practico\n\t3)Monitoreo\n\tOpcion:";
+              cin >> tipo;
+              switch (tipo) {
+                case 1:
+                  tipoCorrecto = 1;
+                  admite = fabrica->getIAsignatura()->asignarDocente(emailDoc,codigoAsig,teorico);
+                break;
+                case 2:
+                  tipoCorrecto = 1;
+                  admite = fabrica->getIAsignatura()->asignarDocente(emailDoc,codigoAsig,practico);
+                break;
+                case 3:
+                  tipoCorrecto = 1;
+                  admite = fabrica->getIAsignatura()->asignarDocente(emailDoc,codigoAsig,monitoreo);
+                break;
+                default:
+                  cout << "\nOpcion no valida.\n";
+                break;
+              }
+            }
+            while(admite && !sn){
+              cout << "\n\t¿Desea confirmar la asignación? (S/N) \n\tOpcion: ";
+              cin >> entrada;
+              switch (entrada) {
+                case 'S':
+                  sn = true;
+                  no_pronto=false;
+                  fabrica->getIAsignatura()->confirmarAsignacion();
+                break;
+                case 'N':
+                  sn = true;
+                  no_pronto=false;
+                  fabrica->getIAsignatura()->cancelarAsignacion();
+                break;
+                default:
+                  cout << "\n\tOpcion no válida.";
+                break;
+              }
+            }
+            if(!admite)
+              cout << "\n\tError, la asignatura no admite el rol indicado.\n";
           }
         }
-        while(admite && !sn){
-          cout << "\n\t¿Desea confirmar la asignación? (S/N) \n\tOpcion: ";
-          cin >> entrada;
-          switch (entrada) {
-            case 'S':
-              sn = true;
-              no_pronto=false;
-              fabrica->getIAsignatura()->confirmarAsignacion();
-            break;
-            case 'N':
-              sn = true;
-              no_pronto=false;
-              fabrica->getIAsignatura()->cancelarAsignacion();
-            break;
-            default:
-              cout << "\n\tOpcion no válida.";
-            break;
-          }
-        }
-        if(!admite)
-          cout << "\n\t¿Desea confirmar la asignación? (S/N) \n\tOpcion: ";
       }
     };
     void eliminarAsignatura(){
-    int cod;
-    char d;
-    bool no_termina=true;
-    while(no_termina){
-      fabrica->getIAsignatura()->consultarAsignaturas();
-      cout << "\n\t¿Qué asignatura desea eliminar? (ingrese código):";
-      cin >> cod;
-      fabrica->getIAsignatura()->eliminarAsignatura(cod);
-      cout << "\n\t¿Desea confirmacion la eliminación (1) o no (0))?:";
-      cin >> d;
-      switch(d){
-        case '1':
-          no_termina=false;
-          fabrica->getIAsignatura()->confirmarElim();
-        break;
-        case '0':
-          no_termina=false;
-          fabrica->getIAsignatura()->cancelarElim();
-        break;
-        default:
-          cout << "\n\tOpcion no válida.";
-        break;
+      int cod;
+      bool no_termina=true;
+      while(no_termina){
+        set<dtAsignatura> nuevo = fabrica->getIAsignatura()->consultarAsignaturas();
+        if(nuevo.begin()==nuevo.end()){
+          cout << "\n\tNo existen asignaturas en el sistema.\n";
+          no_termina = false;
+        }
+        else{
+          for(auto it = nuevo.begin();it != nuevo.end();it++){
+            cout << "\n\tNombre: " << it->getNombre()<< " Codigo: " << it->getCodigo();
+          }
+          bool aux=true;
+          while(aux){
+            while (std::cout << "\n\t¿Qué asignatura desea eliminar? (ingrese código):" && !(std::cin >> cod)) {
+              std::cin.clear(); //clear bad input flag
+              std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); //discard input
+              std::cout << "\tPor favor ingrese un numero.\n";
+            }
+            if(!colAsignaturas->count(cod)){
+              std::cin.clear(); //clear bad input flag
+              std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); //discard input
+              cout << "\tEl codigo no es valido. Por favor intente de nuevo.\n";
+            }
+            else//todo bien, era un numero y un codigo valido
+              aux=false;
+          }
+          fabrica->getIAsignatura()->eliminarAsignatura(cod);
+          bool sn = false;
+          char entrada;
+          while(!sn){
+            cout << "\n\t¿Desea confirmacion la eliminación (1) o no (0))?:";
+            cin >> entrada;
+            switch (entrada) {
+              case '1':
+                sn = true;
+                no_termina=false;
+                fabrica->getIAsignatura()->confirmarElim();
+              break;
+              case '0':
+                sn = true;
+                no_termina=false;
+                fabrica->getIAsignatura()->cancelarElim();
+              break;
+              default:
+                cout << "\n\tOpcion no válida.";
+              break;
+            }
+          }
+        }
       }
-    }
     };
     void tiempoDeDictado(){
       set<DtDictado> tiempos = fabrica->getIAsignatura()->tiempoDictado();
@@ -483,7 +522,33 @@ class Sistema{
       tipoClase tipo = fabrica->getIClase()->rolDocente(asig);
       cout << "\n\t¿Que nombre tiene la clase? ";
       getline(cin >> ws, nombre);
-      fabrica->getIClase()->iniciarClase(asig,nombre,tipo,dtFecha(1,1,1,1,1,1)); //METER RELOJ
+      int anio,mes,dia,hora,minutos;
+      while (std::cout << "\n\tIngrese la fecha para iniciar la clase:\n\t\tAño: " && !(std::cin >> anio)) {
+        std::cin.clear(); //clear bad input flag
+        std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); //discard input
+        std::cout << "\tPor favor ingrese un numero.\n";
+      }
+      while (std::cout << "\n\t\tMes: " && !(std::cin >> mes)) {
+        std::cin.clear(); //clear bad input flag
+        std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); //discard input
+        std::cout << "\tPor favor ingrese un numero.\n";
+      }
+      while (std::cout << "\n\t\tDia: " && !(std::cin >> dia)) {
+        std::cin.clear(); //clear bad input flag
+        std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); //discard input
+        std::cout << "\tPor favor ingrese un numero.\n";
+      }
+      while (std::cout << "\n\t\tHora: " && !(std::cin >> hora)) {
+        std::cin.clear(); //clear bad input flag
+        std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); //discard input
+        std::cout << "\tPor favor ingrese un numero.\n";
+      }
+      while (std::cout << "\n\t\tMinutos: " && !(std::cin >> minutos)) {
+        std::cin.clear(); //clear bad input flag
+        std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); //discard input
+        std::cout << "\tPor favor ingrese un numero.\n";
+      }
+      fabrica->getIClase()->iniciarClase(asig,nombre,tipo,dtFecha(anio,mes,dia,hora,minutos,0)); //METER RELOJ
       if(tipo==monitoreo){
         bool seguir = true;
         while(seguir){
@@ -503,10 +568,10 @@ class Sistema{
           }
       }
       dtInfoClase info = fabrica->getIClase()->desplegarInfoClase();
-      cout << "\n\tNombre de clase: " << info.getNombre() << "\n\tCodigo de clase: " << info.getCodigo() << "\n\tIniciada por: "  << info.getIniciadaPor();
+      cout << "\n\tNombre de clase: " << info.getNombre() << "\n\tCodigo de clase: " << info.getCodigo() << "\n\tIniciada por: "  << info.getIniciadaPor() << "\n\tFecha: " << info.getFechaInicio().getAnio() << "/"<< info.getFechaInicio().getMes() << "/"<< info.getFechaInicio().getDia() << " " << info.getFechaInicio().getHora() << ":"<< info.getFechaInicio().getMinuto();
       bool parar=false;
       while(!parar){
-        cout << "\n\t¿Desea confirmar (S/N)?";
+        cout << "\n\t¿Desea confirmar (S/N)? ";
         cin >> decision;
         switch(decision){
           case 'S':

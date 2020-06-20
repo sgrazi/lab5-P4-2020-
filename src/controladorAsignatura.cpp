@@ -139,13 +139,21 @@ set<DtDictado> ControladorAsignatura::tiempoDictado(){
 };
 
 void ControladorAsignatura::eliminarAsignatura(int codigo){
-setAsigAEliminar(codigo);
+  setAsigAEliminar(codigo);
 };
 void ControladorAsignatura::confirmarElim(){
   auto asig = coleccionGlobalAsignaturas->find(asigAEliminar);
+    for(auto it = asig->second->getClases()->begin();it != asig->second->getClases()->end();it++){
+      int aux = it->second->getCodigo();
+      for(auto itDoc = asig->second->getDocentes()->begin();itDoc != asig->second->getDocentes()->end();itDoc++)//borro la clase del mapa del docente
+        itDoc->second->getDoc()->getClases()->erase(aux);//si no esta en el map no hace nada
+      delete it->second;
+      coleccionGlobalClases->erase(aux);
+    }
     delete asig->second;
     coleccionGlobalAsignaturas->erase(asigAEliminar);
 };
+
 void ControladorAsignatura::cancelarElim(){
 
 };
