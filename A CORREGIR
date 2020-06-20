@@ -1,0 +1,3 @@
+asignar docente a asig
+      permite asignar docentes de roles no admitidos por la asignatura
+      si asigne todos los docentes a la asignatura y no quedan mas, no tengo como salir de la operacion

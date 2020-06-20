@@ -117,78 +117,89 @@ class Sistema{
       }
     };
     void altaDeAsignatura(){
-      string e1,e8;
+      string nombreAsig,e8;
       char e6,e7;
-      int e2;
-      bool e3,e4,e5;
+      int codigoAsig;
+      bool teorico,practico,monitoreo;
+      bool sn = false;
       bool no_pronto=true;
       while(no_pronto){
         cout << "\n\t¿Cuál es el nombre de la asignatura?: ";
-        cin >> e1;
+        cin >> nombreAsig;
         cout << "\n\t¿Cuál es el código de la asignatura?: ";
-        cin >> e2;
-        cout << "\n\t¿La asignatura tiene teórico (1) o no (0)?: ";
+        cin >> codigoAsig;
+        cout << "\n\t¿La asignatura tiene teóricos (1) o no (0)?: ";
+        cin >> e7;
+        while(!sn){
+          switch(e7){
+            case '1':
+              sn = true;
+              teorico=true;
+            break;
+            case '0':
+              sn = true;
+              teorico=false;
+            break;
+            default:
+              cout << "\n\tOpcion no válida.";
+            break;
+          }
+        }
+        cout << "\n\t¿La asignatura tiene prácticos (1) o no (0)?: ";
+        cin >> e7;
+        sn = false;
+        while(!sn){
+          switch(e7){
+            case '1':
+              sn = true;
+              practico=true;
+            break;
+            case '0':
+              sn = true;
+              practico=false;
+            break;
+            default:
+              cout << "\n\tOpcion no válida.";
+            break;
+            }
+        }
+        cout << "\n\t¿La asignatura tiene monitoreos (1) o no(0)?: ";
         cin >> e7;
         switch(e7){
           case '1':
-            e3=true;
+            monitoreo=true;
           break;
           case '0':
-            e3=false;
+            monitoreo=false;
           break;
           default:
             cout << "\n\tOpcion no válida.";
           break;
         }
-        cout << "\n\t¿La asignatura tiene práctico (1) o no (0)?: ";
-        cin >> e7;
-        switch(e7){
-        case '1':
-          e4=true;
-        break;
-        case '0':
-          e4=false;
-        break;
-        default:
-          cout << "\n\tOpcion no válida.";
-        break;
-        }
-        cout << "\n\t¿La asignatura tiene monitoreo (1) o no(0)?: ";
-        cin >> e7;
-        switch(e7){
-        case '1':
-          e5=true;
-        break;
-        case '0':
-          e5=false;
-        break;
-        default:
-          cout << "\n\tOpcion no válida.";
+        fabrica->getIAsignatura()->agregarAsignatura(nombreAsig,codigoAsig,teorico,practico,monitoreo);
+        cout << "\n\t¿Desea confirmar (1) o no(0)?";
+        cin >> e6;
+        switch(e6){
+          case '1':
+            no_pronto=false;
+            fabrica->getIAsignatura()->confirmarAlta();
+          break;
+          case '0':
+            no_pronto=false;
+            fabrica->getIAsignatura()->cancelarAlta();
+          break;
+          default:
+            cout << "\n\tOpcion no válida.";
         break;
       }
-      fabrica->getIAsignatura()->agregarAsignatura(e1,e2,e3,e4,e5);
-      cout << "\n\t¿Desea confirmar (1) o no(0)?";
-      cin >> e6;
-      switch(e6){
-      case '1':
-        no_pronto=false;
-        fabrica->getIAsignatura()->confirmarAlta();
-      break;
-      case '0':
-        no_pronto=false;
-        fabrica->getIAsignatura()->cancelarAlta();
-      break;
-      default:
-        cout << "\n\tOpcion no válida.";
-      break;
     }
-  }
   };
     void asignarDocenteAAsignatura(){
       int codigoAsig, tipo;
       char entrada;
       string emailDoc;
-      bool tipoCorrecto,sn = false;
+      bool tipoCorrecto = false;
+      bool sn = false;
       set<dtAsignatura> asignaturas = fabrica->getIAsignatura()->consultarAsignaturas();
       cout << "\n\tAsignaturas en el sistema:";
       for(auto it = asignaturas.begin();it != asignaturas.end();it++){
@@ -204,7 +215,7 @@ class Sistema{
       cout << "\n\tIngrese el email del docente a asignar: ";
       cin >> emailDoc;//QUE PASA SI ME TIRAN UN VALOR NO VALIDO
       while(!tipoCorrecto){
-        cout << "\n\tIngrese que tipo de docente es: \n\t1)Teorico\n\t2)Practico\n\t3)Monitoreo";
+        cout << "\n\tIngrese que tipo de docente es: \n\t1)Teorico\n\t2)Practico\n\t3)Monitoreo\n\tOpcion:";
         cin >> tipo;
         switch (tipo) {
           case 1:
@@ -286,15 +297,18 @@ class Sistema{
     void getDatosUsuarios(){
       cout << "\n\tEstudiantes en el sistema:";
       for(auto it = colEstudiantes->begin(); it!=colEstudiantes->end();it++){
-        cout << "\n\tNombre: "<<it->second->getNombre()<< " Email: " <<it->second->getEmail();
+        cout << "\n\t\tNombre: "<<it->second->getNombre()<< " Email: " <<it->second->getEmail();
       }
       cout << "\n\tDocentes en el sistema:";
       for(auto it = colDocentes->begin(); it!=colDocentes->end();it++){
-        cout << "\n\tNombre: "<<it->second->getNombre()<< " Email: " <<it->second->getEmail();
+        cout << "\n\t\tNombre: "<<it->second->getNombre()<< " Email: " <<it->second->getEmail();
       }
     };
     void getDatosAsignaturas(){
-
+      cout << "\n\tAsignaturas en el sistema: ";
+      for(auto it = colAsignaturas->begin(); it!=colAsignaturas->end();it++){
+        cout << "\n\t\tNombre: "<<it->second->getNombre()<< " Codigo: " <<it->second->getCodigo();
+      }
     };
     void getDatosClases(){
 
