@@ -5,7 +5,9 @@ alta de user
 memoria
       cada vez que se llama a una funcion que devuelve objetos dt, hay que borrarlos luego no?
 iniciar clase
-      que pasa si el doc no tiene asigs
+      que pasa si le doy una asig que el docente no esta asignado
+tiempoDeAsistencia
+      que pasa si le doy una asig que el docente no esta asignado
 finalizar clase
       no muy importante: si el docente no tiene clases tendria que decirlo
 asistencia a clase

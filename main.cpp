@@ -739,17 +739,36 @@ class Sistema{
     }
     };
     void tiempoDeAsistencia(){
-    int cod;
-    set<dtAsignatura> inscripto = fabrica->getIClase()->consultarAsignaturasDocente();
-    for(auto it=inscripto.begin();it!=inscripto.end();++it){
-      cout << "\n\tNombre: " << it->getNombre() << "\n\tCodigo: " << it->getCodigo();
-    }
-    cout << "\n\t¿De que asignatura desea calcular el tiempo de asistencia promedio a las clases? (ingrese codigo):";
-    cin >> cod;
-    set<DtTiempoDeClase> tiempos = fabrica->getIClase()->consultarTiempoClaseDocente(cod);
-    for(auto itt=tiempos.begin();itt!=tiempos.end();++itt){
-      cout << "\n\tNombre: " << itt->getNombre() << "\n\tCodigo: " << itt->getCodClase() << "\n\tTiempo promedio: " << itt->getTiempo();
-    }
+      int cod;
+      set<dtAsignatura> inscripto = fabrica->getIClase()->consultarAsignaturasDocente();
+      if(inscripto.begin()==inscripto.end()){
+        cout << "\n\tEl docente no esta asignado a ninguna asignatura.\n";
+      }
+      else{
+        for(auto it=inscripto.begin();it!=inscripto.end();++it){
+          cout << "\n\tNombre: " << it->getNombre() << "\tCodigo: " << it->getCodigo();
+        }
+
+        bool aux=true;
+        while(aux){
+          while (std::cout << "\n\t¿De que asignatura desea calcular el tiempo de asistencia promedio a las clases?: " && !(std::cin >> cod)) {
+            std::cin.clear(); //clear bad input flag
+            std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); //discard input
+            std::cout << "\tPor favor ingrese un numero.\n";
+          }
+          if(!colAsignaturas->count(cod)){
+            std::cin.clear(); //clear bad input flag
+            std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); //discard input
+            cout << "\tEl codigo no es valido. Por favor intente de nuevo.\n";
+          }
+          else//todo bien, era un numero y un codigo valido
+            aux=false;
+        }
+        set<DtTiempoDeClase> tiempos = fabrica->getIClase()->consultarTiempoClaseDocente(cod);
+        for(auto itt=tiempos.begin();itt!=tiempos.end();++itt){
+          cout << "\n\tNombre: " << itt->getNombre() << "\tCodigo: " << itt->getCodClase() << "\n\tTiempo promedio en segundos: " << itt->getTiempo();
+        }
+      }
     };
     //ambos
     void enviarMensaje(){
