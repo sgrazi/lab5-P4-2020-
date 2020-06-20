@@ -451,7 +451,59 @@ class Sistema{
       }
       return res;
     };
-    void iniciarClase();
+    void iniciarClase(){
+      string nombre,cedula;
+      int asig;
+      char decision,hab;
+      set<dtAsignatura> opciones = fabrica->getIClase()->consultarAsignaturasDocente();
+      for(auto it=opciones.begin();it!=opciones.end();++it){
+        cout << "\n\tNombre: " << it->getNombre()<< "\n\tCodigo: " << it->getCodigo();
+      }
+      cout << "\n\t¿En cual asignatura desea inciar una clase? (ingrese código):";
+      cin >> asig;
+      tipoClase tipo = fabrica->getIClase()->rolDocente(asig);
+      cout << "\n\t¿Que nombre tiene la clase?";
+      cin >> nombre;
+      fabrica->getIClase()->iniciarClase(asig,nombre,tipo,dtFecha(1,1,1,1,1,1)); //METER RELOJ
+      if(tipo==monitoreo){
+        bool seguir = true;
+        while(seguir){
+          map<string,dtEstudiante*> habilitados = fabrica->getIClase()->consultarInscriptos();
+          for(auto ith=habilitados.begin();ith!=habilitados.end();++ith){
+            cout << "\n\tCI: " << ith->first;
+          }
+          cout << "\n\tIngrese cedula de quien quiera agregar a habilitados:";
+          cin >> cedula;
+          fabrica->getIClase()->agregarHabilitado(cedula);
+          cout << "\n\t¿Desea seguir agregando habilitados? (S/N)";
+          cin >> hab;
+          if(hab=='N')
+            seguir=false;
+          else if(hab!='S')
+            cout << "\n\tOpcion no valida";
+          }
+      }
+      dtInfoClase info = fabrica->getIClase()->desplegarInfoClase();
+      cout << "\n\tNombre de clase: " << info.getNombre() << "\n\tCodigo de clase: " << info.getCodigo() << "\n\tIniciada por: "  << info.getIniciadaPor();
+      bool parar=false;
+      while(!parar){
+        cout << "\n\t¿Desea confirmar (S/N)?";
+        cin >> decision;
+        switch(decision){
+          case 'S':
+            parar=true;
+            fabrica->getIClase()->confirmarInicio();
+          break;
+          case 'N':
+            parar=true;
+            fabrica->getIClase()->cancelarInicio();
+          break;
+          default:
+            cout << "\n\tOpcion no válida.";
+          break;
+        }
+      }
+    };
     void finalizarClase();
     void tiempoDeAsistencia();
     //ambos
@@ -609,6 +661,9 @@ int main(){
             cout << "\n\tOpcion: ";
             cin >> tecla;
             switch (tecla){//agregar las operaciones
+              case '1':
+                s->iniciarClase();
+              break;
               default:
                 cout << "\nOpcion no valida.\n";
               break;
