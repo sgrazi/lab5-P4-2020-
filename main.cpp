@@ -570,7 +570,10 @@ class Sistema{
       }
     };
     void getDatosClases(){
-
+      cout << "\n\tClases en el sistema: ";
+      for(auto it = colClases->begin(); it!=colClases->end();it++){
+        cout << "\n\t\tNombre: "<<it->second->getNombre()<< " Codigo: " <<it->second->getCodigo();
+      }
     };
 };
 
