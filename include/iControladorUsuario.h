@@ -33,6 +33,11 @@ class IControladorUsuario{
 		virtual void confirmarCambio() = 0;
 		virtual void desuscribirse() = 0;
 
+		virtual set<dtAsignatura> consultarAsigNoIns() = 0;
+		virtual void inscribir(int) = 0;
+		virtual void confirmarInscripcion() = 0;
+		virtual void cancelarInscripcion() = 0;
+
 		 ~IControladorUsuario(){};
 };
 #endif

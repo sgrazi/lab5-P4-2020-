@@ -1,3 +1,7 @@
 asignar docente a asig
       permite asignar docentes de roles no admitidos por la asignatura
       si asigne todos los docentes a la asignatura y no quedan mas, no tengo como salir de la operacion
+alta de asig
+      si le paso un char en codigo se rompe
+inscripcion de est
+      si le paso un codigo que no existe u otra cosa que este mal se rompe

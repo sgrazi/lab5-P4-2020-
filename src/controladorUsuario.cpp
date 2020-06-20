@@ -129,6 +129,7 @@ set<dtAsignatura> ControladorUsuario::consultarAsigNoIns(){
     nuevo.insert(*agregar);
   }
   //para cada asig que ya estoy inscripto, la remuevo del set
+
   for(auto itAsig = itEst->second->getAsignaturas()->begin(); itAsig!=itEst->second->getAsignaturas()->end(); ++itAsig){
     auto it = nuevo.begin();
     for(it = nuevo.begin(); it!=nuevo.end(); ++it){

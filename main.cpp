@@ -286,14 +286,6 @@ class Sistema{
       }
     };
     //estudiante
-    void inscribirAAsignatura();
-    void asistirAClaseEnVivo();
-    void finalizarAsistenciaAClaseEnVivo();
-    //docente
-    void iniciarClase();
-    void finalizarClase();
-    void tiempoDeAsistencia();
-    //ambos
     bool iniciarSesionE(string email){
       bool res = colEstudiantes->count(email);
       if(res){
@@ -302,6 +294,39 @@ class Sistema{
       }
       return res;
     };
+    void inscribirAAsignatura(){
+      bool sn = false;
+      char entrada;
+      cout <<"\n\tAsignaturas disponibles para inscripción:";
+      set<dtAsignatura> noInscripto = fabrica->getIUsuario()->consultarAsigNoIns();
+      for(auto it = noInscripto.begin();it != noInscripto.end();it++){
+        cout << "\n\tNombre: " << it->getNombre()<< " Codigo: " << it->getCodigo();
+      }
+      int codigoAsig;
+      cout << "\n\tIngrese el codigo de la asignatura a la que desea inscribirse: ";
+      cin >> codigoAsig;//QUE PASA SI ME TIRAN UN VALOR NO VALIDO
+  		fabrica->getIUsuario()->inscribir(codigoAsig);
+      while(!sn){
+        cout << "\n\t¿Desea confirmar la inscripción? (S/N)\n\tOpcion: ";
+        cin >> entrada;
+        switch (entrada) {
+          case 'S':
+            sn = true;
+            fabrica->getIUsuario()->confirmarInscripcion();
+          break;
+          case 'N':
+            sn = true;
+            fabrica->getIUsuario()->cancelarInscripcion();
+          break;
+          default:
+            cout << "\n\tOpcion no válida.";
+          break;
+        }
+      }
+    };
+    void asistirAClaseEnVivo();
+    void finalizarAsistenciaAClaseEnVivo();
+    //docente
     bool iniciarSesionD(string email){
       bool res = colDocentes->count(email);
       if(res){
@@ -310,6 +335,10 @@ class Sistema{
       }
       return res;
     };
+    void iniciarClase();
+    void finalizarClase();
+    void tiempoDeAsistencia();
+    //ambos
     void enviarMensaje();
     void suscribirANotificaciones();
     void consultarNotificaciones();
@@ -505,6 +534,9 @@ int main(){
             cout << "\n \tOpcion: ";
             cin >> tecla;
             switch (tecla){//agregar las operaciones
+              case '1':
+                s->inscribirAAsignatura();
+              break;
               default:
                 cout << "\nOpcion no valida.\n";
               break;
