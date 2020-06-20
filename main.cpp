@@ -116,7 +116,74 @@ class Sistema{
         }
       }
     };
-    void altaDeAsignatura();
+    void altaDeAsignatura(){
+      string e1,e8;
+      char e6,e7;
+      int e2;
+      bool e3,e4,e5;
+      bool no_pronto=true;
+      while(no_pronto){
+        cout << "\n\t¿Cuál es el nombre de la asignatura?: ";
+        cin >> e1;
+        cout << "\n\t¿Cuál es el código de la asignatura?: ";
+        cin >> e2;
+        cout << "\n\t¿La asignatura tiene teórico (1) o no (0)?: ";
+        cin >> e7;
+        switch(e7){
+          case '1':
+            e3=true;
+          break;
+          case '0':
+            e3=false;
+          break;
+          default:
+            cout << "\n\tOpcion no válida.";
+          break;
+        }
+        cout << "\n\t¿La asignatura tiene práctico (1) o no (0)?: ";
+        cin >> e7;
+        switch(e7){
+        case '1':
+          e4=true;
+        break;
+        case '0':
+          e4=false;
+        break;
+        default:
+          cout << "\n\tOpcion no válida.";
+        break;
+        }
+        cout << "\n\t¿La asignatura tiene monitoreo (1) o no(0)?: ";
+        cin >> e7;
+        switch(e7){
+        case '1':
+          e5=true;
+        break;
+        case '0':
+          e5=false;
+        break;
+        default:
+          cout << "\n\tOpcion no válida.";
+        break;
+      }
+      fabrica->getIAsignatura()->agregarAsignatura(e1,e2,e3,e4,e5);
+      cout << "\n\t¿Desea confirmar (1) o no(0)?";
+      cin >> e6;
+      switch(e6){
+      case '1':
+        no_pronto=false;
+        fabrica->getIAsignatura()->confirmarAlta();
+      break;
+      case '0':
+        no_pronto=false;
+        fabrica->getIAsignatura()->cancelarAlta();
+      break;
+      default:
+        cout << "\n\tOpcion no válida.";
+      break;
+    }
+  }
+  };
     void asignarDocenteAAsignatura(){
       int codigoAsig, tipo;
       char entrada;
@@ -175,7 +242,32 @@ class Sistema{
         }
       }
     };
-    void eliminarAsignatura();
+    void eliminarAsignatura(){
+    int cod;
+    char d;
+    bool no_termina=true;
+    while(no_termina){
+      fabrica->getIAsignatura()->consultarAsignaturas();
+      cout << "\n\t¿Qué asignatura desea eliminar? (ingrese código):";
+      cin >> cod;
+      fabrica->getIAsignatura()->eliminarAsignatura(cod);
+      cout << "\n\t¿Desea confirmacion la eliminación (1) o no (0))?:";
+      cin >> d;
+      switch(d){
+        case '1':
+          no_termina=false;
+          fabrica->getIAsignatura()->confirmarElim();
+        break;
+        case '0':
+          no_termina=false;
+          fabrica->getIAsignatura()->cancelarElim();
+        break;
+        default:
+          cout << "\n\tOpcion no válida.";
+        break;
+      }
+    }
+    };
     void tiempoDeDictado();
     //estudiante
     void inscribirAAsignatura();
@@ -297,8 +389,14 @@ int main(){
           case '3':
             s->altaDeUsuario();
           break;
+          case '4':
+            s->altaDeAsignatura();
+          break;
           case '5':
             s->asignarDocenteAAsignatura();
+          break;
+          case '6':
+            s->eliminarAsignatura();
           break;
           default:
             cout << "\nOpcion no valida.\n";
