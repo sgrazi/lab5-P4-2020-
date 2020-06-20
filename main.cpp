@@ -7,6 +7,7 @@
 #include "include/docente.h"
 #include "include/estudiante.h"
 #include "include/usuario.h"
+#include "include/tipoClase.h"
 
 
 using namespace std;
@@ -90,7 +91,7 @@ class Sistema{
             cin >> var;
             fabrica->getIUsuario()->agregarDocente(n, c, e, u, var);
             while(!sn){
-              cout << "\n\t¿Desea confirmar (1) el alta del docente? (S/N) \n\tOpcion: ";
+              cout << "\n\t¿Desea confirmar el alta del docente? (S/N) \n\tOpcion: ";
               cin >> entrada;
               switch (entrada) {
                 case 'S':
@@ -116,7 +117,64 @@ class Sistema{
       }
     };
     void altaDeAsignatura();
-    void asignarDocenteAAsignatura();
+    void asignarDocenteAAsignatura(){
+      int codigoAsig, tipo;
+      char entrada;
+      string emailDoc;
+      bool tipoCorrecto,sn = false;
+      set<dtAsignatura> asignaturas = fabrica->getIAsignatura()->consultarAsignaturas();
+      cout << "\n\tAsignaturas en el sistema:";
+      for(auto it = asignaturas.begin();it != asignaturas.end();it++){
+        cout << "\n\tNombre: " << it->getNombre()<< " Codigo: " << it->getCodigo();
+      }
+      cout << "\n\tIngrese el codigo de una asignatura: ";
+      cin >> codigoAsig;//QUE PASA SI ME TIRAN UN VALOR NO VALIDO
+      map<string,dtDocente> docLibres = fabrica->getIAsignatura()->consultarDocentesLibres(codigoAsig);
+      cout << "\n\tLos docentes libres para asignar a la asignatura son: ";
+      for(auto it = docLibres.begin();it != docLibres.end();it++){
+        cout << "\n\tNombre: " << it->second.getNombre()<< " Email: " << it->first;
+      }
+      cout << "\n\tIngrese el email del docente a asignar: ";
+      cin >> emailDoc;//QUE PASA SI ME TIRAN UN VALOR NO VALIDO
+      while(!tipoCorrecto){
+        cout << "\n\tIngrese que tipo de docente es: \n\t1)Teorico\n\t2)Practico\n\t3)Monitoreo";
+        cin >> tipo;
+        switch (tipo) {
+          case 1:
+            tipoCorrecto = 1;
+            fabrica->getIAsignatura()->asignarDocente(emailDoc,codigoAsig,teorico);
+          break;
+          case 2:
+            tipoCorrecto = 1;
+            fabrica->getIAsignatura()->asignarDocente(emailDoc,codigoAsig,practico);
+          break;
+          case 3:
+            tipoCorrecto = 1;
+            fabrica->getIAsignatura()->asignarDocente(emailDoc,codigoAsig,monitoreo);
+          break;
+          default:
+            cout << "\nOpcion no valida.\n";
+          break;
+        }
+      }
+      while(!sn){
+        cout << "\n\t¿Desea confirmar la asignación? (S/N) \n\tOpcion: ";
+        cin >> entrada;
+        switch (entrada) {
+          case 'S':
+            sn = true;
+            fabrica->getIAsignatura()->confirmarAsignacion();
+          break;
+          case 'N':
+            sn = true;
+            fabrica->getIAsignatura()->cancelarAsignacion();
+          break;
+          default:
+            cout << "\n\tOpcion no válida.";
+          break;
+        }
+      }
+    };
     void eliminarAsignatura();
     void tiempoDeDictado();
     //estudiante
@@ -230,13 +288,17 @@ int main(){
         cout << "\t2) Modificar reloj del sistema" << endl;
         cout << "\t3) Agregar usuario al sistema" << endl;
         cout << "\t4) Agregar asignatura al sistema" << endl;
-        cout << "\t5) Eliminar asignatura del sistema" << endl;
-        cout << "\t6) Atras" << endl << endl;
+        cout << "\t5) Asignar docente a asignatura" << endl;
+        cout << "\t6) Eliminar asignatura del sistema" << endl;
+        cout << "\t7) Atras" << endl << endl;
         cout << "\n \tOpcion: ";
         cin >> tecla;
         switch (tecla){//agregar las operaciones
           case '3':
             s->altaDeUsuario();
+          break;
+          case '5':
+            s->asignarDocenteAAsignatura();
           break;
           default:
             cout << "\nOpcion no valida.\n";
