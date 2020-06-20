@@ -491,9 +491,9 @@ class Sistema{
           }
 
       		set<dtClase> setClasesAsig = fabrica->getIClase()->consultarClasesVivo(codigoAsig);
-          for(auto it = fabrica->getIClase()->consultarClasesParticipando().begin();it != fabrica->getIClase()->consultarClasesParticipando().end();it++){//eliminar clases que ya estoy viendo
+        /*  for(auto it = fabrica->getIClase()->consultarClasesParticipando().begin();it != fabrica->getIClase()->consultarClasesParticipando().end();it++){//eliminar clases que ya estoy viendo
             setClasesAsig.erase(*it);
-          }
+          }*/
           if(setClasesAsig.begin()==setClasesAsig.end()){
             cout << "\n\tNo hay clases para asistir.\n";
             no_pronto = 0;
