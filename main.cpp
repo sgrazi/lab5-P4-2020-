@@ -268,7 +268,12 @@ class Sistema{
       }
     }
     };
-    void tiempoDeDictado();
+    void tiempoDeDictado(){
+      set<DtDictado> tiempos = fabrica->getIAsignatura()->tiempoDictado();
+      for(auto it=tiempos.begin();it!=tiempos.end();++it){
+        cout << it->getCodAsig() << it->getTiempoDictado();
+      }
+    };
     //estudiante
     void inscribirAAsignatura();
     void asistirAClaseEnVivo();
@@ -382,7 +387,8 @@ int main(){
         cout << "\t4) Agregar asignatura al sistema" << endl;
         cout << "\t5) Asignar docente a asignatura" << endl;
         cout << "\t6) Eliminar asignatura del sistema" << endl;
-        cout << "\t7) Atras" << endl << endl;
+        cout << "\t7) Ver tiempo de dictado de cada asignatura" << endl;
+        cout << "\t8) Atras" << endl << endl;
         cout << "\n \tOpcion: ";
         cin >> tecla;
         switch (tecla){//agregar las operaciones
@@ -397,6 +403,9 @@ int main(){
           break;
           case '6':
             s->eliminarAsignatura();
+          break;
+          case '7':
+            s->tiempoDeDictado();
           break;
           default:
             cout << "\nOpcion no valida.\n";
