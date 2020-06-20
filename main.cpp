@@ -535,7 +535,19 @@ class Sistema{
       }
     }
     };
-    void tiempoDeAsistencia();
+    void tiempoDeAsistencia(){
+    int cod;
+    set<dtAsignatura> inscripto = fabrica->getIClase()->consultarAsignaturasDocente();
+    for(auto it=inscripto.begin();it!=inscripto.end();++it){
+      cout << "\n\tNombre: " << it->getNombre() << "\n\tCodigo: " << it->getCodigo();
+    }
+    cout << "\n\t¿De que asignatura desea calcular el tiempo de asistencia promedio a las clases? (ingrese codigo):";
+    cin >> cod;
+    set<DtTiempoDeClase> tiempos = fabrica->getIClase()->consultarTiempoClaseDocente(cod);
+    for(auto itt=tiempos.begin();itt!=tiempos.end();++itt){
+      cout << "\n\tNombre: " << itt->getNombre() << "\n\tCodigo: " << itt->getCodClase() << "\n\tTiempo promedio: " << itt->getTiempo();
+    }
+    };
     //ambos
     void enviarMensaje();
     void suscribirANotificaciones();
@@ -696,6 +708,9 @@ int main(){
               break;
               case '2':
                 s->finalizarClase();
+              break;
+              case '3':
+                s->tiempoDeAsistencia();
               break;
               default:
                 cout << "\nOpcion no valida.\n";
