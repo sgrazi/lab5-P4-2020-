@@ -7,6 +7,7 @@
 #include "dtAsignatura.h"
 #include "dtClase.h"
 #include "clase.h"
+#include "reloj.h"
 
 using namespace std;
 class Rol;
@@ -18,6 +19,8 @@ class Docente : public Usuario{
     string instituto;
     map<int,Rol*>* asignaturas; //int es el codigo de la asignatura
     map<int,Clase*>* clases;
+
+    Reloj* relojSistema;
   public:
     Docente();
     string getInstituto();

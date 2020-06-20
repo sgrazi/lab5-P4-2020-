@@ -9,7 +9,6 @@
 #include "include/estudiante.h"
 #include "include/usuario.h"
 #include "include/tipoClase.h"
-#include "include/reloj.h"
 
 const dtFecha fechaNula(0,0,0,0,0,0);
 

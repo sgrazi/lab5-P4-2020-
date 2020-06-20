@@ -231,7 +231,7 @@ void ControladorClase::cancelarFin(){
 };
 
 dtFecha ControladorClase::generarFecha(){//NO TERMINADA, HAY QUE IMPLEMENTAR EL RELOJ DEL SISTEMA QUE ELLOS PIDEN
-  return dtFecha(1,1,1,1,1,1);
+  return dtFecha(relojSistema->getInstancia()->getAnioSistema(),relojSistema->getInstancia()->getMesSistema(),relojSistema->getInstancia()->getDiaSistema(),relojSistema->getInstancia()->getHoraSistema(),relojSistema->getInstancia()->getMinSistema(),0);
 };
 
 //ENVIO DE MENSAJE
@@ -306,7 +306,7 @@ set<dtAsignatura> ControladorClase::consultarAsigIns(){
 set<dtClase> ControladorClase::consultarClasesVivo(int a){
   set<dtClase> nuevo;
   for(auto itCla=coleccionGlobalAsignaturas->find(a)->second->getClases()->begin(); itCla!=coleccionGlobalAsignaturas->find(a)->second->getClases()->end(); ++itCla){
-    if(itCla->second->getFechaFin()==fechaNula /*&& itCla->second->getFechaInicio()<*/){
+    if(itCla->second->getFechaFin()==fechaNula && ((itCla->second->getFechaInicio().getAnio()<=relojSistema->getInstancia()->getAnioSistema()) && (itCla->second->getFechaInicio().getMes()<=relojSistema->getInstancia()->getMesSistema()) && (itCla->second->getFechaInicio().getDia()<=relojSistema->getInstancia()->getDiaSistema()) && (itCla->second->getFechaInicio().getHora()<=relojSistema->getInstancia()->getHoraSistema()) && (itCla->second->getFechaInicio().getMinuto()<=relojSistema->getInstancia()->getMinSistema()))){
       dtClase *dt = new dtClase();
       dt->setNombre(itCla->second->getNombre());
       dt->setCodigo(itCla->second->getCodigo());

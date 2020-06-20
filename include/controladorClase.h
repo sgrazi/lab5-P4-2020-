@@ -34,6 +34,8 @@ class ControladorClase: public IControladorClase{
 		map<int,Mensaje*>* coleccionGlobalMensajes;
 		static ControladorClase* instancia;
 		ControladorClase();
+
+		Reloj* relojSistema;
 	public:
 		static ControladorClase* getInstancia();
 		void setPasswordUserActual(string);
@@ -56,7 +58,6 @@ class ControladorClase: public IControladorClase{
 		void setColAsig(map<int,Asignatura*>*);
 		void setColCla(map<int,Clase*>*);
 		void setColMens(map<int,Mensaje*>*);
-
 		void setHandler(HandlerMensajes*);
 
 		//INICIO DE CLASE
