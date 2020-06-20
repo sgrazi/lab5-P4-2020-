@@ -9,6 +9,7 @@
 #include "include/estudiante.h"
 #include "include/usuario.h"
 #include "include/tipoClase.h"
+#include "include/reloj.h"
 
 const dtFecha fechaNula(0,0,0,0,0,0);
 
@@ -30,14 +31,38 @@ class Sistema{
     static map<int,Asignatura*>* colAsignaturas;
     static map<int,Clase*>* colClases;
     static map<int,Mensaje*>* colMensajes;
+    static Reloj* reloj;
   public:
     static Sistema* getInstancia();
 
     //operaciones del sistema, puse lo que me parecia, no creo este super correcto todo
 
     //Administrador
-    void modificarReloj();
-    void consultarReloj();
+    void modificarReloj(){
+      int anio,mes,dia,hora,min;
+      cout << "\n\t¿Qué año desea ingresar?";
+      cin >> anio;
+      reloj->setAnioSistema(anio);
+      cout << "\n\t¿Qué mes desea ingresar?";
+      cin >> mes;
+      reloj->setMesSistema(mes);
+      cout << "\n\t¿Qué dia desea ingresar?";
+      cin >> dia;
+      reloj->setDiaSistema(dia);
+      cout << "\n\t¿Qué hora desea ingresar?";
+      cin >> hora;
+      reloj->setHoraSistema(hora);
+      cout << "\n\t¿Qué minuto desea ingresar?";
+      cin >> min;
+      reloj->setMinSistema(min);
+    };
+    void consultarReloj(){
+      cout << "\n\tEstamos en el año " << reloj->getAnioSistema();
+      cout << "\n\tEstamos en el mes " << reloj->getMesSistema();
+      cout << "\n\tEstamos en el dia " << reloj->getDiaSistema();
+      cout << "\n\tEstamos en la hora " << reloj->getHoraSistema();
+      cout << "\n\tEstamos en el minuto " << reloj->getMinSistema();
+    };
     void altaDeUsuario(){
       char entrada;
       string n,c,e,u,var;
@@ -666,6 +691,7 @@ map<string,Docente*>* Sistema::colDocentes = 0;
 map<int,Asignatura*>* Sistema::colAsignaturas = 0;
 map<int,Clase*>* Sistema::colClases = 0;
 map<int,Mensaje*>* Sistema::colMensajes = 0;
+Reloj* Sistema::reloj = NULL;
 
 Sistema* Sistema::getInstancia(){
     if (instancia == 0)    {
@@ -674,6 +700,8 @@ Sistema* Sistema::getInstancia(){
         fabrica = fabrica->getInstancia();
         //creo el handler
         handler = new HandlerMensajes();
+        //creo el reloj
+        reloj = reloj->getInstancia();
         //creo las colecciones
         colUsuarios = new map<string,Usuario*>;
         colEstudiantes = new map<string,Estudiante*>;
@@ -743,6 +771,12 @@ int main(){
         cout << "\n \tOpcion: ";
         cin >> tecla;
         switch (tecla){//agregar las operaciones
+          case '1':
+            s->consultarReloj();
+          break;
+          case '2':
+            s->modificarReloj();
+          break;
           case '3':
             s->altaDeUsuario();
           break;
