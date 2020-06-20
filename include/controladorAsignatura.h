@@ -57,7 +57,7 @@ class ControladorAsignatura:public IControladorAsignatura{
 		//ASIGNACION DE DOC A ASIG
 		set<dtAsignatura> consultarAsignaturas();
 		map<string,dtDocente> consultarDocentesLibres(int); //list porque no esta definido como ordenar a los docentes en un map
-		void asignarDocente(string,int,tipoClase);
+		bool asignarDocente(string,int,tipoClase);
 		void confirmarAsignacion();
 		void cancelarAsignacion();
 

@@ -99,10 +99,20 @@ map<string,dtDocente> ControladorAsignatura::consultarDocentesLibres(int codigo)
   };
   return nuevo;
 };
-void ControladorAsignatura::asignarDocente(string e, int c, tipoClase r){
-  this->setEmailDocente(e);
-  this->setCodigoAsig(c);
-  this->setRolDoc(r);
+bool ControladorAsignatura::asignarDocente(string e, int c, tipoClase r){
+  bool res;
+  auto asig = coleccionGlobalAsignaturas->find(c)->second;
+  if( (asig->getTeorico() && r==teorico)||(asig->getPractico() && r==practico)||(asig->getMonitoreo() && r==monitoreo) ){
+    this->setEmailDocente(e);
+    this->setCodigoAsig(c);
+    this->setRolDoc(r);
+    res = true;
+  }
+  else{
+    cout << "\n\tLa asignatura no admite clases del rol elegido"<<endl;
+    res = false;
+  }
+  return res;
 };
 void ControladorAsignatura::confirmarAsignacion(){
   auto doc = coleccionGlobalDocentes->find(emailDocente);

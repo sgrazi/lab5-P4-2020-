@@ -24,7 +24,7 @@ class IControladorAsignatura{
 		virtual void cancelarAlta() = 0;
 		virtual set<dtAsignatura> consultarAsignaturas() = 0;
 		virtual map<string,dtDocente> consultarDocentesLibres(int) = 0;
-		virtual void asignarDocente(string,int,tipoClase) = 0;
+		virtual bool asignarDocente(string,int,tipoClase) = 0;
 		virtual void confirmarAsignacion() = 0;
 		virtual void cancelarAsignacion() = 0;
 		virtual void eliminarAsignatura(int) = 0;
