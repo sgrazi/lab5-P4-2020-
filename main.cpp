@@ -294,7 +294,22 @@ class Sistema{
     void finalizarClase();
     void tiempoDeAsistencia();
     //ambos
-    void iniciarSesion();
+    bool iniciarSesionE(string email){
+      bool res = colEstudiantes->count(email);
+      if(res){
+        fabrica->getIClase()->iniciarSesion(email,"pass");
+        fabrica->getIUsuario()->iniciarSesion(email,"pass");
+      }
+      return res;
+    };
+    bool iniciarSesionD(string email){
+      bool res = colDocentes->count(email);
+      if(res){
+        fabrica->getIClase()->iniciarSesion(email,"pass");
+        fabrica->getIUsuario()->iniciarSesion(email,"pass");
+      }
+      return res;
+    };
     void enviarMensaje();
     void suscribirANotificaciones();
     void consultarNotificaciones();
@@ -435,7 +450,8 @@ int main(){
           cin >> email;
           cout << "\tContraseña: ";
           cin >> pass;
-          if(1){//s->iniciarSesion(email,pass)
+          inicioSesion = s->iniciarSesionD(email);//no checkea password, siempre admite si el email existe
+          if(inicioSesion){
             inicioSesion = true;
             cout << "\nSeleccione una operación de docente:" << endl;
             cout << "\t1) Iniciar una clase" << endl;
@@ -445,7 +461,7 @@ int main(){
             cout << "\t5) Suscribirse a notificaciones" << endl;
             cout << "\t6) Consultar notificaciones" << endl;
             cout << "\t7) Atras" << endl << endl;
-            cout << "\n \tOpcion: ";
+            cout << "\n\tOpcion: ";
             cin >> tecla;
             switch (tecla){//agregar las operaciones
               default:
@@ -453,8 +469,17 @@ int main(){
               break;
             }
           }
-          else
-            cout << "Credenciales no validas. Por favor intente de nuevo." << endl;
+          else{
+            cout << "Credenciales no validas ¿Quiere intentar de nuevo? (S/N)" << endl;
+            cin >> tecla;
+            switch (tecla) {
+              case 'S':
+              break;
+              case 'N':
+                inicioSesion=true;
+              break;
+            }
+          }
         }
       break;
       case '3':
@@ -466,7 +491,8 @@ int main(){
           cin >> email;
           cout << "\tContraseña: ";
           cin >> pass;
-          if(1){//s->iniciarSesion(email,pass)
+          inicioSesion = s->iniciarSesionE(email);//no checkea password, siempre admite si el email existe
+          if(inicioSesion){
             inicioSesion = true;
             cout << "\nSeleccione una operación de estudiante:" << endl;
             cout << "\t1) Inscribirse a una asignatura" << endl;
@@ -484,8 +510,17 @@ int main(){
               break;
             }
           }
-          else
-            cout << "\nCredenciales no validas. Por favor intente de nuevo." << endl;
+          else{
+            cout << "Credenciales no validas ¿Quiere intentar de nuevo? (S/N)" << endl;
+            cin >> tecla;
+            switch (tecla) {
+              case 'S':
+              break;
+              case 'N':
+                inicioSesion=true;
+              break;
+            }
+          }
         }
       break;
       case '4':
