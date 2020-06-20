@@ -506,7 +506,35 @@ class Sistema{
         }
       }
     };
-    void finalizarClase();
+    void finalizarClase(){
+    int clase;
+    char decision;
+    set<dtClase> clasesVivo = fabrica->getIClase()->consultarClasesEnVivo();
+    for(auto it=clasesVivo.begin();it!=clasesVivo.end();++it){
+      cout << "\n\tNombre: " << it->getNombre() << "\n\tCodigo: " << it->getCodigo();
+    }
+    cout << "\n\t¿Cual clase desea finalizar? (ingrese código):";
+    cin >> clase;
+    fabrica->getIClase()->finalizarClase(clase);
+    bool parar=false;
+    while(!parar){
+      cout << "\n\t¿Desea confirmar finalizacion? (S/N)";
+      cin >> decision;
+      switch(decision){
+        case 'S':
+          parar=true;
+          fabrica->getIClase()->confirmarFin();
+        break;
+        case 'N':
+          parar=true;
+          fabrica->getIClase()->cancelarFin();
+        break;
+        default:
+          cout << "\n\tOpcion no válida.";
+        break;
+      }
+    }
+    };
     void tiempoDeAsistencia();
     //ambos
     void enviarMensaje();
@@ -665,6 +693,9 @@ int main(){
             switch (tecla){//agregar las operaciones
               case '1':
                 s->iniciarClase();
+              break;
+              case '2':
+                s->finalizarClase();
               break;
               default:
                 cout << "\nOpcion no valida.\n";
