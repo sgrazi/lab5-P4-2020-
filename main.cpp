@@ -219,7 +219,7 @@ class Sistema{
       string emailDoc;
       bool tipoCorrecto = false;
       bool sn = false;
-      bool admite;
+      bool admite = true;
       bool no_pronto = true;
       while(no_pronto){
         set<dtAsignatura> asignaturas = fabrica->getIAsignatura()->consultarAsignaturas();
@@ -292,6 +292,8 @@ class Sistema{
             break;
           }
         }
+        if(!admite)
+          cout << "\n\t¿Desea confirmar la asignación? (S/N) \n\tOpcion: ";
       }
     };
     void eliminarAsignatura(){
