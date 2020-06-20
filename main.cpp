@@ -404,33 +404,49 @@ class Sistema{
     void inscribirAAsignatura(){
       bool sn = false;
       char entrada;
-      cout <<"\n\tAsignaturas disponibles para inscripción:";
       set<dtAsignatura> noInscripto = fabrica->getIUsuario()->consultarAsigNoIns();
-      for(auto it = noInscripto.begin();it != noInscripto.end();it++){
-        cout << "\n\tNombre: " << it->getNombre()<< " Codigo: " << it->getCodigo();
+      if(noInscripto.begin()==noInscripto.end()){
+        cout << "\n\tNo existen asignaturas sin inscribirse.\n";
       }
-      int codigoAsig;
-      while (std::cout << "\n\tIngrese el codigo de la asignatura a la que desea inscribirse: " && !(std::cin >> codigoAsig)) {
-        std::cin.clear(); //clear bad input flag
-        std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); //discard input
-        std::cout << "\tPor favor ingrese un numero.\n";
-      }
-  		fabrica->getIUsuario()->inscribir(codigoAsig);
-      while(!sn){
-        cout << "\n\t¿Desea confirmar la inscripción? (S/N)\n\tOpcion: ";
-        cin >> entrada;
-        switch (entrada) {
-          case 'S':
-            sn = true;
-            fabrica->getIUsuario()->confirmarInscripcion();
-          break;
-          case 'N':
-            sn = true;
-            fabrica->getIUsuario()->cancelarInscripcion();
-          break;
-          default:
-            cout << "\n\tOpcion no válida.";
-          break;
+      else{
+        cout <<"\n\tAsignaturas disponibles para inscripción:";
+        for(auto it = noInscripto.begin();it != noInscripto.end();it++){
+          cout << "\n\tNombre: " << it->getNombre()<< " Codigo: " << it->getCodigo();
+        }
+        int codigoAsig;
+
+        bool aux=true;
+        while(aux){
+          while (std::cout << "\n\tIngrese el codigo de la asignatura a la que desea inscribirse: " && !(std::cin >> codigoAsig)) {
+            std::cin.clear(); //clear bad input flag
+            std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); //discard input
+            std::cout << "\tPor favor ingrese un numero.\n";
+          }
+          if(!colAsignaturas->count(codigoAsig)){
+            std::cin.clear(); //clear bad input flag
+            std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); //discard input
+            cout << "\tEl codigo no es valido. Por favor intente de nuevo.\n";
+          }
+          else//todo bien, era un numero y un codigo valido
+            aux=false;
+        }
+    		fabrica->getIUsuario()->inscribir(codigoAsig);
+        while(!sn){
+          cout << "\n\t¿Desea confirmar la inscripción? (S/N)\n\tOpcion: ";
+          cin >> entrada;
+          switch (entrada) {
+            case 'S':
+              sn = true;
+              fabrica->getIUsuario()->confirmarInscripcion();
+            break;
+            case 'N':
+              sn = true;
+              fabrica->getIUsuario()->cancelarInscripcion();
+            break;
+            default:
+              cout << "\n\tOpcion no válida.";
+            break;
+          }
         }
       }
     };
@@ -439,75 +455,156 @@ class Sistema{
       bool no_pronto = true;
       while(no_pronto){
         char entrada;
-        cout <<"\n\tAsignaturas de estudiante:";
         set<dtAsignatura> asigIns = fabrica->getIClase()->consultarAsigIns();
-        for(auto it = asigIns.begin();it != asigIns.end();it++){
-          cout << "\n\tNombre: " << it->getNombre()<< " Codigo: " << it->getCodigo();
+        if(asigIns.begin()==asigIns.end()){
+          cout << "\n\tEl estudiante no esta inscripto a ninguna asignatura.\n";
+          no_pronto = 0;
         }
-        int codigoAsig;
-        cout << "\n\tIngrese el codigo de la asignatura de la que desea ver clases: ";
-        cin >> codigoAsig;//QUE PASA SI ME TIRAN UN VALOR NO VALIDO
-        cout <<"\n\tClases de asignatura:";
-    		set<dtClase> setClasesAsig = fabrica->getIClase()->consultarClasesVivo(codigoAsig);
-        for(auto it = setClasesAsig.begin();it != setClasesAsig.end();it++){
-          cout << "\n\tNombre: " << it->getNombre()<< " Codigo: " << it->getCodigo();
-        }
-        int codigoCla;
-        cout << "\n\tIngrese el codigo de la clase que desea ver: ";
-        cin >> codigoCla;//QUE PASA SI ME TIRAN UN VALOR NO VALIDO
-    		dtClase claseAsistida = fabrica->getIClase()->asistirClaseVivo(codigoCla);
-        while(!sn){
-          cout << "\n\t¿Desea ver la clase "<<claseAsistida.getNombre()<< "?";
-          cin >> entrada;
-          switch (entrada) {
-            case 'S':
-              sn = true;
-              fabrica->getIClase()->confirmarAsistenciaVivo();
-            break;
-            case 'N':
-              sn = true;
-              fabrica->getIClase()->cancelarAsistencia();
-            break;
-            default:
-              cout << "\n\tOpcion no válida.";
-            break;
+        else{
+          cout <<"\n\tAsignaturas de estudiante:";
+          for(auto it = asigIns.begin();it != asigIns.end();it++){
+            cout << "\n\tNombre: " << it->getNombre()<< " Codigo: " << it->getCodigo();
+          }
+          int codigoAsig;
+          bool aux = true;
+
+          /*while (std::cout << "\n\tIngrese el codigo de la asignatura de la que desea ver clases: " && !(std::cin >> codigoAsig)) {
+            std::cin.clear(); //clear bad input flag
+            std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); //discard input
+            std::cout << "\tPor favor ingrese un numero.\n";
+          }*/
+
+          while(aux){
+            while (std::cout << "\n\tIngrese el codigo de la asignatura de la que desea ver clases: " && !(std::cin >> codigoAsig)) {
+              std::cin.clear(); //clear bad input flag
+              std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); //discard input
+              std::cout << "\tPor favor ingrese un numero.\n";
+            }
+            if(!colAsignaturas->count(codigoAsig)){
+              std::cin.clear(); //clear bad input flag
+              std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); //discard input
+              cout << "\tEl codigo no es valido. Por favor intente de nuevo.\n";
+            }
+            else{//todo bien, era un numero y un codigo valido
+              aux=false;
+            }
+          }
+
+      		set<dtClase> setClasesAsig = fabrica->getIClase()->consultarClasesVivo(codigoAsig);
+          for(auto it = fabrica->getIClase()->consultarClasesParticipando().begin();it != fabrica->getIClase()->consultarClasesParticipando().end();it++){//eliminar clases que ya estoy viendo
+            setClasesAsig.erase(*it);
+          }
+          if(setClasesAsig.begin()==setClasesAsig.end()){
+            cout << "\n\tNo hay clases para asistir.\n";
+            no_pronto = 0;
+          }
+          else{
+            cout <<"\n\tClases de asignatura:";
+            for(auto it = setClasesAsig.begin();it != setClasesAsig.end();it++){
+              cout << "\n\tNombre: " << it->getNombre()<< " Codigo: " << it->getCodigo();
+            }
+            int codigoCla;
+            aux = true;
+            while(aux){
+              while (std::cout << "\n\tIngrese el codigo de la clase que desea ver: " && !(std::cin >> codigoCla)) {
+                std::cin.clear(); //clear bad input flag
+                std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); //discard input
+                std::cout << "\tPor favor ingrese un numero.\n";
+              }
+              if(!colClases->count(codigoCla)){
+                std::cin.clear(); //clear bad input flag
+                std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); //discard input
+                cout << "\tEl codigo no es valido. Por favor intente de nuevo.\n";
+              }
+              else//todo bien, era un numero, un codigo valido y no la esta viendo ya
+                aux=false;
+            }
+        		dtClase claseAsistida = fabrica->getIClase()->asistirClaseVivo(codigoCla);
+            while(!sn){
+              cout << "\n\t¿Desea ver la clase "<<claseAsistida.getNombre()<< "? (S/N): ";
+              cin >> entrada;
+              switch (entrada) {
+                case 'S':
+                  sn = true;
+                  no_pronto = false;
+                  fabrica->getIClase()->confirmarAsistenciaVivo();
+                break;
+                case 'N':
+                  sn = true;
+                  no_pronto = false;
+                  fabrica->getIClase()->cancelarAsistencia();
+                break;
+                default:
+                  cout << "\n\tOpcion no válida.";
+                break;
+              }
+            }
+            no_pronto = 0;
           }
         }
       }
     };
     void finalizarAsistenciaAClaseEnVivo(){
       bool sn = false;
-      char entrada;
       bool no_pronto = true;
       while(no_pronto){
-        cout <<"\n\tClases asistiendo:";
-    		set<dtClase*> setClasesAsig = fabrica->getIClase()->consultarClasesParticipandoVivo();
-        for(auto it = setClasesAsig.begin();it != setClasesAsig.end();it++){
-          cout << "\n\tNombre: " << (*it)->getNombre()<< " Codigo: " << (*it)->getCodigo();
+        char entrada;
+        set<dtClase*> setClasesAsig = fabrica->getIClase()->consultarClasesParticipandoVivo();
+        if(setClasesAsig.begin()==setClasesAsig.end()){
+          cout << "\n\tEl estudiante no esta participando en ninguna clase.\n";
+          no_pronto = 0;
         }
-        int codigoCla;
-        cout << "\n\tIngrese el codigo de la clase que desea dejar de ver: ";
-        cin >> codigoCla;//QUE PASA SI ME TIRAN UN VALOR NO VALIDO
-    		fabrica->getIClase()->finalizarAsistencia(codigoCla);
-        while(!sn){
-          cout << "\n\t¿Desea dejar de ver la clase ingresada?";
-          cin >> entrada;
-          switch (entrada) {
-            case 'S':
-              sn = true;
-              fabrica->getIClase()->confirmarSalida();
-            break;
-            case 'N':
-              sn = true;
-              fabrica->getIClase()->cancelarSalida();
-            break;
-            default:
-              cout << "\n\tOpcion no válida.";
-            break;
+        else{
+          for(auto it = setClasesAsig.begin();it != setClasesAsig.end();it++){
+            cout << "\n\tNombre: " << (*it)->getNombre()<< " Codigo: " << (*it)->getCodigo();
+          }
+          int codigoCla;
+          bool aux = true;
+          while(aux){
+            while (std::cout << "\n\tIngrese el codigo de la clase que desea dejar de ver: " && !(std::cin >> codigoCla)) {
+              std::cin.clear(); //clear bad input flag
+              std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); //discard input
+              std::cout << "\tPor favor ingrese un numero.\n";
+            }
+            bool encontre = false;
+            for(auto it = setClasesAsig.begin(); it!=setClasesAsig.end();it++){
+              if((*it)->getCodigo()==codigoCla){
+                encontre = true;
+                break;
+              }
+            }
+            if(!encontre){
+              std::cin.clear(); //clear bad input flag
+              std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); //discard input
+              cout << "\tEl codigo no es valido. Por favor intente de nuevo.\n";
+            }
+            else//todo bien, era un numero y un codigo valido
+              aux=false;
+          }
+          fabrica->getIClase()->finalizarAsistencia(codigoCla);
+          while(!sn){
+            cout << "\n\t¿Desea dejar de ver la clase ingresada? (S/N): ";
+            cin >> entrada;
+            switch (entrada) {
+              case 'S':
+                sn = true;
+                no_pronto = false;
+                fabrica->getIClase()->confirmarSalida();
+              break;
+              case 'N':
+                sn = true;
+                no_pronto = false;
+                fabrica->getIClase()->cancelarSalida();
+              break;
+              default:
+                cout << "\n\tOpcion no válida.";
+              break;
+            }
           }
         }
       }
     };
+
     //docente
     bool iniciarSesionD(string email){
       bool res = colDocentes->count(email);
@@ -617,7 +714,7 @@ class Sistema{
     char decision;
     set<dtClase> clasesVivo = fabrica->getIClase()->consultarClasesEnVivo();
     for(auto it=clasesVivo.begin();it!=clasesVivo.end();++it){
-      cout << "\n\tNombre: " << it->getNombre() << "\n\tCodigo: " << it->getCodigo();
+      cout << "\n\tNombre: " << it->getNombre() << "\tCodigo: " << it->getCodigo();
     }
     cout << "\n\t¿Cual clase desea finalizar? (ingrese código):";
     cin >> clase;
@@ -856,6 +953,8 @@ int main(){
           case '7':
             s->tiempoDeDictado();
           break;
+          case '8':
+          break;
           default:
             cout << "\nOpcion no valida.\n";
           break;
@@ -895,6 +994,8 @@ int main(){
               break;
               case '4':
                 s->enviarMensaje();
+              break;
+              case '7':
               break;
               default:
                 cout << "\nOpcion no valida.\n";
@@ -943,8 +1044,13 @@ int main(){
               case '2':
                 s->asistirAClaseEnVivo();
               break;
+              case '3':
+                s->finalizarAsistenciaAClaseEnVivo();
+              break;
               case '4':
                 s->enviarMensaje();
+              break;
+              case '7':
               break;
               default:
                 cout << "\nOpcion no valida.\n";

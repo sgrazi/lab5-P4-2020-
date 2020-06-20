@@ -2,12 +2,71 @@ asignar docente a asig
       si no hay docentes para asignar, no tengo como salir de la operacion
 alta de user
       puedo crear usuario con el mismo email(admite uno de cada tipo, y de ahi en adelante se sobreescriben)
-inscribir a asig
-      se rompe si le paso una asig que no existe
-alta de asig
-      si en admite teo le tiro 2 rompe
 memoria
       cada vez que se llama a una funcion que devuelve objetos dt, hay que borrarlos luego no?
 iniciar clase
-      se tiene que pedir la fecha de inicio
       que pasa si el doc no tiene asigs
+finalizar clase
+      no muy importante: si el docente no tiene clases tendria que decirlo
+asistencia a clase
+      me salen clases a las que ya estoy asistiendo
+
+
+//IGNORAR
+
+backup
+set<dtClase> ControladorClase::consultarClasesVivo(int a){
+  cout << "entra1";
+  set<dtClase> nuevo;
+  for(auto itCla=coleccionGlobalAsignaturas->find(a)->second->getClases()->begin(); itCla!=coleccionGlobalAsignaturas->find(a)->second->getClases()->end(); ++itCla){
+    cout << "entra2";
+    if(itCla->second->getFechaFin()==fechaNula && ((itCla->second->getFechaInicio().getAnio()<=relojSistema->getInstancia()->getAnioSistema()) && (itCla->second->getFechaInicio().getMes()<=relojSistema->getInstancia()->getMesSistema()) && (itCla->second->getFechaInicio().getDia()<=relojSistema->getInstancia()->getDiaSistema()) && (itCla->second->getFechaInicio().getHora()<=relojSistema->getInstancia()->getHoraSistema()) && (itCla->second->getFechaInicio().getMinuto()<=relojSistema->getInstancia()->getMinSistema()))){
+      cout << "entra3";
+      auto itEst = coleccionGlobalEstudiantes->find(emailUserActual);//ver si ya estoy asistiendo a la clase
+      bool encontre = false;
+      for(auto it = itEst->second->getClasesParticipa().begin();it != itEst->second->getClasesParticipa().end();++it){//solo agrego si no estoy participando ya de la clase
+        cout << "entra4";
+        /*ACA DA SEGFAULTif((*it)->getClase()->getCodigo() == itCla->second->getCodigo()){//si hay un usr cla para la clase indicada
+          auto it2 = (*it)->getVis().begin();
+          if((*it2)->getFechaFinVis()==fechaNula)//y si la ultima visualizacion aun no termino
+            encontre = true;
+          break;
+        }*/
+      }
+      if(!encontre){
+        cout << "inserta";
+        dtClase *dt = new dtClase();
+        dt->setNombre(itCla->second->getNombre());
+        dt->setCodigo(itCla->second->getCodigo());
+        dt->setFechaInicio(itCla->second->getFechaInicio());
+        dt->setFechaFin(itCla->second->getFechaFin());
+        dt->setTipo(itCla->second->getTipo());
+        dt->setUrl(itCla->second->getUrl());
+        dt->setCreador(itCla->second->getEmailCreador());
+        dt->setAsig(itCla->second->getCodigoAsig());
+        nuevo.insert(*dt);
+      }
+    }
+  }
+  return nuevo;
+};
+
+original
+set<dtClase> ControladorClase::consultarClasesVivo(int a){
+  set<dtClase> nuevo;
+  for(auto itCla=coleccionGlobalAsignaturas->find(a)->second->getClases()->begin(); itCla!=coleccionGlobalAsignaturas->find(a)->second->getClases()->end(); ++itCla){
+    if(itCla->second->getFechaFin()==fechaNula && ((itCla->second->getFechaInicio().getAnio()<=relojSistema->getInstancia()->getAnioSistema()) && (itCla->second->getFechaInicio().getMes()<=relojSistema->getInstancia()->getMesSistema()) && (itCla->second->getFechaInicio().getDia()<=relojSistema->getInstancia()->getDiaSistema()) && (itCla->second->getFechaInicio().getHora()<=relojSistema->getInstancia()->getHoraSistema()) && (itCla->second->getFechaInicio().getMinuto()<=relojSistema->getInstancia()->getMinSistema()))){
+      dtClase *dt = new dtClase();
+      dt->setNombre(itCla->second->getNombre());
+      dt->setCodigo(itCla->second->getCodigo());
+      dt->setFechaInicio(itCla->second->getFechaInicio());
+      dt->setFechaFin(itCla->second->getFechaFin());
+      dt->setTipo(itCla->second->getTipo());
+      dt->setUrl(itCla->second->getUrl());
+      dt->setCreador(itCla->second->getEmailCreador());
+      dt->setAsig(itCla->second->getCodigoAsig());
+      nuevo.insert(*dt);
+    }
+  }
+  return nuevo;
+};

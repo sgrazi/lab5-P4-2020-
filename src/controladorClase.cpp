@@ -302,7 +302,6 @@ set<dtAsignatura> ControladorClase::consultarAsigIns(){
   return itEst->second->getAsignaturasInscripto();
 };
 
-
 set<dtClase> ControladorClase::consultarClasesVivo(int a){
   set<dtClase> nuevo;
   for(auto itCla=coleccionGlobalAsignaturas->find(a)->second->getClases()->begin(); itCla!=coleccionGlobalAsignaturas->find(a)->second->getClases()->end(); ++itCla){
@@ -321,6 +320,7 @@ set<dtClase> ControladorClase::consultarClasesVivo(int a){
   }
   return nuevo;
 };
+
 
 dtClase ControladorClase::asistirClaseVivo(int codigoClase){
   this->claseAFinalizar = codigoClase; //usa claseAFinalizar porque es la variable mas parecida?
@@ -382,32 +382,34 @@ set<dtClase*> ControladorClase::consultarClasesParticipandoVivo(){
   auto itEst = this->coleccionGlobalEstudiantes->find(this->emailUserActual);
   Estudiante* est = itEst->second; // busco el estudiante
 
-  for(auto it =est->getClasesParticipa().begin(); it!=est->getClasesParticipa().end();++it){ //for que recorre la coleccion de UsrCla
-    bool buscando = true;
-    UsrCla* usercla =  (*it);
-    set<Visualizacion*> coleccionVis = (*it)->getVis();
-    auto itVis = coleccionVis.begin();
-    while(itVis!=coleccionVis.end() && buscando){ //While que recorre las visualizaciones del UsrCla buscando si hay alguna en vivo
-      if ((*itVis)->getEnVivo()==true && (*itVis)->getFechaFinVis()==fechaNula){
-        buscando = false;
-      }
-      else
-        ++itVis;
-    };
+  if(!est->getClasesParticipa().empty()){
+    for(auto it =est->getClasesParticipa().begin(); it!=est->getClasesParticipa().end();++it){ //for que recorre la coleccion de UsrCla
+      bool buscando = true;
+      UsrCla* usercla =  (*it);
+      set<Visualizacion*> coleccionVis = (*it)->getVis();
+      auto itVis = coleccionVis.begin();
+      while(itVis!=coleccionVis.end() && buscando){ //While que recorre las visualizaciones del UsrCla buscando si hay alguna en vivo
+        if ((*itVis)->getEnVivo()==true && (*itVis)->getFechaFinVis()==fechaNula){
+          buscando = false;
+        }
+        else
+          ++itVis;
+      };
 
-    if(!buscando){
-      dtClase* dt = new dtClase();
-      dt->setNombre(usercla->getClase()->getNombre());
-      dt->setCodigo(usercla->getClase()->getCodigo());
-      dt->setFechaInicio(usercla->getClase()->getFechaInicio());
-      dt->setFechaFin(usercla->getClase()->getFechaFin());
-      dt->setTipo(usercla->getClase()->getTipo());
-      dt->setUrl(usercla->getClase()->getUrl());
-      dt->setCreador(usercla->getClase()->getEmailCreador());
-      dt->setAsig(usercla->getClase()->getCodigoAsig());
-      clasesAsistiendo.insert(dt);
+      if(!buscando){
+        dtClase* dt = new dtClase();
+        dt->setNombre(usercla->getClase()->getNombre());
+        dt->setCodigo(usercla->getClase()->getCodigo());
+        dt->setFechaInicio(usercla->getClase()->getFechaInicio());
+        dt->setFechaFin(usercla->getClase()->getFechaFin());
+        dt->setTipo(usercla->getClase()->getTipo());
+        dt->setUrl(usercla->getClase()->getUrl());
+        dt->setCreador(usercla->getClase()->getEmailCreador());
+        dt->setAsig(usercla->getClase()->getCodigoAsig());
+        clasesAsistiendo.insert(dt);
+      }
     }
-  };
+  }
   return clasesAsistiendo;
 };
 
