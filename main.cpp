@@ -566,7 +566,66 @@ class Sistema{
     }
     };
     //ambos
-    void enviarMensaje();
+    void enviarMensaje(){
+      int clase;
+      char decision;
+      set<dtClase> clasesP = fabrica->getIClase()->consultarClasesParticipando();
+      for(auto itc = clasesP.begin(); itc!=clasesP.end();itc++){
+        cout << "\n\t\tNombre: "<<itc->getNombre()<< " Codigo: " <<itc->getCodigo() << " Creador: " <<itc->getCreador();
+      }
+      cout << "\n\t\t¿A cual clase desea enviar un mensaje? (ingrese codigo):";
+      cin >> clase;
+      set<dtMensaje> msjs = fabrica->getIClase()->consultarMensajes(clase);
+      for(auto itm = msjs.begin(); itm!=msjs.end();itm++){
+        cout << "\n\t\tId: "<<itm->getId()<< " Contenido: " <<itm->getContenido();
+      }
+      bool parar=false;
+      string mensaje;
+      int aResponder;
+      while(!parar){
+        cout << "\n\t¿Su mensaje es en respuesta a otro? (S/N)";
+        cin >> decision;
+        switch(decision){
+          case 'S':
+            parar=true;
+            msjs = fabrica->getIClase()->consultarMensajes(clase);
+            for(auto itm2 = msjs.begin(); itm2!=msjs.end();itm2++){
+              cout << "\n\t\tId: "<<itm2->getId()<< " Contenido: " <<itm2->getContenido();
+            }
+            cout << "\n\t¿A cual mensaje responde? (ingrese id)?:";
+            cin >> aResponder;
+            fabrica->getIClase()->enviarRespuesta(aResponder,mensaje);
+          break;
+          case 'N':
+            parar=true;
+            cout << "\n\tEscriba su mensaje:";
+            cin >> mensaje;
+            fabrica->getIClase()->enviarMensaje(mensaje);
+          break;
+          default:
+            cout << "\n\tOpcion no válida.";
+          break;
+        }
+      }
+      parar=false;
+      while(!parar){
+        cout << "\n\tDesea confirmar el envio? (S/N)";
+        cin >> decision;
+        switch(decision){
+          case 'S':
+            parar=true;
+            fabrica->getIClase()->confirmarEnvio();
+          break;
+          case 'N':
+            parar=true;
+            fabrica->getIClase()->cancelarEnvio();
+          break;
+          default:
+            cout << "\n\tOpcion no válida.";
+          break;
+      }
+    }
+    };
     void suscribirANotificaciones();
     void consultarNotificaciones();
     //display
@@ -736,6 +795,9 @@ int main(){
               case '3':
                 s->tiempoDeAsistencia();
               break;
+              case '4':
+                s->enviarMensaje();
+              break;
               default:
                 cout << "\nOpcion no valida.\n";
               break;
@@ -782,6 +844,9 @@ int main(){
               break;
               case '2':
                 s->asistirAClaseEnVivo();
+              break;
+              case '4':
+                s->enviarMensaje();
               break;
               default:
                 cout << "\nOpcion no valida.\n";
