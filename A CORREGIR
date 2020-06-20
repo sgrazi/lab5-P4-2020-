@@ -5,3 +5,6 @@ alta de asig
       si le paso un char en codigo se rompe
 inscripcion de est
       si le paso un codigo que no existe u otra cosa que este mal se rompe
+
+memoria
+      cada vez que se llama a una funcion que devuelve objetos dt, hay que borrarlos luego no?

@@ -324,8 +324,75 @@ class Sistema{
         }
       }
     };
-    void asistirAClaseEnVivo();
-    void finalizarAsistenciaAClaseEnVivo();
+    void asistirAClaseEnVivo(){
+      bool sn = false;
+      char entrada;
+      cout <<"\n\tAsignaturas de estudiante:";
+      set<dtAsignatura> asigIns = fabrica->getIClase()->consultarAsigIns();
+      for(auto it = asigIns.begin();it != asigIns.end();it++){
+        cout << "\n\tNombre: " << it->getNombre()<< " Codigo: " << it->getCodigo();
+      }
+      int codigoAsig;
+      cout << "\n\tIngrese el codigo de la asignatura de la que desea ver clases: ";
+      cin >> codigoAsig;//QUE PASA SI ME TIRAN UN VALOR NO VALIDO
+      cout <<"\n\tClases de asignatura:";
+  		set<dtClase> setClasesAsig = fabrica->getIClase()->consultarClasesVivo(codigoAsig);
+      for(auto it = setClasesAsig.begin();it != setClasesAsig.end();it++){
+        cout << "\n\tNombre: " << it->getNombre()<< " Codigo: " << it->getCodigo();
+      }
+      int codigoCla;
+      cout << "\n\tIngrese el codigo de la clase que desea ver: ";
+      cin >> codigoCla;//QUE PASA SI ME TIRAN UN VALOR NO VALIDO
+  		dtClase claseAsistida = fabrica->getIClase()->asistirClaseVivo(codigoCla);
+      while(!sn){
+        cout << "\n\t¿Desea ver la clase "<<claseAsistida.getNombre()<< "?";
+        cin >> entrada;
+        switch (entrada) {
+          case 'S':
+            sn = true;
+            fabrica->getIClase()->confirmarAsistenciaVivo();
+          break;
+          case 'N':
+            sn = true;
+            fabrica->getIClase()->cancelarAsistencia();
+          break;
+          default:
+            cout << "\n\tOpcion no válida.";
+          break;
+        }
+      }
+    };
+    void finalizarAsistenciaAClaseEnVivo(){
+      bool sn = false;
+      char entrada;
+
+      cout <<"\n\tClases asistiendo:";
+  		set<dtClase*> setClasesAsig = fabrica->getIClase()->consultarClasesParticipandoVivo();
+      for(auto it = setClasesAsig.begin();it != setClasesAsig.end();it++){
+        cout << "\n\tNombre: " << (*it)->getNombre()<< " Codigo: " << (*it)->getCodigo();
+      }
+      int codigoCla;
+      cout << "\n\tIngrese el codigo de la clase que desea dejar de ver: ";
+      cin >> codigoCla;//QUE PASA SI ME TIRAN UN VALOR NO VALIDO
+  		fabrica->getIClase()->finalizarAsistencia(codigoCla);
+      while(!sn){
+        cout << "\n\t¿Desea dejar de ver la clase ingresada?";
+        cin >> entrada;
+        switch (entrada) {
+          case 'S':
+            sn = true;
+            fabrica->getIClase()->confirmarSalida();
+          break;
+          case 'N':
+            sn = true;
+            fabrica->getIClase()->cancelarSalida();
+          break;
+          default:
+            cout << "\n\tOpcion no válida.";
+          break;
+        }
+      }
+    };;
     //docente
     bool iniciarSesionD(string email){
       bool res = colDocentes->count(email);
@@ -536,6 +603,9 @@ int main(){
             switch (tecla){//agregar las operaciones
               case '1':
                 s->inscribirAAsignatura();
+              break;
+              case '2':
+                s->asistirAClaseEnVivo();
               break;
               default:
                 cout << "\nOpcion no valida.\n";
