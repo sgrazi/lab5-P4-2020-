@@ -295,14 +295,17 @@ void ControladorClase::enviarRespuesta(int id,string contenido){
 void ControladorClase::confirmarEnvio(){
   dtFecha fecha = generarFecha();
   Mensaje* m = this->handler->agregarMensaje(coleccionGlobalMensajes->size(), (idAResponder!=-1), idAResponder, contenidoMensaje, fecha, getCodigoClase());
-  auto itUser = coleccionGlobalEstudiantes->find(emailUserActual);
-  itUser->second->agregarMensaje(m);
+  if(coleccionGlobalEstudiantes->count(emailUserActual)){//si es estudiante
+    auto itUser = coleccionGlobalEstudiantes->find(emailUserActual);
+    itUser->second->agregarMensaje(m);
+  }
+  else{
+    auto itUser = coleccionGlobalDocentes->find(emailUserActual);
+    itUser->second->agregarMensaje(m);
+  }
   auto itCla = coleccionGlobalClases->find(codigoClase);
   itCla->second->agregarMensaje(m);
-/*
-  for(auto it = itCla->second->getMensajes().begin();it != itCla->second->getMensajes().end();it++){
-    cout << (*it)->getContenido();
-  }*/
+
 };
 
 void ControladorClase::cancelarEnvio(){

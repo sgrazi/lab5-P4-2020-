@@ -35,6 +35,7 @@ class Sistema{
     static Sistema* getInstancia();
 
     void cargarDatos(){//SE REALIZAN LAS OPERACIONES EN ORDEN CRONOLOGICO
+
       fabrica->getIUsuario()->agregarEstudiante("Roberto Parra","1234","roberto@mail.com","url","12345678");//E1 roberto@mail.com Roberto Parra 12345678
       fabrica->getIUsuario()->confirmarAlta();
       fabrica->getIUsuario()->agregarEstudiante("Ana Rodriguez","1234","ana@mail.com","url","23456789");   // E2 ana@mail.com Ana Rodriguez 23456789
@@ -48,6 +49,26 @@ class Sistema{
       fabrica->getIUsuario()->confirmarAlta();
       fabrica->getIUsuario()->agregarDocente("Jorge Chacho","123","jorge@mail.com","url","INCO");  //D3 jorge@mail.com Jorge Chacho INCO
       fabrica->getIUsuario()->confirmarAlta();
+
+      //ASUMO SE DESEA QUE LOS USUARIOS RECIBAN NOTIFICACIONES, LOS SUSCRIBO ACA
+      iniciarSesionE("roberto@mail.com");
+      fabrica->getIUsuario()->cambiarModoSus(3);
+      fabrica->getIUsuario()->confirmarCambio();
+      iniciarSesionE("ana@mail.com");
+      fabrica->getIUsuario()->cambiarModoSus(3);
+      fabrica->getIUsuario()->confirmarCambio();
+      iniciarSesionE("ramon@mail.com");
+      fabrica->getIUsuario()->cambiarModoSus(3);
+      fabrica->getIUsuario()->confirmarCambio();
+      iniciarSesionD("juan@mail.com");
+      fabrica->getIUsuario()->cambiarModoSus(3);
+      fabrica->getIUsuario()->confirmarCambio();
+      iniciarSesionD("maria@mail.com");
+      fabrica->getIUsuario()->cambiarModoSus(3);
+      fabrica->getIUsuario()->confirmarCambio();
+      iniciarSesionD("jorge@mail.com");
+      fabrica->getIUsuario()->cambiarModoSus(3);
+      fabrica->getIUsuario()->confirmarCambio();
 
       fabrica->getIAsignatura()->agregarAsignatura("Programacion 1","P1",1,1,1);//A1 P1 Programacion 1 Te�rico, Pr�ctico, Monitoreo
       fabrica->getIAsignatura()->confirmarAlta();
@@ -173,7 +194,7 @@ class Sistema{
       reloj->setMinSistema(1);
 
       iniciarSesionD("juan@mail.com");//D1 C1 01/05/20 - 09:01am Bienvenidos!
-/*      fabrica->getIClase()->consultarMensajes("0");
+      fabrica->getIClase()->consultarMensajes("0");
       fabrica->getIClase()->enviarMensaje("Bienvenidos!");
       fabrica->getIClase()->confirmarEnvio();
 
@@ -232,7 +253,7 @@ class Sistema{
 
       iniciarSesionD("juan@mail.com");//01/05/20 - 09:06am Me alegro
       fabrica->getIClase()->consultarMensajes("0");
-      fabrica->getIClase()->enviarRespuesta(2,"Me alegro");
+      fabrica->getIClase()->enviarRespuesta(2,"Me alegro");/*
       fabrica->getIClase()->confirmarEnvio();
 
       //01/05/20 - 09:06am
@@ -290,7 +311,7 @@ class Sistema{
       iniciarSesionD("juan@mail.com");
       fabrica->getIClase()->finalizarClase("0");
       fabrica->getIClase()->confirmarFin();
-
+//b
       //02/05/20 - 5pm fin c4
       reloj->setAnioSistema(2020);
       reloj->setMesSistema(5);
@@ -330,7 +351,7 @@ class Sistema{
       reloj->setDiaSistema(4);
       reloj->setHoraSistema(16);
       reloj->setMinSistema(0);
-
+//a
       iniciarSesionE("ramon@mail.com");//E3 C6 04/05/20 � 4:00pm 04/05/20 � 5:00pm
       clase1 = fabrica->getIClase()->asistirClaseVivo("5");
       fabrica->getIClase()->confirmarAsistenciaVivo();
@@ -394,7 +415,6 @@ class Sistema{
       iniciarSesionD("juan@mail.com");
       fabrica->getIClase()->finalizarClase("2");
       fabrica->getIClase()->confirmarFin();
-
 */
     }
     //Administrador
@@ -1220,10 +1240,10 @@ class Sistema{
           switch(decision){
             case 'S':
               parar=true;
-              /*msjs = fabrica->getIClase()->consultarMensajes(clase);
+              msjs = fabrica->getIClase()->consultarMensajes(clase);
               for(auto itm2 = msjs.begin(); itm2!=msjs.end();itm2++){
                 cout << "\n\t\tId: "<<itm2->getId()<< " Contenido: " <<itm2->getContenido();
-              }*/
+              }
               cout << "\n\t¿A que mensaje responde? (ingrese la id): ";
               cin >> aResponder;
               cout << "\n\tEscriba su mensaje: ";
@@ -1321,6 +1341,16 @@ class Sistema{
           cout << "Si";
       }
     };
+    void getDatosMensajes(){
+      cout << "\n\tMensajes en el sistema:";
+      for(auto it = colMensajes->begin(); it!=colMensajes->end();it++){
+        cout << "\n\t\tId: "<<it->second->getId();
+        if(it->second->getEnRespuestaA()){
+          cout << " En respuesta a: " <<it->second->getEnRespuestaA()->getId();
+        }
+        cout << "\n\t\t\""<<it->second->getContenido()<<"\"";
+      }
+    }
 };
 
 Factory* Sistema::fabrica = 0;
@@ -1477,6 +1507,12 @@ int main(){
               case '4':
                 s->enviarMensaje();
               break;
+              case '5':
+                s->suscribirANotificaciones();
+              break;
+              case '6':
+                s->consultarNotificaciones();
+              break;
               case '7':
               break;
               default:
@@ -1566,6 +1602,7 @@ int main(){
         s->getDatosUsuarios();
         s->getDatosAsignaturas();
         s->getDatosClases();
+        s->getDatosMensajes();
       break;
       case '6':
         salir = true;

@@ -168,7 +168,7 @@ void ControladorUsuario::cancelarInscripcion(){
 };
 
 set<dtNotificacion*> ControladorUsuario::consultarNotifs(){
-  auto itEst = this->coleccionGlobalEstudiantes->find(emailUserActual);
+  auto itEst = this->ColeccionGlobalUsuarios->find(emailUserActual);
   return itEst->second->getNotificaciones();
   /*VIEJO
   set<dtNotificacion> nuevo;
