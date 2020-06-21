@@ -1,7 +1,6 @@
-asignar docente a asig
-      si no hay docentes para asignar, no tengo como salir de la operacion
+
 alta de user
-      puedo crear usuario con el mismo email(admite uno de cada tipo, y de ahi en adelante se sobreescriben)
+      puede haber un docente y user con el mismo email
 memoria
       cada vez que se llama a una funcion que devuelve objetos dt, hay que borrarlos luego no?
 iniciar clase
