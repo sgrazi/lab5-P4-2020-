@@ -268,9 +268,13 @@ set<dtMensaje> ControladorClase::consultarMensajes(int codigoClase){
     dt->setId((*itMens)->getId());
     dt->setContenido((*itMens)->getContenido());
     dt->setFecha((*itMens)->getFecha());
-    dt->setEnRespuestaA((*itMens)->getEnRespuestaA()->getId());
+    if((*itMens)->getEnRespuestaA())
+      dt->setEnRespuestaA((*itMens)->getEnRespuestaA()->getId());
+    else
+      dt->setEnRespuestaA(-1);
     dt->setClase((*itMens)->getClase()->getCodigo());
     dt->setAsignatura((*itMens)->getClase()->getCodigoAsig());
+    nuevo.insert(*dt);
   }
   return nuevo;
 };
@@ -290,6 +294,12 @@ void ControladorClase::confirmarEnvio(){
   Mensaje* m = this->handler->agregarMensaje(coleccionGlobalMensajes->size(), (idAResponder!=-1), idAResponder, contenidoMensaje, fecha, getCodigoClase());
   auto itUser = coleccionGlobalEstudiantes->find(emailUserActual);
   itUser->second->agregarMensaje(m);
+  auto itCla = coleccionGlobalClases->find(codigoClase);
+  itCla->second->agregarMensaje(m);
+/*
+  for(auto it = itCla->second->getMensajes().begin();it != itCla->second->getMensajes().end();it++){
+    cout << (*it)->getContenido();
+  }*/
 };
 
 void ControladorClase::cancelarEnvio(){

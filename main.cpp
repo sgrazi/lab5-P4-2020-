@@ -35,7 +35,41 @@ class Sistema{
     static Sistema* getInstancia();
 
     //operaciones del sistema, puse lo que me parecia, no creo este super correcto todo
+    void cargarDatos(){
+      fabrica->getIUsuario()->agregarEstudiante("1", "1", "1", "1", "1");
+      fabrica->getIUsuario()->confirmarAlta();
+      fabrica->getIUsuario()->agregarDocente("1", "1", "1", "1", "1");
+      fabrica->getIUsuario()->confirmarAlta();
 
+      fabrica->getIAsignatura()->agregarAsignatura("1",1,1,1,1);
+      fabrica->getIAsignatura()->confirmarAlta();
+
+      bool admite = fabrica->getIAsignatura()->asignarDocente("1",1,teorico);
+      fabrica->getIAsignatura()->confirmarAsignacion();
+
+      iniciarSesionD("1");
+      fabrica->getIClase()->iniciarClase(1,"1",teorico,dtFecha(0,0,0,0,0,0));
+      fabrica->getIClase()->confirmarInicio();
+
+      iniciarSesionE("1");
+      fabrica->getIUsuario()->inscribir(1);
+      fabrica->getIUsuario()->confirmarInscripcion();
+      dtClase claseAsistida = fabrica->getIClase()->asistirClaseVivo(0);
+      fabrica->getIClase()->confirmarAsistenciaVivo();
+      fabrica->getIUsuario()->cambiarModoSus(3);
+      fabrica->getIUsuario()->confirmarCambio();
+
+      set<dtMensaje> msjs = fabrica->getIClase()->consultarMensajes(0);
+      fabrica->getIClase()->enviarMensaje("mensaje");
+      fabrica->getIClase()->confirmarEnvio();
+
+      iniciarSesionD("1");
+      enviarMensaje();
+
+      iniciarSesionE("1");
+      consultarNotificaciones();
+
+    }
     //Administrador
     void modificarReloj(){
       int anio,mes,dia,hora,min;
@@ -604,7 +638,6 @@ class Sistema{
         }
       }
     };
-
     //docente
     bool iniciarSesionD(string email){
       bool res = colDocentes->count(email);
@@ -669,7 +702,7 @@ class Sistema{
         std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); //discard input
         std::cout << "\tPor favor ingrese un numero.\n";
       }
-      fabrica->getIClase()->iniciarClase(asig,nombre,tipo,dtFecha(anio,mes,dia,hora,minutos,0)); //METER RELOJ
+      fabrica->getIClase()->iniciarClase(asig,nombre,tipo,dtFecha(anio,mes,dia,hora,minutos,0));
       if(tipo==monitoreo){
         bool seguir = true;
         while(seguir){
@@ -721,7 +754,7 @@ class Sistema{
     fabrica->getIClase()->finalizarClase(clase);
     bool parar=false;
     while(!parar){
-      cout << "\n\t¿Desea confirmar finalizacion? (S/N)";
+      cout << "\n\t¿Desea confirmar finalizacion? (S/N): ";
       cin >> decision;
       switch(decision){
         case 'S':
@@ -776,45 +809,75 @@ class Sistema{
       char decision;
       set<dtClase> clasesP = fabrica->getIClase()->consultarClasesParticipando();
       for(auto itc = clasesP.begin(); itc!=clasesP.end();itc++){
-        cout << "\n\t\tNombre: "<<itc->getNombre()<< " Codigo: " <<itc->getCodigo() << " Creador: " <<itc->getCreador();
+        cout << "\n\tNombre: "<<itc->getNombre()<< " Codigo: " <<itc->getCodigo();
       }
-      cout << "\n\t\t¿A cual clase desea enviar un mensaje? (ingrese codigo):";
-      cin >> clase;
+
+      bool aux=true;
+      while(aux){
+        while (std::cout << "\n\t¿A cual clase desea enviar un mensaje? (ingrese codigo): " && !(std::cin >> clase)) {
+          std::cin.clear(); //clear bad input flag
+          std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); //discard input
+          std::cout << "\tPor favor ingrese un numero.\n";
+        }
+        if(!colClases->count(clase)){
+          std::cin.clear(); //clear bad input flag
+          std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); //discard input
+          cout << "\tEl codigo no es valido. Por favor intente de nuevo.\n";
+        }
+        else//todo bien, era un numero y un codigo valido
+          aux=false;
+      }
+      bool primerMensaje = false;
       set<dtMensaje> msjs = fabrica->getIClase()->consultarMensajes(clase);
+      if(msjs.size()==0){
+        cout << "\n\tAun no hay mensajes en esta clase, el suyo sera el primero.";
+        primerMensaje = 1;
+      }
+      cout << "\n\tMensajes en la clase: ";
       for(auto itm = msjs.begin(); itm!=msjs.end();itm++){
-        cout << "\n\t\tId: "<<itm->getId()<< " Contenido: " <<itm->getContenido();
+        cout << "\n\tId: "<<itm->getId()<< " Contenido: " <<itm->getContenido();
       }
       bool parar=false;
       string mensaje;
       int aResponder;
       while(!parar){
-        cout << "\n\t¿Su mensaje es en respuesta a otro? (S/N)";
-        cin >> decision;
-        switch(decision){
-          case 'S':
-            parar=true;
-            msjs = fabrica->getIClase()->consultarMensajes(clase);
-            for(auto itm2 = msjs.begin(); itm2!=msjs.end();itm2++){
-              cout << "\n\t\tId: "<<itm2->getId()<< " Contenido: " <<itm2->getContenido();
-            }
-            cout << "\n\t¿A cual mensaje responde? (ingrese id)?:";
-            cin >> aResponder;
-            fabrica->getIClase()->enviarRespuesta(aResponder,mensaje);
-          break;
-          case 'N':
-            parar=true;
-            cout << "\n\tEscriba su mensaje:";
-            cin >> mensaje;
-            fabrica->getIClase()->enviarMensaje(mensaje);
-          break;
-          default:
-            cout << "\n\tOpcion no válida.";
-          break;
+        if(primerMensaje){
+          parar=true;
+          cout << "\n\tEscriba su mensaje: ";
+          getline(cin >> ws, mensaje);
+          fabrica->getIClase()->enviarMensaje(mensaje);
+        }
+        else{
+          cout << "\n\t¿Su mensaje es en respuesta a otro? (S/N): ";
+          cin >> decision;
+          switch(decision){
+            case 'S':
+              parar=true;
+              /*msjs = fabrica->getIClase()->consultarMensajes(clase);
+              for(auto itm2 = msjs.begin(); itm2!=msjs.end();itm2++){
+                cout << "\n\t\tId: "<<itm2->getId()<< " Contenido: " <<itm2->getContenido();
+              }*/
+              cout << "\n\t¿A que mensaje responde? (ingrese la id): ";
+              cin >> aResponder;
+              cout << "\n\tEscriba su mensaje: ";
+              getline(cin >> ws, mensaje);
+              fabrica->getIClase()->enviarRespuesta(aResponder,mensaje);
+            break;
+            case 'N':
+              parar=true;
+              cout << "\n\tEscriba su mensaje: ";
+              getline(cin >> ws, mensaje);
+              fabrica->getIClase()->enviarMensaje(mensaje);
+            break;
+            default:
+              cout << "\n\tOpcion no válida.";
+            break;
+          }
         }
       }
       parar=false;
       while(!parar){
-        cout << "\n\tDesea confirmar el envio? (S/N)";
+        cout << "\n\tDesea confirmar el envio? (S/N): ";
         cin >> decision;
         switch(decision){
           case 'S':
@@ -828,11 +891,42 @@ class Sistema{
           default:
             cout << "\n\tOpcion no válida.";
           break;
+        }
       }
-    }
     };
-    void suscribirANotificaciones();
-    void consultarNotificaciones();
+    void suscribirANotificaciones(){
+  		fabrica->getIUsuario()->cambiarModoSus(3);
+      bool parar=false;
+      char decision;
+      while(!parar){
+        cout << "\n\t¿Desea suscribirse a notificaciones (modo 3)? (S/N): ";
+        cin >> decision;
+        switch(decision){
+          case 'S':
+            parar=true;
+            fabrica->getIUsuario()->confirmarCambio();
+          break;
+          case 'N':
+            parar=true;
+            fabrica->getIUsuario()->cancelarCambio();
+          break;
+          default:
+            cout << "\n\tOpcion no válida.";
+          break;
+        }
+      }
+    };
+    void consultarNotificaciones(){
+      set<dtNotificacion*> notifs = fabrica->getIUsuario()->consultarNotifs();
+      if(notifs.begin()==notifs.end()){
+        cout << "\n\tNo tiene notificaciones.";
+      }
+      else{
+        for(auto it=notifs.begin();it!=notifs.end();++it){
+          cout << "\n\tEn la clase Codigo " << (*it)->getCodigoClase() << " de la asignatura Codigo " << (*it)->getCodigoAsig() << " recibiste la respuesta: \""<< (*it)->getContenidoMensaje() << "\"";
+        }
+      }
+    };
     //display
     void getDatosUsuarios(){
       cout << "\n\tEstudiantes en el sistema:";
@@ -923,6 +1017,8 @@ int main(){
   bool inicioSesion = false;
   string email;
   string pass;
+
+  //caso de prueba
 
   while (!salir){
     cout << "\n";
@@ -1090,7 +1186,8 @@ int main(){
         }
       break;
       case '4':
-        cout << "\nCasos de pruebas cargados.";
+        s->cargarDatos();
+        cout << "\nCasos de pruebas cargados."<<endl;
       break;
       case '5':
         s->getDatosUsuarios();

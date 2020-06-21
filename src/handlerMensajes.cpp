@@ -13,18 +13,7 @@ HandlerMensajes::HandlerMensajes(){
 void HandlerMensajes::setColMens(map<int,Mensaje*>* c){ this->coleccionGlobalMensajes = c;};
 void HandlerMensajes::setColCla(map<int,Clase*>* c){ this->coleccionGlobalClases = c;};
 
-Mensaje* HandlerMensajes::agregarMensaje(int codigo, bool esRespuesta, int idRes, string contenidoMensaje, dtFecha fecha, int codigoClase){ //cual es el tipo de retorno? en el dcd no estaba, puse void
-
-  dtMensaje *dt = new dtMensaje();//creo el dtMensaje para pasar a las estrategias
-  dt->setId(codigo);
-  if(esRespuesta)
-    dt->setEnRespuestaA(idRes);
-  else
-    dt->setEnRespuestaA(-1);
-  dt->setContenido(contenidoMensaje);
-  dt->setFecha(fecha);
-  dt->setClase(codigoClase);
-  dt->setAsignatura(this->coleccionGlobalClases->find(codigoClase)->second->getCodigoAsig());
+Mensaje* HandlerMensajes::agregarMensaje(int codigo, bool esRespuesta, int idRes, string contenidoMensaje, dtFecha fecha, int codigoClase){
 
   Mensaje* nuevo = new Mensaje();//creo el mensaje nuevo
   nuevo->setId(codigo);
@@ -36,6 +25,17 @@ Mensaje* HandlerMensajes::agregarMensaje(int codigo, bool esRespuesta, int idRes
     nuevo->setEnRespuestaA(NULL);
   nuevo->setClase(coleccionGlobalClases->find(codigoClase)->second);
 
+  dtMensaje *dt = new dtMensaje();//creo el dtMensaje para pasar a las estrategias
+  dt->setId(codigo);
+  if(esRespuesta)
+    dt->setEnRespuestaA(idRes);
+  else
+    dt->setEnRespuestaA(-1);
+  dt->setContenido(contenidoMensaje);
+  dt->setFecha(fecha);
+  dt->setClase(codigoClase);
+  dt->setAsignatura(this->coleccionGlobalClases->find(codigoClase)->second->getCodigoAsig());
+  
   coleccionGlobalMensajes->insert(pair<int,Mensaje*>(codigo,nuevo));//agrego el mensaje a la coleccion global
 
   for(auto itObs = observers->begin(); itObs!=observers->end(); ++itObs){//notifico a los observers
