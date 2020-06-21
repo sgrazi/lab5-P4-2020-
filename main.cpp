@@ -47,27 +47,11 @@ class Sistema{
       bool admite = fabrica->getIAsignatura()->asignarDocente("1",1,teorico);
       fabrica->getIAsignatura()->confirmarAsignacion();
 
-      iniciarSesionD("1");
-      fabrica->getIClase()->iniciarClase(1,"1",teorico,dtFecha(0,0,0,0,0,0));
-      fabrica->getIClase()->confirmarInicio();
-
       iniciarSesionE("1");
       fabrica->getIUsuario()->inscribir(1);
       fabrica->getIUsuario()->confirmarInscripcion();
-      dtClase claseAsistida = fabrica->getIClase()->asistirClaseVivo(0);
-      fabrica->getIClase()->confirmarAsistenciaVivo();
-      fabrica->getIUsuario()->cambiarModoSus(3);
-      fabrica->getIUsuario()->confirmarCambio();
 
-      set<dtMensaje> msjs = fabrica->getIClase()->consultarMensajes(0);
-      fabrica->getIClase()->enviarMensaje("mensaje");
-      fabrica->getIClase()->confirmarEnvio();
-
-      iniciarSesionD("1");
-      enviarMensaje();
-
-      iniciarSesionE("1");
-      consultarNotificaciones();
+      eliminarAsignatura();
 
     }
     //Administrador
@@ -382,7 +366,7 @@ class Sistema{
           }
           bool aux=true;
           while(aux){
-            while (std::cout << "\n\t¿Qué asignatura desea eliminar? (ingrese código):" && !(std::cin >> cod)) {
+            while (std::cout << "\n\t¿Qué asignatura desea eliminar? (ingrese código): " && !(std::cin >> cod)) {
               std::cin.clear(); //clear bad input flag
               std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); //discard input
               std::cout << "\tPor favor ingrese un numero.\n";
@@ -399,7 +383,7 @@ class Sistema{
           bool sn = false;
           char entrada;
           while(!sn){
-            cout << "\n\t¿Desea confirmacion la eliminación (1) o no (0))?:";
+            cout << "\n\t¿Desea confirmacion la eliminación (1) o no (0)?: ";
             cin >> entrada;
             switch (entrada) {
               case '1':
@@ -1164,6 +1148,12 @@ int main(){
               break;
               case '4':
                 s->enviarMensaje();
+              break;
+              case '5':
+                s->suscribirANotificaciones();
+              break;
+              case '6':
+                s->consultarNotificaciones();
               break;
               case '7':
               break;
