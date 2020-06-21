@@ -34,26 +34,369 @@ class Sistema{
   public:
     static Sistema* getInstancia();
 
-    //operaciones del sistema, puse lo que me parecia, no creo este super correcto todo
-    void cargarDatos(){
-      fabrica->getIUsuario()->agregarEstudiante("1", "1", "1", "1", "1");
+    /*void cargarDatos(){//SE REALIZAN LAS OPERACIONES EN ORDEN CRONOLOGICO
+      fabrica->getIUsuario()->agregarEstudiante("Roberto Parra","1234","roberto@mail.com","url","12345678");//E1 roberto@mail.com Roberto Parra 12345678
       fabrica->getIUsuario()->confirmarAlta();
-      fabrica->getIUsuario()->agregarDocente("1", "1", "1", "1", "1");
+      fabrica->getIUsuario()->agregarEstudiante("Ana Rodriguez","1234","ana@mail.com","url","23456789");   // E2 ana@mail.com Ana Rodriguez 23456789
+      fabrica->getIUsuario()->confirmarAlta();
+      fabrica->getIUsuario()->agregarEstudiante("Ramon Valdez","1234","ramon@mail.com","url","34567890"); //  E3 ramon@mail.com Ramon Valdez 34567890
       fabrica->getIUsuario()->confirmarAlta();
 
-      fabrica->getIAsignatura()->agregarAsignatura("1",1,1,1,1);
+      fabrica->getIUsuario()->agregarDocente("Juan Perez","123","juan@mail.com","url","INCO");    // D1  juan@mail.com Juan Perez   INCO
+      fabrica->getIUsuario()->confirmarAlta();
+      fabrica->getIUsuario()->agregarDocente("Maria Pires","123","maria@mail.com","url","INCO");   //D2  maria@mail.com Maria Pires INCO
+      fabrica->getIUsuario()->confirmarAlta();
+      fabrica->getIUsuario()->agregarDocente("Jorge Chacho","123","jorge@mail.com","url","INCO");  //D3 jorge@mail.com Jorge Chacho INCO
+      fabrica->getIUsuario()->confirmarAlta();
+
+      fabrica->getIAsignatura()->agregarAsignatura("Programacion 1","P1",1,1,1);//A1 P1 Programacion 1 Te�rico, Pr�ctico, Monitoreo
+      fabrica->getIAsignatura()->confirmarAlta();
+      fabrica->getIAsignatura()->agregarAsignatura("Programacion 2","P2",1,1,1);//A2 P2 Programacion 2 Te�rico, Pr�ctico, Monitoreo
+      fabrica->getIAsignatura()->confirmarAlta();
+      fabrica->getIAsignatura()->agregarAsignatura("Programacion 3","P3",1,1,0);//A3 P3 Programacion 3 Te�rico, Pr�ctico
       fabrica->getIAsignatura()->confirmarAlta();
 
-      bool admite = fabrica->getIAsignatura()->asignarDocente("1",1,teorico);
+      bool admite;
+      admite = fabrica->getIAsignatura()->asignarDocente("juan@mail.com","P1",teorico); //D1 A1 Te�rico
+      fabrica->getIAsignatura()->confirmarAsignacion();
+      admite = fabrica->getIAsignatura()->asignarDocente("maria@mail","P1",practico); //D2 A1 Pr�ctico
+      fabrica->getIAsignatura()->confirmarAsignacion();
+      admite = fabrica->getIAsignatura()->asignarDocente("jorge@mail.com","P1",monitoreo); //D3 A1 Monitoreo
       fabrica->getIAsignatura()->confirmarAsignacion();
 
-      iniciarSesionE("1");
-      fabrica->getIUsuario()->inscribir(1);
+      iniciarSesionE("roberto@mail.com","1234");// E1 A1
+      fabrica->getIUsuario()->inscribir("P1");
+      fabrica->getIUsuario()->confirmarInscripcion();
+      iniciarSesionE("ana@mail.com","1234");// E2 A1,A2
+      fabrica->getIUsuario()->inscribir("P1");
+      fabrica->getIUsuario()->confirmarInscripcion();
+      fabrica->getIUsuario()->inscribir("P2");
+      fabrica->getIUsuario()->confirmarInscripcion();
+      iniciarSesionE("ramon@mail.com","1234");// E3 A1
+      fabrica->getIUsuario()->inscribir("P1");
       fabrica->getIUsuario()->confirmarInscripcion();
 
-      eliminarAsignatura();
+      iniciarSesionD("juan@mail.com","123");
+      dtFecha* fecha = new dtFecha();
+      fecha->setAnio(2020);
+      fecha->setMes(5);
+      fecha->setDia(1);
+      fecha->setHora(9);
+      fecha->setMinuto(0);
+      fecha->setSegundo(0);
 
-    }
+      fabrica->getIClase()->iniciarClase("P1","Intro Te�rico",teorico,*fecha);//C1 A1 Intro Te�rico 01/05/20 - 9am 01/05/20 - 10am D1
+      fabrica->getIClase()->confirmarInicio();
+      delete fecha;
+
+      fecha = new dtFecha();
+      fecha->setAnio(2020);
+      fecha->setMes(5);
+      fecha->setDia(3);
+      fecha->setHora(9);
+      fecha->setMinuto(0);
+      fecha->setSegundo(0);
+
+      fabrica->getIClase()->iniciarClase("P1","Tema 1",teorico,*fecha);//C2 A1 Tema 1 Te�rico 03/05/20 - 9am 03/05/20 - 10am D1
+      fabrica->getIClase()->confirmarInicio();
+      delete fecha;
+
+      fecha = new dtFecha();
+      fecha->setAnio(2020);
+      fecha->setMes(5);
+      fecha->setDia(8);
+      fecha->setHora(9);
+      fecha->setMinuto(0);
+      fecha->setSegundo(0);
+
+      fabrica->getIClase()->iniciarClase("P1","Tema 2",teorico,*fecha);//C3 A1 Tema 2 Te�rico 08/05/20 - 9am 08/05/20 - 10am D1
+      fabrica->getIClase()->confirmarInicio();
+      delete fecha;
+
+      iniciarSesionD("maria@mail","123");
+      dtFecha* fecha = new dtFecha();
+      fecha->setAnio(2020);
+      fecha->setMes(5);
+      fecha->setDia(2);
+      fecha->setHora(16);
+      fecha->setMinuto(0);
+      fecha->setSegundo(0);
+
+      fabrica->getIClase()->iniciarClase("P1","Pra 1",practico,*fecha);//C4 A1 Pra 1 Pr�ctico 02/05/20 - 4pm 02/05/20 - 5pm D2
+      fabrica->getIClase()->confirmarInicio();
+      delete fecha;
+
+      fecha = new dtFecha();
+      fecha->setAnio(2020);
+      fecha->setMes(5);
+      fecha->setDia(3);
+      fecha->setHora(16);
+      fecha->setMinuto(0);
+      fecha->setSegundo(0);
+
+      fabrica->getIClase()->iniciarClase("P1","Pra 2",practico,*fecha);//C5 A1 Pra 2 Pr�ctico 03/05/20 - 4pm 03/05/20 - 5pm D2
+      fabrica->getIClase()->confirmarInicio();
+      delete fecha;
+
+      iniciarSesionD("jorge@mail.com","123");
+      fecha = new dtFecha();
+      fecha->setAnio(2020);
+      fecha->setMes(5);
+      fecha->setDia(4);
+      fecha->setHora(17);
+      fecha->setMinuto(0);
+      fecha->setSegundo(0);
+
+      fabrica->getIClase()->iniciarClase("P1","06/01/20",monitoreo,*fecha);//C6 A1 06/01/20 Monitoreo 04/05/20 - 4pm 04/05/20 - 5pm D3
+      fabrica->getIClase()->agregarHabilitado("ana@mail.com");
+      fabrica->getIClase()->agregarHabilitado("ramon@mail.com");
+
+      fabrica->getIClase()->confirmarInicio();
+      delete fecha;
+
+      //01/05/20 - 09:01am
+      reloj->setAnioSistema(2020);
+      reloj->setMesSistema(5);
+      reloj->setDiaSistema(1);
+      reloj->setHoraSistema(9);
+      reloj->setMinSistema(1);
+
+      iniciarSesionE("roberto@mail.com","1234");//E1 C1 01/05/20 - 09:01am 01/05/20 - 09:21am
+      dtClase clase1 = Cc->asistirClaseVivo("Intro Te�rico");
+      fabrica->getIClase()->confirmarAsistenciaVivo();
+
+      //01/05/20 - 09:01am
+      reloj->setAnioSistema(2020);
+      reloj->setMesSistema(5);
+      reloj->setDiaSistema(1);
+      reloj->setHoraSistema(9);
+      reloj->setMinSistema(1);
+
+      iniciarSesionD("juan@mail.com","1234");//D1 C1 01/05/20 - 09:01am Bienvenidos!
+      fabrica->getIClase()->consultarMensajes(0);
+      fabrica->getIClase()->enviarMensaje("Bienvenidos!");
+      fabrica->getIClase()->confirmarEnvio();
+
+      //01/05/20 - 09:02am
+      reloj->setAnioSistema(2020);
+      reloj->setMesSistema(5);
+      reloj->setDiaSistema(1);
+      reloj->setHoraSistema(9);
+      reloj->setMinSistema(2);
+
+      iniciarSesionD("juan@mail.com","1234");//D1 C1 01/05/20 - 09:01am Bienvenidos!
+      fabrica->getIClase()->consultarMensajes(0);
+      fabrica->getIClase()->enviarMensaje("Confirmen materiales por favor.");//01/05/20 - 09:02 am Confirmen materiales por favor.
+      fabrica->getIClase()->confirmarEnvio();
+
+      //01/05/20 - 09:02am
+      reloj->setAnioSistema(2020);
+      reloj->setMesSistema(5);
+      reloj->setDiaSistema(1);
+      reloj->setHoraSistema(9);
+      reloj->setMinSistema(2);
+
+      iniciarSesionE("ana@mail.com","1234");//E2 C1 01/05/20 - 09:02am 01/05/20 - 09:32am
+      clase1 = Cc->asistirClaseVivo("Intro Te�rico");
+      fabrica->getIClase()->confirmarAsistenciaVivo();
+
+      //01/05/20 - 09:03am
+      reloj->setAnioSistema(2020);
+      reloj->setMesSistema(5);
+      reloj->setDiaSistema(1);
+      reloj->setHoraSistema(9);
+      reloj->setMinSistema(3);
+
+      iniciarSesionE("ramon@mail.com","1234");//E3 C1 01/05/20 - 09:03am 01/05/20 - 09:43am
+      clase1 = Cc->asistirClaseVivo("Intro Te�rico");
+      fabrica->getIClase()->confirmarAsistenciaVivo();
+
+      //01/05/20 - 09:05am
+      reloj->setAnioSistema(2020);
+      reloj->setMesSistema(5);
+      reloj->setDiaSistema(1);
+      reloj->setHoraSistema(9);
+      reloj->setMinSistema(5);
+
+      iniciarSesionE("roberto@mail.com","1234");//01/05/20 - 09:05am Listo para aprender
+      fabrica->getIClase()->consultarMensajes(0);
+      fabrica->getIClase()->enviarRespuesta(,"Listo para aprender");
+      fabrica->getIClase()->confirmarEnvio();
+
+      //01/05/20 - 09:05am
+      reloj->setAnioSistema(2020);
+      reloj->setMesSistema(5);
+      reloj->setDiaSistema(1);
+      reloj->setHoraSistema(9);
+      reloj->setMinSistema(6);
+
+      iniciarSesionD("juan@mail.com","1234");//01/05/20 - 09:06am Me alegro
+      fabrica->getIClase()->consultarMensajes(0);
+      fabrica->getIClase()->enviarRespuesta(,"Me alegro");
+      fabrica->getIClase()->confirmarEnvio();
+
+      //01/05/20 - 09:06am
+      reloj->setAnioSistema(2020);
+      reloj->setMesSistema(5);
+      reloj->setDiaSistema(1);
+      reloj->setHoraSistema(9);
+      reloj->setMinSistema(6);
+
+      iniciarSesionD("ana@mail.com","1234");//01/05/20 - 09:06am Todo listo
+      fabrica->getIClase()->consultarMensajes(5);
+      fabrica->getIClase()->enviarRespuesta(,"Todo listo");
+      fabrica->getIClase()->confirmarEnvio();
+
+      //01/05/20 - 09:21am
+      reloj->setAnioSistema(2020);
+      reloj->setMesSistema(5);
+      reloj->setDiaSistema(1);
+      reloj->setHoraSistema(9);
+      reloj->setMinSistema(21);
+
+      iniciarSesionE("roberto@mail.com","1234");//04/05/20 – 5:00pm
+      fabrica->getIClase()->finalizarAsistencia(0);
+      fabrica->getIClase()->confirmarSalida();
+
+      //01/05/20 - 09:32am
+      reloj->setAnioSistema(2020);
+      reloj->setMesSistema(5);
+      reloj->setDiaSistema(1);
+      reloj->setHoraSistema(9);
+      reloj->setMinSistema(32);
+
+      iniciarSesionE("ana@mail.com","1234");//04/05/20 – 5:00pm
+      fabrica->getIClase()->finalizarAsistencia(0);
+      fabrica->getIClase()->confirmarSalida();
+
+      //01/05/20 - 09:43am
+      reloj->setAnioSistema(2020);
+      reloj->setMesSistema(5);
+      reloj->setDiaSistema(1);
+      reloj->setHoraSistema(9);
+      reloj->setMinSistema(43);
+
+      iniciarSesionE("ramon@mail.com","1234");//04/05/20 – 5:00pm
+      fabrica->getIClase()->finalizarAsistencia(0);
+      fabrica->getIClase()->confirmarSalida();
+
+      //01/05/20 - 10am fin c1
+      reloj->setAnioSistema(2020);
+      reloj->setMesSistema(5);
+      reloj->setDiaSistema(1);
+      reloj->setHoraSistema(10);
+      reloj->setMinSistema(0);
+
+      iniciarSesionD("juan@mail.com","123");
+      fabrica->getIClase()->finalizarClase(0);
+      fabrica->getIClase()->confirmarFin();
+
+      //02/05/20 - 5pm fin c4
+      reloj->setAnioSistema(2020);
+      reloj->setMesSistema(5);
+      reloj->setDiaSistema(2);
+      reloj->setHoraSistema(17);
+      reloj->setMinSistema(0);
+
+      iniciarSesionD("maria@mail.com","123");
+      fabrica->getIClase()->finalizarClase(3);
+      fabrica->getIClase()->confirmarFin();
+
+      //03/05/20 - 10am fin c2
+      reloj->setAnioSistema(2020);
+      reloj->setMesSistema(5);
+      reloj->setDiaSistema(3);
+      reloj->setHoraSistema(10);
+      reloj->setMinSistema(0);
+
+      iniciarSesionD("juan@mail.com","123");
+      fabrica->getIClase()->finalizarClase(1);
+      fabrica->getIClase()->confirmarFin();
+
+      //03/05/20 - 5pm fin c5
+      reloj->setAnioSistema(2020);
+      reloj->setMesSistema(5);
+      reloj->setDiaSistema(3);
+      reloj->setHoraSistema(17);
+      reloj->setMinSistema(0);
+
+      iniciarSesionD("maria@mail.com","123");
+      fabrica->getIClase()->finalizarClase(4);
+      fabrica->getIClase()->confirmarFin();
+
+      //04/05/20 - 4:00pm
+      reloj->setAnioSistema(2020);
+      reloj->setMesSistema(5);
+      reloj->setDiaSistema(4);
+      reloj->setHoraSistema(16);
+      reloj->setMinSistema(0);
+
+      iniciarSesionE("ramon@mail.com","1234");//E3 C6 04/05/20 � 4:00pm 04/05/20 � 5:00pm
+      clase1 = Cc->asistirClaseVivo("06/01/20");
+      fabrica->getIClase()->confirmarAsistenciaVivo();
+      fabrica->getIClase()->confirmarAsistenciaVivo();
+
+      //04/05/20 - 04:01pm
+      reloj->setAnioSistema(2020);
+      reloj->setMesSistema(5);
+      reloj->setDiaSistema(4);
+      reloj->setHoraSistema(4);
+      reloj->setMinSistema(1);
+
+      iniciarSesionD("jorge@mail.com","1234");//04/05/20 - 04:01pm Comparto pantalla.
+      fabrica->getIClase()->consultarMensajes(5);
+      fabrica->getIClase()->enviarMensaje("Comparto pantalla.");
+      fabrica->getIClase()->confirmarEnvio();
+
+      //04/05/20 - 04:05pm
+      reloj->setAnioSistema(2020);
+      reloj->setMesSistema(5);
+      reloj->setDiaSistema(4);
+      reloj->setHoraSistema(16);
+      reloj->setMinSistema(5);
+
+      iniciarSesionD("ramon@mail.com","1234");//04/05/20 - 04:05pm Ya la vemos
+      fabrica->getIClase()->consultarMensajes(0);
+      fabrica->getIClase()->enviarRespuesta(,"Ya la vemos");
+      fabrica->getIClase()->confirmarEnvio();
+
+
+      //04/05/20 - 5pm fin c6
+      reloj->setAnioSistema(2020);
+      reloj->setMesSistema(5);
+      reloj->setDiaSistema(4);
+      reloj->setHoraSistema(17);
+      reloj->setMinSistema(0);
+
+      iniciarSesionD("jorge@mail.com","123");
+      fabrica->getIClase()->finalizarClase(5);
+      fabrica->getIClase()->confirmarFin();
+
+      //04/05/20 – 5:00pm LA REALIZA EL FIN DE LA CLASE ^^^^^^^^^^
+      ////reloj->setAnioSistema(2020);
+      ////reloj->setMesSistema(5);
+      ////reloj->setDiaSistema(4;
+      ////reloj->setHoraSistema(17);
+      ////reloj->setMinSistema(0);
+
+      ////iniciarSesionE("ramon@mail.com","1234");//04/05/20 – 5:00pm
+      ////fabrica->getIClase()->finalizarAsistencia(5);
+      ////fabrica->getIClase()->confirmarSalida();
+
+
+      //08/05/20 - 10am fin c3
+      reloj->setAnioSistema(2020);
+      reloj->setMesSistema(5);
+      reloj->setDiaSistema(8);
+      reloj->setHoraSistema(10);
+      reloj->setMinSistema(0);
+
+      iniciarSesionD("juan@mail.com","123");
+      fabrica->getIClase()->finalizarClase(2);
+      fabrica->getIClase()->confirmarFin();
+
+
+    }*/
     //Administrador
     void modificarReloj(){
       int anio,mes,dia,hora,min;
@@ -328,7 +671,7 @@ class Sistema{
               std::cout << "\tNo existe un docente con ese email. Por favor intente denuevo.\n";
             }
             while(!tipoCorrecto){
-              cout << "\n\tIngrese que tipo de docente es: \n\t1)Teorico\n\t2)Practico\n\t3)Monitoreo\n\tOpcion:";
+              cout << "\n\tIngrese que tipo de docente es: \n\t1)Teorico\n\t2)Practico\n\t3)Monitoreo\n\tOpcion: ";
               cin >> tipo;
               switch (tipo) {
                 case 1:
@@ -654,7 +997,7 @@ class Sistema{
       return res;
     };
     void iniciarClase(){
-      string nombre,cedula;
+      string nombre,email;
       int asig;
       char decision,hab;
       cout <<"\n\tAsignaturas en las que el docente participa:";
@@ -711,24 +1054,42 @@ class Sistema{
       fabrica->getIClase()->iniciarClase(asig,nombre,tipo,dtFecha(anio,mes,dia,hora,minutos,0));
       if(tipo==monitoreo){
         bool seguir = true;
+        map<string,dtEstudiante*> habilitados = fabrica->getIClase()->consultarInscriptos();
+        if(habilitados.empty())//si no hay inscriptos
+          seguir = false;
         while(seguir){
-          map<string,dtEstudiante*> habilitados = fabrica->getIClase()->consultarInscriptos();
           for(auto ith=habilitados.begin();ith!=habilitados.end();++ith){
-            cout << "\n\tCI: " << ith->first;
+            cout << "\n\tEmail: " << ith->first <<"\tCI: "<<ith->second->getCI();
           }
-          cout << "\n\tIngrese cedula de quien quiera agregar a habilitados:";
-          cin >> cedula;
-          fabrica->getIClase()->agregarHabilitado(cedula);
-          cout << "\n\t¿Desea seguir agregando habilitados? (S/N)";
-          cin >> hab;
-          if(hab=='N')
-            seguir=false;
-          else if(hab!='S')
-            cout << "\n\tOpcion no valida";
+          while(cout << "\n\tIngrese email de quien quiera agregar a habilitados: " && cin >> email && !habilitados.count(email)){
+            std::cin.clear(); //clear bad input flag
+            std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); //discard input
+            std::cout << "\tNo existe un estudiante con ese email. Por favor intente denuevo.\n";
           }
+          fabrica->getIClase()->agregarHabilitado(email);
+          habilitados.erase(email);
+          if(habilitados.empty()){
+            seguir = false;
+            cout << "\n\tNo quedan estudiantes para agregar.";
+          }
+          else{
+            cout << "\n\t¿Desea seguir agregando habilitados? (S/N)";
+            cin >> hab;
+            if(hab=='N')
+              seguir=false;
+            else if(hab!='S')
+              cout << "\n\tOpcion no valida";
+            }
+          }
+
       }
       dtInfoClase info = fabrica->getIClase()->desplegarInfoClase();
       cout << "\n\tNombre de clase: " << info.getNombre() << "\n\tCodigo de clase: " << info.getCodigo() << "\n\tIniciada por: "  << info.getIniciadaPor() << "\n\tFecha: " << info.getFechaInicio().getAnio() << "/"<< info.getFechaInicio().getMes() << "/"<< info.getFechaInicio().getDia() << " " << info.getFechaInicio().getHora() << ":"<< info.getFechaInicio().getMinuto();
+      cout << "\n\tLista de habilitados:";
+      array<string, 15> arr = info.getHabilitados();
+      for(int i=0; i<info.getCantHabilitados(); i++){
+        cout << "\n\t\t" << arr[i];
+      }
       bool parar=false;
       while(!parar){
         cout << "\n\t¿Desea confirmar (S/N)? ";
@@ -1198,7 +1559,7 @@ int main(){
         }
       break;
       case '4':
-        s->cargarDatos();
+        //s->cargarDatos();
         cout << "\nCasos de pruebas cargados."<<endl;
       break;
       case '5':
