@@ -27,8 +27,8 @@ class Sistema{
     static map<string,Usuario*>* colUsuarios;
     static map<string,Estudiante*>* colEstudiantes;
     static map<string,Docente*>* colDocentes;
-    static map<int,Asignatura*>* colAsignaturas;
-    static map<int,Clase*>* colClases;
+    static map<string,Asignatura*>* colAsignaturas;
+    static map<string,Clase*>* colClases;
     static map<int,Mensaje*>* colMensajes;
     static Reloj* reloj;
   public:
@@ -533,7 +533,7 @@ class Sistema{
     void altaDeAsignatura(){
       string nombreAsig,e8;
       char e6,e7;
-      int codigoAsig;
+      string codigoAsig;
       bool teorico,practico,monitoreo;
       bool sn = false;
       bool no_pronto=true;
@@ -622,9 +622,9 @@ class Sistema{
       }
     };
     void asignarDocenteAAsignatura(){
-      int codigoAsig, tipo;
+      int tipo;
       char entrada;
-      string emailDoc;
+      string emailDoc,codigoAsig;
       bool tipoCorrecto = false;
       bool sn = false;
       bool admite = true;
@@ -717,7 +717,7 @@ class Sistema{
       }
     };
     void eliminarAsignatura(){
-      int cod;
+      string cod;
       bool no_termina=true;
       while(no_termina){
         set<dtAsignatura> nuevo = fabrica->getIAsignatura()->consultarAsignaturas();
@@ -796,7 +796,7 @@ class Sistema{
         for(auto it = noInscripto.begin();it != noInscripto.end();it++){
           cout << "\n\tNombre: " << it->getNombre()<< " Codigo: " << it->getCodigo();
         }
-        int codigoAsig;
+        string codigoAsig;
 
         bool aux=true;
         while(aux){
@@ -848,7 +848,7 @@ class Sistema{
           for(auto it = asigIns.begin();it != asigIns.end();it++){
             cout << "\n\tNombre: " << it->getNombre()<< " Codigo: " << it->getCodigo();
           }
-          int codigoAsig;
+          string codigoAsig;
           bool aux = true;
 
           /*while (std::cout << "\n\tIngrese el codigo de la asignatura de la que desea ver clases: " && !(std::cin >> codigoAsig)) {
@@ -886,7 +886,7 @@ class Sistema{
             for(auto it = setClasesAsig.begin();it != setClasesAsig.end();it++){
               cout << "\n\tNombre: " << it->getNombre()<< " Codigo: " << it->getCodigo();
             }
-            int codigoCla;
+            string codigoCla;
             aux = true;
             while(aux){
               while (std::cout << "\n\tIngrese el codigo de la clase que desea ver: " && !(std::cin >> codigoCla)) {
@@ -941,7 +941,7 @@ class Sistema{
           for(auto it = setClasesAsig.begin();it != setClasesAsig.end();it++){
             cout << "\n\tNombre: " << (*it)->getNombre()<< " Codigo: " << (*it)->getCodigo();
           }
-          int codigoCla;
+          string codigoCla;
           bool aux = true;
           while(aux){
             while (std::cout << "\n\tIngrese el codigo de la clase que desea dejar de ver: " && !(std::cin >> codigoCla)) {
@@ -998,7 +998,7 @@ class Sistema{
     };
     void iniciarClase(){
       string nombre,email;
-      int asig;
+      string asig;
       char decision,hab;
       cout <<"\n\tAsignaturas en las que el docente participa:";
       set<dtAsignatura> opciones = fabrica->getIClase()->consultarAsignaturasDocente();
@@ -1110,7 +1110,7 @@ class Sistema{
       }
     };
     void finalizarClase(){
-    int clase;
+    string clase;
     char decision;
     set<dtClase> clasesVivo = fabrica->getIClase()->consultarClasesEnVivo();
     for(auto it=clasesVivo.begin();it!=clasesVivo.end();++it){
@@ -1139,7 +1139,7 @@ class Sistema{
     }
     };
     void tiempoDeAsistencia(){
-      int cod;
+      string cod;
       set<dtAsignatura> inscripto = fabrica->getIClase()->consultarAsignaturasDocente();
       if(inscripto.begin()==inscripto.end()){
         cout << "\n\tEl docente no esta asignado a ninguna asignatura.\n";
@@ -1172,7 +1172,7 @@ class Sistema{
     };
     //ambos
     void enviarMensaje(){
-      int clase;
+      string clase;
       char decision;
       set<dtClase> clasesP = fabrica->getIClase()->consultarClasesParticipando();
       for(auto itc = clasesP.begin(); itc!=clasesP.end();itc++){
@@ -1329,8 +1329,8 @@ HandlerMensajes* Sistema::handler = 0;
 map<string,Usuario*>* Sistema::colUsuarios = 0;
 map<string,Estudiante*>* Sistema::colEstudiantes = 0;
 map<string,Docente*>* Sistema::colDocentes = 0;
-map<int,Asignatura*>* Sistema::colAsignaturas = 0;
-map<int,Clase*>* Sistema::colClases = 0;
+map<string,Asignatura*>* Sistema::colAsignaturas = 0;
+map<string,Clase*>* Sistema::colClases = 0;
 map<int,Mensaje*>* Sistema::colMensajes = 0;
 Reloj* Sistema::reloj = NULL;
 
@@ -1347,8 +1347,8 @@ Sistema* Sistema::getInstancia(){
         colUsuarios = new map<string,Usuario*>;
         colEstudiantes = new map<string,Estudiante*>;
         colDocentes = new map<string,Docente*>;
-        colAsignaturas = new map<int,Asignatura*>;
-        colClases = new map<int,Clase*>;
+        colAsignaturas = new map<string,Asignatura*>;
+        colClases = new map<string,Clase*>;
         colMensajes = new map<int,Mensaje*>;
         //inicializo las colecciones de los controladores
         fabrica->getIUsuario()->setColUser(colUsuarios);

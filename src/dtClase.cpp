@@ -5,8 +5,8 @@ dtClase::dtClase(){};
 void dtClase::setNombre(string n){ this->nombre = n;};
 string dtClase::getNombre() const { return nombre;};
 
-void dtClase::setCodigo(int c){ this->codigo = c;};
-int dtClase::getCodigo() const { return codigo;};
+void dtClase::setCodigo(string c){ this->codigo = c;};
+string dtClase::getCodigo() const { return codigo;};
 
 void dtClase::setUrl(string u){ this->url = u;};
 string dtClase::getUrl() const { return url;};
@@ -23,8 +23,8 @@ tipoClase dtClase::getTipo() const { return tipo;};
 void dtClase::setCreador(string c){ this->creador = c;};
 string dtClase::getCreador() const { return creador;};
 
-void dtClase::setAsig(int a){ this->codigoAsig = a;};
-int dtClase::getAsig() const { return codigoAsig;};
+void dtClase::setAsig(string a){ this->codigoAsig = a;};
+string dtClase::getAsig() const { return codigoAsig;};
 
 dtClase::~dtClase(){};
 

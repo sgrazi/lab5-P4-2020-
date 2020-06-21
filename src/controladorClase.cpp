@@ -47,19 +47,19 @@ string ControladorClase::getContenidoMensaje(){ return contenidoMensaje;};
 void ControladorClase::setIdAResponder(int id){ this->idAResponder = id;};
 int ControladorClase::getIdAResponder(){ return idAResponder;};
 
-void ControladorClase::setCodigoClase(int c){ this->codigoClase = c;};
-int ControladorClase::getCodigoClase(){ return codigoClase;};
+void ControladorClase::setCodigoClase(string c){ this->codigoClase = c;};
+string ControladorClase::getCodigoClase(){ return codigoClase;};
 
 //void ControladorClase::setInfoParaCreacionClase(dtInfoClase *i){ this->infoParaCreacionClase = i;};
 //dtInfoClase* ControladorClase::getInfoParaCreacionClase(){ return infoParaCreacionClase;};
 
-void ControladorClase::setClaseAFinalizar(int c){ this->claseAFinalizar = c;};
-int ControladorClase::getClaseAFinalizar(){ return claseAFinalizar;};
+void ControladorClase::setClaseAFinalizar(string c){ this->claseAFinalizar = c;};
+string ControladorClase::getClaseAFinalizar(){ return claseAFinalizar;};
 
 void ControladorClase::setColEst(map<string,Estudiante*>* c){this->coleccionGlobalEstudiantes=c;};
 void ControladorClase::setColDoc(map<string,Docente*>* c){this->coleccionGlobalDocentes=c;};
-void ControladorClase::setColAsig(map<int,Asignatura*>* c){this->coleccionGlobalAsignaturas=c;};
-void ControladorClase::setColCla(map<int,Clase*>* c){this->coleccionGlobalClases=c;};
+void ControladorClase::setColAsig(map<string,Asignatura*>* c){this->coleccionGlobalAsignaturas=c;};
+void ControladorClase::setColCla(map<string,Clase*>* c){this->coleccionGlobalClases=c;};
 void ControladorClase::setColMens(map<int,Mensaje*>* c){this->coleccionGlobalMensajes=c;};
 
 void ControladorClase::setHandler(HandlerMensajes* h){ this->handler = h;};
@@ -79,13 +79,13 @@ set<dtAsignatura> ControladorClase::consultarAsignaturasDocente(){
 /*se supone que aca se creaba un dtInfoClase y se empezaba a guardar info
 para despues usarla en el confirmar, pero no es necesario, lo puedo empezar a
 hacer en iniciarClase*/
-tipoClase ControladorClase::rolDocente(int codigoAsig){//retorna un tipoClase con el rol del docente en el parametro tipo
+tipoClase ControladorClase::rolDocente(string codigoAsig){//retorna un tipoClase con el rol del docente en el parametro tipo
   auto itDoc = this->coleccionGlobalDocentes->find(emailUserActual);
   auto itRol = itDoc->second->getAsignaturas()->find(codigoAsig);
   return itRol->second->getDicta();
 };
 
-void ControladorClase::iniciarClase(int codigoAsig, string nombre, tipoClase tipo, dtFecha fecha){
+void ControladorClase::iniciarClase(string codigoAsig, string nombre, tipoClase tipo, dtFecha fecha){
   dtInfoClase* dt = new dtInfoClase();
   dt->setIniciadaPor(emailUserActual);
   dt->setCodigo(codigoAsig);
@@ -135,7 +135,8 @@ void ControladorClase::confirmarInicio(){//se separa en dos casos que hacen lo m
   if(infoParaCreacionClase->getTipo() == teorico){
     teoAux = dynamic_cast<Teorico*>(clase);
     teoAux->setAsistentes(0);
-    teoAux->setCodigo(itAsig->second->getClases()->size());//fijarme cantidad de clases en la asignatura y ponerle codigo igual a eso +1
+    std::string s = std::to_string(itAsig->second->getClases()->size());
+    teoAux->setCodigo(s);//fijarme cantidad de clases en la asignatura y ponerle codigo igual a eso +1
     teoAux->setNombre(infoParaCreacionClase->getNombre());
     teoAux->setUrl("clases.com/" + clase->getCodigo());
     teoAux->setFechaInicio(infoParaCreacionClase->getFechaInicio());
@@ -147,12 +148,13 @@ void ControladorClase::confirmarInicio(){//se separa en dos casos que hacen lo m
     itDoc->second->agregarClaseNueva(teoAux);
     itAsig->second->agregarClaseNueva(teoAux);
 
-    this->coleccionGlobalClases->insert(pair<int,Clase*> (teoAux->getCodigo(),teoAux));
+    this->coleccionGlobalClases->insert(pair<string,Clase*> (teoAux->getCodigo(),teoAux));
   }
   else{
     if(infoParaCreacionClase->getTipo() == monitoreo){
       monAux = dynamic_cast<Monitoreo*>(clase);
-      monAux->setCodigo(itAsig->second->getClases()->size());//fijarme cantidad de clases en la asignatura y ponerle codigo igual a eso +1
+      std::string s2 = std::to_string(itAsig->second->getClases()->size());
+      monAux->setCodigo(s2);//fijarme cantidad de clases en la asignatura y ponerle codigo igual a eso +1
       monAux->setNombre(infoParaCreacionClase->getNombre());
       monAux->setUrl("clases.com/" + clase->getCodigo());
       monAux->setFechaInicio(infoParaCreacionClase->getFechaInicio());
@@ -168,10 +170,11 @@ void ControladorClase::confirmarInicio(){//se separa en dos casos que hacen lo m
       itDoc->second->agregarClaseNueva(monAux);
       itAsig->second->agregarClaseNueva(monAux);
 
-      this->coleccionGlobalClases->insert(pair<int,Clase*> (monAux->getCodigo(),monAux));
+      this->coleccionGlobalClases->insert(pair<string,Clase*> (monAux->getCodigo(),monAux));
     }
     else{ //practico
-      clase->setCodigo(itAsig->second->getClases()->size());//fijarme cantidad de clases en la asignatura y ponerle codigo igual a eso +1
+      std::string s3 = std::to_string(itAsig->second->getClases()->size());
+      clase->setCodigo(s3);//fijarme cantidad de clases en la asignatura y ponerle codigo igual a eso +1
       clase->setNombre(infoParaCreacionClase->getNombre());
       clase->setUrl("clases.com/" + clase->getCodigo());
       clase->setFechaInicio(infoParaCreacionClase->getFechaInicio());
@@ -183,7 +186,7 @@ void ControladorClase::confirmarInicio(){//se separa en dos casos que hacen lo m
       itDoc->second->agregarClaseNueva(clase);
       itAsig->second->agregarClaseNueva(clase);
 
-      this->coleccionGlobalClases->insert(pair<int,Clase*> (clase->getCodigo(),clase));
+      this->coleccionGlobalClases->insert(pair<string,Clase*> (clase->getCodigo(),clase));
     }
 
   }
@@ -199,13 +202,13 @@ set<dtClase> ControladorClase::consultarClasesEnVivo(){
   return itDoc->second->clasesATerminar();
 };
 
-set<dtClase> ControladorClase::consultarClasesEnVivoDeAsig(int codigoAsig){
+set<dtClase> ControladorClase::consultarClasesEnVivoDeAsig(string codigoAsig){
 auto itDoc = this->coleccionGlobalAsignaturas->find(codigoAsig);
 return itDoc->second->clasesEnVivo();
 
 };
 
-void ControladorClase::finalizarClase(int codigo){
+void ControladorClase::finalizarClase(string codigo){
   this->claseAFinalizar = codigo;
 };
 
@@ -258,7 +261,7 @@ set<dtClase> ControladorClase::consultarClasesParticipando(){
   return nuevo;
 };
 
-set<dtMensaje> ControladorClase::consultarMensajes(int codigoClase){
+set<dtMensaje> ControladorClase::consultarMensajes(string codigoClase){
   setCodigoClase(codigoClase);
   set<dtMensaje> nuevo;
   auto itCla = coleccionGlobalClases->find(codigoClase);
@@ -312,7 +315,7 @@ set<dtAsignatura> ControladorClase::consultarAsigIns(){
   return itEst->second->getAsignaturasInscripto();
 };
 
-set<dtClase> ControladorClase::consultarClasesVivo(int a){
+set<dtClase> ControladorClase::consultarClasesVivo(string a){
   set<dtClase> nuevo;
   for(auto itCla=coleccionGlobalAsignaturas->find(a)->second->getClases()->begin(); itCla!=coleccionGlobalAsignaturas->find(a)->second->getClases()->end(); ++itCla){
     if(itCla->second->getFechaFin()==fechaNula && ((itCla->second->getFechaInicio().getAnio()<=relojSistema->getInstancia()->getAnioSistema()) && (itCla->second->getFechaInicio().getMes()<=relojSistema->getInstancia()->getMesSistema()) && (itCla->second->getFechaInicio().getDia()<=relojSistema->getInstancia()->getDiaSistema()) && (itCla->second->getFechaInicio().getHora()<=relojSistema->getInstancia()->getHoraSistema()) && (itCla->second->getFechaInicio().getMinuto()<=relojSistema->getInstancia()->getMinSistema()))){
@@ -332,7 +335,7 @@ set<dtClase> ControladorClase::consultarClasesVivo(int a){
 };
 
 
-dtClase ControladorClase::asistirClaseVivo(int codigoClase){
+dtClase ControladorClase::asistirClaseVivo(string codigoClase){
   this->claseAFinalizar = codigoClase; //usa claseAFinalizar porque es la variable mas parecida?
   dtClase* dt = new dtClase();
   auto it = coleccionGlobalClases->find(codigoClase);
@@ -423,7 +426,7 @@ set<dtClase*> ControladorClase::consultarClasesParticipandoVivo(){
   return clasesAsistiendo;
 };
 
-void ControladorClase::finalizarAsistencia(int codigoClase) {
+void ControladorClase::finalizarAsistencia(string codigoClase) {
   this->setClaseAFinalizar(codigoClase);
 };
 
@@ -464,7 +467,7 @@ void ControladorClase::cancelarSalida(){};
 
 //TIEMPO DE ASISTENCIA A CLASE
 
-set<DtTiempoDeClase> ControladorClase::consultarTiempoClaseDocente(int codigo){
+set<DtTiempoDeClase> ControladorClase::consultarTiempoClaseDocente(string codigo){
   set<DtTiempoDeClase> nuevo;
   auto itAsig = this->coleccionGlobalAsignaturas->find(codigo);
   int tiempo=0;

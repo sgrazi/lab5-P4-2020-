@@ -6,19 +6,19 @@ using namespace std;
 
 class dtNotificacion {
 private:
-  int codigoAsig;
-  int codigoClase;
+  string codigoAsig;
+  string codigoClase;
   int idMensaje;
   string contenidoMensaje;
 public:
   dtNotificacion();
 
-  void setCodigoAsig(int);
-  void setCodigoClase(int);
+  void setCodigoAsig(string);
+  void setCodigoClase(string);
   void setIdMensaje(int);
   void setContenidoMensaje(string);
-  int getCodigoAsig() const ;
-  int getCodigoClase() const ;
+  string getCodigoAsig() const ;
+  string getCodigoClase() const ;
   int getIdMensaje() const ;
   string getContenidoMensaje() const ;
 

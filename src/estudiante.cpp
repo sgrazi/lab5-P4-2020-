@@ -2,7 +2,7 @@
 #include "../include/asignatura.h"
 
 Estudiante::Estudiante(){
-  map<int,Asignatura*>* a = new map<int,Asignatura*>;
+  map<string,Asignatura*>* a = new map<string,Asignatura*>;
   this->asignaturas = a;
 };
 void Estudiante::setCI(string ci){
@@ -12,13 +12,13 @@ string Estudiante::getCI(){
   return ci;
 };
 void Estudiante::inscribir(Asignatura* a){
-  asignaturas->insert(pair<int,Asignatura*> (a->getCodigo(),a));
+  asignaturas->insert(pair<string,Asignatura*> (a->getCodigo(),a));
 };
-void Estudiante::desinscribir(int codigo){
+void Estudiante::desinscribir(string codigo){
   asignaturas->erase(codigo);
 };
 
-map<int,Asignatura*>* Estudiante::getAsignaturas(){
+map<string,Asignatura*>* Estudiante::getAsignaturas(){
   return asignaturas;
 };
 Estudiante::~Estudiante(){

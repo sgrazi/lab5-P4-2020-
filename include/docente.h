@@ -17,23 +17,23 @@ class Asignatura;
 class Docente : public Usuario{
   private:
     string instituto;
-    map<int,Rol*>* asignaturas; //int es el codigo de la asignatura
-    map<int,Clase*>* clases;
+    map<string,Rol*>* asignaturas; //string es el codigo de la asignatura
+    map<string,Clase*>* clases;
 
     Reloj* relojSistema;
   public:
     Docente();
     string getInstituto();
     void setInstituto(string);
-    map<int,Rol*>* getAsignaturas();//corregir esto en un futuro, no tiene que ser puntero a map sino map solo
-    map<int,Clase*>* getClases();
+    map<string,Rol*>* getAsignaturas();//corregir esto en un futuro, no tiene que ser puntero a map sino map solo
+    map<string,Clase*>* getClases();
 
-    bool esDocenteDe(int);
+    bool esDocenteDe(string);
     Rol* nuevoRol(Asignatura*,tipoClase);
     set<dtAsignatura> getInfo();
     void agregarClaseNueva(Clase*);
     set<dtClase> clasesATerminar();
-    void desvincularDoc(int);
+    void desvincularDoc(string);
 
     ~Docente();
 };

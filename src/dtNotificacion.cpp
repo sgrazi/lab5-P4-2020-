@@ -2,11 +2,11 @@
 
 dtNotificacion::dtNotificacion(){};
 
-void dtNotificacion::setCodigoAsig(int c){ this->codigoAsig = c;};
-int dtNotificacion::getCodigoAsig() const { return codigoAsig;};
+void dtNotificacion::setCodigoAsig(string c){ this->codigoAsig = c;};
+string dtNotificacion::getCodigoAsig() const { return codigoAsig;};
 
-void dtNotificacion::setCodigoClase(int c){ this->codigoClase = c;};
-int dtNotificacion::getCodigoClase() const { return codigoClase;};
+void dtNotificacion::setCodigoClase(string c){ this->codigoClase = c;};
+string dtNotificacion::getCodigoClase() const { return codigoClase;};
 
 void dtNotificacion::setIdMensaje(int i){ this->idMensaje = i;};
 int dtNotificacion::getIdMensaje() const { return idMensaje;};

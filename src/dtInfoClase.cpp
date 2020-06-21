@@ -2,8 +2,8 @@
 #include "../include/dtFecha.h"
 #include "../include/dtEstudiante.h"
 
-void dtInfoClase::setCodigo(int c){  this->codigo = c;};
-int dtInfoClase::getCodigo(){  return codigo;};
+void dtInfoClase::setCodigo(string c){  this->codigo = c;};
+string dtInfoClase::getCodigo(){  return codigo;};
 
 void dtInfoClase::setNombre(string n){ this->nombre = n;};
 string dtInfoClase::getNombre(){ return nombre;};

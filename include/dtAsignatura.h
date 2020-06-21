@@ -7,19 +7,19 @@ using namespace std;
 
 class dtAsignatura{
   private:
-    int codigo;
+    string codigo;
     string nombre;
     bool teorico;
     bool monitoreo;
     bool practico;
   public:
     dtAsignatura();
-    void setCodigo(int);
+    void setCodigo(string);
     void setNombre(string);
     void setTeorico(bool);
     void setPractico(bool);
     void setMonitoreo(bool);
-    int getCodigo() const;
+    string getCodigo() const;
     string getNombre() const;
     bool getTeorico() const;
     bool getPractico() const;

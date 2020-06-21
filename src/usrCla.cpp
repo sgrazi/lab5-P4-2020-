@@ -19,7 +19,7 @@ void UsrCla::setVisualizacion(Visualizacion* v){
 
 set<Visualizacion*> UsrCla::getVis(){ return vis;};
 
-//int UsrCla::getCodigoClase(){};
+//string UsrCla::getCodigoClase(){};
 //string UsrCla::getEmailUser(){};
 
 void UsrCla::marcarFin(dtFecha fecha){//como es clase en vivo solo hay una visualizacion, solo marco el principio de la lista

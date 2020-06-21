@@ -30,12 +30,12 @@ class ControladorUsuario: public IControladorUsuario{
 		string nombreUserActual;
 		string emailUserActual;
 		int nuevoModoSus;
-		int asignaturaAIns;
+		string asignaturaAIns;
 		HandlerMensajes* handler;
 		map<string,Usuario*>* ColeccionGlobalUsuarios;
 		map<string,Estudiante*>* coleccionGlobalEstudiantes;
 		map<string,Docente*>* coleccionGlobalDocentes;
-		map<int,Asignatura*>* coleccionGlobalAsignaturas;
+		map<string,Asignatura*>* coleccionGlobalAsignaturas;
 		static ControladorUsuario* instancia;
 		ControladorUsuario();
 
@@ -51,7 +51,7 @@ class ControladorUsuario: public IControladorUsuario{
 		string getNombreUserActual();
 		string getEmailUserActual();
 		int getNuevoModoSus();
-		int getAsignaturaAIns();
+		string getAsignaturaAIns();
 		void setUserEsEst(bool);
 		void setNombreUser(string);
 		void setPasswordUser(string);
@@ -62,12 +62,12 @@ class ControladorUsuario: public IControladorUsuario{
 		void setNombreUserActual(string);
 		void setEmailUserActual(string);
 		void setNuevoModoSus(int);
-		void setAsignaturaAIns(int);
+		void setAsignaturaAIns(string);
 		//COLECCIONES
 		void setColUser(map<string,Usuario*>*);
 		void setColEst(map<string,Estudiante*>*);
 		void setColDoc(map<string,Docente*>*);
-		void setColAsig(map<int,Asignatura*>*);
+		void setColAsig(map<string,Asignatura*>*);
 
 		void setHandler(HandlerMensajes*);
 
@@ -82,7 +82,7 @@ class ControladorUsuario: public IControladorUsuario{
 
 		//INSCRIPCION A ASIGNATURA
 		set<dtAsignatura> consultarAsigNoIns();
-		void inscribir(int);
+		void inscribir(string);
 		void confirmarInscripcion();
 		void cancelarInscripcion();
 

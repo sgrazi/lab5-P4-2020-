@@ -1,8 +1,8 @@
 #include "../include/dtAsignatura.h"
 
 dtAsignatura::dtAsignatura(){};
-void dtAsignatura::setCodigo(int c){  this->codigo = c;};
-int dtAsignatura::getCodigo() const {  return codigo;};
+void dtAsignatura::setCodigo(string c){  this->codigo = c;};
+string dtAsignatura::getCodigo() const {  return codigo;};
 
 void dtAsignatura::setNombre(string n){ this->nombre = n;};
 string dtAsignatura::getNombre() const { return nombre;};

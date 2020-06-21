@@ -14,11 +14,11 @@ dtFecha dtMensaje::getFecha() const { return fecha;};
 void dtMensaje::setEnRespuestaA(int a){ this->enRespuestaA = a;};
 int dtMensaje::getEnRespuestaA() const { return enRespuestaA;};
 
-void dtMensaje::setClase(int a){ this->clase = a;};
-int dtMensaje::getClase() const { return clase;};
+void dtMensaje::setClase(string a){ this->clase = a;};
+string dtMensaje::getClase() const { return clase;};
 
-void dtMensaje::setAsignatura(int c){ this->asignatura = c;}
-int dtMensaje::getAsignatura() const {  return asignatura;};
+void dtMensaje::setAsignatura(string c){ this->asignatura = c;}
+string dtMensaje::getAsignatura() const {  return asignatura;};
 
 dtMensaje::~dtMensaje(){};
 

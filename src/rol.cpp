@@ -27,7 +27,7 @@ Docente* Rol::getDoc(){
 Asignatura* Rol::getAsig(){
   return asig;
 };
-int Rol::getCodigoAsig(){
+string Rol::getCodigoAsig(){
   return asig->getCodigo();
 };
 Rol::~Rol(){

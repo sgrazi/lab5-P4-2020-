@@ -15,15 +15,15 @@ using namespace std;
 class HandlerMensajes{
   private:
     map<int,Mensaje*>* coleccionGlobalMensajes;
-    map<int,Clase*>* coleccionGlobalClases;
+    map<string,Clase*>* coleccionGlobalClases;
     map<string,Usuario*>* observers;
   public:
     HandlerMensajes();
 
     void setColMens(map<int,Mensaje*>*);
-    void setColCla(map<int,Clase*>*);
+    void setColCla(map<string,Clase*>*);
 
-    Mensaje* agregarMensaje(int , bool , int , string, dtFecha, int);
+    Mensaje* agregarMensaje(int , bool , int , string, dtFecha, string);
     void agregarObs(Usuario*);
     void eliminarObs(Usuario*);
 

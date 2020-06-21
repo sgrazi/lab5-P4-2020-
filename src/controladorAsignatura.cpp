@@ -21,8 +21,8 @@ string ControladorAsignatura::getEmailDocente(){  return emailDocente;};
 void ControladorAsignatura::setNombreAsig(string n){  this->nombreAsig = n;};
 string ControladorAsignatura::getNombreAsig(){ return nombreAsig;};
 
-void ControladorAsignatura::setCodigoAsig(int c){  this->codigoAsig = c;};
-int ControladorAsignatura::getCodigoAsig(){ return codigoAsig;};
+void ControladorAsignatura::setCodigoAsig(string c){  this->codigoAsig = c;};
+string ControladorAsignatura::getCodigoAsig(){ return codigoAsig;};
 
 void ControladorAsignatura::setAceptaTeo(bool b){  this->aceptaTeo = b;};
 bool ControladorAsignatura::getAceptaTeo(){ return aceptaTeo;};
@@ -36,14 +36,14 @@ bool ControladorAsignatura::getAceptaMon(){ return aceptaMon;};
 void ControladorAsignatura::setRolDoc(tipoClase r){ this->rolDoc = r;};
 tipoClase ControladorAsignatura::getRolDoc(){return rolDoc;};
 
-void ControladorAsignatura::setAsigAEliminar(int a){ this->asigAEliminar = a;};
-int ControladorAsignatura::getAsigAEliminar(){ return asigAEliminar;};
+void ControladorAsignatura::setAsigAEliminar(string a){ this->asigAEliminar = a;};
+string ControladorAsignatura::getAsigAEliminar(){ return asigAEliminar;};
 
-void ControladorAsignatura::setColAsig(map<int,Asignatura*>* c){ this->coleccionGlobalAsignaturas = c;};
+void ControladorAsignatura::setColAsig(map<string,Asignatura*>* c){ this->coleccionGlobalAsignaturas = c;};
 void ControladorAsignatura::setColDoc(map<string,Docente*>* c){ this->coleccionGlobalDocentes = c;};
-void ControladorAsignatura::setColCla(map<int,Clase*>* c){this->coleccionGlobalClases=c;};
+void ControladorAsignatura::setColCla(map<string,Clase*>* c){this->coleccionGlobalClases=c;};
 
-void ControladorAsignatura::agregarAsignatura(string n, int c, bool t, bool p, bool m){
+void ControladorAsignatura::agregarAsignatura(string n, string c, bool t, bool p, bool m){
   this->setNombreAsig(n);
   this->setCodigoAsig(c);
   this->setAceptaTeo(t);
@@ -58,7 +58,7 @@ void ControladorAsignatura::confirmarAlta(){
   nueva->setTeorico(getAceptaTeo());
   nueva->setPractico(getAceptaPra());
   nueva->setMonitoreo(getAceptaMon());
-  this->coleccionGlobalAsignaturas->insert(pair<int,Asignatura*>(nueva->getCodigo(),nueva));
+  this->coleccionGlobalAsignaturas->insert(pair<string,Asignatura*>(nueva->getCodigo(),nueva));
 };
 
 void ControladorAsignatura::cancelarAlta(){
@@ -67,7 +67,7 @@ void ControladorAsignatura::cancelarAlta(){
 
 set<dtAsignatura> ControladorAsignatura::consultarAsignaturas(){
   set<dtAsignatura> nuevo;
-  map<int,Asignatura*> :: iterator it;
+  map<string,Asignatura*> :: iterator it;
   for (it=coleccionGlobalAsignaturas->begin(); it!=coleccionGlobalAsignaturas->end() ;++it){
     Asignatura* a = it->second;
     dtAsignatura* agregar = new dtAsignatura();
@@ -81,7 +81,7 @@ set<dtAsignatura> ControladorAsignatura::consultarAsignaturas(){
   return nuevo;
 };
 
-map<string,dtDocente> ControladorAsignatura::consultarDocentesLibres(int codigo){
+map<string,dtDocente> ControladorAsignatura::consultarDocentesLibres(string codigo){
   map<string,dtDocente> nuevo;
   map<string,Docente*> :: iterator it;
   for (it=coleccionGlobalDocentes->begin(); it!=coleccionGlobalDocentes->end() ;++it){
@@ -99,7 +99,7 @@ map<string,dtDocente> ControladorAsignatura::consultarDocentesLibres(int codigo)
   };
   return nuevo;
 };
-bool ControladorAsignatura::asignarDocente(string e, int c, tipoClase r){
+bool ControladorAsignatura::asignarDocente(string e, string c, tipoClase r){
   bool res;
   auto asig = coleccionGlobalAsignaturas->find(c)->second;
   if( (asig->getTeorico() && r==teorico)||(asig->getPractico() && r==practico)||(asig->getMonitoreo() && r==monitoreo) ){
@@ -126,7 +126,7 @@ void ControladorAsignatura::cancelarAsignacion(){
 
 set<DtDictado> ControladorAsignatura::tiempoDictado(){
   set<DtDictado> nuevo;
-  map<int,Asignatura*> :: iterator it;
+  map<string,Asignatura*> :: iterator it;
   for (it=coleccionGlobalAsignaturas->begin(); it!=coleccionGlobalAsignaturas->end() ;++it){
       int tiempo=0;
       for (auto itclases=it->second->getClases()->begin(); itclases!=it->second->getClases()->end() ;++itclases){
@@ -138,13 +138,13 @@ set<DtDictado> ControladorAsignatura::tiempoDictado(){
   return nuevo;
 };
 
-void ControladorAsignatura::eliminarAsignatura(int codigo){
+void ControladorAsignatura::eliminarAsignatura(string codigo){
   setAsigAEliminar(codigo);
 };
 void ControladorAsignatura::confirmarElim(){
   auto asig = coleccionGlobalAsignaturas->find(asigAEliminar);
     for(auto it = asig->second->getClases()->begin();it != asig->second->getClases()->end();it++){
-      int aux = it->second->getCodigo();
+      string aux = it->second->getCodigo();
       for(auto itDoc = asig->second->getDocentes()->begin();itDoc != asig->second->getDocentes()->end();itDoc++)//borro la clase del mapa del docente
         itDoc->second->getDoc()->getClases()->erase(aux);//si no esta en el map no hace nada
       delete it->second;

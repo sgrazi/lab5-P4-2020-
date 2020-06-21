@@ -11,9 +11,9 @@ HandlerMensajes::HandlerMensajes(){
 };
 
 void HandlerMensajes::setColMens(map<int,Mensaje*>* c){ this->coleccionGlobalMensajes = c;};
-void HandlerMensajes::setColCla(map<int,Clase*>* c){ this->coleccionGlobalClases = c;};
+void HandlerMensajes::setColCla(map<string,Clase*>* c){ this->coleccionGlobalClases = c;};
 
-Mensaje* HandlerMensajes::agregarMensaje(int codigo, bool esRespuesta, int idRes, string contenidoMensaje, dtFecha fecha, int codigoClase){
+Mensaje* HandlerMensajes::agregarMensaje(int codigo, bool esRespuesta, int idRes, string contenidoMensaje, dtFecha fecha, string codigoClase){
 
   Mensaje* nuevo = new Mensaje();//creo el mensaje nuevo
   nuevo->setId(codigo);
@@ -35,7 +35,7 @@ Mensaje* HandlerMensajes::agregarMensaje(int codigo, bool esRespuesta, int idRes
   dt->setFecha(fecha);
   dt->setClase(codigoClase);
   dt->setAsignatura(this->coleccionGlobalClases->find(codigoClase)->second->getCodigoAsig());
-  
+
   coleccionGlobalMensajes->insert(pair<int,Mensaje*>(codigo,nuevo));//agrego el mensaje a la coleccion global
 
   for(auto itObs = observers->begin(); itObs!=observers->end(); ++itObs){//notifico a los observers

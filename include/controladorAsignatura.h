@@ -16,53 +16,53 @@ class ControladorAsignatura:public IControladorAsignatura{
 	private:
 		string emailDocente;
 		string nombreAsig;
-		int codigoAsig;
+		string codigoAsig;
 		bool aceptaTeo;
 		bool aceptaPra;
 		bool aceptaMon;
 		tipoClase rolDoc;
-		int asigAEliminar;
-		map<int,Asignatura*>* coleccionGlobalAsignaturas;
+		string asigAEliminar;
+		map<string,Asignatura*>* coleccionGlobalAsignaturas;
 		map<string,Docente*>* coleccionGlobalDocentes;
-		map<int,Clase*>* coleccionGlobalClases;
+		map<string,Clase*>* coleccionGlobalClases;
 		static ControladorAsignatura* instancia;
 		ControladorAsignatura();
 	public:
 		static ControladorAsignatura* getInstancia();
 		void setEmailDocente(string);
 		void setNombreAsig(string);
-		void setCodigoAsig(int);
+		void setCodigoAsig(string);
 		void setAceptaTeo(bool);
 		void setAceptaPra(bool);
 		void setAceptaMon(bool);
 		void setRolDoc(tipoClase);
-		void setAsigAEliminar(int);
+		void setAsigAEliminar(string);
 		string getEmailDocente();
 		string getNombreAsig();
-		int getCodigoAsig();
+		string getCodigoAsig();
 		bool getAceptaTeo();
 		bool getAceptaPra();
 		bool getAceptaMon();
 		tipoClase getRolDoc();
-		int getAsigAEliminar();
+		string getAsigAEliminar();
 
 		//colecciones
-		void setColAsig(map<int,Asignatura*>*);
+		void setColAsig(map<string,Asignatura*>*);
 		void setColDoc(map<string,Docente*>*);
-		void setColCla(map<int,Clase*>*);
+		void setColCla(map<string,Clase*>*);
 		//ALTA DE ASIG
-		void agregarAsignatura(string,int,bool,bool,bool);
+		void agregarAsignatura(string,string,bool,bool,bool);
 		void confirmarAlta();
 		void cancelarAlta();
 		//ASIGNACION DE DOC A ASIG
 		set<dtAsignatura> consultarAsignaturas();
-		map<string,dtDocente> consultarDocentesLibres(int); //list porque no esta definido como ordenar a los docentes en un map
-		bool asignarDocente(string,int,tipoClase);
+		map<string,dtDocente> consultarDocentesLibres(string); //list porque no esta definido como ordenar a los docentes en un map
+		bool asignarDocente(string,string,tipoClase);
 		void confirmarAsignacion();
 		void cancelarAsignacion();
 
 		//ELIM DE ASIG
-		void eliminarAsignatura(int);
+		void eliminarAsignatura(string);
 		void confirmarElim();
 		void cancelarElim();
 

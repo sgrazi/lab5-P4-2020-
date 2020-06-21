@@ -17,17 +17,17 @@ using namespace std;
 class Estudiante : public Usuario{
   private:
     string ci;
-    map<int,Asignatura*>* asignaturas;
+    map<string,Asignatura*>* asignaturas;
     //map<int,Monitoreo>* monHabilitados;
   public://faltan funciones de manejo de relaciones
     Estudiante();
     void setCI(string);
     string getCI();
-    map<int,Asignatura*>* getAsignaturas();
+    map<string,Asignatura*>* getAsignaturas();
     set<dtAsignatura> getAsignaturasInscripto();
 
     void inscribir(Asignatura*);
-    void desinscribir(int);
+    void desinscribir(string);
 
     ~Estudiante();
 };

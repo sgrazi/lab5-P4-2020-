@@ -22,15 +22,15 @@ class ControladorClase: public IControladorClase{
 		string passwordUserActual;
 		string emailUserActual;
 		dtInfoClase* infoParaCreacionClase;
-		int claseAFinalizar;
+		string claseAFinalizar;
 		string contenidoMensaje;
 		int idAResponder;
-		int codigoClase;
+		string codigoClase;
 		HandlerMensajes* handler;
-		map<int,Asignatura*>* coleccionGlobalAsignaturas;
+		map<string,Asignatura*>* coleccionGlobalAsignaturas;
 		map<string,Estudiante*>* coleccionGlobalEstudiantes;
 		map<string,Docente*>* coleccionGlobalDocentes;
-		map<int,Clase*>* coleccionGlobalClases;
+		map<string,Clase*>* coleccionGlobalClases;
 		map<int,Mensaje*>* coleccionGlobalMensajes;
 		static ControladorClase* instancia;
 		ControladorClase();
@@ -41,30 +41,30 @@ class ControladorClase: public IControladorClase{
 		void setPasswordUserActual(string);
 		void setEmailUserActual(string);
 		//void setInfoParaCreacionClase(dtInfoClase*);
-		void setClaseAFinalizar(int);
+		void setClaseAFinalizar(string);
 		string getPasswordUserActual();
 		string getEmailUserActual();
 		//dtInfoClase* getInfoParaCreacionClase();
-		int getClaseAFinalizar();
+		string getClaseAFinalizar();
 		void setContenidoMensaje(string);
 		string getContenidoMensaje();
 		void setIdAResponder(int);
 		int getIdAResponder();
-		void setCodigoClase(int);
-		int getCodigoClase();
+		void setCodigoClase(string);
+		string getCodigoClase();
 		//COLECCIONES
 		void setColEst(map<string,Estudiante*>*);
 		void setColDoc(map<string,Docente*>*);
-		void setColAsig(map<int,Asignatura*>*);
-		void setColCla(map<int,Clase*>*);
+		void setColAsig(map<string,Asignatura*>*);
+		void setColCla(map<string,Clase*>*);
 		void setColMens(map<int,Mensaje*>*);
 		void setHandler(HandlerMensajes*);
 
 		//INICIO DE CLASE
 		void iniciarSesion(string,string);
 		set<dtAsignatura> consultarAsignaturasDocente();
-		tipoClase rolDocente(int);
-		void iniciarClase(int,string,tipoClase,dtFecha);
+		tipoClase rolDocente(string);
+		void iniciarClase(string,string,tipoClase,dtFecha);
 		map<string,dtEstudiante*> consultarInscriptos();
 		void agregarHabilitado(string);
 		dtInfoClase desplegarInfoClase();
@@ -75,14 +75,14 @@ class ControladorClase: public IControladorClase{
 
 		//FINALIZAR CLASE
 		set<dtClase> consultarClasesEnVivo();
-		set<dtClase> consultarClasesEnVivoDeAsig(int codigoAsig);
-		void finalizarClase(int);
+		set<dtClase> consultarClasesEnVivoDeAsig(string codigoAsig);
+		void finalizarClase(string);
 		void confirmarFin();
 		void cancelarFin();
 
 		//ENVIO DE MENSAJE
 		set<dtClase> consultarClasesParticipando();
-		set<dtMensaje> consultarMensajes(int);
+		set<dtMensaje> consultarMensajes(string);
 		void enviarMensaje(string);
 		void enviarRespuesta(int,string);
 		void confirmarEnvio();
@@ -90,19 +90,19 @@ class ControladorClase: public IControladorClase{
 
 		//ASISTENCIA A CLASE EN VIVO
 		set<dtAsignatura> consultarAsigIns();
-		set<dtClase> consultarClasesVivo(int a);
-		dtClase asistirClaseVivo(int);
+		set<dtClase> consultarClasesVivo(string a);
+		dtClase asistirClaseVivo(string);
 		void confirmarAsistenciaVivo();
 		void cancelarAsistencia();
 
 		//FINALIZACION ASISTENCIA A CLASE EN VIVO
 		set<dtClase*>  consultarClasesParticipandoVivo();
-		void finalizarAsistencia(int codigoClase);
+		void finalizarAsistencia(string codigoClase);
 		void confirmarSalida();
 		void cancelarSalida();
 
 		//TIEMPO DE ASISTENCIA A CLASE
-		set<DtTiempoDeClase> consultarTiempoClaseDocente(int codigo);
+		set<DtTiempoDeClase> consultarTiempoClaseDocente(string codigo);
 
 		~ControladorClase();
 };

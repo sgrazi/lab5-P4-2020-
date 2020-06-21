@@ -26,15 +26,15 @@ class IControladorClase{
 
 		virtual void setColEst(map<string,Estudiante*>*) = 0;
 		virtual void setColDoc(map<string,Docente*>*) = 0;
-		virtual void setColAsig(map<int,Asignatura*>*) = 0;
-		virtual void setColCla(map<int,Clase*>*) = 0;
+		virtual void setColAsig(map<string,Asignatura*>*) = 0;
+		virtual void setColCla(map<string,Clase*>*) = 0;
 		virtual void setColMens(map<int,Mensaje*>*) = 0;
 		virtual void setHandler(HandlerMensajes*) = 0;
 
 		virtual void iniciarSesion(string,string) = 0;
 		virtual set<dtAsignatura> consultarAsignaturasDocente() = 0;
-		virtual tipoClase rolDocente(int) = 0;
-		virtual void iniciarClase(int,string,tipoClase,dtFecha) = 0;
+		virtual tipoClase rolDocente(string) = 0;
+		virtual void iniciarClase(string,string,tipoClase,dtFecha) = 0;
 		virtual map<string,dtEstudiante*> consultarInscriptos() = 0;
 		virtual void agregarHabilitado(string) = 0;
 		virtual dtInfoClase desplegarInfoClase() = 0;
@@ -42,26 +42,26 @@ class IControladorClase{
 		virtual void cancelarInicio() = 0;
 		virtual dtFecha generarFecha() = 0;
 		virtual set<dtClase> consultarClasesEnVivo() = 0;
-		virtual set<dtClase> consultarClasesEnVivoDeAsig(int codigoAsig) = 0;
-		virtual void finalizarClase(int) = 0;
+		virtual set<dtClase> consultarClasesEnVivoDeAsig(string codigoAsig) = 0;
+		virtual void finalizarClase(string) = 0;
 		virtual void confirmarFin() = 0;
 		virtual void cancelarFin() = 0;
 		virtual set<dtClase> consultarClasesParticipando() = 0;
-		virtual set<dtMensaje> consultarMensajes(int) = 0;
+		virtual set<dtMensaje> consultarMensajes(string) = 0;
 		virtual void enviarMensaje(string) = 0;
 		virtual void enviarRespuesta(int,string) = 0;
 		virtual void confirmarEnvio() = 0;
 		virtual void cancelarEnvio() = 0;
 		virtual set<dtAsignatura> consultarAsigIns() = 0;
-		virtual set<dtClase> consultarClasesVivo(int a) = 0;
-		virtual dtClase asistirClaseVivo(int) = 0;
+		virtual set<dtClase> consultarClasesVivo(string a) = 0;
+		virtual dtClase asistirClaseVivo(string) = 0;
 		virtual void confirmarAsistenciaVivo() = 0;
 		virtual void cancelarAsistencia() = 0;
 		virtual set<dtClase*>  consultarClasesParticipandoVivo() = 0;
-		virtual void finalizarAsistencia(int) = 0;
+		virtual void finalizarAsistencia(string) = 0;
 		virtual void confirmarSalida() = 0;
 		virtual void cancelarSalida() = 0;
-		virtual set<DtTiempoDeClase> consultarTiempoClaseDocente(int ) = 0;
+		virtual set<DtTiempoDeClase> consultarTiempoClaseDocente(string ) = 0;
 		~IControladorClase(){};
 };
 #endif

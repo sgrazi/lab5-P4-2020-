@@ -9,9 +9,9 @@
 const dtFecha fechaNula(0,0,0,0,0,0);
 
 Docente::Docente(){
-  map<int,Rol*>* a = new map<int,Rol*>;
+  map<string,Rol*>* a = new map<string,Rol*>;
   this->asignaturas = a;
-  map<int,Clase*>* c = new map<int,Clase*>;
+  map<string,Clase*>* c = new map<string,Clase*>;
   this->clases = c;
 };
 string Docente::getInstituto(){
@@ -21,13 +21,13 @@ void Docente::setInstituto(string ins){
   this->instituto = ins;
 };
 
-map<int,Rol*>* Docente::getAsignaturas(){ return asignaturas;};
-map<int,Clase*>* Docente::getClases(){ return clases;};
+map<string,Rol*>* Docente::getAsignaturas(){ return asignaturas;};
+map<string,Clase*>* Docente::getClases(){ return clases;};
 
-bool Docente::esDocenteDe(int codigoAsig){
-  int aux;
+bool Docente::esDocenteDe(string codigoAsig){
+  string aux;
   bool res = false;
-  map<int,Rol*> :: iterator it;
+  map<string,Rol*> :: iterator it;
   for(it=asignaturas->begin(); it!=asignaturas->end(); it++){
     aux = it->first;
     if(aux==codigoAsig)
@@ -40,7 +40,7 @@ bool Docente::esDocenteDe(int codigoAsig){
 Rol* Docente::nuevoRol(Asignatura *asig, tipoClase rolDoc){
   Rol *rolNuevo = new Rol(this, asig);
   rolNuevo->setDicta(rolDoc);
-  this->asignaturas->insert(pair<int,Rol*> (asig->getCodigo(),rolNuevo));//agregago el rol nuevo a la coleccion
+  this->asignaturas->insert(pair<string,Rol*> (asig->getCodigo(),rolNuevo));//agregago el rol nuevo a la coleccion
   //asig->agregarRol(rolNuevo); //de esto se encarga controlador Aasignatura en confirmarAsignacion
   return rolNuevo;
 };
@@ -58,7 +58,7 @@ set<dtAsignatura> Docente::getInfo(){
   return nuevo;
 };
 void Docente::agregarClaseNueva(Clase *c){
-  clases->insert(pair<int,Clase*> (c->getCodigo(),c));
+  clases->insert(pair<string,Clase*> (c->getCodigo(),c));
 };
 
 set<dtClase> Docente::clasesATerminar(){
@@ -80,7 +80,7 @@ set<dtClase> Docente::clasesATerminar(){
   return nuevo;
 };
 
-void Docente::desvincularDoc(int codigoAsignatura){
+void Docente::desvincularDoc(string codigoAsignatura){
 
   this->asignaturas->erase(codigoAsignatura);
 };

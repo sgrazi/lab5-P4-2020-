@@ -52,13 +52,13 @@ void ControladorUsuario::setEmailUserActual(string email){  this->emailUserActua
 int ControladorUsuario::getNuevoModoSus(){  return nuevoModoSus;};
 void ControladorUsuario::setNuevoModoSus(int modo){  this->nuevoModoSus = modo;};
 
-int ControladorUsuario::getAsignaturaAIns(){ return asignaturaAIns;};
-void ControladorUsuario::setAsignaturaAIns(int a){ this->asignaturaAIns = a;};
+string ControladorUsuario::getAsignaturaAIns(){ return asignaturaAIns;};
+void ControladorUsuario::setAsignaturaAIns(string a){ this->asignaturaAIns = a;};
 
 void ControladorUsuario::setColUser(map<string,Usuario*>* c){ this->ColeccionGlobalUsuarios = c;};
 void ControladorUsuario::setColEst(map<string,Estudiante*>* c){ this->coleccionGlobalEstudiantes = c;};
 void ControladorUsuario::setColDoc(map<string,Docente*>* c){ this->coleccionGlobalDocentes = c;};
-void ControladorUsuario::setColAsig(map<int,Asignatura*>* c){ this->coleccionGlobalAsignaturas = c;};
+void ControladorUsuario::setColAsig(map<string,Asignatura*>* c){ this->coleccionGlobalAsignaturas = c;};
 
 void ControladorUsuario::setHandler(HandlerMensajes* h){ this->handler = h;};
 
@@ -152,7 +152,7 @@ set<dtAsignatura> ControladorUsuario::consultarAsigNoIns(){
   return nuevo;
 };
 
-void ControladorUsuario::inscribir(int codigo){
+void ControladorUsuario::inscribir(string codigo){
   this->setAsignaturaAIns(codigo);
 };
 

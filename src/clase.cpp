@@ -9,7 +9,7 @@ void Clase::auxiliar(){};
 void Clase::setNombre(string nombre){
   this->nombre = nombre;
 };
-void Clase::setCodigo(int codigo){
+void Clase::setCodigo(string codigo){
   this->codigo = codigo;
 };
 void Clase::setUrl(string url){
@@ -36,7 +36,7 @@ tipoClase Clase::getTipo(){
 string Clase::getNombre(){
   return nombre;
 };
-int Clase::getCodigo(){
+string Clase::getCodigo(){
   return codigo;
 };
 string Clase::getUrl(){
@@ -59,7 +59,7 @@ string Clase::getEmailCreador(){
   return creador->getEmail();
 };
 
-int Clase::getCodigoAsig(){
+string Clase::getCodigoAsig(){
   return asig->getCodigo();
 };
 void Clase::nuevaVis(UsrCla* c){//inserta el usrcla

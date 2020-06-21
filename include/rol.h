@@ -21,7 +21,7 @@ class Rol{
     void setAsig(Asignatura*);
     Docente* getDoc();
     Asignatura* getAsig();
-    int getCodigoAsig();
+    string getCodigoAsig();
     ~Rol();
 };
 #endif

@@ -1,14 +1,17 @@
+#include <string>
+using namespace std;
+
 class DtDictado{
   private:
-    int codAsig;
+    string codAsig;
     int TiempoDictado;
   //string nombreAsig;
   public:
     DtDictado();
-    DtDictado(int,int);
-    void setCodAsig(int cod);
+    DtDictado(string,int);
+    void setCodAsig(string cod);
     void setTiempoDictado(int tiempo);
-    int getCodAsig() const;
+    string getCodAsig() const;
     int getTiempoDictado() const;
     bool operator<(const DtDictado &right) const ;
     ~DtDictado();

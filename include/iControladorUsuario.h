@@ -19,7 +19,7 @@ class IControladorUsuario{
 		virtual void setColUser(map<string,Usuario*>*) = 0;
 		virtual void setColEst(map<string,Estudiante*>*) = 0;
 		virtual void setColDoc(map<string,Docente*>*) = 0;
-		virtual void setColAsig(map<int,Asignatura*>*) = 0;
+		virtual void setColAsig(map<string,Asignatura*>*) = 0;
 		virtual void setHandler(HandlerMensajes*) = 0;
 
 		virtual void iniciarSesion(string,string) = 0;
@@ -35,7 +35,7 @@ class IControladorUsuario{
 		virtual void desuscribirse() = 0;
 
 		virtual set<dtAsignatura> consultarAsigNoIns() = 0;
-		virtual void inscribir(int) = 0;
+		virtual void inscribir(string) = 0;
 		virtual void confirmarInscripcion() = 0;
 		virtual void cancelarInscripcion() = 0;
 

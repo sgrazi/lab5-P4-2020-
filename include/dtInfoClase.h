@@ -16,7 +16,7 @@ class dtInfoClase{
     dtFecha fechaInicio;
     dtFecha fechaFin;
     tipoClase tipo;
-    int codigo; //codigo de la asignatura de la clase
+    string codigo; //codigo de la asignatura de la clase
     string iniciadaPor;
     int cantHabilitados;
     array<string, 15> habilitados; //emails de los habilitados
@@ -25,7 +25,7 @@ class dtInfoClase{
     dtInfoClase(){
       this->cantHabilitados = 0;
     };
-    void setCodigo(int);
+    void setCodigo(string);
     void setNombre(string);
     void setUrl(string);
     void setFechaInicio(dtFecha);
@@ -35,7 +35,7 @@ class dtInfoClase{
     void setAsistentes(int);
     int getCantHabilitados();
     array<string, 15> getHabilitados();
-    int getCodigo();
+    string getCodigo();
     string getNombre();
     string getUrl();
     dtFecha getFechaInicio();

@@ -20,7 +20,7 @@ using namespace std;
 class Clase{
   private:
     string nombre;
-    int codigo;
+    string codigo;
     string url;
     dtFecha fechaInicio;
     dtFecha fechaFin;
@@ -34,7 +34,7 @@ class Clase{
     Clase();
     virtual void auxiliar();
     void setNombre(string);
-    void setCodigo(int);
+    void setCodigo(string);
     void setUrl(string);
     void setFechaInicio(dtFecha);
     void setFechaFin(dtFecha);
@@ -43,14 +43,14 @@ class Clase{
     void setTipo(tipoClase);
     tipoClase getTipo();
     string getNombre();
-    int getCodigo();
+    string getCodigo();
     string getUrl();
     dtFecha getFechaInicio();
     dtFecha getFechaFin();
     set<UsrCla*> getParticipantes();
     set<Mensaje*> getMensajes();
     string getEmailCreador();
-    int getCodigoAsig();
+    string getCodigoAsig();
 
     void nuevaVis(UsrCla*);
     void agregarMensaje(Mensaje*);

@@ -17,29 +17,29 @@ class Clase;
 
 class Asignatura{
   private:
-    int codigo;
+    string codigo;
     string nombre;
     bool teorico;
     bool monitoreo;
     bool practico;
     map<string,Estudiante*>* inscriptos;
     map<string,Rol*>* docentes; //string es el email del doc
-    map<int,Clase*>* clases;
+    map<string,Clase*>* clases;
   public://faltan funciones de manejo de relaciones
     Asignatura();
-    void setCodigo(int);
+    void setCodigo(string);
     void setNombre(string);
     void setTeorico(bool);
     void setPractico(bool);
     void setMonitoreo(bool);
-    int getCodigo() const;
+    string getCodigo() const;
     string getNombre() const;
     bool getTeorico() const;
     bool getPractico() const;
     bool getMonitoreo() const;
     set<dtClase>clasesEnVivo();
     map<string,Estudiante*>* getInscriptos();
-    map<int,Clase*>* getClases();
+    map<string,Clase*>* getClases();
     map<string,Rol*>* getDocentes();
 
     void agregarRol(Rol*);

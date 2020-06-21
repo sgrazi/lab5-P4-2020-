@@ -5,16 +5,16 @@ class DtTiempoDeClase{
 private:
   string nombre;
   int tiempo;
-  int codClase;
+  string codClase;
 public:
   DtTiempoDeClase();
-  DtTiempoDeClase(string n,int t,int c);
+  DtTiempoDeClase(string n,int t,string c);
   void setNombre(string nombre);
   void setTiempo(int tiempo);
-  void setCodClase(int cod);
+  void setCodClase(string cod);
   string getNombre() const ;
   int getTiempo() const ;
-  int getCodClase() const ;
+  string getCodClase() const ;
   bool operator<(const DtTiempoDeClase &right) const ;
   ~DtTiempoDeClase(){};
 };

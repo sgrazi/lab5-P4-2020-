@@ -7,14 +7,14 @@ const dtFecha fechaNula(0,0,0,0,0,0);
 Asignatura::Asignatura(){//inicializo las colecciones vacias
   map<string,Estudiante*>* a = new map<string,Estudiante*>;
   this->inscriptos = a;
-  map<int,Clase*>* b = new map<int,Clase*>;
+  map<string,Clase*>* b = new map<string,Clase*>;
   this->clases = b;
   map<string,Rol*>* c = new map<string,Rol*>;
   this->docentes = c;
 };
 
-void Asignatura::setCodigo(int c){ this->codigo = c;};
-int Asignatura::getCodigo() const{ return codigo;};
+void Asignatura::setCodigo(string c){ this->codigo = c;};
+string Asignatura::getCodigo() const{ return codigo;};
 
 void Asignatura::setNombre(string n){ this->nombre = n;};
 string Asignatura::getNombre()const{ return nombre;};
@@ -37,7 +37,7 @@ void Asignatura::agregarRol(Rol* rol){
 map<string,Estudiante*>* Asignatura::getInscriptos(){
   return inscriptos;
 };
-map<int,Clase*>* Asignatura::getClases(){
+map<string,Clase*>* Asignatura::getClases(){
   return clases;
 };
 
@@ -68,7 +68,7 @@ void Asignatura::agregarInscripto(Estudiante* est){
 };
 
 void Asignatura::agregarClaseNueva(Clase* c){
-  clases->insert(pair<int,Clase*> (c->getCodigo(),c));
+  clases->insert(pair<string,Clase*> (c->getCodigo(),c));
 };
 
 /*set<dtClase> Asignatura::getClasesDiferido(){
