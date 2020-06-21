@@ -253,7 +253,7 @@ class Sistema{
 
       iniciarSesionD("juan@mail.com");//01/05/20 - 09:06am Me alegro
       fabrica->getIClase()->consultarMensajes("0");
-      fabrica->getIClase()->enviarRespuesta(2,"Me alegro");/*
+      fabrica->getIClase()->enviarRespuesta(2,"Me alegro");
       fabrica->getIClase()->confirmarEnvio();
 
       //01/05/20 - 09:06am
@@ -311,7 +311,7 @@ class Sistema{
       iniciarSesionD("juan@mail.com");
       fabrica->getIClase()->finalizarClase("0");
       fabrica->getIClase()->confirmarFin();
-//b
+
       //02/05/20 - 5pm fin c4
       reloj->setAnioSistema(2020);
       reloj->setMesSistema(5);
@@ -351,7 +351,7 @@ class Sistema{
       reloj->setDiaSistema(4);
       reloj->setHoraSistema(16);
       reloj->setMinSistema(0);
-//a
+//4
       iniciarSesionE("ramon@mail.com");//E3 C6 04/05/20 � 4:00pm 04/05/20 � 5:00pm
       clase1 = fabrica->getIClase()->asistirClaseVivo("5");
       fabrica->getIClase()->confirmarAsistenciaVivo();
@@ -415,7 +415,6 @@ class Sistema{
       iniciarSesionD("juan@mail.com");
       fabrica->getIClase()->finalizarClase("2");
       fabrica->getIClase()->confirmarFin();
-*/
     }
     //Administrador
     void modificarReloj(){
@@ -1240,10 +1239,10 @@ class Sistema{
           switch(decision){
             case 'S':
               parar=true;
-              msjs = fabrica->getIClase()->consultarMensajes(clase);
+              /*msjs = fabrica->getIClase()->consultarMensajes(clase);
               for(auto itm2 = msjs.begin(); itm2!=msjs.end();itm2++){
                 cout << "\n\t\tId: "<<itm2->getId()<< " Contenido: " <<itm2->getContenido();
-              }
+              }*/
               cout << "\n\t¿A que mensaje responde? (ingrese la id): ";
               cin >> aResponder;
               cout << "\n\tEscriba su mensaje: ";

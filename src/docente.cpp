@@ -75,6 +75,7 @@ set<dtClase> Docente::clasesATerminar(){
       dt->setCreador(this->getEmail());
       dt->setAsig(it->second->getCodigoAsig());
       nuevo.insert(*dt);
+      delete dt;
     }
   }
   return nuevo;

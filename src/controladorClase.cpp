@@ -241,22 +241,29 @@ dtFecha ControladorClase::generarFecha(){//NO TERMINADA, HAY QUE IMPLEMENTAR EL 
 
 set<dtClase> ControladorClase::consultarClasesParticipando(){
   set<dtClase> nuevo;
-  auto itUser = coleccionGlobalEstudiantes->find(emailUserActual);
-  set<UsrCla*> lista = itUser->second->getClasesParticipa();
-  for(auto itLista = lista.begin(); itLista!=lista.end(); itLista++){
-    auto itVis = (*itLista)->getVis().begin();
-    if((*itVis)->getFechaFinVis() == fechaNula){//si la visualizacion mas reciente aun no termino (esta viendo aun)
-      dtClase *dt = new dtClase();
-      dt->setNombre((*itLista)->getClase()->getNombre());
-      dt->setCodigo((*itLista)->getClase()->getCodigo());
-      dt->setFechaInicio((*itLista)->getClase()->getFechaInicio());
-      dt->setFechaFin((*itLista)->getClase()->getFechaFin());
-      dt->setTipo((*itLista)->getClase()->getTipo());
-      dt->setUrl((*itLista)->getClase()->getUrl());
-      dt->setCreador((*itLista)->getClase()->getEmailCreador());
-      dt->setAsig((*itLista)->getClase()->getCodigoAsig());
-      nuevo.insert(*dt);
+  if(coleccionGlobalEstudiantes->count(emailUserActual)){
+    auto itUser = coleccionGlobalEstudiantes->find(emailUserActual);
+    set<UsrCla*> lista = itUser->second->getClasesParticipa();
+    for(auto itLista = lista.begin(); itLista!=lista.end(); itLista++){
+      auto itVis = (*itLista)->getVis().begin();
+      if((*itVis)->getFechaFinVis() == fechaNula){//si la visualizacion mas reciente aun no termino (esta viendo aun)
+        dtClase *dt = new dtClase();
+        dt->setNombre((*itLista)->getClase()->getNombre());
+        dt->setCodigo((*itLista)->getClase()->getCodigo());
+        dt->setFechaInicio((*itLista)->getClase()->getFechaInicio());
+        dt->setFechaFin((*itLista)->getClase()->getFechaFin());
+        dt->setTipo((*itLista)->getClase()->getTipo());
+        dt->setUrl((*itLista)->getClase()->getUrl());
+        dt->setCreador((*itLista)->getClase()->getEmailCreador());
+        dt->setAsig((*itLista)->getClase()->getCodigoAsig());
+        nuevo.insert(*dt);
+        delete dt;
+      }
     }
+  }
+  else{
+    auto itUser = coleccionGlobalDocentes->find(emailUserActual);
+    nuevo = itUser->second->clasesATerminar();
   }
   return nuevo;
 };

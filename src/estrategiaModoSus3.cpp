@@ -15,7 +15,9 @@ bool EstrategiaModoSus3::aplicaNotificacion(dtMensaje d){
       if((*it)->getId() == id){
           res = true;
           encontre = true;
+          break;
       }
+      it++;
     }
   }
   return res;
