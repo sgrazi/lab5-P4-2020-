@@ -34,7 +34,7 @@ class Sistema{
   public:
     static Sistema* getInstancia();
 
-    /*void cargarDatos(){//SE REALIZAN LAS OPERACIONES EN ORDEN CRONOLOGICO
+    void cargarDatos(){//SE REALIZAN LAS OPERACIONES EN ORDEN CRONOLOGICO
       fabrica->getIUsuario()->agregarEstudiante("Roberto Parra","1234","roberto@mail.com","url","12345678");//E1 roberto@mail.com Roberto Parra 12345678
       fabrica->getIUsuario()->confirmarAlta();
       fabrica->getIUsuario()->agregarEstudiante("Ana Rodriguez","1234","ana@mail.com","url","23456789");   // E2 ana@mail.com Ana Rodriguez 23456789
@@ -57,26 +57,26 @@ class Sistema{
       fabrica->getIAsignatura()->confirmarAlta();
 
       bool admite;
-      admite = fabrica->getIAsignatura()->asignarDocente("juan@mail.com","P1",teorico); //D1 A1 Te�rico
+      admite = fabrica->getIAsignatura()->asignarDocente("maria@mail.com","P1",practico); //D2 A1 Pr�ctico
       fabrica->getIAsignatura()->confirmarAsignacion();
-      admite = fabrica->getIAsignatura()->asignarDocente("maria@mail","P1",practico); //D2 A1 Pr�ctico
+      admite = fabrica->getIAsignatura()->asignarDocente("juan@mail.com","P1",teorico); //D1 A1 Te�rico
       fabrica->getIAsignatura()->confirmarAsignacion();
       admite = fabrica->getIAsignatura()->asignarDocente("jorge@mail.com","P1",monitoreo); //D3 A1 Monitoreo
       fabrica->getIAsignatura()->confirmarAsignacion();
 
-      iniciarSesionE("roberto@mail.com","1234");// E1 A1
+      iniciarSesionE("roberto@mail.com");// E1 A1
       fabrica->getIUsuario()->inscribir("P1");
       fabrica->getIUsuario()->confirmarInscripcion();
-      iniciarSesionE("ana@mail.com","1234");// E2 A1,A2
+      iniciarSesionE("ana@mail.com");// E2 A1,A2
       fabrica->getIUsuario()->inscribir("P1");
       fabrica->getIUsuario()->confirmarInscripcion();
       fabrica->getIUsuario()->inscribir("P2");
       fabrica->getIUsuario()->confirmarInscripcion();
-      iniciarSesionE("ramon@mail.com","1234");// E3 A1
+      iniciarSesionE("ramon@mail.com");// E3 A1
       fabrica->getIUsuario()->inscribir("P1");
       fabrica->getIUsuario()->confirmarInscripcion();
 
-      iniciarSesionD("juan@mail.com","123");
+      iniciarSesionD("juan@mail.com");
       dtFecha* fecha = new dtFecha();
       fecha->setAnio(2020);
       fecha->setMes(5);
@@ -85,7 +85,7 @@ class Sistema{
       fecha->setMinuto(0);
       fecha->setSegundo(0);
 
-      fabrica->getIClase()->iniciarClase("P1","Intro Te�rico",teorico,*fecha);//C1 A1 Intro Te�rico 01/05/20 - 9am 01/05/20 - 10am D1
+      fabrica->getIClase()->iniciarClase("P1","Intro Teórico",teorico,*fecha);//C1 A1 Intro Te�rico 01/05/20 - 9am 01/05/20 - 10am D1
       fabrica->getIClase()->confirmarInicio();
       delete fecha;
 
@@ -113,8 +113,8 @@ class Sistema{
       fabrica->getIClase()->confirmarInicio();
       delete fecha;
 
-      iniciarSesionD("maria@mail","123");
-      dtFecha* fecha = new dtFecha();
+      iniciarSesionD("maria@mail");
+      fecha = new dtFecha();
       fecha->setAnio(2020);
       fecha->setMes(5);
       fecha->setDia(2);
@@ -138,7 +138,7 @@ class Sistema{
       fabrica->getIClase()->confirmarInicio();
       delete fecha;
 
-      iniciarSesionD("jorge@mail.com","123");
+      iniciarSesionD("jorge@mail.com");
       fecha = new dtFecha();
       fecha->setAnio(2020);
       fecha->setMes(5);
@@ -161,8 +161,8 @@ class Sistema{
       reloj->setHoraSistema(9);
       reloj->setMinSistema(1);
 
-      iniciarSesionE("roberto@mail.com","1234");//E1 C1 01/05/20 - 09:01am 01/05/20 - 09:21am
-      dtClase clase1 = Cc->asistirClaseVivo("Intro Te�rico");
+      iniciarSesionE("roberto@mail.com");//E1 C1 01/05/20 - 09:01am 01/05/20 - 09:21am
+      dtClase clase1 = fabrica->getIClase()->asistirClaseVivo("0");
       fabrica->getIClase()->confirmarAsistenciaVivo();
 
       //01/05/20 - 09:01am
@@ -172,8 +172,8 @@ class Sistema{
       reloj->setHoraSistema(9);
       reloj->setMinSistema(1);
 
-      iniciarSesionD("juan@mail.com","1234");//D1 C1 01/05/20 - 09:01am Bienvenidos!
-      fabrica->getIClase()->consultarMensajes(0);
+      iniciarSesionD("juan@mail.com");//D1 C1 01/05/20 - 09:01am Bienvenidos!
+/*      fabrica->getIClase()->consultarMensajes("0");
       fabrica->getIClase()->enviarMensaje("Bienvenidos!");
       fabrica->getIClase()->confirmarEnvio();
 
@@ -184,8 +184,8 @@ class Sistema{
       reloj->setHoraSistema(9);
       reloj->setMinSistema(2);
 
-      iniciarSesionD("juan@mail.com","1234");//D1 C1 01/05/20 - 09:01am Bienvenidos!
-      fabrica->getIClase()->consultarMensajes(0);
+      iniciarSesionD("juan@mail.com");//D1 C1 01/05/20 - 09:01am Bienvenidos!
+      fabrica->getIClase()->consultarMensajes("0");
       fabrica->getIClase()->enviarMensaje("Confirmen materiales por favor.");//01/05/20 - 09:02 am Confirmen materiales por favor.
       fabrica->getIClase()->confirmarEnvio();
 
@@ -196,8 +196,8 @@ class Sistema{
       reloj->setHoraSistema(9);
       reloj->setMinSistema(2);
 
-      iniciarSesionE("ana@mail.com","1234");//E2 C1 01/05/20 - 09:02am 01/05/20 - 09:32am
-      clase1 = Cc->asistirClaseVivo("Intro Te�rico");
+      iniciarSesionE("ana@mail.com");//E2 C1 01/05/20 - 09:02am 01/05/20 - 09:32am
+      clase1 = fabrica->getIClase()->asistirClaseVivo("0");
       fabrica->getIClase()->confirmarAsistenciaVivo();
 
       //01/05/20 - 09:03am
@@ -207,8 +207,8 @@ class Sistema{
       reloj->setHoraSistema(9);
       reloj->setMinSistema(3);
 
-      iniciarSesionE("ramon@mail.com","1234");//E3 C1 01/05/20 - 09:03am 01/05/20 - 09:43am
-      clase1 = Cc->asistirClaseVivo("Intro Te�rico");
+      iniciarSesionE("ramon@mail.com");//E3 C1 01/05/20 - 09:03am 01/05/20 - 09:43am
+      clase1 = fabrica->getIClase()->asistirClaseVivo("0");
       fabrica->getIClase()->confirmarAsistenciaVivo();
 
       //01/05/20 - 09:05am
@@ -218,9 +218,9 @@ class Sistema{
       reloj->setHoraSistema(9);
       reloj->setMinSistema(5);
 
-      iniciarSesionE("roberto@mail.com","1234");//01/05/20 - 09:05am Listo para aprender
-      fabrica->getIClase()->consultarMensajes(0);
-      fabrica->getIClase()->enviarRespuesta(,"Listo para aprender");
+      iniciarSesionE("roberto@mail.com");//01/05/20 - 09:05am Listo para aprender
+      fabrica->getIClase()->consultarMensajes("0");
+      fabrica->getIClase()->enviarRespuesta(0,"Listo para aprender");// 0 es Bienvenidos
       fabrica->getIClase()->confirmarEnvio();
 
       //01/05/20 - 09:05am
@@ -230,9 +230,9 @@ class Sistema{
       reloj->setHoraSistema(9);
       reloj->setMinSistema(6);
 
-      iniciarSesionD("juan@mail.com","1234");//01/05/20 - 09:06am Me alegro
-      fabrica->getIClase()->consultarMensajes(0);
-      fabrica->getIClase()->enviarRespuesta(,"Me alegro");
+      iniciarSesionD("juan@mail.com");//01/05/20 - 09:06am Me alegro
+      fabrica->getIClase()->consultarMensajes("0");
+      fabrica->getIClase()->enviarRespuesta(2,"Me alegro");
       fabrica->getIClase()->confirmarEnvio();
 
       //01/05/20 - 09:06am
@@ -242,9 +242,9 @@ class Sistema{
       reloj->setHoraSistema(9);
       reloj->setMinSistema(6);
 
-      iniciarSesionD("ana@mail.com","1234");//01/05/20 - 09:06am Todo listo
-      fabrica->getIClase()->consultarMensajes(5);
-      fabrica->getIClase()->enviarRespuesta(,"Todo listo");
+      iniciarSesionD("ana@mail.com");//01/05/20 - 09:06am Todo listo
+      fabrica->getIClase()->consultarMensajes("5");
+      fabrica->getIClase()->enviarRespuesta(1,"Todo listo"); //1 es confirmen materiales
       fabrica->getIClase()->confirmarEnvio();
 
       //01/05/20 - 09:21am
@@ -254,8 +254,8 @@ class Sistema{
       reloj->setHoraSistema(9);
       reloj->setMinSistema(21);
 
-      iniciarSesionE("roberto@mail.com","1234");//04/05/20 – 5:00pm
-      fabrica->getIClase()->finalizarAsistencia(0);
+      iniciarSesionE("roberto@mail.com");//04/05/20 – 5:00pm
+      fabrica->getIClase()->finalizarAsistencia("0");
       fabrica->getIClase()->confirmarSalida();
 
       //01/05/20 - 09:32am
@@ -265,8 +265,8 @@ class Sistema{
       reloj->setHoraSistema(9);
       reloj->setMinSistema(32);
 
-      iniciarSesionE("ana@mail.com","1234");//04/05/20 – 5:00pm
-      fabrica->getIClase()->finalizarAsistencia(0);
+      iniciarSesionE("ana@mail.com");//04/05/20 – 5:00pm
+      fabrica->getIClase()->finalizarAsistencia("0");
       fabrica->getIClase()->confirmarSalida();
 
       //01/05/20 - 09:43am
@@ -276,8 +276,8 @@ class Sistema{
       reloj->setHoraSistema(9);
       reloj->setMinSistema(43);
 
-      iniciarSesionE("ramon@mail.com","1234");//04/05/20 – 5:00pm
-      fabrica->getIClase()->finalizarAsistencia(0);
+      iniciarSesionE("ramon@mail.com");//04/05/20 – 5:00pm
+      fabrica->getIClase()->finalizarAsistencia("0");
       fabrica->getIClase()->confirmarSalida();
 
       //01/05/20 - 10am fin c1
@@ -287,8 +287,8 @@ class Sistema{
       reloj->setHoraSistema(10);
       reloj->setMinSistema(0);
 
-      iniciarSesionD("juan@mail.com","123");
-      fabrica->getIClase()->finalizarClase(0);
+      iniciarSesionD("juan@mail.com");
+      fabrica->getIClase()->finalizarClase("0");
       fabrica->getIClase()->confirmarFin();
 
       //02/05/20 - 5pm fin c4
@@ -298,8 +298,8 @@ class Sistema{
       reloj->setHoraSistema(17);
       reloj->setMinSistema(0);
 
-      iniciarSesionD("maria@mail.com","123");
-      fabrica->getIClase()->finalizarClase(3);
+      iniciarSesionD("maria@mail.com");
+      fabrica->getIClase()->finalizarClase("3");
       fabrica->getIClase()->confirmarFin();
 
       //03/05/20 - 10am fin c2
@@ -309,8 +309,8 @@ class Sistema{
       reloj->setHoraSistema(10);
       reloj->setMinSistema(0);
 
-      iniciarSesionD("juan@mail.com","123");
-      fabrica->getIClase()->finalizarClase(1);
+      iniciarSesionD("juan@mail.com");
+      fabrica->getIClase()->finalizarClase("1");
       fabrica->getIClase()->confirmarFin();
 
       //03/05/20 - 5pm fin c5
@@ -320,8 +320,8 @@ class Sistema{
       reloj->setHoraSistema(17);
       reloj->setMinSistema(0);
 
-      iniciarSesionD("maria@mail.com","123");
-      fabrica->getIClase()->finalizarClase(4);
+      iniciarSesionD("maria@mail.com");
+      fabrica->getIClase()->finalizarClase("4");
       fabrica->getIClase()->confirmarFin();
 
       //04/05/20 - 4:00pm
@@ -331,8 +331,8 @@ class Sistema{
       reloj->setHoraSistema(16);
       reloj->setMinSistema(0);
 
-      iniciarSesionE("ramon@mail.com","1234");//E3 C6 04/05/20 � 4:00pm 04/05/20 � 5:00pm
-      clase1 = Cc->asistirClaseVivo("06/01/20");
+      iniciarSesionE("ramon@mail.com");//E3 C6 04/05/20 � 4:00pm 04/05/20 � 5:00pm
+      clase1 = fabrica->getIClase()->asistirClaseVivo("5");
       fabrica->getIClase()->confirmarAsistenciaVivo();
       fabrica->getIClase()->confirmarAsistenciaVivo();
 
@@ -343,8 +343,8 @@ class Sistema{
       reloj->setHoraSistema(4);
       reloj->setMinSistema(1);
 
-      iniciarSesionD("jorge@mail.com","1234");//04/05/20 - 04:01pm Comparto pantalla.
-      fabrica->getIClase()->consultarMensajes(5);
+      iniciarSesionD("jorge@mail.com");//04/05/20 - 04:01pm Comparto pantalla.
+      fabrica->getIClase()->consultarMensajes("5");
       fabrica->getIClase()->enviarMensaje("Comparto pantalla.");
       fabrica->getIClase()->confirmarEnvio();
 
@@ -355,9 +355,9 @@ class Sistema{
       reloj->setHoraSistema(16);
       reloj->setMinSistema(5);
 
-      iniciarSesionD("ramon@mail.com","1234");//04/05/20 - 04:05pm Ya la vemos
-      fabrica->getIClase()->consultarMensajes(0);
-      fabrica->getIClase()->enviarRespuesta(,"Ya la vemos");
+      iniciarSesionD("ramon@mail.com");//04/05/20 - 04:05pm Ya la vemos
+      fabrica->getIClase()->consultarMensajes("0");
+      fabrica->getIClase()->enviarRespuesta(5,"Ya la vemos");
       fabrica->getIClase()->confirmarEnvio();
 
 
@@ -368,8 +368,8 @@ class Sistema{
       reloj->setHoraSistema(17);
       reloj->setMinSistema(0);
 
-      iniciarSesionD("jorge@mail.com","123");
-      fabrica->getIClase()->finalizarClase(5);
+      iniciarSesionD("jorge@mail.com");
+      fabrica->getIClase()->finalizarClase("5");
       fabrica->getIClase()->confirmarFin();
 
       //04/05/20 – 5:00pm LA REALIZA EL FIN DE LA CLASE ^^^^^^^^^^
@@ -391,12 +391,12 @@ class Sistema{
       reloj->setHoraSistema(10);
       reloj->setMinSistema(0);
 
-      iniciarSesionD("juan@mail.com","123");
-      fabrica->getIClase()->finalizarClase(2);
+      iniciarSesionD("juan@mail.com");
+      fabrica->getIClase()->finalizarClase("2");
       fabrica->getIClase()->confirmarFin();
 
-
-    }*/
+*/
+    }
     //Administrador
     void modificarReloj(){
       int anio,mes,dia,hora,min;
@@ -439,7 +439,7 @@ class Sistema{
             case 'E':
               ed = true;
               cout << "\n\tIngrese el nombre: ";
-              cin >> n;
+              getline(cin >> ws, n);
               cout << "\n\tIngrese el email: ";
               cin >> e;
               cout << "\n\tIngrese la contraseña: ";
@@ -486,7 +486,7 @@ class Sistema{
             case 'D':
               ed = true;
               cout << "\n\tIngrese el nombre: ";
-              cin >> n;
+              getline(cin >> ws, n);
               cout << "\n\tIngrese el email: ";
               cin >> e;
               cout << "\n\tIngrese la contraseña: ";
@@ -539,11 +539,11 @@ class Sistema{
       bool no_pronto=true;
       while(no_pronto){
         cout << "\n\t¿Cuál es el nombre de la asignatura?: ";
-        cin >> nombreAsig;
+        getline(cin >> ws, nombreAsig);
         while (std::cout << "\n\t¿Cuál es el código de la asignatura?: " && !(std::cin >> codigoAsig)) {
           std::cin.clear(); //clear bad input flag
           std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); //discard input
-          std::cout << "\tPor favor ingrese un numero.\n";
+          std::cout << "\tCodigo no valido.\n";
         }
         while(!sn){
           cout << "\n\t¿La asignatura tiene teóricos (1) o no (0)?: ";
@@ -1559,7 +1559,7 @@ int main(){
         }
       break;
       case '4':
-        //s->cargarDatos();
+        s->cargarDatos();
         cout << "\nCasos de pruebas cargados."<<endl;
       break;
       case '5':
