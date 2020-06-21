@@ -74,6 +74,7 @@ class ControladorUsuario: public IControladorUsuario{
 		void iniciarSesion(string,string);
 
 		//ALTA DE USUARIO
+		bool existeCedula(string);
 		void agregarEstudiante(string,string,string,string,string);
 		void agregarDocente(string,string,string,string,string);
 		void confirmarAlta();

@@ -66,7 +66,16 @@ void ControladorUsuario::iniciarSesion(string email, string pass){
   //member(); buscar si las credenciales existen en la coleccion
   this->setEmailUserActual(email);
 };
-
+bool ControladorUsuario::existeCedula(string ci){
+  bool res = false;
+  for(auto it = coleccionGlobalEstudiantes->begin();it != coleccionGlobalEstudiantes->end();++it){
+    if(it->second->getCI()==ci){
+      res = true;
+      break;
+    }
+  }
+  return res;
+};
 void ControladorUsuario::agregarEstudiante(string n, string c, string e, string u, string ci){
   setNombreUser(n);
   setPasswordUser(c);

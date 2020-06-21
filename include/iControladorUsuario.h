@@ -24,6 +24,7 @@ class IControladorUsuario{
 
 		virtual void iniciarSesion(string,string) = 0;
 		virtual void agregarEstudiante(string,string,string,string,string) = 0;
+		virtual bool existeCedula(string) = 0;
 		virtual void agregarDocente(string,string,string,string,string) = 0;
 		virtual void confirmarAlta() = 0;
 		virtual void cancelarAlta() = 0;

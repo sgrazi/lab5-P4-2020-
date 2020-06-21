@@ -108,24 +108,31 @@ class Sistema{
               fabrica->getIUsuario()->agregarEstudiante(n, c, e, u, var);
               cant = colEstudiantes->count(e);
               if(cant==0){
-                while(!sn){
-                  cout << "\n\t¿Desea confirmar el alta del estudiante? (S/N)\n\tOpcion: ";
-                  cin >> entrada;
-                  switch (entrada) {
-                    case 'S':
-                      sn = true;
-                      no_pronto = false;
-                      fabrica->getIUsuario()->confirmarAlta();
-                    break;
-                    case 'N':
-                      sn = true;
-                      no_pronto = false;
-                      fabrica->getIUsuario()->cancelarAlta();
-                    break;
-                    default:
-                      cout << "\n\tOpcion no válida.";
-                    break;
+                bool cedula = fabrica->getIUsuario()->existeCedula(var);
+                if(!cedula){
+                  while(!sn){
+                    cout << "\n\t¿Desea confirmar el alta del estudiante? (S/N)\n\tOpcion: ";
+                    cin >> entrada;
+                    switch (entrada) {
+                      case 'S':
+                        sn = true;
+                        no_pronto = false;
+                        fabrica->getIUsuario()->confirmarAlta();
+                      break;
+                      case 'N':
+                        sn = true;
+                        no_pronto = false;
+                        fabrica->getIUsuario()->cancelarAlta();
+                      break;
+                      default:
+                        cout << "\n\tOpcion no válida.";
+                      break;
+                    }
                   }
+                }
+                else{
+                  ed = 0;
+                  cout << "\n\tYa existe un estudiante con la cedula indicada.";
                 }
               }
               else{
