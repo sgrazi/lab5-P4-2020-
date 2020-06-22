@@ -134,7 +134,7 @@ class Sistema{
       fabrica->getIClase()->confirmarInicio();
       delete fecha;
 
-      iniciarSesionD("maria@mail");
+      iniciarSesionD("maria@mail.com");
       fecha = new dtFecha();
       fecha->setAnio(2020);
       fecha->setMes(5);
@@ -263,8 +263,8 @@ class Sistema{
       reloj->setHoraSistema(9);
       reloj->setMinSistema(6);
 
-      iniciarSesionD("ana@mail.com");//01/05/20 - 09:06am Todo listo
-      fabrica->getIClase()->consultarMensajes("5");
+      iniciarSesionE("ana@mail.com");//01/05/20 - 09:06am Todo listo
+      fabrica->getIClase()->consultarMensajes("0");
       fabrica->getIClase()->enviarRespuesta(1,"Todo listo"); //1 es confirmen materiales
       fabrica->getIClase()->confirmarEnvio();
 
@@ -355,7 +355,7 @@ class Sistema{
       iniciarSesionE("ramon@mail.com");//E3 C6 04/05/20 � 4:00pm 04/05/20 � 5:00pm
       clase1 = fabrica->getIClase()->asistirClaseVivo("5");
       fabrica->getIClase()->confirmarAsistenciaVivo();
-      fabrica->getIClase()->confirmarAsistenciaVivo();
+      //fabrica->getIClase()->confirmarAsistenciaVivo();
 
       //04/05/20 - 04:01pm
       reloj->setAnioSistema(2020);
@@ -376,8 +376,8 @@ class Sistema{
       reloj->setHoraSistema(16);
       reloj->setMinSistema(5);
 
-      iniciarSesionD("ramon@mail.com");//04/05/20 - 04:05pm Ya la vemos
-      fabrica->getIClase()->consultarMensajes("0");
+      iniciarSesionE("ramon@mail.com");//04/05/20 - 04:05pm Ya la vemos
+      fabrica->getIClase()->consultarMensajes("5");
       fabrica->getIClase()->enviarRespuesta(5,"Ya la vemos");
       fabrica->getIClase()->confirmarEnvio();
 
@@ -394,15 +394,15 @@ class Sistema{
       fabrica->getIClase()->confirmarFin();
 
       //04/05/20 – 5:00pm LA REALIZA EL FIN DE LA CLASE ^^^^^^^^^^
-      ////reloj->setAnioSistema(2020);
-      ////reloj->setMesSistema(5);
-      ////reloj->setDiaSistema(4;
-      ////reloj->setHoraSistema(17);
-      ////reloj->setMinSistema(0);
+      //reloj->setAnioSistema(2020);
+      //reloj->setMesSistema(5);
+      //reloj->setDiaSistema(4);
+      //reloj->setHoraSistema(17);
+      //reloj->setMinSistema(0);
 
-      ////iniciarSesionE("ramon@mail.com","1234");//04/05/20 – 5:00pm
-      ////fabrica->getIClase()->finalizarAsistencia(5);
-      ////fabrica->getIClase()->confirmarSalida();
+      //iniciarSesionE("ramon@mail.com");//04/05/20 – 5:00pm
+      //fabrica->getIClase()->finalizarAsistencia("5");
+      //fabrica->getIClase()->confirmarSalida();
 
 
       //08/05/20 - 10am fin c3
@@ -415,6 +415,7 @@ class Sistema{
       iniciarSesionD("juan@mail.com");
       fabrica->getIClase()->finalizarClase("2");
       fabrica->getIClase()->confirmarFin();
+
     }
     //Administrador
     void modificarReloj(){
@@ -1021,110 +1022,115 @@ class Sistema{
       char decision,hab;
       cout <<"\n\tAsignaturas en las que el docente participa:";
       set<dtAsignatura> opciones = fabrica->getIClase()->consultarAsignaturasDocente();
-      for(auto it=opciones.begin();it!=opciones.end();++it){
-        cout << "\n\tNombre: " << it->getNombre()<< "\tCodigo: " << it->getCodigo();
+      if(opciones.begin()==opciones.end()){
+          cout <<"\n\tNo hay asignaturas en en el sistema.\n";
       }
+      else{
+        for(auto it=opciones.begin();it!=opciones.end();++it){
+          cout << "\n\tNombre: " << it->getNombre()<< "\tCodigo: " << it->getCodigo();
+        }
 
-      bool aux=true;
-      while(aux){
-        while (std::cout << "\n\tIngrese el codigo de la asignatura en la que desea iniciar una clase: " && !(std::cin >> asig)) {
+        bool aux=true;
+        while(aux){
+          while (std::cout << "\n\tIngrese el codigo de la asignatura en la que desea iniciar una clase: " && !(std::cin >> asig)) {
+            std::cin.clear(); //clear bad input flag
+            std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); //discard input
+            std::cout << "\tPor favor ingrese un numero.\n";
+          }
+          if(!colAsignaturas->count(asig)){
+            std::cin.clear(); //clear bad input flag
+            std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); //discard input
+            cout << "\tEl codigo no es valido. Por favor intente de nuevo.\n";
+          }
+          else//todo bien, era un numero y un codigo valido
+            aux=false;
+        }
+
+        tipoClase tipo = fabrica->getIClase()->rolDocente(asig);
+        cout << "\n\t¿Que nombre tiene la clase? ";
+        getline(cin >> ws, nombre);
+        int anio,mes,dia,hora,minutos;
+        while (std::cout << "\n\tIngrese la fecha para iniciar la clase:\n\t\tAño: " && !(std::cin >> anio)) {
           std::cin.clear(); //clear bad input flag
           std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); //discard input
           std::cout << "\tPor favor ingrese un numero.\n";
         }
-        if(!colAsignaturas->count(asig)){
+        while (std::cout << "\n\t\tMes: " && !(std::cin >> mes)) {
           std::cin.clear(); //clear bad input flag
           std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); //discard input
-          cout << "\tEl codigo no es valido. Por favor intente de nuevo.\n";
+          std::cout << "\tPor favor ingrese un numero.\n";
         }
-        else//todo bien, era un numero y un codigo valido
-          aux=false;
-      }
-
-      tipoClase tipo = fabrica->getIClase()->rolDocente(asig);
-      cout << "\n\t¿Que nombre tiene la clase? ";
-      getline(cin >> ws, nombre);
-      int anio,mes,dia,hora,minutos;
-      while (std::cout << "\n\tIngrese la fecha para iniciar la clase:\n\t\tAño: " && !(std::cin >> anio)) {
-        std::cin.clear(); //clear bad input flag
-        std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); //discard input
-        std::cout << "\tPor favor ingrese un numero.\n";
-      }
-      while (std::cout << "\n\t\tMes: " && !(std::cin >> mes)) {
-        std::cin.clear(); //clear bad input flag
-        std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); //discard input
-        std::cout << "\tPor favor ingrese un numero.\n";
-      }
-      while (std::cout << "\n\t\tDia: " && !(std::cin >> dia)) {
-        std::cin.clear(); //clear bad input flag
-        std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); //discard input
-        std::cout << "\tPor favor ingrese un numero.\n";
-      }
-      while (std::cout << "\n\t\tHora: " && !(std::cin >> hora)) {
-        std::cin.clear(); //clear bad input flag
-        std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); //discard input
-        std::cout << "\tPor favor ingrese un numero.\n";
-      }
-      while (std::cout << "\n\t\tMinutos: " && !(std::cin >> minutos)) {
-        std::cin.clear(); //clear bad input flag
-        std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); //discard input
-        std::cout << "\tPor favor ingrese un numero.\n";
-      }
-      fabrica->getIClase()->iniciarClase(asig,nombre,tipo,dtFecha(anio,mes,dia,hora,minutos,0));
-      if(tipo==monitoreo){
-        bool seguir = true;
-        map<string,dtEstudiante*> habilitados = fabrica->getIClase()->consultarInscriptos();
-        if(habilitados.empty())//si no hay inscriptos
-          seguir = false;
-        while(seguir){
-          for(auto ith=habilitados.begin();ith!=habilitados.end();++ith){
-            cout << "\n\tEmail: " << ith->first <<"\tCI: "<<ith->second->getCI();
-          }
-          while(cout << "\n\tIngrese email de quien quiera agregar a habilitados: " && cin >> email && !habilitados.count(email)){
-            std::cin.clear(); //clear bad input flag
-            std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); //discard input
-            std::cout << "\tNo existe un estudiante con ese email. Por favor intente denuevo.\n";
-          }
-          fabrica->getIClase()->agregarHabilitado(email);
-          habilitados.erase(email);
-          if(habilitados.empty()){
+        while (std::cout << "\n\t\tDia: " && !(std::cin >> dia)) {
+          std::cin.clear(); //clear bad input flag
+          std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); //discard input
+          std::cout << "\tPor favor ingrese un numero.\n";
+        }
+        while (std::cout << "\n\t\tHora: " && !(std::cin >> hora)) {
+          std::cin.clear(); //clear bad input flag
+          std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); //discard input
+          std::cout << "\tPor favor ingrese un numero.\n";
+        }
+        while (std::cout << "\n\t\tMinutos: " && !(std::cin >> minutos)) {
+          std::cin.clear(); //clear bad input flag
+          std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); //discard input
+          std::cout << "\tPor favor ingrese un numero.\n";
+        }
+        fabrica->getIClase()->iniciarClase(asig,nombre,tipo,dtFecha(anio,mes,dia,hora,minutos,0));
+        if(tipo==monitoreo){
+          bool seguir = true;
+          map<string,dtEstudiante*> habilitados = fabrica->getIClase()->consultarInscriptos();
+          if(habilitados.empty())//si no hay inscriptos
             seguir = false;
-            cout << "\n\tNo quedan estudiantes para agregar.";
-          }
-          else{
-            cout << "\n\t¿Desea seguir agregando habilitados? (S/N)";
-            cin >> hab;
-            if(hab=='N')
-              seguir=false;
-            else if(hab!='S')
-              cout << "\n\tOpcion no valida";
+          while(seguir){
+            for(auto ith=habilitados.begin();ith!=habilitados.end();++ith){
+              cout << "\n\tEmail: " << ith->first <<"\tCI: "<<ith->second->getCI();
             }
-          }
+            while(cout << "\n\tIngrese email de quien quiera agregar a habilitados: " && cin >> email && !habilitados.count(email)){
+              std::cin.clear(); //clear bad input flag
+              std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); //discard input
+              std::cout << "\tNo existe un estudiante con ese email. Por favor intente denuevo.\n";
+            }
+            fabrica->getIClase()->agregarHabilitado(email);
+            habilitados.erase(email);
+            if(habilitados.empty()){
+              seguir = false;
+              cout << "\n\tNo quedan estudiantes para agregar.";
+            }
+            else{
+              cout << "\n\t¿Desea seguir agregando habilitados? (S/N)";
+              cin >> hab;
+              if(hab=='N')
+                seguir=false;
+              else if(hab!='S')
+                cout << "\n\tOpcion no valida";
+              }
+            }
 
-      }
-      dtInfoClase info = fabrica->getIClase()->desplegarInfoClase();
-      cout << "\n\tNombre de clase: " << info.getNombre() << "\n\tCodigo de clase: " << info.getCodigo() << "\n\tIniciada por: "  << info.getIniciadaPor() << "\n\tFecha: " << info.getFechaInicio().getAnio() << "/"<< info.getFechaInicio().getMes() << "/"<< info.getFechaInicio().getDia() << " " << info.getFechaInicio().getHora() << ":"<< info.getFechaInicio().getMinuto();
-      cout << "\n\tLista de habilitados:";
-      array<string, 15> arr = info.getHabilitados();
-      for(int i=0; i<info.getCantHabilitados(); i++){
-        cout << "\n\t\t" << arr[i];
-      }
-      bool parar=false;
-      while(!parar){
-        cout << "\n\t¿Desea confirmar (S/N)? ";
-        cin >> decision;
-        switch(decision){
-          case 'S':
-            parar=true;
-            fabrica->getIClase()->confirmarInicio();
-          break;
-          case 'N':
-            parar=true;
-            fabrica->getIClase()->cancelarInicio();
-          break;
-          default:
-            cout << "\n\tOpcion no válida.";
-          break;
+        }
+        dtInfoClase info = fabrica->getIClase()->desplegarInfoClase();
+        cout << "\n\tNombre de clase: " << info.getNombre() << "\n\tCodigo de clase: " << info.getCodigo() << "\n\tIniciada por: "  << info.getIniciadaPor() << "\n\tFecha: " << info.getFechaInicio().getAnio() << "/"<< info.getFechaInicio().getMes() << "/"<< info.getFechaInicio().getDia() << " " << info.getFechaInicio().getHora() << ":"<< info.getFechaInicio().getMinuto();
+        cout << "\n\tLista de habilitados:";
+        array<string, 15> arr = info.getHabilitados();
+        for(int i=0; i<info.getCantHabilitados(); i++){
+          cout << "\n\t\t" << arr[i];
+        }
+        bool parar=false;
+        while(!parar){
+          cout << "\n\t¿Desea confirmar (S/N)? ";
+          cin >> decision;
+          switch(decision){
+            case 'S':
+              parar=true;
+              fabrica->getIClase()->confirmarInicio();
+            break;
+            case 'N':
+              parar=true;
+              fabrica->getIClase()->cancelarInicio();
+            break;
+            default:
+              cout << "\n\tOpcion no válida.";
+            break;
+          }
         }
       }
     };
@@ -1333,7 +1339,7 @@ class Sistema{
     void getDatosClases(){
       cout << "\n\tClases en el sistema: ";
       for(auto it = colClases->begin(); it!=colClases->end();it++){
-        cout << "\n\t\tNombre: \""<<it->second->getNombre()<< "\" Codigo: " <<it->second->getCodigo() << " Finalizada: ";
+        cout << "\n\t\tNombre: \""<<it->second->getNombre()<< "\" Codigo: " <<it->second->getCodigo() << " Creada por: "<<it->second->getEmailCreador()<< " Finalizada: ";
         if(it->second->getFechaFin()==fechaNula)
           cout << "No";
         else
@@ -1343,7 +1349,7 @@ class Sistema{
     void getDatosMensajes(){
       cout << "\n\tMensajes en el sistema:";
       for(auto it = colMensajes->begin(); it!=colMensajes->end();it++){
-        cout << "\n\t\tId: "<<it->second->getId();
+        cout << "\n\t\tId: "<<it->second->getId() << " En clase: "<<it->second->getClase()->getCodigo();
         if(it->second->getEnRespuestaA()){
           cout << " En respuesta a: " <<it->second->getEnRespuestaA()->getId();
         }
@@ -1388,6 +1394,7 @@ Sistema* Sistema::getInstancia(){
         fabrica->getIAsignatura()->setColDoc(colDocentes);
         fabrica->getIAsignatura()->setColAsig(colAsignaturas);
         fabrica->getIAsignatura()->setColCla(colClases);
+        fabrica->getIAsignatura()->setColMens(colMensajes);
         fabrica->getIClase()->setColEst(colEstudiantes);
         fabrica->getIClase()->setColDoc(colDocentes);
         fabrica->getIClase()->setColAsig(colAsignaturas);
@@ -1396,6 +1403,8 @@ Sistema* Sistema::getInstancia(){
         fabrica->getIClase()->setHandler(handler);
         handler->setColMens(colMensajes);
         handler->setColCla(colClases);
+        //inicializo el reloj del controlador clase
+        fabrica->getIClase()->setReloj(reloj->getInstancia());
     }
     return instancia;
 }

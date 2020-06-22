@@ -52,6 +52,7 @@ class ControladorClase: public IControladorClase{
 		int getIdAResponder();
 		void setCodigoClase(string);
 		string getCodigoClase();
+		void setReloj(Reloj*);
 		//COLECCIONES
 		void setColEst(map<string,Estudiante*>*);
 		void setColDoc(map<string,Docente*>*);

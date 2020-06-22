@@ -4,6 +4,6 @@
 
 EstrategiaModoSus2();
 
-bool aplicaNotificacion(dtMensaje d);
+bool aplicaNotificacion(dtMensaje d){return true;};
 
 ~EstrategiaModoSus2();

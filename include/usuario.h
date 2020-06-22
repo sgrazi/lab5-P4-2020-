@@ -19,6 +19,7 @@ class Usuario{
     string password;
     string imagen;
     set<dtNotificacion*> notificaciones;
+    set<int> idMensajes;
     set<Mensaje*> mensajes;
     int modoSus;
     EstrategiaNotifs* aplica;
@@ -39,11 +40,14 @@ class Usuario{
     set<dtNotificacion*> getNotificaciones();
     EstrategiaNotifs* getAplica();
     set<Mensaje*> getMensajes();
-
+    set<int> getIdMensajes();
     void agregarMensaje(Mensaje*);
     void asistir(UsrCla*);
     set<UsrCla*> getClasesParticipa();
 
+    void borrarMensajes(string cc);
+    void borrarNotifs(string cc);
+    
     bool aplicaNotificacion(dtMensaje);
     void notificar(dtMensaje);
 

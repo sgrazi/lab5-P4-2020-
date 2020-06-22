@@ -3,7 +3,6 @@
 
 #include "iControladorUsuario.h"
 #include "docente.h"
-#include "usrCla.h"
 #include "mensaje.h"
 #include <string>
 #include <set>
@@ -12,6 +11,7 @@
 
 using namespace std;
 
+class UsrCla;
 class Mensaje;
 class Asignatura;
 class Estudiante;

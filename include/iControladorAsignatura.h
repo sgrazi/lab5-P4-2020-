@@ -18,6 +18,7 @@ class IControladorAsignatura{
 		virtual void setColDoc(map<string,Docente*>*) = 0;
 		virtual void setColAsig(map<string,Asignatura*>*) = 0;
 		virtual void setColCla(map<string,Clase*>*) = 0;
+		virtual void setColMens(map<int,Mensaje*>*) = 0;
 
 		virtual void agregarAsignatura(string,string,bool,bool,bool) = 0;
 		virtual void confirmarAlta() = 0;

@@ -233,6 +233,10 @@ void ControladorClase::cancelarFin(){
 
 };
 
+void ControladorClase::setReloj (Reloj* reloj) {
+this->relojSistema = reloj;
+};
+
 dtFecha ControladorClase::generarFecha(){//NO TERMINADA, HAY QUE IMPLEMENTAR EL RELOJ DEL SISTEMA QUE ELLOS PIDEN
   return dtFecha(relojSistema->getInstancia()->getAnioSistema(),relojSistema->getInstancia()->getMesSistema(),relojSistema->getInstancia()->getDiaSistema(),relojSistema->getInstancia()->getHoraSistema(),relojSistema->getInstancia()->getMinSistema(),0);
 };
@@ -301,7 +305,9 @@ void ControladorClase::enviarRespuesta(int id,string contenido){
 
 void ControladorClase::confirmarEnvio(){
   dtFecha fecha = generarFecha();
-  Mensaje* m = this->handler->agregarMensaje(coleccionGlobalMensajes->size(), (idAResponder!=-1), idAResponder, contenidoMensaje, fecha, getCodigoClase());
+  int size = coleccionGlobalMensajes->size();
+  string cc = getCodigoClase();
+  Mensaje* m = this->handler->agregarMensaje(size, (idAResponder!=-1), idAResponder, contenidoMensaje, fecha, cc);
   if(coleccionGlobalEstudiantes->count(emailUserActual)){//si es estudiante
     auto itUser = coleccionGlobalEstudiantes->find(emailUserActual);
     itUser->second->agregarMensaje(m);
@@ -368,12 +374,11 @@ void ControladorClase::confirmarAsistenciaVivo(){
 
   UsrCla* asistencia = NULL;
   auto it = est->getClasesParticipa().begin();
-  bool sigue = true; //SE BUSCA SI YA EXISTIA UN USRCLA
-  while(it!=est->getClasesParticipa().end() && sigue ){
-    //UsrCla *current = *it;
+  //bool sigue = true; //SE BUSCA SI YA EXISTIA UN USRCLA
+  for(unsigned int i=0; i!=est->getClasesParticipa().size();i++){
     if ((*it)->getClase()->getCodigo() == clase->getCodigo() ) {
-      sigue = false;
       asistencia = *it; //verificar si es = it o = *it
+      i=est->getClasesParticipa().size();
     }
     else
       ++it;
@@ -406,12 +411,13 @@ set<dtClase*> ControladorClase::consultarClasesParticipandoVivo(){
   Estudiante* est = itEst->second; // busco el estudiante
 
   if(!est->getClasesParticipa().empty()){
-    for(auto it =est->getClasesParticipa().begin(); it!=est->getClasesParticipa().end();++it){ //for que recorre la coleccion de UsrCla
+    auto it = est->getClasesParticipa().begin();
+    for(unsigned int i=0; i!=est->getClasesParticipa().size();i++){ //for que recorre la coleccion de UsrCla
       bool buscando = true;
       UsrCla* usercla =  (*it);
       set<Visualizacion*> coleccionVis = (*it)->getVis();
       auto itVis = coleccionVis.begin();
-      while(itVis!=coleccionVis.end() && buscando){ //While que recorre las visualizaciones del UsrCla buscando si hay alguna en vivo
+      for(unsigned int j=0; j!=coleccionVis.size();j++){ //While que recorre las visualizaciones del UsrCla buscando si hay alguna en vivo
         if ((*itVis)->getEnVivo()==true && (*itVis)->getFechaFinVis()==fechaNula){
           buscando = false;
         }
@@ -431,6 +437,7 @@ set<dtClase*> ControladorClase::consultarClasesParticipandoVivo(){
         dt->setAsig(usercla->getClase()->getCodigoAsig());
         clasesAsistiendo.insert(dt);
       }
+      ++it;
     }
   }
   return clasesAsistiendo;
@@ -449,26 +456,28 @@ void ControladorClase::confirmarSalida(){
   bool sigue = true; // SE BUSCA EL UsrCla DE LA CLASE DE LA QUE SE VA A SALIR
 
   UsrCla* asistencia = NULL;
-
-  while( it!=est->getClasesParticipa().end() && sigue ) {
+  unsigned int i=0;
+  while( i!=est->getClasesParticipa().size() && sigue ) {
     if ((*it)->getClase()->getCodigo() == this->claseAFinalizar) {
       sigue = false;
       asistencia = *it;
     }
     else
       ++it;
+    i++;
     };
 
   auto itVis=asistencia->getVis().begin();
   sigue = true;
-
-  while(itVis!=asistencia->getVis().end() && sigue ){
+  unsigned int j=0;
+  while(j!=asistencia->getVis().size() && sigue ){
     if((*itVis)->getEnVivo()== true && (*itVis)->getFechaFinVis()== fechaNula){
       sigue = false;
       (*itVis)->setFechaFinVis(generarFecha());
     }
     else
       ++itVis;
+    j++;
   }
 };
 
@@ -482,6 +491,7 @@ set<DtTiempoDeClase> ControladorClase::consultarTiempoClaseDocente(string codigo
   auto itAsig = this->coleccionGlobalAsignaturas->find(codigo);
   int tiempo=0;
   int divisor=0;
+  bool primera;
   for(auto itCla =itAsig->second->getClases()->begin(); itCla!=itAsig->second->getClases()->end();++itCla){
     if(itCla->second->getEmailCreador()==this->emailUserActual){
       tiempo=0;
@@ -490,13 +500,16 @@ set<DtTiempoDeClase> ControladorClase::consultarTiempoClaseDocente(string codigo
       tiempoClase->setNombre(itCla->second->getNombre());
       tiempoClase->setCodClase(itCla->second->getCodigo());
       for(auto itEstCla =itCla->second->getParticipantes().begin(); itEstCla!=itCla->second->getParticipantes().end();++itEstCla){
-
+        primera=true;
         set<Visualizacion*> sett = (*itEstCla)->getVis();
         for(auto itVis = sett.begin(); itVis!=sett.end();++itVis){
           if((*itVis)->getEnVivo()==true && !((*itVis)->getFechaFinVis()==fechaNula)){
-            divisor++;
             tiempo+=(*itVis)->getFechaFinVis() - (*itVis)->getFechaInicioVis();
             tiempoClase->setTiempo(tiempoClase->getTiempo()+tiempo);
+            if(primera){
+              divisor++;
+              primera=false;
+            }
           }
         }
       }

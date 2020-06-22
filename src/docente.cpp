@@ -85,7 +85,9 @@ void Docente::desvincularDoc(string codigoAsignatura){
 
   this->asignaturas->erase(codigoAsignatura);
 };
-
+void Docente::borrarClase(string cc){
+  clases->erase(cc);
+};
 Docente::~Docente(){
 
 };

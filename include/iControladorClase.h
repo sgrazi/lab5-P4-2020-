@@ -21,6 +21,8 @@
 
 using namespace std;
 
+class Reloj;
+
 class IControladorClase{
 	public:
 
@@ -30,6 +32,7 @@ class IControladorClase{
 		virtual void setColCla(map<string,Clase*>*) = 0;
 		virtual void setColMens(map<int,Mensaje*>*) = 0;
 		virtual void setHandler(HandlerMensajes*) = 0;
+		virtual void setReloj(Reloj*) = 0;
 
 		virtual void iniciarSesion(string,string) = 0;
 		virtual set<dtAsignatura> consultarAsignaturasDocente() = 0;

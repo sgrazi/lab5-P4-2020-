@@ -38,3 +38,7 @@ set<dtAsignatura> Estudiante::getAsignaturasInscripto(){
   }
   return nuevo;
 };
+
+void Estudiante::borrarAsig(string ca){
+  asignaturas->erase(ca);
+};

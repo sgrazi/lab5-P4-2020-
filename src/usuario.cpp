@@ -49,7 +49,9 @@ EstrategiaNotifs* Usuario::getAplica(){
 set<Mensaje*> Usuario::getMensajes(){
   return mensajes;
 };
-
+set<int> Usuario::getIdMensajes(){
+  return idMensajes;
+}
 void Usuario::setModoSus(int a){ this->modoSus = a;};
 int Usuario::getModoSus(){ return modoSus;};
 
@@ -69,6 +71,7 @@ bool Usuario::aplicaNotificacion(dtMensaje d){
 
 void Usuario::agregarMensaje(Mensaje* m){
   this->mensajes.insert(m);
+  this->idMensajes.insert(m->getId());
 };
 
 void Usuario::notificar(dtMensaje d){
@@ -81,4 +84,16 @@ void Usuario::notificar(dtMensaje d){
 };
 Usuario::~Usuario(){
 
+};
+
+void Usuario::borrarNotifs(string cc){
+  int i=0;
+  int size = notificaciones.size();
+  for(auto it = notificaciones.begin();i<size;++it){
+    if((*it)->getCodigoClase()==cc){
+      notificaciones.erase((*it));
+      delete (*it);
+    }
+    i++;
+  }
 };

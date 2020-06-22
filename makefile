@@ -17,7 +17,7 @@ EJECUTABLE = main
 # compilador
 CC = g++
 # opciones de compilación
-CCFLAGS = -Wall
+CCFLAGS = -Wall -g
 
 $(ODIR)/$(PRINCIPAL).o:$(PRINCIPAL).cpp
 	$(CC) $(CCFLAGS) -c $< -o $@

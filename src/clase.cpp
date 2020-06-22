@@ -1,6 +1,7 @@
 #include "../include/clase.h"
 #include "../include/asignatura.h"
 #include "../include/visualizacion.h"
+#include "../include/usrCla.h"
 Clase::Clase(){
 
 };
@@ -94,9 +95,11 @@ void Clase::visualizar(Estudiante* e){/*
 
 Clase::~Clase(){
   for(auto itmsj =this->mensajes.begin(); itmsj!=this->mensajes.end();++itmsj){
-    delete &itmsj;
+    auto itmsj2=itmsj;
+    delete *itmsj2;
   }
   for(auto itestcla =this->participantes.begin(); itestcla!=this->participantes.end();++itestcla){
-    delete &itestcla;
+    auto itestcla2 = itestcla;
+    delete *itestcla2;
   }
 };

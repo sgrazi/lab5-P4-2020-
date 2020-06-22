@@ -25,6 +25,7 @@ class ControladorAsignatura:public IControladorAsignatura{
 		map<string,Asignatura*>* coleccionGlobalAsignaturas;
 		map<string,Docente*>* coleccionGlobalDocentes;
 		map<string,Clase*>* coleccionGlobalClases;
+		map<int,Mensaje*>* coleccionGlobalMensajes;
 		static ControladorAsignatura* instancia;
 		ControladorAsignatura();
 	public:
@@ -50,6 +51,7 @@ class ControladorAsignatura:public IControladorAsignatura{
 		void setColAsig(map<string,Asignatura*>*);
 		void setColDoc(map<string,Docente*>*);
 		void setColCla(map<string,Clase*>*);
+		void setColMens(map<int,Mensaje*>*);
 		//ALTA DE ASIG
 		void agregarAsignatura(string,string,bool,bool,bool);
 		void confirmarAlta();

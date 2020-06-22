@@ -38,13 +38,16 @@ Mensaje* HandlerMensajes::agregarMensaje(int codigo, bool esRespuesta, int idRes
 
   coleccionGlobalMensajes->insert(pair<int,Mensaje*>(codigo,nuevo));//agrego el mensaje a la coleccion global
 
-  for(auto itObs = observers->begin(); itObs!=observers->end(); ++itObs){//notifico a los observers
-    bool aplica = itObs->second->aplicaNotificacion(*dt);
-    if(aplica){
-      itObs->second->notificar(*dt);
+  if(esRespuesta){
+    auto itObs = observers->begin();
+    for(unsigned int i=0; i!=observers->size();i++){//notifico a los observers
+      bool aplica = itObs->second->aplicaNotificacion(*dt);
+      if(aplica){
+        itObs->second->notificar(*dt);
+      }
+      ++itObs;
     }
   }
-
   delete dt;
 
   return nuevo;

@@ -26,6 +26,8 @@ class Estudiante : public Usuario{
     map<string,Asignatura*>* getAsignaturas();
     set<dtAsignatura> getAsignaturasInscripto();
 
+    void borrarAsig(string ca);
+
     void inscribir(Asignatura*);
     void desinscribir(string);
 

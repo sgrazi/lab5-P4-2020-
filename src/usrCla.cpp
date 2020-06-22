@@ -2,6 +2,7 @@
 #include "../include/dtFecha.h"
 #include "../include/estudiante.h"
 #include "../include/visualizacion.h"
+#include "../include/clase.h"
 
 const dtFecha fechaNula(0,0,0,0,0,0);
 
@@ -30,7 +31,8 @@ void UsrCla::marcarFin(dtFecha fecha){//como es clase en vivo solo hay una visua
 //void UsrCla::iniciarVis(){};
 
 UsrCla::~UsrCla(){
+  getEst()->borrarNotifs(getClase()->getCodigo());//borro las posibles notificaciones
   for(auto itvis =this->vis.begin(); itvis!=this->vis.end();++itvis){
-    delete &itvis;
+    delete *itvis;
   }
 };

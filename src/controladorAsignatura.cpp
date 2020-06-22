@@ -2,6 +2,8 @@
 #include "../include/dtAsignatura.h"
 #include "../include/dtDocente.h"
 #include "../include/clase.h"
+#include "../include/usrCla.h"
+#include "../include/visualizacion.h"
 
 using namespace std;
 
@@ -42,6 +44,7 @@ string ControladorAsignatura::getAsigAEliminar(){ return asigAEliminar;};
 void ControladorAsignatura::setColAsig(map<string,Asignatura*>* c){ this->coleccionGlobalAsignaturas = c;};
 void ControladorAsignatura::setColDoc(map<string,Docente*>* c){ this->coleccionGlobalDocentes = c;};
 void ControladorAsignatura::setColCla(map<string,Clase*>* c){this->coleccionGlobalClases=c;};
+void ControladorAsignatura::setColMens(map<int,Mensaje*>* c){this->coleccionGlobalMensajes=c;};
 
 void ControladorAsignatura::agregarAsignatura(string n, string c, bool t, bool p, bool m){
   this->setNombreAsig(n);
@@ -141,13 +144,22 @@ set<DtDictado> ControladorAsignatura::tiempoDictado(){
 void ControladorAsignatura::eliminarAsignatura(string codigo){
   setAsigAEliminar(codigo);
 };
+
 void ControladorAsignatura::confirmarElim(){
   auto asig = coleccionGlobalAsignaturas->find(asigAEliminar);
     for(auto it = asig->second->getClases()->begin();it != asig->second->getClases()->end();it++){
       string aux = it->second->getCodigo();
-      for(auto itDoc = asig->second->getDocentes()->begin();itDoc != asig->second->getDocentes()->end();itDoc++)//borro la clase del mapa del docente
-        itDoc->second->getDoc()->getClases()->erase(aux);//si no esta en el map no hace nada
-      delete it->second;
+      auto doc = coleccionGlobalDocentes->find(it->second->getEmailCreador());
+
+      doc->second->borrarNotifs(aux);//borro las posibles notificaciones
+
+      set<Mensaje*> msjs = it->second->getMensajes();
+      while(!msjs.empty()){
+        coleccionGlobalMensajes->erase((*msjs.begin())->getId());
+        msjs.erase(msjs.begin());
+      }
+
+      doc->second->borrarClase(aux);
       coleccionGlobalClases->erase(aux);
     }
     delete asig->second;

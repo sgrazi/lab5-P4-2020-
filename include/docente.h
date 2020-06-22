@@ -28,6 +28,8 @@ class Docente : public Usuario{
     map<string,Rol*>* getAsignaturas();//corregir esto en un futuro, no tiene que ser puntero a map sino map solo
     map<string,Clase*>* getClases();
 
+    void borrarClase(string cc);
+
     bool esDocenteDe(string);
     Rol* nuevoRol(Asignatura*,tipoClase);
     set<dtAsignatura> getInfo();
