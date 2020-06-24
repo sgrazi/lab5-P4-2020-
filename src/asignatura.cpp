@@ -90,16 +90,41 @@ void Asignatura::agregarClaseNueva(Clase* c){
   return nuevo;
 };*/
 Asignatura::~Asignatura(){
+  int i = 0;
+  int size = this->clases->size();
+  while(i<size){
+    auto itclases = this->clases->begin();
+    delete itclases->second;
+    this->clases->erase(itclases->first);
+    i++;
+  }
+  /*
   for(auto itclases = this->clases->begin(); itclases!=clases->end(); ++itclases){
     delete itclases->second;
     this->clases->erase(itclases->first);
-  }
-  for(auto itest = this->inscriptos->begin(); itest!=this->inscriptos->end(); ++itest){
+  }*/
+  i = 0;
+  size = this->inscriptos->size();
+  while(i<size){
+    auto itest = this->inscriptos->begin();
     itest->second->desinscribir(this->codigo);
     this->inscriptos->erase(itest->first);
+    ++i;
   }
+  /*for(auto itest = this->inscriptos->begin();itest!=this->inscriptos->end() ; ++itest){
+    itest->second->desinscribir(this->codigo);
+    this->inscriptos->erase(itest->first);
+  }*/
+  i = 0;
+  size = this->docentes->size();
+  while(i<size){
+    auto itrol = this->docentes->begin();
+    delete itrol->second;
+    this->docentes->erase(itrol->first);
+    ++i;
+  }/*
   for(auto itrol = this->docentes->begin(); itrol!=this->docentes->end(); ++itrol){
     delete itrol->second;
     this->docentes->erase(itrol->first);
-  }
+  }*/
 };

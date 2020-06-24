@@ -164,7 +164,7 @@ class Sistema{
       fecha->setAnio(2020);
       fecha->setMes(5);
       fecha->setDia(4);
-      fecha->setHora(17);
+      fecha->setHora(16);
       fecha->setMinuto(0);
       fecha->setSegundo(0);
 
@@ -1023,7 +1023,7 @@ class Sistema{
       cout <<"\n\tAsignaturas en las que el docente participa:";
       set<dtAsignatura> opciones = fabrica->getIClase()->consultarAsignaturasDocente();
       if(opciones.begin()==opciones.end()){
-          cout <<"\n\tNo hay asignaturas en en el sistema.\n";
+          cout <<"\n\tEl docente no esta asignado a ninguna asignatura.\n";
       }
       else{
         for(auto it=opciones.begin();it!=opciones.end();++it){

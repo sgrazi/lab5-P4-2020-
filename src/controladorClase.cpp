@@ -135,7 +135,7 @@ void ControladorClase::confirmarInicio(){//se separa en dos casos que hacen lo m
   if(infoParaCreacionClase->getTipo() == teorico){
     teoAux = dynamic_cast<Teorico*>(clase);
     teoAux->setAsistentes(0);
-    std::string s = std::to_string(itAsig->second->getClases()->size());
+    std::string s = std::to_string(coleccionGlobalClases->size());
     teoAux->setCodigo(s);//fijarme cantidad de clases en la asignatura y ponerle codigo igual a eso +1
     teoAux->setNombre(infoParaCreacionClase->getNombre());
     teoAux->setUrl("clases.com/" + clase->getCodigo());
@@ -153,7 +153,7 @@ void ControladorClase::confirmarInicio(){//se separa en dos casos que hacen lo m
   else{
     if(infoParaCreacionClase->getTipo() == monitoreo){
       monAux = dynamic_cast<Monitoreo*>(clase);
-      std::string s2 = std::to_string(itAsig->second->getClases()->size());
+      std::string s2 = std::to_string(coleccionGlobalClases->size());
       monAux->setCodigo(s2);//fijarme cantidad de clases en la asignatura y ponerle codigo igual a eso +1
       monAux->setNombre(infoParaCreacionClase->getNombre());
       monAux->setUrl("clases.com/" + clase->getCodigo());
@@ -173,7 +173,7 @@ void ControladorClase::confirmarInicio(){//se separa en dos casos que hacen lo m
       this->coleccionGlobalClases->insert(pair<string,Clase*> (monAux->getCodigo(),monAux));
     }
     else{ //practico
-      std::string s3 = std::to_string(itAsig->second->getClases()->size());
+      std::string s3 = std::to_string(coleccionGlobalClases->size());
       clase->setCodigo(s3);//fijarme cantidad de clases en la asignatura y ponerle codigo igual a eso +1
       clase->setNombre(infoParaCreacionClase->getNombre());
       clase->setUrl("clases.com/" + clase->getCodigo());
