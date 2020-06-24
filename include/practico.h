@@ -4,7 +4,7 @@
 
 class Practico : public Clase{
   public:
-    void auxiliar();
+    bool estaHabilitado(string);
 
     Practico();
     ~Practico();

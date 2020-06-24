@@ -871,12 +871,6 @@ class Sistema{
           string codigoAsig;
           bool aux = true;
 
-          /*while (std::cout << "\n\tIngrese el codigo de la asignatura de la que desea ver clases: " && !(std::cin >> codigoAsig)) {
-            std::cin.clear(); //clear bad input flag
-            std::cin.ignore(numeric_limits<streamsize>::max(), '\n'); //discard input
-            std::cout << "\tPor favor ingrese un numero.\n";
-          }*/
-
           while(aux){
             while (std::cout << "\n\tIngrese el codigo de la asignatura de la que desea ver clases: " && !(std::cin >> codigoAsig)) {
               std::cin.clear(); //clear bad input flag
@@ -894,9 +888,7 @@ class Sistema{
           }
 
       		set<dtClase> setClasesAsig = fabrica->getIClase()->consultarClasesVivo(codigoAsig);
-        /*  for(auto it = fabrica->getIClase()->consultarClasesParticipando().begin();it != fabrica->getIClase()->consultarClasesParticipando().end();it++){//eliminar clases que ya estoy viendo
-            setClasesAsig.erase(*it);
-          }*/
+
           if(setClasesAsig.begin()==setClasesAsig.end()){
             cout << "\n\tNo hay clases para asistir.\n";
             no_pronto = 0;

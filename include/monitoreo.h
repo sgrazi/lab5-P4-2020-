@@ -9,7 +9,7 @@ class Monitoreo : public Clase{
     int cantHabilitados;
     Estudiante* habilitados[15];
   public://faltan funciones de manejo de relaciones
-    void auxiliar();
+    bool estaHabilitado(string);
 
     Monitoreo();
 

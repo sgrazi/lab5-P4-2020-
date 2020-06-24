@@ -335,16 +335,32 @@ set<dtClase> ControladorClase::consultarClasesVivo(string a){
   set<dtClase> nuevo;
   for(auto itCla=coleccionGlobalAsignaturas->find(a)->second->getClases()->begin(); itCla!=coleccionGlobalAsignaturas->find(a)->second->getClases()->end(); ++itCla){
     if(itCla->second->getFechaFin()==fechaNula && ((itCla->second->getFechaInicio().getAnio()<=relojSistema->getInstancia()->getAnioSistema()) && (itCla->second->getFechaInicio().getMes()<=relojSistema->getInstancia()->getMesSistema()) && (itCla->second->getFechaInicio().getDia()<=relojSistema->getInstancia()->getDiaSistema()) && (itCla->second->getFechaInicio().getHora()<=relojSistema->getInstancia()->getHoraSistema()) && (itCla->second->getFechaInicio().getMinuto()<=relojSistema->getInstancia()->getMinSistema()))){
-      dtClase *dt = new dtClase();
-      dt->setNombre(itCla->second->getNombre());
-      dt->setCodigo(itCla->second->getCodigo());
-      dt->setFechaInicio(itCla->second->getFechaInicio());
-      dt->setFechaFin(itCla->second->getFechaFin());
-      dt->setTipo(itCla->second->getTipo());
-      dt->setUrl(itCla->second->getUrl());
-      dt->setCreador(itCla->second->getEmailCreador());
-      dt->setAsig(itCla->second->getCodigoAsig());
-      nuevo.insert(*dt);
+      if(itCla->second->getTipo()!=monitoreo){
+        dtClase *dt = new dtClase();
+        dt->setNombre(itCla->second->getNombre());
+        dt->setCodigo(itCla->second->getCodigo());
+        dt->setFechaInicio(itCla->second->getFechaInicio());
+        dt->setFechaFin(itCla->second->getFechaFin());
+        dt->setTipo(itCla->second->getTipo());
+        dt->setUrl(itCla->second->getUrl());
+        dt->setCreador(itCla->second->getEmailCreador());
+        dt->setAsig(itCla->second->getCodigoAsig());
+        nuevo.insert(*dt);
+      }
+      else{//verifico si esta habilitado
+        if(itCla->second->estaHabilitado(emailUserActual)){
+            dtClase *dt = new dtClase();
+            dt->setNombre(itCla->second->getNombre());
+            dt->setCodigo(itCla->second->getCodigo());
+            dt->setFechaInicio(itCla->second->getFechaInicio());
+            dt->setFechaFin(itCla->second->getFechaFin());
+            dt->setTipo(itCla->second->getTipo());
+            dt->setUrl(itCla->second->getUrl());
+            dt->setCreador(itCla->second->getEmailCreador());
+            dt->setAsig(itCla->second->getCodigoAsig());
+            nuevo.insert(*dt);
+        }
+      }
     }
   }
   return nuevo;

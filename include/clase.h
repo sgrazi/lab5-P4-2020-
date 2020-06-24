@@ -32,7 +32,7 @@ class Clase{
 
   public://faltan funciones de manejo de relaciones
     Clase();
-    virtual void auxiliar();
+    virtual bool estaHabilitado(string);
     void setNombre(string);
     void setCodigo(string);
     void setUrl(string);

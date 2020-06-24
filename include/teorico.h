@@ -8,7 +8,7 @@ class Teorico : public Clase{
   public:
     Teorico();
 
-    void auxiliar();
+    bool estaHabilitado(string);
     void setAsistentes(int);
     int getAsistentes();
 

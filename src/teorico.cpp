@@ -6,7 +6,9 @@
 
 const dtFecha fechaNula(0,0,0,0,0,0);
 
-void Teorico::auxiliar(){};
+bool Teorico::estaHabilitado(string s){
+  return true;
+};
 
 Teorico::Teorico(){
   this->setTipo(teorico); //invariable, una clase de tipo teorico tiene en el atributo "tipo" el valor "teorico", se otroga este valor cuando se la crea, es correcto esto?
@@ -25,7 +27,7 @@ int Teorico::calcularAsistentes(){
     auto visualizaciones = (*it)->getVis().begin();//
     if((*visualizaciones)->getFechaInicioVis()==fechaNula)
       cout << "1";
-    
+
     if((*visualizaciones)->getFechaFinVis() == fechaNula){ //la visualizacion mas reciente siempre esta al inicio
       (*it)->marcarFin(this->getFechaFin());//como es clase en vivo solo hay una visualizacion
       i++;
