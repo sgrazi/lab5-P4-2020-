@@ -47,7 +47,7 @@ class Usuario{
 
     void borrarMensajes(string cc);
     void borrarNotifs(string cc);
-    
+
     bool aplicaNotificacion(dtMensaje);
     void notificar(dtMensaje);
 

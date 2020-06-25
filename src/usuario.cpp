@@ -41,7 +41,14 @@ string Usuario::getImagen(){
   return imagen;
 };
 set<dtNotificacion*> Usuario::getNotificaciones(){
-  return notificaciones;
+
+  set<dtNotificacion*>muestro = notificaciones;
+  set<dtNotificacion*>::iterator it1; set<dtNotificacion*>::iterator it2;
+  it1=notificaciones.begin();
+  it2=notificaciones.end();
+  notificaciones.erase(it1,it2);
+
+  return muestro;
 };
 EstrategiaNotifs* Usuario::getAplica(){
   return aplica;
