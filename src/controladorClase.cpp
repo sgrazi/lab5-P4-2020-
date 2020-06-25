@@ -227,6 +227,7 @@ void ControladorClase::confirmarFin(){
     }
   }
   iniciarSesion(itCla->second->getEmailCreador(),"password que no importa porque nunca verificamos");//vuelvo a dejar al docente como el usuario actual};
+}
 
 void ControladorClase::cancelarFin(){
 
