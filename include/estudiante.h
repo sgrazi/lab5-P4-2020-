@@ -11,6 +11,7 @@
 class Asignatura;
 class UsrCla;
 class dtAsignatura;
+class Clase;
 
 using namespace std;
 
@@ -18,16 +19,18 @@ class Estudiante : public Usuario{
   private:
     string ci;
     map<string,Asignatura*>* asignaturas;
-    //map<int,Monitoreo>* monHabilitados;
+    set<Clase*>* asistiendo;
   public://faltan funciones de manejo de relaciones
     Estudiante();
     void setCI(string);
     string getCI();
     map<string,Asignatura*>* getAsignaturas();
     set<dtAsignatura> getAsignaturasInscripto();
-
+    set<Clase*>* getAsistiendo();
     void borrarAsig(string ca);
 
+    void asistirClase(Clase* c);
+    void dejarDeAsistir(Clase* c);
     void inscribir(Asignatura*);
     void desinscribir(string);
 

@@ -415,6 +415,40 @@ class Sistema{
       iniciarSesionD("juan@mail.com");
       fabrica->getIClase()->finalizarClase("2");
       fabrica->getIClase()->confirmarFin();
+///SEPARA
+reloj->setAnioSistema(2020);
+reloj->setMesSistema(5);
+reloj->setDiaSistema(8);
+reloj->setHoraSistema(11);
+reloj->setMinSistema(0);
+
+      fecha = new dtFecha();
+      fecha->setAnio(2020);
+      fecha->setMes(5);
+      fecha->setDia(8);
+      fecha->setHora(11);
+      fecha->setMinuto(0);
+      fecha->setSegundo(0);
+
+      iniciarSesionD("juan@mail.com");
+      fabrica->getIClase()->iniciarClase("P1","PRUEBA1",teorico,*fecha);//C3 A1 Tema 2 Te�rico 08/05/20 - 9am 08/05/20 - 10am D1
+      fabrica->getIClase()->confirmarInicio();
+
+      fabrica->getIClase()->iniciarClase("P1","PRUEBA2",teorico,*fecha);//C3 A1 Tema 2 Te�rico 08/05/20 - 9am 08/05/20 - 10am D1
+      fabrica->getIClase()->confirmarInicio();
+      delete fecha;
+
+      iniciarSesionE("roberto@mail.com");//E3 C1 01/05/20 - 09:03am 01/05/20 - 09:43am
+      clase1 = fabrica->getIClase()->asistirClaseVivo("6");
+      fabrica->getIClase()->confirmarAsistenciaVivo();
+
+      iniciarSesionE("roberto@mail.com");//E3 C1 01/05/20 - 09:03am 01/05/20 - 09:43am
+      clase1 = fabrica->getIClase()->asistirClaseVivo("7");
+      fabrica->getIClase()->confirmarAsistenciaVivo();
+
+      iniciarSesionD("juan@mail.com");
+      fabrica->getIClase()->finalizarClase("7");
+      fabrica->getIClase()->confirmarFin();
 
     }
     //Administrador
@@ -1100,7 +1134,7 @@ class Sistema{
 
         }
         dtInfoClase info = fabrica->getIClase()->desplegarInfoClase();
-        cout << "\n\tNombre de clase: " << info.getNombre() << "\n\tCodigo de clase: " << info.getCodigo() << "\n\tIniciada por: "  << info.getIniciadaPor() << "\n\tFecha: " << info.getFechaInicio().getAnio() << "/"<< info.getFechaInicio().getMes() << "/"<< info.getFechaInicio().getDia() << " " << info.getFechaInicio().getHora() << ":"<< info.getFechaInicio().getMinuto();
+        cout << "\n\tNombre de clase: " << info.getNombre() << "\n\tDe la asignatura: " << info.getCodigo() << "\n\tIniciada por: "  << info.getIniciadaPor() << "\n\tFecha: " << info.getFechaInicio().getAnio() << "/"<< info.getFechaInicio().getMes() << "/"<< info.getFechaInicio().getDia() << " " << info.getFechaInicio().getHora() << ":"<< info.getFechaInicio().getMinuto();
         cout << "\n\tLista de habilitados:";
         array<string, 15> arr = info.getHabilitados();
         for(int i=0; i<info.getCantHabilitados(); i++){

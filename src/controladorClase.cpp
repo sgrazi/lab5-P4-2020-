@@ -226,8 +226,7 @@ void ControladorClase::confirmarFin(){
       confirmarSalida();
     }
   }
-  iniciarSesion(itCla->second->getEmailCreador(),"password que no importa porque nunca verificamos");//vuelvo a dejar al docente como el usuario actual
-};
+  iniciarSesion(itCla->second->getEmailCreador(),"password que no importa porque nunca verificamos");//vuelvo a dejar al docente como el usuario actual};
 
 void ControladorClase::cancelarFin(){
 
@@ -336,6 +335,7 @@ set<dtClase> ControladorClase::consultarClasesVivo(string a){
   for(auto itCla=coleccionGlobalAsignaturas->find(a)->second->getClases()->begin(); itCla!=coleccionGlobalAsignaturas->find(a)->second->getClases()->end(); ++itCla){
     if(itCla->second->getFechaFin()==fechaNula && ((itCla->second->getFechaInicio().getAnio()<=relojSistema->getInstancia()->getAnioSistema()) && (itCla->second->getFechaInicio().getMes()<=relojSistema->getInstancia()->getMesSistema()) && (itCla->second->getFechaInicio().getDia()<=relojSistema->getInstancia()->getDiaSistema()) && (itCla->second->getFechaInicio().getHora()<=relojSistema->getInstancia()->getHoraSistema()) && (itCla->second->getFechaInicio().getMinuto()<=relojSistema->getInstancia()->getMinSistema()))){
       if(itCla->second->getTipo()!=monitoreo){
+        cout<<"bby";
         dtClase *dt = new dtClase();
         dt->setNombre(itCla->second->getNombre());
         dt->setCodigo(itCla->second->getCodigo());
@@ -387,7 +387,7 @@ dtClase ControladorClase::asistirClaseVivo(string codigoClase){
 void ControladorClase::confirmarAsistenciaVivo(){
   Estudiante* est = this->coleccionGlobalEstudiantes->find(this->emailUserActual)->second; // busco el estudiante
   Clase* clase = this->coleccionGlobalClases->find(this->claseAFinalizar)->second; //busco la clase
-
+  est->asistirClase(clase);
   UsrCla* asistencia = NULL;
   auto it = est->getClasesParticipa().begin();
   //bool sigue = true; //SE BUSCA SI YA EXISTIA UN USRCLA
@@ -425,36 +425,17 @@ set<dtClase*> ControladorClase::consultarClasesParticipandoVivo(){
   set<dtClase*> clasesAsistiendo;
   auto itEst = this->coleccionGlobalEstudiantes->find(this->emailUserActual);
   Estudiante* est = itEst->second; // busco el estudiante
-
-  if(!est->getClasesParticipa().empty()){
-    auto it = est->getClasesParticipa().begin();
-    for(unsigned int i=0; i!=est->getClasesParticipa().size();i++){ //for que recorre la coleccion de UsrCla
-      bool buscando = true;
-      UsrCla* usercla =  (*it);
-      set<Visualizacion*> coleccionVis = (*it)->getVis();
-      auto itVis = coleccionVis.begin();
-      for(unsigned int j=0; j!=coleccionVis.size();j++){ //While que recorre las visualizaciones del UsrCla buscando si hay alguna en vivo
-        if ((*itVis)->getEnVivo()==true && (*itVis)->getFechaFinVis()==fechaNula){
-          buscando = false;
-        }
-        else
-          ++itVis;
-      };
-
-      if(!buscando){
-        dtClase* dt = new dtClase();
-        dt->setNombre(usercla->getClase()->getNombre());
-        dt->setCodigo(usercla->getClase()->getCodigo());
-        dt->setFechaInicio(usercla->getClase()->getFechaInicio());
-        dt->setFechaFin(usercla->getClase()->getFechaFin());
-        dt->setTipo(usercla->getClase()->getTipo());
-        dt->setUrl(usercla->getClase()->getUrl());
-        dt->setCreador(usercla->getClase()->getEmailCreador());
-        dt->setAsig(usercla->getClase()->getCodigoAsig());
-        clasesAsistiendo.insert(dt);
-      }
-      ++it;
-    }
+  for(auto it=est->getAsistiendo()->begin();it!=est->getAsistiendo()->end();it++){
+    dtClase* dt = new dtClase();
+    dt->setNombre((*it)->getNombre());
+    dt->setCodigo((*it)->getCodigo());
+    dt->setFechaInicio((*it)->getFechaInicio());
+    dt->setFechaFin((*it)->getFechaFin());
+    dt->setTipo((*it)->getTipo());
+    dt->setUrl((*it)->getUrl());
+    dt->setCreador((*it)->getEmailCreador());
+    dt->setAsig((*it)->getCodigoAsig());
+    clasesAsistiendo.insert(dt);
   }
   return clasesAsistiendo;
 };
@@ -464,9 +445,10 @@ void ControladorClase::finalizarAsistencia(string codigoClase) {
 };
 
 void ControladorClase::confirmarSalida(){
+  auto itCla = this->coleccionGlobalClases->find(codigoClase);
   auto itEst = this->coleccionGlobalEstudiantes->find(this->emailUserActual);
   Estudiante* est = itEst->second; // busco el estudiante
-
+  est->dejarDeAsistir(itCla->second);
 
   auto it = est->getClasesParticipa().begin();
   bool sigue = true; // SE BUSCA EL UsrCla DE LA CLASE DE LA QUE SE VA A SALIR
