@@ -461,7 +461,7 @@ void ControladorClase::finalizarAsistencia(string codigoClase) {
 };
 
 void ControladorClase::confirmarSalida(){
-  auto itCla = this->coleccionGlobalClases->find(codigoClase);
+  auto itCla = this->coleccionGlobalClases->find(claseAFinalizar);
   auto itEst = this->coleccionGlobalEstudiantes->find(this->emailUserActual);
   Estudiante* est = itEst->second; // busco el estudiante
   est->dejarDeAsistir(itCla->second);
