@@ -218,14 +218,24 @@ void ControladorClase::confirmarFin(){
   itCla->second->setFechaFin(fechaFin);
 
   set<UsrCla*> participantes = itCla->second->getParticipantes();
-  for(auto itUser = participantes.begin(); itUser!=participantes.end(); itUser++){//para cada visualizacion que no haya terminado
+
+  for(UsrCla *itUser: participantes) {
+    auto itVis = (itUser)->getVis().begin();
+    if((*itVis)->getFechaFinVis() == fechaNula){//finalizo la asistencia
+      iniciarSesion((itUser)->getEst()->getEmail(),(itUser)->getEst()->getPassword());
+      finalizarAsistencia(claseAFinalizar);
+      confirmarSalida();
+    }
+  }
+
+  /*for(auto itUser = participantes.begin(); itUser!=participantes.end(); itUser++){//para cada visualizacion que no haya terminado
     auto itVis = (*itUser)->getVis().begin();
     if((*itVis)->getFechaFinVis() == fechaNula){//finalizo la asistencia
       iniciarSesion((*itUser)->getEst()->getEmail(),(*itUser)->getEst()->getPassword());
       finalizarAsistencia(claseAFinalizar);
       confirmarSalida();
     }
-  }
+  }*/
   iniciarSesion(itCla->second->getEmailCreador(),"password que no importa porque nunca verificamos");//vuelvo a dejar al docente como el usuario actual};
 }
 
@@ -336,7 +346,6 @@ set<dtClase> ControladorClase::consultarClasesVivo(string a){
   for(auto itCla=coleccionGlobalAsignaturas->find(a)->second->getClases()->begin(); itCla!=coleccionGlobalAsignaturas->find(a)->second->getClases()->end(); ++itCla){
     if(itCla->second->getFechaFin()==fechaNula && ((itCla->second->getFechaInicio().getAnio()<=relojSistema->getInstancia()->getAnioSistema()) && (itCla->second->getFechaInicio().getMes()<=relojSistema->getInstancia()->getMesSistema()) && (itCla->second->getFechaInicio().getDia()<=relojSistema->getInstancia()->getDiaSistema()) && (itCla->second->getFechaInicio().getHora()<=relojSistema->getInstancia()->getHoraSistema()) && (itCla->second->getFechaInicio().getMinuto()<=relojSistema->getInstancia()->getMinSistema()))){
       if(itCla->second->getTipo()!=monitoreo){
-        cout<<"bby";
         dtClase *dt = new dtClase();
         dt->setNombre(itCla->second->getNombre());
         dt->setCodigo(itCla->second->getCodigo());
@@ -390,8 +399,13 @@ void ControladorClase::confirmarAsistenciaVivo(){
   Clase* clase = this->coleccionGlobalClases->find(this->claseAFinalizar)->second; //busco la clase
   est->asistirClase(clase);
   UsrCla* asistencia = NULL;
-  auto it = est->getClasesParticipa().begin();
-  //bool sigue = true; //SE BUSCA SI YA EXISTIA UN USRCLA
+  set<UsrCla*> uc = est->getClasesParticipa();
+  for (UsrCla *it: uc) {
+    if ((it)->getClase()->getCodigo() == clase->getCodigo() ) {
+      asistencia = it; //verificar si es = it o = *it
+      break;
+    }
+  }/*
   for(unsigned int i=0; i!=est->getClasesParticipa().size();i++){
     if ((*it)->getClase()->getCodigo() == clase->getCodigo() ) {
       asistencia = *it; //verificar si es = it o = *it
@@ -399,7 +413,7 @@ void ControladorClase::confirmarAsistenciaVivo(){
     }
     else
       ++it;
-  };
+  };*/
                            //SI NO EXISTIA SE GENERA Y ASOCIA
   if(asistencia==NULL){
     asistencia = new UsrCla();
@@ -412,6 +426,7 @@ void ControladorClase::confirmarAsistenciaVivo(){
   Visualizacion* vis = new Visualizacion();
   vis->setEnVivo(true);
   vis->setFechaInicioVis(generarFecha());
+  vis->setFechaFinVis(fechaNula);
   asistencia->setVisualizacion(vis); //ver.h y arreglar esta funcion
 
 };
@@ -451,9 +466,18 @@ void ControladorClase::confirmarSalida(){
   Estudiante* est = itEst->second; // busco el estudiante
   est->dejarDeAsistir(itCla->second);
 
-  auto it = est->getClasesParticipa().begin();
-  bool sigue = true; // SE BUSCA EL UsrCla DE LA CLASE DE LA QUE SE VA A SALIR
+  //auto it = est->getClasesParticipa().begin();
+  //bool sigue = true; // SE BUSCA EL UsrCla DE LA CLASE DE LA QUE SE VA A SALIR
+  UsrCla* asistencia;
 
+  set<UsrCla*> clasesParticipa = est->getClasesParticipa();
+  for (UsrCla *it: clasesParticipa) {
+    if ((it)->getClase()->getCodigo() == this->claseAFinalizar) {
+      asistencia = it;
+      break;
+    }
+  }
+/*
   UsrCla* asistencia = NULL;
   unsigned int i=0;
   while( i!=est->getClasesParticipa().size() && sigue ) {
@@ -465,9 +489,9 @@ void ControladorClase::confirmarSalida(){
       ++it;
     i++;
     };
-
+*/
   auto itVis=asistencia->getVis().begin();
-  sigue = true;
+  bool sigue = true;
   unsigned int j=0;
   while(j!=asistencia->getVis().size() && sigue ){
     if((*itVis)->getEnVivo()== true && (*itVis)->getFechaFinVis()== fechaNula){
