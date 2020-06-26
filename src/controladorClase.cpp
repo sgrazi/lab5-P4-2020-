@@ -515,6 +515,54 @@ set<DtTiempoDeClase> ControladorClase::consultarTiempoClaseDocente(string codigo
   int tiempo=0;
   int divisor=0;
   bool primera;
+
+  map<string,Clase*>* clasesParticipa = itAsig->second->getClases();
+  for (auto const& itCla: *clasesParticipa){
+    if(itCla.second->getEmailCreador()==this->emailUserActual){
+      tiempo=0;
+      divisor=0;
+      DtTiempoDeClase *tiempoClase= new DtTiempoDeClase();
+      tiempoClase->setNombre(itCla.second->getNombre());
+      tiempoClase->setCodClase(itCla.second->getCodigo());
+
+      set<UsrCla*> nombre = itCla.second->getParticipantes();
+      for (UsrCla *itEstCla: nombre) {
+        primera=true;
+        set<Visualizacion*> sett = itEstCla->getVis();
+        for (Visualizacion *itVis: sett) {
+          if(itVis->getEnVivo()==true && !(itVis->getFechaFinVis()==fechaNula)){
+            tiempo+=itVis->getFechaFinVis() - itVis->getFechaInicioVis();
+            tiempoClase->setTiempo(tiempoClase->getTiempo()+tiempo);
+            if(primera){
+              divisor++;
+              primera=false;
+            }
+          }
+          /*
+          for(auto itVis = sett.begin(); itVis!=sett.end();++itVis){
+            if((*itVis)->getEnVivo()==true && !((*itVis)->getFechaFinVis()==fechaNula)){
+              tiempo+=(*itVis)->getFechaFinVis() - (*itVis)->getFechaInicioVis();
+              tiempoClase->setTiempo(tiempoClase->getTiempo()+tiempo);
+              if(primera){
+                divisor++;
+                primera=false;
+              }
+            }
+          }*/
+        }
+      }
+
+      if(divisor!=0){
+        tiempoClase->setTiempo(tiempoClase->getTiempo()/divisor);
+        nuevo.insert(*tiempoClase);
+      }
+      else{
+        tiempoClase->setTiempo(0);
+        nuevo.insert(*tiempoClase);
+      }
+    }
+  }
+  /*
   for(auto itCla =itAsig->second->getClases()->begin(); itCla!=itAsig->second->getClases()->end();++itCla){
     if(itCla->second->getEmailCreador()==this->emailUserActual){
       tiempo=0;
@@ -545,7 +593,7 @@ set<DtTiempoDeClase> ControladorClase::consultarTiempoClaseDocente(string codigo
         nuevo.insert(*tiempoClase);
       }
     }
-  }
+  }*/
   return nuevo;
 };
 
