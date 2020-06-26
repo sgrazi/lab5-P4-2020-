@@ -524,13 +524,14 @@ set<DtTiempoDeClase> ControladorClase::consultarTiempoClaseDocente(string codigo
       DtTiempoDeClase *tiempoClase= new DtTiempoDeClase();
       tiempoClase->setNombre(itCla.second->getNombre());
       tiempoClase->setCodClase(itCla.second->getCodigo());
-
+      tiempoClase->setTiempo(0);
       set<UsrCla*> nombre = itCla.second->getParticipantes();
       for (UsrCla *itEstCla: nombre) {
         primera=true;
         set<Visualizacion*> sett = itEstCla->getVis();
         for (Visualizacion *itVis: sett) {
           if(itVis->getEnVivo()==true && !(itVis->getFechaFinVis()==fechaNula)){
+            tiempo=0;
             tiempo+=itVis->getFechaFinVis() - itVis->getFechaInicioVis();
             tiempoClase->setTiempo(tiempoClase->getTiempo()+tiempo);
             if(primera){

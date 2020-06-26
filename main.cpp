@@ -415,7 +415,7 @@ class Sistema{
       iniciarSesionD("juan@mail.com");
       fabrica->getIClase()->finalizarClase("2");
       fabrica->getIClase()->confirmarFin();
-///SEPARA
+/*SEPARA
 reloj->setAnioSistema(2020);
 reloj->setMesSistema(5);
 reloj->setDiaSistema(8);
@@ -449,7 +449,7 @@ reloj->setMinSistema(0);
       iniciarSesionD("juan@mail.com");
       fabrica->getIClase()->finalizarClase("7");
       fabrica->getIClase()->confirmarFin();
-
+*/
     }
     //Administrador
     void modificarReloj(){
